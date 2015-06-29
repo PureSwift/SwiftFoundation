@@ -8,31 +8,43 @@
 
 public struct Date {
     
-    // MARK: - Static Properties
-    
-    /** Returns the time interval between the current date and the reference date (1 January 2001, GMT). */
-    public static func timeIntervalSinceReferenceDate() -> TimeInterval {
-        
-        
-    }
-    
     // MARK: - Properties
     
     public let timeIntervalSinceReferenceDate: TimeInterval
     
     // MARK: - Initialization
     
+    public init() {
+        
+        self.timeIntervalSinceReferenceDate = TimeIntervalSinceReferenceDate()
+    }
+    
     public init(timeIntervalSinceReferenceDate: TimeInterval) {
         
         self.timeIntervalSinceReferenceDate = timeIntervalSinceReferenceDate
     }
     
-    public init() {
-        
-        self.timeIntervalSinceReferenceDate = Date.timeIntervalSinceReferenceDate()
-    }
+    
     
     // MARK: - Static Methods
+}
+
+// MARK: - Functions
+
+/** Returns the time interval between the current date and the reference date (1 January 2001, GMT). */
+public func TimeIntervalSinceReferenceDate() -> TimeInterval {
+    
+    var timeStamp = timeval()
+    
+    gettimeofday(&timeStamp, nil)
+    
+    let secondsSinceReferenceDate = TimeInterval(timeStamp.tv_sec) - NSTimeIntervalSince1970
+    
+    let microseconds = (TimeInterval(timeStamp.tv_usec) / TimeInterval(1000000.0))
+    
+    let timeSinceReferenceDate = secondsSinceReferenceDate + microseconds
+    
+    return timeSinceReferenceDate
 }
 
 // MARK: - Constants
