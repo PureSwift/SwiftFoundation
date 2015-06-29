@@ -6,3 +6,5 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
+public typealias JSONObject = [String: Any]
+

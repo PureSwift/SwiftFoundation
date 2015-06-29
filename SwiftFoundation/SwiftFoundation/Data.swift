@@ -6,7 +6,7 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-final class Data {
+public final class Data {
     
     // MARK: - Properties
     
