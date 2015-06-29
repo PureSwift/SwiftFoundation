@@ -27,6 +27,7 @@
 		6E30BA451B413BCB009B1B49 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA441B413BCB009B1B49 /* Formatter.swift */; };
 		6E30BA481B413C6D009B1B49 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA471B413C6D009B1B49 /* DateFormatter.swift */; };
 		6E30BA4B1B413DF0009B1B49 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA4A1B413DF0009B1B49 /* Transformer.swift */; };
+		6E30BA4D1B41402B009B1B49 /* SortDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA4C1B41402B009B1B49 /* SortDescriptor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		6E30BA441B413BCB009B1B49 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		6E30BA471B413C6D009B1B49 /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		6E30BA4A1B413DF0009B1B49 /* Transformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
+		6E30BA4C1B41402B009B1B49 /* SortDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortDescriptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				6E30BA331B412814009B1B49 /* Predicate.swift */,
 				6E30BA351B4133F3009B1B49 /* Task.swift */,
 				6E30BA421B413A8F009B1B49 /* UUID.swift */,
+				6E30BA4C1B41402B009B1B49 /* SortDescriptor.swift */,
 				6E30BA491B413DE1009B1B49 /* Transformer */,
 				6E30BA461B413BCF009B1B49 /* Formatter */,
 				6E30BA3D1B413865009B1B49 /* URL */,
@@ -285,6 +288,7 @@
 				6E30BA3F1B413874009B1B49 /* URLResponse.swift in Sources */,
 				6E30BA381B41344C009B1B49 /* URL.swift in Sources */,
 				6E30BA4B1B413DF0009B1B49 /* Transformer.swift in Sources */,
+				6E30BA4D1B41402B009B1B49 /* SortDescriptor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
