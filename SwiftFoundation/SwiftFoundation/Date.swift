@@ -6,10 +6,11 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-public struct Date {
+public struct Date: CustomStringConvertible, CustomPlaygroundQuickLookable {
     
     // MARK: - Properties
     
+    /** Returns the time interval between the date and the reference date (1 January 2001, GMT). */
     public let timeIntervalSinceReferenceDate: TimeInterval
     
     // MARK: - Initialization
@@ -24,9 +25,24 @@ public struct Date {
         self.timeIntervalSinceReferenceDate = timeIntervalSinceReferenceDate
     }
     
+    public func timeIntervalSinceDate(date: Date) -> TimeInterval {
+        
+        return self.timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate
+    }
     
+    public func add(timeInterval: TimeInterval) -> Date {
+        
+        return Date(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate + timeInterval)
+    }
     
-    // MARK: - Static Methods
+    // MARK: - Protocol Comformance
+    
+    public var description: String { return "\(self.timeIntervalSinceReferenceDate)" }
+    
+    public func customPlaygroundQuickLook() -> PlaygroundQuickLook {
+        
+        return QuickLookObject.Text(self.description)
+    }
 }
 
 // MARK: - Functions

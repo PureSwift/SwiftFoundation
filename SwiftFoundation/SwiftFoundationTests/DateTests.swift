@@ -7,26 +7,48 @@
 //
 
 import XCTest
+import Foundation
 import SwiftFoundation
 
 class DateTests: XCTestCase {
+    
+    var date: Date!
+    
+    var foundationDate: NSDate!
 
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        let timeIntervalSinceReferenceDate = NSDate.timeIntervalSinceReferenceDate()
+        
+        date = Date(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate)
+        
+        foundationDate = NSDate(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate)
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        date = nil
+        
+        foundationDate  = nil
     }
     
-    func testTimeIntervalSinceReferenceDate() {
+    func testFoundationDateEquality() {
+        
+        let timeIntervalSinceReferenceDate = NSDate.timeIntervalSinceReferenceDate()
+        
+        let date = Date(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate)
+        
+        let FoundationDate = NSDate(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate)
+        
+        XCTAssert(date.timeIntervalSinceReferenceDate == FoundationDate.timeIntervalSinceReferenceDate,
+            "Date's internal values must be equal. (\(date.timeIntervalSinceReferenceDate) != \(FoundationDate.timeIntervalSinceReferenceDate))")
+    }
+    
+    func testTimeIntervalSinceReferenceDateSecondsPrecision() {
         
         let interval = UInt(TimeIntervalSinceReferenceDate())
         
@@ -34,12 +56,38 @@ class DateTests: XCTestCase {
         
         XCTAssert(interval == NSInterval, "\(interval) must equal \(NSInterval)")
     }
-
+    
+    func testTimeIntervalSinceReferenceDateMicroSecondsPrecision() {
+        
+        let interval = TimeIntervalSinceReferenceDate()
+        
+        let NSInterval = NSDate.timeIntervalSinceReferenceDate()
+        
+        XCTAssert(interval <= NSInterval, "\(interval) must lower than or equal \(NSInterval)")
+    }
+    
+    func testTimeIntervalSinceDate() {
+        
+        let time2 = NSDate.timeIntervalSinceReferenceDate()
+        
+        let date2 = Date(timeIntervalSinceReferenceDate: time2)
+        
+        let foundationDate2 = NSDate(timeIntervalSinceReferenceDate: time2)
+        
+        let intervalSinceDate = date.timeIntervalSinceDate(date2)
+        
+        let foundationIntervalSinceDate = foundationDate.timeIntervalSinceDate(foundationDate2)
+        
+        XCTAssert(intervalSinceDate == foundationIntervalSinceDate)
+    }
+    
+    /*
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock() {
             // Put the code you want to measure the time of here.
         }
     }
+    */
 
 }
