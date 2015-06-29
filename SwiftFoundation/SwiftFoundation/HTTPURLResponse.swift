@@ -15,6 +15,9 @@ public struct HTTPURLResponse: URLResponse {
     /** Returns the HTTP status code for the response. */
     public let statusCode: Int
     
+    /** The HTTP response body. */
+    public let body: Data?
+    
     public init(headers: [String: String], statusCode: Int) {
         
         self.headers = headers
