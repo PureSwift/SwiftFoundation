@@ -6,7 +6,7 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-/// Defines the interface for supporting conversion between strings and objects of various types.
+/// Defines the interface for supporting conversion between strings and other types of values.
 public protocol Formatter {
     
     typealias ValueType

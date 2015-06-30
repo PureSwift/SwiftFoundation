@@ -6,7 +6,7 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-public struct Date: CustomStringConvertible, CustomPlaygroundQuickLookable {
+public struct Date: Equatable, Comparable, CustomStringConvertible, CustomPlaygroundQuickLookable {
     
     // MARK: - Properties
     
@@ -37,12 +37,47 @@ public struct Date: CustomStringConvertible, CustomPlaygroundQuickLookable {
     
     // MARK: - Protocol Comformance
     
-    public var description: String { return "\(self.timeIntervalSinceReferenceDate)" }
+    public var description: String {
+        
+        return "\(self.timeIntervalSinceReferenceDate)"
+    }
     
     public func customPlaygroundQuickLook() -> PlaygroundQuickLook {
         
         return QuickLookObject.Text(self.description)
     }
+}
+
+// MARK: - Operator Overloading
+
+public func ==(lhs: Date, rhs: Date) -> Bool {
+    
+    return lhs.timeIntervalSinceReferenceDate == rhs.timeIntervalSinceReferenceDate
+}
+
+public func <(lhs: Date, rhs: Date) -> Bool {
+    
+    return lhs.timeIntervalSinceReferenceDate < rhs.timeIntervalSinceReferenceDate
+}
+
+public func <=(lhs: Date, rhs: Date) -> Bool {
+    
+    return lhs.timeIntervalSinceReferenceDate <= rhs.timeIntervalSinceReferenceDate
+}
+
+public func >=(lhs: Date, rhs: Date) -> Bool {
+    
+    return lhs.timeIntervalSinceReferenceDate >= rhs.timeIntervalSinceReferenceDate
+}
+
+public func >(lhs: Date, rhs: Date) -> Bool {
+    
+    return lhs.timeIntervalSinceReferenceDate > rhs.timeIntervalSinceReferenceDate
+}
+
+public func -(lhs: Date, rhs: Date) -> TimeInterval {
+    
+    return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
 }
 
 // MARK: - Functions
@@ -54,7 +89,7 @@ public func TimeIntervalSinceReferenceDate() -> TimeInterval {
     
     gettimeofday(&timeStamp, nil)
     
-    let secondsSinceReferenceDate = TimeInterval(timeStamp.tv_sec) - NSTimeIntervalSince1970
+    let secondsSinceReferenceDate = TimeInterval(timeStamp.tv_sec) - TimeIntervalSince1970
     
     let microseconds = (TimeInterval(timeStamp.tv_usec) / TimeInterval(1000000.0))
     

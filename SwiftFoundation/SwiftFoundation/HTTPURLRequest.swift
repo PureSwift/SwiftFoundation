@@ -21,7 +21,12 @@ public struct HTTPURLRequest: URLRequest {
     
     public let version: HTTPVersion
     
-    public init(URL: SwiftFoundation.URL, timeoutInterval: TimeInterval = 30, body: Data? = nil, headers: [String: String] = [:], method: HTTPMethod = .GET, version: HTTPVersion = HTTPVersion()) {
+    public init(URL: SwiftFoundation.URL,
+        timeoutInterval: TimeInterval = 30,
+        body: Data? = nil,
+        headers: [String: String] = [:],
+        method: HTTPMethod = .GET,
+        version: HTTPVersion = HTTPVersion()) {
         
         self.URL = URL
         self.timeoutInterval = timeoutInterval

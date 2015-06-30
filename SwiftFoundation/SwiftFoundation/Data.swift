@@ -6,14 +6,20 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-#if os(osx) || os(ios) || os(watchos)
-import Foundation
-#endif
-
-/** Class to hold data. */
+/** Encapsulates data. */
 public protocol Data {
     
     // MARK: - Properties
     
-    var bytes: [UInt8] { get }
+    var count: UInt { get }
+    
+    var bytes: UnsafePointer<Void> { get }
+}
+
+public extension Data {
+    
+    var isEmpty: Bool {
+        
+        return self.count > 0
+    }
 }

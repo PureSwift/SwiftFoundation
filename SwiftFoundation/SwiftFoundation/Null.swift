@@ -7,9 +7,16 @@
 //
 
 /** An OOP placeholder for ```nil```. */
-public struct Null: CustomStringConvertible {
+public struct Null: CustomStringConvertible, Equatable {
     
     // MARK: - CustomStringConvertible
     
     public var description: String { return "<null>" }
+}
+
+// MARK: - Operator Overloading
+
+public func ==(lhs: Null, rhs: Null) -> Bool {
+    
+    return true
 }

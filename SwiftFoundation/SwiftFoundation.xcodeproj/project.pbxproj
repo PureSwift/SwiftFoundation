@@ -30,7 +30,6 @@
 		6E30BA4B1B413DF0009B1B49 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA4A1B413DF0009B1B49 /* Transformer.swift */; };
 		6E30BA4D1B41402B009B1B49 /* SortDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA4C1B41402B009B1B49 /* SortDescriptor.swift */; };
 		6E30BA4F1B4142D9009B1B49 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA4E1B4142D9009B1B49 /* FileManager.swift */; };
-		6E30BA511B4143A2009B1B49 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA501B4143A2009B1B49 /* NotificationCenter.swift */; };
 		6E30BA531B41D960009B1B49 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA521B41D960009B1B49 /* HTTPMethod.swift */; };
 		6E30BA561B41DB5A009B1B49 /* HTTPVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA551B41DB5A009B1B49 /* HTTPVersion.swift */; };
 /* End PBXBuildFile section */
@@ -126,9 +125,9 @@
 				6E30BA2B1B40F71B009B1B49 /* Date.swift */,
 				6E30BA2F1B4105A5009B1B49 /* Null.swift */,
 				6E30BA331B412814009B1B49 /* Predicate.swift */,
+				6E30BA4C1B41402B009B1B49 /* SortDescriptor.swift */,
 				6E30BA351B4133F3009B1B49 /* Task.swift */,
 				6E30BA421B413A8F009B1B49 /* UUID.swift */,
-				6E30BA4C1B41402B009B1B49 /* SortDescriptor.swift */,
 				6E30BA4E1B4142D9009B1B49 /* FileManager.swift */,
 				6E30BA501B4143A2009B1B49 /* NotificationCenter.swift */,
 				6E30BA491B413DE1009B1B49 /* Transformer */,
@@ -303,7 +302,6 @@
 				6E30BA281B40F66D009B1B49 /* JSON.swift in Sources */,
 				6E30BA561B41DB5A009B1B49 /* HTTPVersion.swift in Sources */,
 				6E30BA301B4105A5009B1B49 /* Null.swift in Sources */,
-				6E30BA511B4143A2009B1B49 /* NotificationCenter.swift in Sources */,
 				6E30BA431B413A8F009B1B49 /* UUID.swift in Sources */,
 				6E16C2BE1B42460B00C07C25 /* HTTPStatusCode.swift in Sources */,
 				6E30BA2C1B40F71B009B1B49 /* Date.swift in Sources */,

@@ -6,9 +6,9 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-final class NotificationCenter {
+final public class NotificationCenter {
     
-    let defaultCenter = NotificationCenter()
+    public let defaultCenter = NotificationCenter()
     
     
 }
