@@ -18,9 +18,10 @@ public struct HTTPURLResponse: URLResponse {
     /** The HTTP response body. */
     public let body: Data?
     
-    public init(headers: [String: String], statusCode: Int) {
+    public init(headers: [String: String] = [:], statusCode: Int =, body: Data? = nil) {
         
         self.headers = headers
         self.statusCode = statusCode
+        self.body = body
     }
 }

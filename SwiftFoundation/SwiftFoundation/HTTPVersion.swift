@@ -10,8 +10,15 @@
 public struct HTTPVersion {
     
     /** Major version number. */
-    let major: UInt8
+    public let major: UInt8
     
     /** Minor version number. */
-    let minor: UInt8
+    public let minor: UInt8
+    
+    /** Defaults to ```1.1``` */
+    public init(major: UInt8 = 1, minor: UInt8 = 1) {
+        
+        self.major = major
+        self.minor = minor
+    }
 }

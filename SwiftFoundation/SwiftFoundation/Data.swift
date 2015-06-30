@@ -6,9 +6,14 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-public final class Data {
+#if os(osx) || os(ios) || os(watchos)
+import Foundation
+#endif
+
+/** Class to hold data. */
+public protocol Data {
     
     // MARK: - Properties
     
-    
+    var bytes: [UInt8] { get }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E16C2BE1B42460B00C07C25 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2BD1B42460A00C07C25 /* HTTPStatusCode.swift */; };
 		6E30BA111B40F543009B1B49 /* SwiftFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E30BA101B40F543009B1B49 /* SwiftFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E30BA181B40F543009B1B49 /* SwiftFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E30BA0D1B40F543009B1B49 /* SwiftFoundation.framework */; };
 		6E30BA1D1B40F543009B1B49 /* SwiftFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA1C1B40F543009B1B49 /* SwiftFoundationTests.swift */; };
@@ -45,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6E16C2BC1B42423B00C07C25 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
+		6E16C2BD1B42460A00C07C25 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		6E30BA0D1B40F543009B1B49 /* SwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E30BA101B40F543009B1B49 /* SwiftFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFoundation.h; sourceTree = "<group>"; };
 		6E30BA121B40F543009B1B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -97,6 +100,7 @@
 		6E30BA031B40F543009B1B49 = {
 			isa = PBXGroup;
 			children = (
+				6E16C2BC1B42423B00C07C25 /* MyPlayground.playground */,
 				6E30BA0F1B40F543009B1B49 /* SwiftFoundation */,
 				6E30BA1B1B40F543009B1B49 /* SwiftFoundationTests */,
 				6E30BA0E1B40F543009B1B49 /* Products */,
@@ -180,6 +184,7 @@
 				6E30BA401B41394B009B1B49 /* HTTPURLResponse.swift */,
 				6E30BA521B41D960009B1B49 /* HTTPMethod.swift */,
 				6E30BA551B41DB5A009B1B49 /* HTTPVersion.swift */,
+				6E16C2BD1B42460A00C07C25 /* HTTPStatusCode.swift */,
 			);
 			name = HTTP;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 				6E30BA301B4105A5009B1B49 /* Null.swift in Sources */,
 				6E30BA511B4143A2009B1B49 /* NotificationCenter.swift in Sources */,
 				6E30BA431B413A8F009B1B49 /* UUID.swift in Sources */,
+				6E16C2BE1B42460B00C07C25 /* HTTPStatusCode.swift in Sources */,
 				6E30BA2C1B40F71B009B1B49 /* Date.swift in Sources */,
 				6E30BA531B41D960009B1B49 /* HTTPMethod.swift in Sources */,
 				6E30BA3C1B413718009B1B49 /* HTTPURLRequest.swift in Sources */,
