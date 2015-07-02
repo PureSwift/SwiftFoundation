@@ -10,80 +10,55 @@ withUnsafePointer(&test, { (ptr: UnsafePointer<Int>) -> Void in
     
 })
 
-var uuid = uuid_t(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
-
-withUnsafeMutablePointer(&uuid, { (ptr: UnsafeMutablePointer<uuid_t>) -> Void in
+private func UUIDCreateRandom() -> uuid_t {
     
-    let type = UnsafeMutablePointer<UInt8>.self
+    var uuid = uuid_t(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
     
-    var uint8Ptr: UnsafeMutablePointer<UInt8> = unsafeBitCast(ptr, type)
-    
-    uuid_generate(uint8Ptr)
-})
-
-print(uuid)
-
-
-
-
-/*
-/// A representation of universally unique identifiers (UUIDs).
-public struct UUID: CustomStringConvertible {
-    
-    // MARK: - Private Class Methods
-    
-    private static func convertToString(internalUUID: uuid_t) -> String {
+    withUnsafeMutablePointer(&uuid, { (valuePointer: UnsafeMutablePointer<uuid_t>) -> Void in
         
-        var cString = CChar()
+        let bufferType = UnsafeMutablePointer<UInt8>.self
         
-        var mutableUUID = internalUUID
+        let buffer = unsafeBitCast(valuePointer, bufferType)
         
-        //uuid_unparse(unsafeBitCast(<#T##x: T##T#>, UnsafePointer<Void>.self), unsafeBitCast(<#T##x: T##T#>, UnsafePointer<Void>.self))
-        
-        return String.fromCString(&cString)!
-    }
+        uuid_generate(buffer)
+    })
     
-    // MARK: - Private Properties
-    
-    private let internalUUID: uuid_t
-    
-    private let stringValue: String
-    
-    // MARK: - Initialization
-    
-    public init() {
-        
-        let pointer = UnsafeMutablePointer<UInt8>()
-        
-        uuid_generate(pointer)
-        
-        self.internalUUID = bytes.withUnsafeBufferPointer({ (p) -> R in
-            
-
-        })
-        
-        self.stringValue = UUID.convertToString(self.internalUUID)
-    }
-    
-    /*
-    public init(string: String) {
-    
-    
-    }
-    */
-    
-    public init(bytes: uuid_t) {
-        
-        self.internalUUID = bytes
-        
-        self.stringValue = UUID.convertToString(self.internalUUID)
-    }
-    
-    // MARK: - CustomStringConvertible
-    
-    public var description: String { return self.stringValue }
+    return uuid
 }
 
-*/
-/// Created UUID
-//UUID()
+private func UUIDConvertToUUIDString(uuid: uuid_t) -> uuid_string_t {
+    
+    var uuidCopy = uuid
+    
+    var uuidString = uuid_string_t(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    
+    withUnsafeMutablePointers(&uuidCopy, &uuidString) { (uuidPointer: UnsafeMutablePointer<uuid_t>, uuidStringPointer: UnsafeMutablePointer<uuid_string_t>) -> Void in
+        
+        let stringBuffer = unsafeBitCast(uuidStringPointer, UnsafeMutablePointer<Int8>.self)
+        
+        let uuidBuffer = unsafeBitCast(uuidPointer, UnsafeMutablePointer<UInt8>.self)
+        
+        uuid_unparse(unsafeBitCast(uuidBuffer, UnsafePointer<UInt8>.self), stringBuffer)
+    }
+    
+    return uuidString
+}
+
+private func UUIDStringConvertToString(uuidString: uuid_string_t) -> String {
+    
+    return "\(as %08x-%04x-%04x-%04x-%012x)"
+}
+
+private func UUIDConvertToString(uuid: uuid_t) -> String {
+    
+    let uuidString = UUIDConvertToUUIDString(uuid)
+    
+    return UUIDStringConvertToString(uuidString)
+}
+
+let uuid = UUIDCreateRandom()
+
+let string = UUIDConvertToString(uuid)
+
+
+
