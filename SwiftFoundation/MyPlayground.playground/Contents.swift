@@ -66,6 +66,8 @@ let bytes = NSUUID().byteValue
 
 let copy = NSUUID(byteValue: bytes)
 
+copy.UUIDString
+
 
 
 

@@ -7,11 +7,11 @@
 //
 
 /// A representation of universally unique identifiers (UUIDs).
-public struct UUID: CustomStringConvertible {
+public struct UUID: RawRepresentable, CustomStringConvertible {
     
     // MARK: - Public Properties
     
-    public let stringValue: String
+    public let rawValue: String
     
     public let byteValue: uuid_t
     
@@ -21,26 +21,31 @@ public struct UUID: CustomStringConvertible {
         
         self.byteValue = UUIDCreateRandom()
         
-        self.stringValue = UUIDConvertToString(self.byteValue)
+        self.rawValue = UUIDConvertToString(self.byteValue)
     }
-    
-    /*
-    public init(string: String) {
-        
-        
-    }
-    */
     
     public init(bytes: uuid_t) {
         
         self.byteValue = bytes
         
-        self.stringValue = UUIDConvertToString(self.byteValue)
+        self.rawValue = UUIDConvertToString(self.byteValue)
+    }
+    
+    public init?(rawValue: String) {
+        
+        guard let uuid = UUIDConvertStringToUUID(rawValue) else {
+            
+            return nil
+        }
+        
+        self.rawValue = rawValue
+        
+        self.byteValue = uuid
     }
     
     // MARK: - CustomStringConvertible
     
-    public var description: String { return self.stringValue }
+    public var description: String { return self.rawValue }
 }
 
 // MARK: - Private UUID System Type Functions
@@ -100,4 +105,9 @@ private func UUIDConvertToString(uuid: uuid_t) -> String {
     let uuidString = UUIDConvertToUUIDString(uuid)
     
     return UUIDStringConvertToString(uuidString)
+}
+
+private func UUIDConvertStringToUUID(string: String) -> uuid_t? {
+    
+    return nil
 }

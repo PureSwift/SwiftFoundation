@@ -38,7 +38,7 @@ class UUIDTests: XCTestCase {
         
         let uuid = UUID(bytes: foundationUUID.byteValue)
         
-        XCTAssert(foundationUUID.UUIDString == uuid.stringValue)
+        XCTAssert(foundationUUID.UUIDString == uuid.rawValue)
     }
     
     func testUUIDValidBytes() {
@@ -47,9 +47,18 @@ class UUIDTests: XCTestCase {
         
         let foundationUUID = NSUUID(byteValue: uuid.byteValue)
         
-        XCTAssert(uuid.stringValue == foundationUUID.UUIDString)
+        XCTAssert(uuid.rawValue == foundationUUID.UUIDString)
     }
-
+    
+    func testCreateFromString() {
+        
+        let stringValue = NSUUID().UUIDString
+        
+        
+        
+        XCTAssert((UUID(rawValue: stringValue) != nil), "Could not create UUID with string \"\(stringValue)\"")
+        
+    }
 }
 
 // MARK: - Foundation Extensions
