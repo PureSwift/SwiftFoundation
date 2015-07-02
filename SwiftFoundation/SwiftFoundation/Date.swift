@@ -6,7 +6,7 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-public struct Date: Equatable, Comparable, CustomStringConvertible, CustomPlaygroundQuickLookable {
+public struct Date: Equatable, Comparable, CustomStringConvertible {
     
     // MARK: - Properties
     
@@ -25,14 +25,11 @@ public struct Date: Equatable, Comparable, CustomStringConvertible, CustomPlaygr
         self.timeIntervalSinceReferenceDate = timeIntervalSinceReferenceDate
     }
     
+    // MARK: - Methods
+    
     public func timeIntervalSinceDate(date: Date) -> TimeInterval {
         
         return self.timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate
-    }
-    
-    public func add(timeInterval: TimeInterval) -> Date {
-        
-        return Date(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate + timeInterval)
     }
     
     // MARK: - Protocol Comformance
@@ -40,11 +37,6 @@ public struct Date: Equatable, Comparable, CustomStringConvertible, CustomPlaygr
     public var description: String {
         
         return "\(self.timeIntervalSinceReferenceDate)"
-    }
-    
-    public func customPlaygroundQuickLook() -> PlaygroundQuickLook {
-        
-        return QuickLookObject.Text(self.description)
     }
 }
 
@@ -78,6 +70,16 @@ public func >(lhs: Date, rhs: Date) -> Bool {
 public func -(lhs: Date, rhs: Date) -> TimeInterval {
     
     return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+}
+
+public func +(lhs: Date, rhs: TimeInterval) -> Date {
+    
+    return Date(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate + rhs)
+}
+
+public func +=(lhs: Date, rhs: TimeInterval) -> Date {
+    
+    return lhs + rhs
 }
 
 // MARK: - Functions

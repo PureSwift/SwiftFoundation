@@ -7,7 +7,7 @@
 //
 
 /// A representation of universally unique identifiers (UUIDs).
-public struct UUID: RawRepresentable, CustomStringConvertible {
+public struct UUID: RawRepresentable, Equatable, CustomStringConvertible {
     
     // MARK: - Public Properties
     
@@ -43,9 +43,14 @@ public struct UUID: RawRepresentable, CustomStringConvertible {
         self.byteValue = uuid
     }
     
-    // MARK: - CustomStringConvertible
-    
     public var description: String { return self.rawValue }
+}
+
+// MARK: - Operator Overloading
+
+public func ==(lhs: UUID, rhs: UUID) -> Bool {
+    
+    return lhs.rawValue == rhs.rawValue
 }
 
 // MARK: - Private UUID System Type Functions

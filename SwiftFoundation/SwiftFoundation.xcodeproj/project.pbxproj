@@ -107,6 +107,14 @@
 			name = Dependencies;
 			sourceTree = "<group>";
 		};
+		6E16C2F01B4533C700C07C25 /* Data Wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				6E30BA291B40F713009B1B49 /* Data.swift */,
+			);
+			name = "Data Wrappers";
+			sourceTree = "<group>";
+		};
 		6E30BA031B40F543009B1B49 = {
 			isa = PBXGroup;
 			children = (
@@ -133,7 +141,6 @@
 				6E30BA101B40F543009B1B49 /* SwiftFoundation.h */,
 				6E30BA271B40F66C009B1B49 /* JSON.swift */,
 				6E30BA2D1B410176009B1B49 /* Base64.swift */,
-				6E30BA291B40F713009B1B49 /* Data.swift */,
 				6E30BA2B1B40F71B009B1B49 /* Date.swift */,
 				6E30BA2F1B4105A5009B1B49 /* Null.swift */,
 				6E30BA331B412814009B1B49 /* Predicate.swift */,
@@ -143,6 +150,7 @@
 				6E30BA4E1B4142D9009B1B49 /* FileManager.swift */,
 				6E30BA501B4143A2009B1B49 /* NotificationCenter.swift */,
 				6E16C2EC1B44FC4700C07C25 /* RegularExpression.swift */,
+				6E16C2F01B4533C700C07C25 /* Data Wrappers */,
 				6E30BA491B413DE1009B1B49 /* Transformer */,
 				6E30BA461B413BCF009B1B49 /* Formatter */,
 				6E30BA3D1B413865009B1B49 /* URL */,
