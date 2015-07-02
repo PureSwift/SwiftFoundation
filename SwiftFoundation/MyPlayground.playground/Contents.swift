@@ -26,39 +26,47 @@ private func UUIDCreateRandom() -> uuid_t {
     return uuid
 }
 
-private func UUIDConvertToUUIDString(uuid: uuid_t) -> uuid_string_t {
+public extension NSUUID {
     
-    var uuidCopy = uuid
-    
-    var uuidString = uuid_string_t(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    
-    withUnsafeMutablePointers(&uuidCopy, &uuidString) { (uuidPointer: UnsafeMutablePointer<uuid_t>, uuidStringPointer: UnsafeMutablePointer<uuid_string_t>) -> Void in
+    public var byteValue: uuid_t {
         
-        let stringBuffer = unsafeBitCast(uuidStringPointer, UnsafeMutablePointer<Int8>.self)
+        var uuid = uuid_t(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
         
-        let uuidBuffer = unsafeBitCast(uuidPointer, UnsafeMutablePointer<UInt8>.self)
+        withUnsafeMutablePointer(&uuid, { (valuePointer: UnsafeMutablePointer<uuid_t>) -> Void in
+            
+            let bufferType = UnsafeMutablePointer<UInt8>.self
+            
+            let buffer = unsafeBitCast(valuePointer, bufferType)
+            
+            self.getUUIDBytes(buffer)
+        })
         
-        uuid_unparse(unsafeBitCast(uuidBuffer, UnsafePointer<UInt8>.self), stringBuffer)
+        return uuid
     }
     
-    return uuidString
+    convenience init(byteValue: uuid_t) {
+        
+        var value = byteValue
+        
+        let buffer = withUnsafeMutablePointer(&value, { (valuePointer: UnsafeMutablePointer<uuid_t>) -> UnsafeMutablePointer<UInt8> in
+            
+            let bufferType = UnsafeMutablePointer<UInt8>.self
+            
+            return unsafeBitCast(valuePointer, bufferType)
+        })
+        
+        self.init(UUIDBytes: buffer)
+    }
 }
 
-private func UUIDStringConvertToString(uuidString: uuid_string_t) -> String {
-    
-    return "\(as %08x-%04x-%04x-%04x-%012x)"
-}
 
-private func UUIDConvertToString(uuid: uuid_t) -> String {
-    
-    let uuidString = UUIDConvertToUUIDString(uuid)
-    
-    return UUIDStringConvertToString(uuidString)
-}
 
-let uuid = UUIDCreateRandom()
 
-let string = UUIDConvertToString(uuid)
+let bytes = NSUUID().byteValue
+
+let copy = NSUUID(byteValue: bytes)
+
+
 
 
 

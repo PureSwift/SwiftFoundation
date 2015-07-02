@@ -9,19 +9,19 @@
 /// A representation of universally unique identifiers (UUIDs).
 public struct UUID: CustomStringConvertible {
     
-    // MARK: - Private Properties
+    // MARK: - Public Properties
     
-    private let internalUUID: uuid_t
+    public let stringValue: String
     
-    private let stringValue: String
+    public let byteValue: uuid_t
     
     // MARK: - Initialization
     
     public init() {
         
-        self.internalUUID = UUIDCreateRandom()
+        self.byteValue = UUIDCreateRandom()
         
-        self.stringValue = UUIDConvertToString(self.internalUUID)
+        self.stringValue = UUIDConvertToString(self.byteValue)
     }
     
     /*
@@ -29,13 +29,13 @@ public struct UUID: CustomStringConvertible {
         
         
     }
-*/
+    */
     
     public init(bytes: uuid_t) {
         
-        self.internalUUID = bytes
+        self.byteValue = bytes
         
-        self.stringValue = UUIDConvertToString(self.internalUUID)
+        self.stringValue = UUIDConvertToString(self.byteValue)
     }
     
     // MARK: - CustomStringConvertible
@@ -44,6 +44,8 @@ public struct UUID: CustomStringConvertible {
 }
 
 // MARK: - Private UUID System Type Functions
+
+private typealias UUIDStringType = uuid_string_t
 
 private func UUIDCreateRandom() -> uuid_t {
     
@@ -61,13 +63,13 @@ private func UUIDCreateRandom() -> uuid_t {
     return uuid
 }
 
-private func UUIDConvertToUUIDString(uuid: uuid_t) -> uuid_string_t {
+private func UUIDConvertToUUIDString(uuid: uuid_t) -> UUIDStringType {
     
     var uuidCopy = uuid
     
-    var uuidString = uuid_string_t(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    var uuidString = UUIDStringType(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     
-    withUnsafeMutablePointers(&uuidCopy, &uuidString) { (uuidPointer: UnsafeMutablePointer<uuid_t>, uuidStringPointer: UnsafeMutablePointer<uuid_string_t>) -> Void in
+    withUnsafeMutablePointers(&uuidCopy, &uuidString) { (uuidPointer: UnsafeMutablePointer<uuid_t>, uuidStringPointer: UnsafeMutablePointer<UUIDStringType>) -> Void in
         
         let stringBuffer = unsafeBitCast(uuidStringPointer, UnsafeMutablePointer<Int8>.self)
         
@@ -79,9 +81,18 @@ private func UUIDConvertToUUIDString(uuid: uuid_t) -> uuid_string_t {
     return uuidString
 }
 
-private func UUIDStringConvertToString(uuidString: uuid_string_t) -> String {
+private func UUIDStringConvertToString(uuidString: UUIDStringType) -> String {
     
+    var uuidStringCopy = uuidString
     
+    return withUnsafeMutablePointer(&uuidStringCopy, { (valuePointer: UnsafeMutablePointer<UUIDStringType>) -> String in
+        
+        let bufferType = UnsafeMutablePointer<CChar>.self
+        
+        let buffer = unsafeBitCast(valuePointer, bufferType)
+        
+        return String.fromCString(unsafeBitCast(buffer, UnsafePointer<CChar>.self))!
+    })
 }
 
 private func UUIDConvertToString(uuid: uuid_t) -> String {
