@@ -8,5 +8,5 @@
 
 public struct RegularExpression {
     
-    //private let internalExpression: URegularExpression
+    private let internalExpression: regex_t
 }

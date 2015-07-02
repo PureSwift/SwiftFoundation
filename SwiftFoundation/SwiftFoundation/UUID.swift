@@ -73,6 +73,13 @@ private func UUIDCreateRandom() -> uuid_t {
     return uuid
 }
 
+private func UUIDConvertToString(uuid: uuid_t) -> String {
+    
+    let uuidString = UUIDConvertToUUIDString(uuid)
+    
+    return UUIDStringConvertToString(uuidString)
+}
+
 private func UUIDConvertToUUIDString(uuid: uuid_t) -> UUIDStringType {
     
     var uuidCopy = uuid
@@ -105,14 +112,15 @@ private func UUIDStringConvertToString(uuidString: UUIDStringType) -> String {
     })
 }
 
-private func UUIDConvertToString(uuid: uuid_t) -> String {
-    
-    let uuidString = UUIDConvertToUUIDString(uuid)
-    
-    return UUIDStringConvertToString(uuidString)
-}
-
 private func UUIDConvertStringToUUID(string: String) -> uuid_t? {
     
-    return nil
+    let uuidPointer = UnsafeMutablePointer<uuid_t>.alloc(1)
+    defer { uuidPointer.dealloc(1) }
+    
+    guard uuid_parse(string, unsafeBitCast(uuidPointer, UnsafeMutablePointer<UInt8>.self)) != -1 else {
+        
+        return nil
+    }
+    
+    return uuidPointer.memory
 }

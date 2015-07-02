@@ -36,6 +36,8 @@ public struct Date: Equatable, Comparable, CustomStringConvertible {
     
     public var description: String {
         
+        // TODO: Match Foundation description
+        
         return "\(self.timeIntervalSinceReferenceDate)"
     }
 }

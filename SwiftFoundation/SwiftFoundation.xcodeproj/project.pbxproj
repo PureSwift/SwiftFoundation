@@ -149,7 +149,7 @@
 				6E30BA421B413A8F009B1B49 /* UUID.swift */,
 				6E30BA4E1B4142D9009B1B49 /* FileManager.swift */,
 				6E30BA501B4143A2009B1B49 /* NotificationCenter.swift */,
-				6E16C2EC1B44FC4700C07C25 /* RegularExpression.swift */,
+				6EB4DE3A1B45D49D00C02276 /* Regular Expression */,
 				6E16C2F01B4533C700C07C25 /* Data Wrappers */,
 				6E30BA491B413DE1009B1B49 /* Transformer */,
 				6E30BA461B413BCF009B1B49 /* Formatter */,
@@ -208,6 +208,14 @@
 				6E16C2BD1B42460A00C07C25 /* HTTPStatusCode.swift */,
 			);
 			name = HTTP;
+			sourceTree = "<group>";
+		};
+		6EB4DE3A1B45D49D00C02276 /* Regular Expression */ = {
+			isa = PBXGroup;
+			children = (
+				6E16C2EC1B44FC4700C07C25 /* RegularExpression.swift */,
+			);
+			name = "Regular Expression";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

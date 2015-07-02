@@ -9,7 +9,6 @@
 import XCTest
 @testable import SwiftFoundation
 
-
 class UUIDTests: XCTestCase {
 
     override func setUp() {
@@ -54,10 +53,9 @@ class UUIDTests: XCTestCase {
         
         let stringValue = NSUUID().UUIDString
         
-        
-        
         XCTAssert((UUID(rawValue: stringValue) != nil), "Could not create UUID with string \"\(stringValue)\"")
         
+        XCTAssert((UUID(rawValue: "BadInput") == nil), "UUID should not be created")
     }
 }
 
