@@ -8,7 +8,7 @@
 
 import XCTest
 import Foundation
-import SwiftFoundation
+@testable import SwiftFoundation
 
 class DateTests: XCTestCase {
     
