@@ -96,9 +96,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E16C2C51B42698100C07C25 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
 		6E30BA031B40F543009B1B49 = {
 			isa = PBXGroup;
 			children = (
+				6E16C2C51B42698100C07C25 /* Dependencies */,
 				6E16C2BC1B42423B00C07C25 /* MyPlayground.playground */,
 				6E30BA0F1B40F543009B1B49 /* SwiftFoundation */,
 				6E30BA1B1B40F543009B1B49 /* SwiftFoundationTests */,

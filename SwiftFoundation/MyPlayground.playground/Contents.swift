@@ -3,6 +3,4 @@
 import SwiftFoundation
 import Foundation
 
-
 let data = NSData()
-

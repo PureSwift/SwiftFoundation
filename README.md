@@ -3,5 +3,4 @@ Linux-compatible base library to complement the Swift Standard Library. Implemen
 
 ## Dependencies
 
-- [CFLite](https://github.com/colemancda/CFLite)
 - ICU4C
