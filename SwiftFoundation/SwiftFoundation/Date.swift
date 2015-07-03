@@ -6,7 +6,34 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-public struct Date: Equatable, Comparable, CustomStringConvertible {
+/** Date Type */
+public protocol DateType: Equatable, Comparable, CustomStringConvertible {
+    
+    /** Returns the time interval between the date and the reference date (1 January 2001, GMT). */
+    var timeIntervalSinceReferenceDate: TimeInterval { get }
+    
+    /** Creates the date with the current time. */
+    init()
+    
+    /** Creates the date with the specified time interval since the reference date (1 January 2001, GMT). */
+    init(timeIntervalSinceReferenceDate: TimeInterval)
+}
+
+/** Default implementations */
+public extension DateType {
+    
+    func timeIntervalSinceDate(date: Self) -> TimeInterval {
+        
+        return self.timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate
+    }
+    
+    public var description: String {
+        
+        return "\(self.timeIntervalSinceReferenceDate)"
+    }
+}
+
+public struct Date: DateType {
     
     // MARK: - Properties
     
@@ -23,22 +50,6 @@ public struct Date: Equatable, Comparable, CustomStringConvertible {
     public init(timeIntervalSinceReferenceDate: TimeInterval) {
         
         self.timeIntervalSinceReferenceDate = timeIntervalSinceReferenceDate
-    }
-    
-    // MARK: - Methods
-    
-    public func timeIntervalSinceDate(date: Date) -> TimeInterval {
-        
-        return self.timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate
-    }
-    
-    // MARK: - Protocol Comformance
-    
-    public var description: String {
-        
-        // TODO: Match Foundation description
-        
-        return "\(self.timeIntervalSinceReferenceDate)"
     }
 }
 

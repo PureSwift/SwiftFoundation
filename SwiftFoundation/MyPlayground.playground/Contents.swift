@@ -4,7 +4,8 @@ import SwiftFoundation
 import Foundation
 
 
-let items  = ["coleman", "Coleman", "alsey", "miller", "Z", "A"]
+let items = ["coleman", "Coleman", "alsey", "miller", "Z", "A"]
 
 let sortedItems = (items as NSArray).sortedArrayUsingDescriptors([NSSortDescriptor(key: nil, ascending: true)])
+
 

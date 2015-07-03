@@ -6,8 +6,22 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
+/** UUID interface */
+public protocol UUIDType: RawRepresentable, Equatable, CustomStringConvertible {
+    
+    var rawValue: String { get }
+    
+    /** Creates a random UUID. */
+    init()
+}
+
+public extension UUIDType {
+    
+    var description: String { return self.rawValue }
+}
+
 /// A representation of universally unique identifiers (UUIDs).
-public struct UUID: RawRepresentable, Equatable, CustomStringConvertible {
+public struct UUID: UUIDType {
     
     // MARK: - Public Properties
     
@@ -24,13 +38,6 @@ public struct UUID: RawRepresentable, Equatable, CustomStringConvertible {
         self.rawValue = UUIDConvertToString(self.byteValue)
     }
     
-    public init(bytes: uuid_t) {
-        
-        self.byteValue = bytes
-        
-        self.rawValue = UUIDConvertToString(self.byteValue)
-    }
-    
     public init?(rawValue: String) {
         
         guard let uuid = UUIDConvertStringToUUID(rawValue) else {
@@ -43,7 +50,12 @@ public struct UUID: RawRepresentable, Equatable, CustomStringConvertible {
         self.byteValue = uuid
     }
     
-    public var description: String { return self.rawValue }
+    public init(bytes: uuid_t) {
+        
+        self.byteValue = bytes
+        
+        self.rawValue = UUIDConvertToString(self.byteValue)
+    }
 }
 
 // MARK: - Operator Overloading

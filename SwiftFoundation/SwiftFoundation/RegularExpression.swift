@@ -7,7 +7,7 @@
 //
 
 /** Regular expression type. */
-public protocol RegularExpression {
+public protocol RegularExpressionType {
     
     var pattern: String { get }
 }

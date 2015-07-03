@@ -17,21 +17,24 @@ public protocol SortDescriptor {
     func sort(SortedType, SortedType) -> Order
 }
 
-public extension CollectionType where SortDescriptor.SortedType: AnyObject {
+/** Returns a sorted array of the collection as specified by the sort descriptor. */
+public func Sort<T: CollectionType, S: SortDescriptor where S.SortedType == T.Generator.Element>(sortDescriptor: S, collection: T) -> [T.Generator.Element] {
     
-    func sort(sortDescriptors: [SortDescriptor]) -> [Self.Generator.Element] {
+    return collection.sort { (first: T.Generator.Element, second: T.Generator.Element) -> Bool in
         
-        self.sort { (first: Self.Generator.Element, second: Self.Generator.Element) -> Bool in
-            
-            
-        }
+        
     }
 }
 
-public func Sort<T: CollectionType, S: SortDescriptor>(sortDescriptors: [S], collection: T) -> [T.Generator.Element] {
+/** Returns a sorted array if the collection sorted as specified by a given array of sort descriptors. */
+public func Sort<T: CollectionType, S: SortDescriptor where S.SortedType == T.Generator.Element>(sortDescriptors: [S], collection: T) -> [T.Generator.Element] {
     
-    collection.sort { (first: T.Generator.Element, second: T.Generator.Element) -> Bool in
+    var sortedArray = collection.map { (element: T.Generator.Element) -> T in }
+    
+    for sortDescriptor in sortDescriptors {
         
-        
+        sortedArray = Sort(sortDescriptor, collection: collection)
     }
+    
+    return sortedArray
 }
