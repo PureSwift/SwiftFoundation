@@ -7,9 +7,7 @@
 //
 
 /** Regular expression type. */
-public struct RegularExpression {
+public protocol RegularExpression {
     
-    // MARK: - Private Properties
-    
-    private let internalExpression: regex_t
+    var pattern: String { get }
 }

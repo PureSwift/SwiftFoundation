@@ -20,6 +20,6 @@ public extension Data {
     
     var isEmpty: Bool {
         
-        return self.count > 0
+        return self.count == 0
     }
 }
