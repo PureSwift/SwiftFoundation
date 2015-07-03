@@ -3,6 +3,4 @@
 import SwiftFoundation
 import Foundation
 
-private typealias UUIDStringType = uuid_string_t
-
-NSUUID().UUIDString
+NSRegularExpressionOptions
