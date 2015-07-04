@@ -57,7 +57,7 @@ class SortDescriptorTests: XCTestCase {
         verifySort(places, ascending: false)
     }
     
-    func testDescendingComparatorSorting() {
+    func testComparatorSorting() {
         
         func verifySort(items: [String], ascending: Bool = true) {
             

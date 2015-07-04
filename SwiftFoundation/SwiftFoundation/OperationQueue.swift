@@ -10,5 +10,8 @@
 
 public protocol OperationQueueType {
     
+    /** The operation queue for the main thread. */
+    static var mainQueue: Self { get }
+    
     
 }

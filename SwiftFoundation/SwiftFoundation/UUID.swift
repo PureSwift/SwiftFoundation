@@ -15,6 +15,9 @@ public protocol UUIDType: RawRepresentable, Equatable, CustomStringConvertible {
     
     /** Creates a random UUID. */
     init()
+    
+    // RawRepresentable initializer is the default initializer
+    init?(rawValue: String)
 }
 
 // MARK: - Protocol Implementation

@@ -20,8 +20,9 @@ public protocol NotificationCenterType {
     ///
     /// - parameter: name The name of the notification.
     /// - parameter: domain The domain of the notification.
-    
-    func addObserver(name: String, domain: String, sender: AnyObject, queue: OperationQueueType, ())
+    /// - parameter: sender The object that sent the notification.
+    /// - parameter: queue The operation queue that will be used to execute the callback closure.
+    func addObserver(name: String, domain: String, sender: AnyObject, queue: OperationQueueType, (NotificationType) -> Void)
 }
 
 // MARK: - Implementation
