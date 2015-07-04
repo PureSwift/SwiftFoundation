@@ -6,8 +6,82 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-/** Regular expression type. */
-public protocol RegularExpressionType {
+// MARK: - Protocol
+
+/** Regular expression interface. */
+public protocol RegularExpressionType: RawRepresentable, CustomStringConvertible, Equatable {
+    
+    typealias OptionsType
     
     var pattern: String { get }
+    
+    var options: OptionsType { get }
+    
+    init(pattern: String, options: OptionsType) throws
+}
+
+// MARK: - Protocol Implementation
+
+public extension RegularExpressionType {
+    
+    init?(rawValue: (String, OptionsType)) {
+        
+        do {
+            
+            try self.init(pattern: rawValue.0, options: rawValue.1)
+        }
+        catch _ {
+            
+            return nil
+        }
+    }
+    
+    var rawValue: (String, OptionsType) {
+        
+        return (pattern, options)
+    }
+    
+    var description: String {
+        
+        return "Options: \(options) Pattern: \(pattern)"
+    }
+}
+
+// MARK: - Implementation
+
+/** POSIX Regular Expression. */
+public struct RegularExpression: RegularExpressionType {
+    
+    // MARK: - Properties
+    
+    public let pattern: String
+    
+    public let options: RegularExpressionOptions
+    
+    // MARK: - Internal Properties
+    
+    private let internalRegularExpression: regex_t
+    
+    // MARK: - Initialization
+    
+    public init(pattern: String, options: RegularExpressionOptions) throws {
+        
+        self.pattern = pattern
+        self.options = options
+    }
+}
+
+// MARK: - Operator Overloading
+
+public func ==(lhs: Date, rhs: Date) -> Bool {
+    
+    return lhs.timeIntervalSinceReferenceDate == rhs.timeIntervalSinceReferenceDate
+}
+
+// MARK: - Supporting Types
+
+/** POSIX Regular Expression Options */
+public struct RegularExpressionOptions {
+    
+    
 }

@@ -9,3 +9,4 @@ let items = ["coleman", "Coleman", "alsey", "miller", "Z", "A"]
 let sortedItems = (items as NSArray).sortedArrayUsingDescriptors([NSSortDescriptor(key: nil, ascending: true)])
 
 
+let expression = NSRegularExpression(pattern: <#T##String#>, options: NSRegularExpressionOptions)

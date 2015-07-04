@@ -6,6 +6,8 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
+// MARK: - Protocol
+
 /** Date Type */
 public protocol DateType: Equatable, Comparable, CustomStringConvertible {
     
@@ -18,6 +20,8 @@ public protocol DateType: Equatable, Comparable, CustomStringConvertible {
     /** Creates the date with the specified time interval since the reference date (1 January 2001, GMT). */
     init(timeIntervalSinceReferenceDate: TimeInterval)
 }
+
+// MARK: - Protocol Implementation
 
 /** Default implementations */
 public extension DateType {
@@ -32,6 +36,8 @@ public extension DateType {
         return "\(self.timeIntervalSinceReferenceDate)"
     }
 }
+
+// MARK: - Implementation
 
 public struct Date: DateType {
     

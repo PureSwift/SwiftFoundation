@@ -6,6 +6,8 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
+// MARK: - Protocol
+
 /** Describes a basis for ordering types. */
 public protocol SortDescriptor {
     
@@ -16,6 +18,8 @@ public protocol SortDescriptor {
     /** Compares two types and gets their order. */
     func sort(SortedType, SortedType) -> Order
 }
+
+// MARK: - Functions
 
 /** Returns a sorted array of the collection as specified by the sort descriptor. */
 public func Sort<T: CollectionType, S: SortDescriptor where S.SortedType == T.Generator.Element>(sortDescriptor: S, collection: T) -> [T.Generator.Element] {
