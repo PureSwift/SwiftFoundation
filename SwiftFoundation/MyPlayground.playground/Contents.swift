@@ -6,7 +6,9 @@ import Foundation
 
 let items = ["coleman", "Coleman", "alsey", "miller", "Z", "A"]
 
-let sortedItems = (items as NSArray).sortedArrayUsingDescriptors([NSSortDescriptor(key: nil, ascending: true)])
+let ascending = false
 
+let sortedItems = (items as NSArray).sortedArrayUsingDescriptors([NSSortDescriptor(key: nil, ascending: ascending)])
 
-let expression = NSRegularExpression(pattern: <#T##String#>, options: NSRegularExpressionOptions)
+let sortedItems2 = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: ascending))
+

@@ -27,7 +27,7 @@ public extension UUIDType {
 // MARK: - Implementation
 
 /// A representation of universally unique identifiers (UUIDs).
-public struct UUID: UUIDType {
+public struct UUID: UUIDType, ByteValue {
     
     // MARK: - Public Properties
     

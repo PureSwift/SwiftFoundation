@@ -26,22 +26,23 @@ public func Sort<T: CollectionType, S: SortDescriptor where S.SortedType == T.Ge
     
     return collection.sort { (first: T.Generator.Element, second: T.Generator.Element) -> Bool in
         
-        let order = sort.sort(first, second)
+        let order = sortDescriptor.sort(first, second)
         
         let first: Bool = {
             
             switch order {
                 
-            case .Ascending: return false
+            case .Ascending: return sortDescriptor.ascending
                 
-            case .Descending: return true
+            case .Descending: return !sortDescriptor.ascending
                 
             case .Same: return true
+                
             }
             
-        }()
+            }()
         
-        
+        return first
     }
 }
 

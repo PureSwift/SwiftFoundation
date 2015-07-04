@@ -36,6 +36,8 @@ class DateTests: XCTestCase {
         foundationDate  = nil
     }
     
+    // MARK: - Functional Tests
+    
     func testFoundationDateEquality() {
         
         let timeIntervalSinceReferenceDate = NSDate.timeIntervalSinceReferenceDate()
@@ -80,5 +82,28 @@ class DateTests: XCTestCase {
         
         XCTAssert(intervalSinceDate == foundationIntervalSinceDate)
     }
-
+    
+    // MARK: - Performance Tests
+    
+    func testCreationPerformance() {
+        
+        self.measureBlock() {
+            
+            for _ in 0...1000000 {
+                
+                _ = Date.init()
+            }
+        }
+    }
+    
+    func testFoundationCreationPerformance() {
+        
+        self.measureBlock() {
+            
+            for _ in 0...1000000 {
+                
+                _ = NSDate.init()
+            }
+        }
+    }
 }

@@ -20,6 +20,8 @@ class UUIDTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+    
+    // MARK: - Functional Tests
 
     func testCreateRandomUUID() {
         
@@ -56,6 +58,30 @@ class UUIDTests: XCTestCase {
         XCTAssert((UUID(rawValue: stringValue) != nil), "Could not create UUID with string \"\(stringValue)\"")
         
         XCTAssert((UUID(rawValue: "BadInput") == nil), "UUID should not be created")
+    }
+    
+    // MARK: - Performance Tests
+    
+    func testCreationPerformance() {
+        
+        self.measureBlock() {
+            
+            for _ in 0...1000000 {
+                
+                _ = UUID()
+            }
+        }
+    }
+    
+    func testFoundationCreationPerformance() {
+        
+        self.measureBlock() {
+            
+            for _ in 0...1000000 {
+                
+                _ = NSUUID()
+            }
+        }
     }
 }
 
