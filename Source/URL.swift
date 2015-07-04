@@ -45,3 +45,10 @@ public struct URL: URLType {
         self.rawValue = rawValue
     }
 }
+
+// MARK: - Operator Overloading
+
+public func ==(lhs: URL, rhs: URL) -> Bool {
+    
+    return lhs == rhs
+}
