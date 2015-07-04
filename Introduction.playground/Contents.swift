@@ -1,6 +1,5 @@
 //: SwiftFoundation Introduction
 
-import Foundation
 import SwiftFoundation
 
 var str = "Hello, SwiftFoundation"
@@ -11,6 +10,8 @@ var str = "Hello, SwiftFoundation"
 let randomUUID = UUID()
 
 //: SwiftFoundation aims to provide the exact same *interface* and *implementation* as Foundation, but upgraded for Swift and Protocol-Oriented Programming where feasible.
+
+import Foundation
 
 let validRawUUID = "7ADBFDE5-0311-441F-AA77-CC7BBECFA949"
 
