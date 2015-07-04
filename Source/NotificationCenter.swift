@@ -10,11 +10,9 @@
 
 /** Notification Center interface */
 public protocol NotificationCenterType {
-    
-    static var defaultCenter: Self { get }
-    
+        
     /** Posts the notification. */
-    func post<T: NotificationType>(notification: T)
+    func post(notification: NotificationType)
     
     /// Forwards the notification calling the block.
     ///
@@ -29,14 +27,14 @@ public protocol NotificationCenterType {
 
 final public class NotificationCenter: NotificationCenterType {
     
-    public let defaultCenter = NotificationCenter()
+    public let defaultCenter: NotificationCenterType = NotificationCenter()
     
-    public func post<T: NotificationType>(notification: T) {
+    public func post(notification: NotificationType) {
         
         
     }
     
-    func addObserver<T: NotificationType, U: OperationQueueType, V: AnyObject>(name: String, domain: String, sender: V?, queue: U, (T) -> Void) {
+    public func addObserver<T: NotificationType, U: OperationQueueType, V: AnyObject>(name: String, domain: String, sender: V?, queue: U, (T) -> Void) {
         
         
     }

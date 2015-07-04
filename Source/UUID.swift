@@ -9,7 +9,7 @@
 // MARK: - Protocol
 
 /** UUID interface */
-public protocol UUIDType: RawRepresentable, Equatable, CustomStringConvertible {
+public protocol UUIDType: RawRepresentable, CustomStringConvertible, Equatable {
     
     var rawValue: String { get }
     
@@ -18,13 +18,6 @@ public protocol UUIDType: RawRepresentable, Equatable, CustomStringConvertible {
     
     // RawRepresentable initializer is the default initializer
     init?(rawValue: String)
-}
-
-// MARK: - Protocol Implementation
-
-public extension UUIDType {
-    
-    var description: String { return self.rawValue }
 }
 
 // MARK: - Implementation

@@ -6,17 +6,42 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-public struct URL {
+// MARK: - Protocol
+
+public protocol URLType: RawRepresentable, CustomStringConvertible, Equatable {
     
-    let stringValue: String
+    var host: String { get }
     
-    init?(stringValue: String) {
+    var rawValue: String { get }
+    
+    init?(rawValue: String)
+}
+
+// MARK: - Protocol Extension
+
+public extension URLType {
+    
+    var host: String {
         
-        guard stringValue.characters.count > 1 else {
+        // TODO: Implement 'host' extraction
+        
+        return ""
+    }
+}
+
+// MARK: - Implementation
+
+public struct URL: URLType {
+    
+    public let rawValue: String
+    
+    public init?(rawValue: String) {
+        
+        guard rawValue.characters.count > 1 else {
             
             return nil
         }
         
-        self.stringValue = stringValue
+        self.rawValue = rawValue
     }
 }
