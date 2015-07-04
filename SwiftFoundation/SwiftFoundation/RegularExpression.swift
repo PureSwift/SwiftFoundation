@@ -49,6 +49,7 @@ public extension RegularExpressionType {
 
 // MARK: - Implementation
 
+/*
 /** POSIX Regular Expression. */
 public struct RegularExpression: RegularExpressionType {
     
@@ -66,6 +67,12 @@ public struct RegularExpression: RegularExpressionType {
     
     public init(pattern: String, options: RegularExpressionOptions) throws {
         
+        // create internal representation
+        
+        
+        
+        // set values
+        
         self.pattern = pattern
         self.options = options
     }
@@ -73,9 +80,9 @@ public struct RegularExpression: RegularExpressionType {
 
 // MARK: - Operator Overloading
 
-public func ==(lhs: Date, rhs: Date) -> Bool {
+public func ==(lhs: RegularExpression, rhs: RegularExpression) -> Bool {
     
-    return lhs.timeIntervalSinceReferenceDate == rhs.timeIntervalSinceReferenceDate
+    return (lhs.pattern == rhs.pattern && lhs.options == rhs.options)
 }
 
 // MARK: - Supporting Types
@@ -85,3 +92,4 @@ public struct RegularExpressionOptions {
     
     
 }
+*/
