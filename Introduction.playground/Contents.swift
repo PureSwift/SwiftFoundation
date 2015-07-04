@@ -15,7 +15,7 @@ import Foundation
 
 let validRawUUID = "7ADBFDE5-0311-441F-AA77-CC7BBECFA949"
 
-let uuid = UUID(rawValue: validRawUUID)
+let uuid = UUID(rawValue: validRawUUID)!
 
 let foundationUUID = NSUUID(UUIDString: validRawUUID)!
 
@@ -30,9 +30,10 @@ func printDate(date: DateType) {
 
 import SwiftFoundationAppleBridge
 
-extension NSDate: DateType { /* Implementation provided in SwiftFoundationAppleBridge module */ }
+extension NSDate: DateType { /* Bridging provided in SwiftFoundationAppleBridge module */ }
 
-printUUID(NSDate()) // Foundation-based
+printDate(NSDate()) // Foundation-based
 
-printUUID(Date()) // POSIX-based
+printDate(Date()) // POSIX-based
+
 
