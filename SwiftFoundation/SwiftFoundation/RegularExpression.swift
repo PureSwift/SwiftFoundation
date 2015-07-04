@@ -51,7 +51,7 @@ public extension RegularExpressionType {
 
 /*
 /** POSIX Regular Expression. */
-public struct RegularExpression: RegularExpressionType {
+public struct RegularExpression: RegularExpressionType, ByteValue {
     
     // MARK: - Properties
     

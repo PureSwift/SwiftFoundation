@@ -15,48 +15,13 @@ public protocol Predicate {
     func evaluate<T>(object: T) -> Bool
 }
 
-public extension Array {
+public extension CollectionType {
     
-    func filteredArrayUsingPredicate(predicate: Predicate) -> Array {
+    func filterUsingPredicate(predicate: Predicate) -> [Self.Generator.Element] {
         
-        return self.filter({ (element: Array.Generator.Element) -> Bool in
+        return self.filter({ (element: Self.Generator.Element) -> Bool in
             
             return predicate.evaluate(element)
         })
     }
 }
-
-/*
-public extension CollectionType {
-    
-    func filteredUsingPredicate(predicate: Predicate) -> Self {
-        
-        var copy = self
-        
-        for i in startIndex..<endIndex {
-            
-            copy[i] = nil
-        }
-        
-        
-    }
-}
-
-public extension MutableCollectionType {
-    
-    /// Evaluate each object in the set using the specified predicate and remove each objects which evaluates to NO.
-    ///
-    mutating func filterUsingPredicate(predicate: Predicate) {
-        
-        for index in startIndex..<endIndex {
-            
-            let element = self[index]
-            
-            if predicate.evaluate(element) == false {
-                
-                self[index] = nil
-            }
-        }
-    }
-}
-*/

@@ -3,3 +3,4 @@
 import SwiftFoundation
 import Foundation
 
+"Hey".lowercaseString
