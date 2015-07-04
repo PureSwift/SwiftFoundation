@@ -84,37 +84,3 @@ class UUIDTests: XCTestCase {
         }
     }
 }
-
-// MARK: - Foundation Extensions
-extension NSUUID {
-    
-    convenience init(byteValue: uuid_t) {
-        
-        var value = byteValue
-        
-        let buffer = withUnsafeMutablePointer(&value, { (valuePointer: UnsafeMutablePointer<uuid_t>) -> UnsafeMutablePointer<UInt8> in
-            
-            let bufferType = UnsafeMutablePointer<UInt8>.self
-            
-            return unsafeBitCast(valuePointer, bufferType)
-        })
-        
-        self.init(UUIDBytes: buffer)
-    }
-    
-    var byteValue: uuid_t {
-        
-        var uuid = uuid_t(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
-        
-        withUnsafeMutablePointer(&uuid, { (valuePointer: UnsafeMutablePointer<uuid_t>) -> Void in
-            
-            let bufferType = UnsafeMutablePointer<UInt8>.self
-            
-            let buffer = unsafeBitCast(valuePointer, bufferType)
-            
-            self.getUUIDBytes(buffer)
-        })
-        
-        return uuid
-    }
-}

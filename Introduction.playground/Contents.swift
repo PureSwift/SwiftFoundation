@@ -1,8 +1,9 @@
-//: Playground - noun: a place where people can play
+//: SwiftFoundation Introduction
 
 import Foundation
 import SwiftFoundation
+import SwiftFoundationAppleBridge
 
-var str = "Hello, playground"
+var str = "Hello, SwiftFoundation (\(Date()))"
 
 

@@ -10,11 +10,7 @@
    <FileRef
       location = "group:SwiftFoundation/SwiftFoundation.xcodeproj">
    </FileRef>
-   <Group
-      location = "group:AppleBridge"
-      name = "AppleBridge">
-      <FileRef
-         location = "group:Date.swift">
-      </FileRef>
-   </Group>
+   <FileRef
+      location = "group:SwiftFoundationAppleBridge/SwiftFoundationAppleBridge.xcodeproj">
+   </FileRef>
 </Workspace>

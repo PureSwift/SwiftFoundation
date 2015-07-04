@@ -14,6 +14,3 @@ FOUNDATION_EXPORT double SwiftFoundationVersionNumber;
 //! Project version string for SwiftFoundation.
 FOUNDATION_EXPORT const unsigned char SwiftFoundationVersionString[];
 
-
-
-

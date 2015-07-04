@@ -17,7 +17,8 @@
 		6E16C2FB1B47A92100C07C25 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2FA1B47A92100C07C25 /* Coding.swift */; };
 		6E16C2FD1B47ADF700C07C25 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2FC1B47ADF700C07C25 /* Operation.swift */; };
 		6E16C2FF1B47AE0400C07C25 /* OperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2FE1B47AE0400C07C25 /* OperationQueue.swift */; };
-		6E17CCCD1B4846AD0019AFB2 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CCCB1B4846AD0019AFB2 /* Date.swift */; };
+		6E17CD051B484FE40019AFB2 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD041B484FE30019AFB2 /* Version.swift */; };
+		6E17CD071B4850B40019AFB2 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD061B4850B40019AFB2 /* SemanticVersion.swift */; };
 		6E30BA111B40F543009B1B49 /* SwiftFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E30BA101B40F543009B1B49 /* SwiftFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E30BA181B40F543009B1B49 /* SwiftFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E30BA0D1B40F543009B1B49 /* SwiftFoundation.framework */; };
 		6E30BA1D1B40F543009B1B49 /* SwiftFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA1C1B40F543009B1B49 /* SwiftFoundationTests.swift */; };
@@ -69,7 +70,9 @@
 		6E16C2FA1B47A92100C07C25 /* Coding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coding.swift; sourceTree = "<group>"; };
 		6E16C2FC1B47ADF700C07C25 /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		6E16C2FE1B47AE0400C07C25 /* OperationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueue.swift; sourceTree = "<group>"; };
-		6E17CCCB1B4846AD0019AFB2 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		6E17CD001B484D5A0019AFB2 /* BridgedTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BridgedTypes.swift; path = ../../SwiftFoundationAppleBridge/SwiftFoundationAppleBridge/BridgedTypes.swift; sourceTree = "<group>"; };
+		6E17CD041B484FE30019AFB2 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		6E17CD061B4850B40019AFB2 /* SemanticVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticVersion.swift; sourceTree = "<group>"; };
 		6E30BA0D1B40F543009B1B49 /* SwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E30BA101B40F543009B1B49 /* SwiftFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFoundation.h; sourceTree = "<group>"; };
 		6E30BA121B40F543009B1B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -149,15 +152,6 @@
 			name = Operations;
 			sourceTree = "<group>";
 		};
-		6E17CCCC1B4846AD0019AFB2 /* AppleBridge */ = {
-			isa = PBXGroup;
-			children = (
-				6E17CCCB1B4846AD0019AFB2 /* Date.swift */,
-			);
-			name = AppleBridge;
-			path = ../../AppleBridge;
-			sourceTree = "<group>";
-		};
 		6E30BA031B40F543009B1B49 = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +174,8 @@
 			isa = PBXGroup;
 			children = (
 				6E30BA101B40F543009B1B49 /* SwiftFoundation.h */,
+				6E17CD041B484FE30019AFB2 /* Version.swift */,
+				6E17CD061B4850B40019AFB2 /* SemanticVersion.swift */,
 				6E30BA2D1B410176009B1B49 /* Base64.swift */,
 				6E16C2F11B47851600C07C25 /* ByteValue.swift */,
 				6E30BA2B1B40F71B009B1B49 /* Date.swift */,
@@ -207,7 +203,7 @@
 		6E30BA1B1B40F543009B1B49 /* SwiftFoundationTests */ = {
 			isa = PBXGroup;
 			children = (
-				6E17CCCC1B4846AD0019AFB2 /* AppleBridge */,
+				6E17CD001B484D5A0019AFB2 /* BridgedTypes.swift */,
 				6E30BA1C1B40F543009B1B49 /* SwiftFoundationTests.swift */,
 				6E30BA311B4116E6009B1B49 /* DateTests.swift */,
 				6E16C2EE1B45095900C07C25 /* UUIDTests.swift */,
@@ -399,12 +395,14 @@
 				6E16C2BE1B42460B00C07C25 /* HTTPStatusCode.swift in Sources */,
 				6E30BA2C1B40F71B009B1B49 /* Date.swift in Sources */,
 				6E16C2F21B47851600C07C25 /* ByteValue.swift in Sources */,
+				6E17CD051B484FE40019AFB2 /* Version.swift in Sources */,
 				6E30BA531B41D960009B1B49 /* HTTPMethod.swift in Sources */,
 				6E30BA3C1B413718009B1B49 /* HTTPURLRequest.swift in Sources */,
 				6E30BA361B4133F3009B1B49 /* Task.swift in Sources */,
 				6E16C2F61B47A62800C07C25 /* NumberFormatter.swift in Sources */,
 				6E30BA3A1B413510009B1B49 /* URLRequest.swift in Sources */,
 				6E30BA451B413BCB009B1B49 /* Formatter.swift in Sources */,
+				6E17CD071B4850B40019AFB2 /* SemanticVersion.swift in Sources */,
 				6E30BA2A1B40F713009B1B49 /* Data.swift in Sources */,
 				6E30BA3F1B413874009B1B49 /* URLResponse.swift in Sources */,
 				6E30BA381B41344C009B1B49 /* URL.swift in Sources */,
@@ -424,7 +422,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E16C2EF1B45095900C07C25 /* UUIDTests.swift in Sources */,
-				6E17CCCD1B4846AD0019AFB2 /* Date.swift in Sources */,
 				6E30BA1D1B40F543009B1B49 /* SwiftFoundationTests.swift in Sources */,
 				6EB4DE431B46F3E300C02276 /* OrderTests.swift in Sources */,
 				6E30BA321B4116E6009B1B49 /* DateTests.swift in Sources */,

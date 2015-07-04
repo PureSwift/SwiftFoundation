@@ -55,16 +55,3 @@ class OrderTests: XCTestCase {
         XCTAssert(now < later)
     }
 }
-
-extension NSComparisonResult {
-    
-    func toOrder() -> Order {
-        
-        switch self {
-            
-        case .OrderedAscending: return .Ascending
-        case .OrderedDescending: return .Descending
-        case .OrderedSame: return .Same
-        }
-    }
-}
