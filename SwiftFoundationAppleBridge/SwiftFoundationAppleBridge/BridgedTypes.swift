@@ -12,6 +12,6 @@ import SwiftFoundationAppleBridge
 
 /** Declares all the types that can be bridged toll-free. This file needs to built with the targeted module since extensions that conform to protocols cannot be declared ```public```. */
 
+extension NSData: DataType {}
 extension NSDate: DateType {}
 extension NSUUID: UUIDType {}
-extension NSData: DataType {}

@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import SwiftFoundation
+import SwiftFoundationAppleBridge
 
 class UUIDTests: XCTestCase {
 
