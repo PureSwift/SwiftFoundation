@@ -73,8 +73,6 @@ public struct RegularExpression: RegularExpressionType, ByteValue {
         self.pattern = pattern
         self.options = options
     }
-    
-    
 }
 
 // MARK: - Operator Overloading
