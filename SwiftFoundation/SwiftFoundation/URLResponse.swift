@@ -9,8 +9,8 @@
 /// Encapsulates the metadata associated with the response to a a URL load request in a manner independent of protocol and URL scheme.
 public protocol URLResponse {
     
+    typealias URLResponseDataType: DataType
+    
     /** The response body. */
-    var body: Data? { get }
-    
-    
+    var body: URLResponseDataType? { get }
 }

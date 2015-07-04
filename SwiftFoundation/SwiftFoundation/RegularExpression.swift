@@ -49,7 +49,6 @@ public extension RegularExpressionType {
 
 // MARK: - Implementation
 
-/*
 /** POSIX Regular Expression. */
 public struct RegularExpression: RegularExpressionType, ByteValue {
     
@@ -59,9 +58,7 @@ public struct RegularExpression: RegularExpressionType, ByteValue {
     
     public let options: RegularExpressionOptions
     
-    // MARK: - Internal Properties
-    
-    private let internalRegularExpression: regex_t
+    public let byteValue: regex_t
     
     // MARK: - Initialization
     
@@ -69,13 +66,15 @@ public struct RegularExpression: RegularExpressionType, ByteValue {
         
         // create internal representation
         
-        
+        self.byteValue = regex_t()
         
         // set values
         
         self.pattern = pattern
         self.options = options
     }
+    
+    
 }
 
 // MARK: - Operator Overloading
@@ -88,8 +87,10 @@ public func ==(lhs: RegularExpression, rhs: RegularExpression) -> Bool {
 // MARK: - Supporting Types
 
 /** POSIX Regular Expression Options */
-public struct RegularExpressionOptions {
+public enum RegularExpressionOptions {
     
-    
+    case AllowWhitespace
 }
-*/
+
+
+

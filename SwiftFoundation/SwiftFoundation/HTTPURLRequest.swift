@@ -6,6 +6,23 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
+// MARK: - Protocol
+
+public protocol HTTPURLRequestType: URLRequest {
+    
+    typealias HTTPURLRequestDataType: DataType
+    
+    var body: HTTPURLRequestDataType? { get }
+    
+    var headers: [String: String] { get }
+    
+    var method: HTTPMethod { get }
+    
+    var version: HTTPVersion { get }
+}
+
+// MARK: - Implementation
+
 /** HTTP URL request. */
 public struct HTTPURLRequest: URLRequest {
     

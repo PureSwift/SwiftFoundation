@@ -7,19 +7,36 @@
 //
 
 /** Encapsulates data. */
-public protocol Data {
+public protocol DataType: ByteValue {
     
     // MARK: - Properties
     
+    /** Number of bytes. */
     var count: UInt { get }
     
-    var bytes: UnsafePointer<Void> { get }
+    /** Data pointer. */
+    var byteValue: (UnsafePointer<Void>, UInt) { get }
 }
 
-public extension Data {
+public extension DataType {
+    
+    var count: UInt {
+        
+        return byteValue.1
+    }
     
     var isEmpty: Bool {
         
-        return self.count == 0
+        return count == 0
+    }
+}
+
+public struct Data: DataType {
+    
+    public let byteValue: (UnsafePointer<Void>, UInt)
+    
+    public init(byteValue: (UnsafePointer<Void>, UInt)) {
+        
+        self.byteValue = byteValue
     }
 }

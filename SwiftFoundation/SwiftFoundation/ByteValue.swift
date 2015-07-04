@@ -11,5 +11,6 @@ public protocol ByteValue {
     
     typealias ByteValueType
     
+    /** Returns the primitive type */
     var byteValue: ByteValueType { get }
 }

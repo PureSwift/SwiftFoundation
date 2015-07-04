@@ -11,16 +11,17 @@
 /** Notification Center interface */
 public protocol NotificationCenterType {
     
-    typealias NotificationType
-    
-    typealias OperationQueueType
-    
     static var defaultCenter: Self { get }
     
     /** Posts the notification. */
     func post(notification: NotificationType)
     
-    func addObserver(name: String, domain: String, queue: OperationQueueType)
+    /// Forwards the notification calling the block.
+    ///
+    /// - parameter: name The name of the notification.
+    /// - parameter: domain The domain of the notification.
+    
+    func addObserver(name: String, domain: String, sender: AnyObject, queue: OperationQueueType, ())
 }
 
 // MARK: - Implementation

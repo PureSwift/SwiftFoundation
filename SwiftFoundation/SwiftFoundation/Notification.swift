@@ -19,4 +19,7 @@ public protocol NotificationType {
     
     /** Accompanying payload for the notification. */
     var userInfo: [String: Any] { get }
+    
+    /** Default initializer. */
+    init(name: String, domain: String, userInfo: [String: Any])
 }
