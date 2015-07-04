@@ -66,13 +66,6 @@
 			remoteGlobalIDString = 6E17CCE81B484B020019AFB2;
 			remoteInfo = SwiftFoundationAppleBridgeTests;
 		};
-		6E17CD131B4853D80019AFB2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6E17CD0A1B4853BE0019AFB2 /* SwiftFoundationAppleBridge.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6E17CCDD1B484B020019AFB2;
-			remoteInfo = SwiftFoundationAppleBridge;
-		};
 		6E30BA191B40F543009B1B49 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6E30BA041B40F543009B1B49 /* Project object */;
@@ -198,8 +191,8 @@
 		6E30BA031B40F543009B1B49 = {
 			isa = PBXGroup;
 			children = (
-				6E17CD191B4855F90019AFB2 /* SwiftFoundation */,
 				6E30BA0F1B40F543009B1B49 /* Source */,
+				6E17CD191B4855F90019AFB2 /* SwiftFoundation */,
 				6E30BA1B1B40F543009B1B49 /* SwiftFoundationTests */,
 				6E30BA0E1B40F543009B1B49 /* Products */,
 			);
@@ -360,7 +353,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6E17CD141B4853D80019AFB2 /* PBXTargetDependency */,
 				6E30BA1A1B40F543009B1B49 /* PBXTargetDependency */,
 			);
 			name = SwiftFoundationTests;
@@ -489,9 +481,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E16C2EF1B45095900C07C25 /* UUIDTests.swift in Sources */,
 				6E17CD161B4854AD0019AFB2 /* BridgedTypes.swift in Sources */,
 				6E30BA1D1B40F543009B1B49 /* SwiftFoundationTests.swift in Sources */,
+				6E16C2EF1B45095900C07C25 /* UUIDTests.swift in Sources */,
 				6EB4DE431B46F3E300C02276 /* OrderTests.swift in Sources */,
 				6E30BA321B4116E6009B1B49 /* DateTests.swift in Sources */,
 				6EB4DE451B47063700C02276 /* SortDescriptorTests.swift in Sources */,
@@ -501,11 +493,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6E17CD141B4853D80019AFB2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftFoundationAppleBridge;
-			targetProxy = 6E17CD131B4853D80019AFB2 /* PBXContainerItemProxy */;
-		};
 		6E30BA1A1B40F543009B1B49 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6E30BA0C1B40F543009B1B49 /* SwiftFoundation */;

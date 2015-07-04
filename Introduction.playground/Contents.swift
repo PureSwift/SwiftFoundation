@@ -2,7 +2,6 @@
 
 import Foundation
 import SwiftFoundation
-import SwiftFoundationAppleBridge
 
 var str = "Hello, SwiftFoundation"
 
@@ -17,23 +16,22 @@ let validRawUUID = "7ADBFDE5-0311-441F-AA77-CC7BBECFA949"
 
 let uuid = UUID(rawValue: validRawUUID)
 
-let foundationUUID = NSUUID(stringUUID: validRawUUID)
+let foundationUUID = NSUUID(UUIDString: validRawUUID)!
 
 uuid.rawValue == foundationUUID.UUIDString
 
 //: SwiftFoundation's Protocol-Oriented Programming paradigm permits for toll free bridging between OS-dependent implementations.
 
-func printUUID(uuid: UUIDType) {
+func printDate(date: DateType) {
 
-    print(uuid.rawValue)
+    print(date.timeIntervalSinceReferenceDate)
 }
 
-extension NSUUID: UUIDType {}
+import SwiftFoundationAppleBridge
 
-printUUID(foundationUUID) // Foundation-based
+extension NSDate: DateType { /* Implementation provided in SwiftFoundationAppleBridge module */ }
 
-printUUID(uuid) // POSIX-based
+printUUID(NSDate()) // Foundation-based
 
-uuid.rawValue == foundationUUID.rawValue
-
+printUUID(Date()) // POSIX-based
 

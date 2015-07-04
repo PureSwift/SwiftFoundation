@@ -14,4 +14,4 @@ import SwiftFoundationAppleBridge
 
 extension NSData: DataType {}
 extension NSDate: DateType {}
-extension NSUUID: UUIDType {}
+// extension NSUUID: UUIDType {}
