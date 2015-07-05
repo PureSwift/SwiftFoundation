@@ -3,4 +3,17 @@
 import SwiftFoundation
 import Foundation
 
-"Hey".lowercaseString
+class Test {
+    
+    func observe() {
+        
+        NotificationCenter.defaultCenter.addObserver(self, method: Test.notification, name: "Hey", domain: "Test", sender: nil)
+    }
+    
+    func notification(n: Notification<AnyObject>) {
+        
+        print("Hey")
+    }
+}
+
+let

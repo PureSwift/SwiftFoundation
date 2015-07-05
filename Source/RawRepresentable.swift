@@ -49,6 +49,8 @@ public extension CollectionType where Self.Generator.Element: RawRepresentable {
 
 // MARK: - SwiftFoundation Default Implementations
 
+// MARK: CustomStringConvertible
+
 public extension RawRepresentable {
     
     // Prints the raw value by default

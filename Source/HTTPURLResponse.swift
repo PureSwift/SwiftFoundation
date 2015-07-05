@@ -6,6 +6,16 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
+public protocol HTTPURLResponseType: URLResponse {
+        
+    var statusCode: Int { get }
+    
+    var headers: [String: String] { get }
+    
+    /** The response body. */
+    //var body: DataType? { get }
+}
+
 /** HTTP URL response. */
 public struct HTTPURLResponse: URLResponse {
     

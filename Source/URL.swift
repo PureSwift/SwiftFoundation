@@ -8,7 +8,7 @@
 
 // MARK: - Protocol
 
-public protocol URLType: RawRepresentable, CustomStringConvertible, Equatable {
+public protocol URLType: RawRepresentable, CustomStringConvertible {
     
     var host: String { get }
     
@@ -44,11 +44,4 @@ public struct URL: URLType {
         
         self.rawValue = rawValue
     }
-}
-
-// MARK: - Operator Overloading
-
-public func ==(lhs: URL, rhs: URL) -> Bool {
-    
-    return lhs == rhs
 }

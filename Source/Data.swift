@@ -31,7 +31,7 @@ public extension DataType {
     }
 }
 
-public struct Data: DataType {
+final public class Data: DataType {
     
     public let byteValue: (UnsafePointer<Void>, UInt)
     
