@@ -7,7 +7,7 @@
 //
 
 /** Encapsulates data. */
-public protocol DataType: CollectionType, ByteValue {
+public protocol DataType: class, CollectionType, ByteValue {
     
     // MARK: - Properties
     

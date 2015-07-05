@@ -9,7 +9,7 @@
 // MARK: - Protocol
 
 /** Notification Center interface */
-public protocol NotificationCenterType {
+public protocol NotificationCenterType: class {
     
     static var defaultCenter: Self { get }
     

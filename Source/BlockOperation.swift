@@ -8,10 +8,41 @@
 
 // MARK: - Protocol
 
-public protocol BlockOperationType: Operation {
+public protocol BlockOperationType: OperationType {
     
     var block: () -> Void { get }
 }
 
 // MARK: - Implemenation
 
+final public class BlockOperation: Operation, BlockOperationType {
+    
+    // MARK: Properties
+    
+    public let block: () -> Void
+    
+    // MARK: Initialization
+    
+    init(block: () -> Void,
+        name: String?,
+        queuePriority: OperationQueuePriority,
+        asynchronous: Bool = true,
+        completionBlock: (() -> Void)? = nil) {
+        
+            self.block = block
+            
+            super.init(name: name,
+                queuePriority: queuePriority,
+                asynchronous: asynchronous,
+                completionBlock: completionBlock)
+    }
+    
+    // MARK: Methods
+    
+    public override func main() {
+        
+        self.block()
+    }
+    
+    
+}
