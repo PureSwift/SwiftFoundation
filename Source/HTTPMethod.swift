@@ -18,4 +18,6 @@ public enum HTTPMethod: String {
     case TRACE = "TRACE"
     case CONNECT = "CONNECT"
     case PATCH = "PATCH"
+    
+    init() { self = .GET }
 }

@@ -7,7 +7,7 @@
 //
 
 /** Encapsulates data. */
-public protocol DataType: ByteValue {
+public protocol DataType: CollectionType, ByteValue {
     
     // MARK: - Properties
     
@@ -16,6 +16,11 @@ public protocol DataType: ByteValue {
     
     /** Data pointer. */
     var byteValue: (UnsafePointer<Void>, UInt) { get }
+}
+
+public protocol MutableDataType: DataType, MutableCollectionType {
+    
+    
 }
 
 public extension DataType {
@@ -31,7 +36,16 @@ public extension DataType {
     }
 }
 
-final public class Data: DataType {
+public struct DataArray {
+    
+    // MARK: - Private Properties
+    
+    private var internalValue: UnsafeBufferPointer<UInt8>
+    
+    init(
+}
+
+final public class DataPointer: DataType {
     
     public let byteValue: (UnsafePointer<Void>, UInt)
     

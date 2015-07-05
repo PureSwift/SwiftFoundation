@@ -25,4 +25,6 @@ public enum HTTPStatusCode: UInt {
     case IMUsed = 226
     
     case MultipleChoices = 300
+    
+    init() { self = .OK }
 }
