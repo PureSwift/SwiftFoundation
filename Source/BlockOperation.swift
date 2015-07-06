@@ -8,41 +8,50 @@
 
 // MARK: - Protocol
 
-public protocol BlockOperationType: OperationType {
+public protocol BlockOperationType: Operation {
     
     var block: () -> Void { get }
 }
 
 // MARK: - Implemenation
 
-final public class BlockOperation: Operation, BlockOperationType {
+public struct BlockOperation: BlockOperationType {
     
     // MARK: Properties
+    
+    public var state = OperationState()
+    
+    public var dependencies = [Operation]()
+    
+    public let name: String?
+    
+    public let queuePriority: OperationQueuePriority
+    
+    public let asynchronous: Bool
+    
+    public let completionBlock: (() -> Void)?
     
     public let block: () -> Void
     
     // MARK: Initialization
     
-    init(block: () -> Void,
-        name: String?,
-        queuePriority: OperationQueuePriority,
+    public init(block: () -> Void,
+        name: String? = nil,
+        queuePriority: OperationQueuePriority = .Normal,
         asynchronous: Bool = true,
         completionBlock: (() -> Void)? = nil) {
-        
-            self.block = block
             
-            super.init(name: name,
-                queuePriority: queuePriority,
-                asynchronous: asynchronous,
-                completionBlock: completionBlock)
+            self.block = block
+            self.name = name
+            self.queuePriority = queuePriority
+            self.asynchronous = asynchronous
+            self.completionBlock = completionBlock
     }
     
     // MARK: Methods
     
-    public override func main() {
+    public func main() {
         
         self.block()
     }
-    
-    
 }

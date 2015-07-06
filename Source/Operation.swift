@@ -9,103 +9,37 @@
 // MARK: - Protocol
 
 /** Operation Interface. Abstraction for tasks. To be used with a operation queue. */
-public protocol OperationType {
+public protocol Operation {
     
     // MARK: Properties
     
+    /** The state of the operation. */
     var state: OperationState { get }
     
-    var dependencies: [OperationType] { get }
+    /** The operations that have to be executed first before the operation can begin executing. */
+    var dependencies: [Operation] { get }
     
+    /** The name of the operation. (for debugging purposes) */
     var name: String?  { get }
     
+    /** The priority this operation will have on a queue. */
     var queuePriority: OperationQueuePriority { get }
-        
+    
+    /** The block to be executed when the operation finishes. */
     var completionBlock: (() -> Void)? { get }
     
+    /** Whether the ```func main()``` function is executed syncronously or asyncronously on the queue. */
     var asynchronous: Bool { get }
     
     // MARK: Methods
     
-    func start()
-    
-    func cancel()
-    
+    /** The method implementing the task to be performed by the operation. */
     func main()
-    
-    func addDependency(OperationType)
-    
-    func removeDependency(OperationType)
-}
-
-// MARK: - Implementation
-
-/** Abstract class for operations that can be added to an operation queue. */
-public class Operation: OperationType {
-    
-    // MARK: Properties
-    
-    private(set) public var state = OperationState()
-    
-    private(set) public var dependencies = [OperationType]()
-    
-    public let name: String?
-    
-    public let queuePriority: OperationQueuePriority
-    
-    public let asynchronous: Bool
-    
-    public let completionBlock: (() -> Void)?
-    
-    // MARK: Initialization
-    
-    public init(name: String? = nil,
-        queuePriority: OperationQueuePriority = .Normal,
-        asynchronous: Bool = true,
-        completionBlock: (() -> Void)? = nil) {
-            
-            self.name = name
-            self.queuePriority = queuePriority
-            self.asynchronous = asynchronous
-            self.completionBlock = completionBlock
-    }
-    
-    // MARK: Methods
-    
-    final public func start() {
-        
-        self.state = OperationState.Executing
-    }
-    
-    final public func cancel() {
-        
-        self.state
-    }
-    
-    final public func addDependency(operation: OperationType) {
-        
-        self.dependencies.append(operation)
-    }
-    
-    final public func removeDependency(operation: OperationType) {
-        
-        if let index = self.dependencies.indexOf { (operation: Operation) -> Bool in
-            
-            operation == operation
-        } {
-            
-            
-        }
-    }
-    
-    public func main() {
-        
-        debugPrint("Executed an Operation (\(self)), which is an abstract class and does nothing. ")
-    }
 }
 
 // MARK: - Supporting Types
 
+/** Defines the state of an operation. */
 public enum OperationState {
     
     case Ready
@@ -116,6 +50,7 @@ public enum OperationState {
     init() { self = .Ready }
 }
 
+/** The priority of an operation on a queue. */
 public enum OperationQueuePriority: Int {
     
     case VeryLow    = -2

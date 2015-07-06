@@ -17,7 +17,6 @@ public protocol UUIDType: RawRepresentable, CustomStringConvertible, Equatable {
     init()
     
     // RawRepresentable initializer is the default initializer
-    init?(rawValue: String)
 }
 
 // MARK: - Implementation

@@ -10,9 +10,7 @@
 
 public protocol HTTPURLRequestType: URLRequest {
     
-    typealias HTTPURLRequestDataType: DataType
-    
-    var body: HTTPURLRequestDataType? { get }
+    var body: Data? { get }
     
     var headers: [String: String] { get }
     

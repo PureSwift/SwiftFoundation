@@ -36,21 +36,11 @@ public extension DataType {
     }
 }
 
-public struct DataArray {
+final public class Data {
     
     // MARK: - Private Properties
     
-    private var internalValue: UnsafeBufferPointer<UInt8>
+    //private var internalValue: UnsafeBufferPointer<UInt8>
     
-    init(
-}
-
-final public class DataPointer: DataType {
     
-    public let byteValue: (UnsafePointer<Void>, UInt)
-    
-    public init(byteValue: (UnsafePointer<Void>, UInt)) {
-        
-        self.byteValue = byteValue
-    }
 }
