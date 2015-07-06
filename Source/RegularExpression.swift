@@ -77,7 +77,7 @@ public struct RegularExpression: RegularExpressionType, ByteValue {
 
 // MARK: - Operator Overloading
 
-public func ==(lhs: RegularExpression, rhs: RegularExpression) -> Bool {
+public func ==<T where T: RegularExpressionType, T.OptionsType: Equatable>(lhs: T, rhs: T) -> Bool {
     
     return (lhs.pattern == rhs.pattern && lhs.options == rhs.options)
 }

@@ -83,6 +83,21 @@ class DateTests: XCTestCase {
         XCTAssert(intervalSinceDate == foundationIntervalSinceDate)
     }
     
+    func testEquality() {
+        
+        let date = Date()
+        
+        let date2 = Date(timeIntervalSinceReferenceDate: date.timeIntervalSinceReferenceDate)
+        
+        let foundationDate = NSDate()
+        
+        let foundationDate2 = NSDate(timeIntervalSinceReferenceDate: foundationDate.timeIntervalSinceReferenceDate)
+        
+        XCTAssert(date == date2)
+        
+        XCTAssert(foundationDate == foundationDate2)
+    }
+    
     // MARK: - Performance Tests
     
     func testCreationPerformance() {

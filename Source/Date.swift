@@ -28,7 +28,7 @@ public extension DateType {
     
     func timeIntervalSinceDate(date: Self) -> TimeInterval {
         
-        return self.timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate
+        return self - date
     }
     
     public var byteValue: TimeInterval {
@@ -66,42 +66,42 @@ public struct Date: DateType {
 
 // MARK: - Operator Overloading
 
-public func ==(lhs: Date, rhs: Date) -> Bool {
+public func == <T: DateType> (lhs: T, rhs: T) -> Bool {
     
     return lhs.timeIntervalSinceReferenceDate == rhs.timeIntervalSinceReferenceDate
 }
 
-public func <(lhs: Date, rhs: Date) -> Bool {
+public func < <T: DateType> (lhs: T, rhs: T) -> Bool {
     
     return lhs.timeIntervalSinceReferenceDate < rhs.timeIntervalSinceReferenceDate
 }
 
-public func <=(lhs: Date, rhs: Date) -> Bool {
+public func <= <T: DateType> (lhs: T, rhs: T) -> Bool {
     
     return lhs.timeIntervalSinceReferenceDate <= rhs.timeIntervalSinceReferenceDate
 }
 
-public func >=(lhs: Date, rhs: Date) -> Bool {
+public func >= <T: DateType> (lhs: T, rhs: T) -> Bool {
     
     return lhs.timeIntervalSinceReferenceDate >= rhs.timeIntervalSinceReferenceDate
 }
 
-public func >(lhs: Date, rhs: Date) -> Bool {
+public func > <T: DateType> (lhs: T, rhs: T) -> Bool {
     
     return lhs.timeIntervalSinceReferenceDate > rhs.timeIntervalSinceReferenceDate
 }
 
-public func -(lhs: Date, rhs: Date) -> TimeInterval {
+public func - <T: DateType> (lhs: T, rhs: T) -> TimeInterval {
     
     return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
 }
 
-public func +(lhs: Date, rhs: TimeInterval) -> Date {
+public func + <T: DateType> (lhs: T, rhs: TimeInterval) -> T {
     
-    return Date(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate + rhs)
+    return T(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate + rhs)
 }
 
-public func +=(lhs: Date, rhs: TimeInterval) -> Date {
+public func += <T: DateType> (lhs: T, rhs: TimeInterval) -> T {
     
     return lhs + rhs
 }

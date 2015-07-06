@@ -39,8 +39,7 @@ public func Sort<T: CollectionType, S: SortDescriptor where S.SortedType == T.Ge
             case .Same: return true
                 
             }
-            
-            }()
+        }()
         
         return first
     }
