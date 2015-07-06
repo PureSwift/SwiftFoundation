@@ -19,3 +19,16 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
    - Java 
    - Andriod
    - .NET
+
+## Implemented
+To see what parts of Foundation are implemented, just look at the unit tests. Completed functionality will be fully unit tested. Note that there are some functionality that is written as a protocol only, that will not be included on this list.
+
+- [x] Date
+- [x] Null
+- [x] Order (```NSComparisonResult```)
+- [x] SortDescriptor
+- [x] UUID
+- [ ] NotificationCenter
+- [ ] OperationQueue
+- [ ] RegularExpression
+- [ ] Data
