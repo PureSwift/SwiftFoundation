@@ -61,7 +61,12 @@ public struct UUID: UUIDType, ByteValue {
 
 // MARK: - Operator Overloading
 
-public func ==(lhs: UUID, rhs: UUID) -> Bool {
+public func == (lhs: UUID, rhs: UUID) -> Bool {
+    
+    return lhs == rhs
+}
+
+public func == <T: UUIDType> (lhs: T, rhs: T) -> Bool {
     
     return lhs.rawValue == rhs.rawValue
 }
