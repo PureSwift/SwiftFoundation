@@ -165,9 +165,6 @@ public enum RegularExpressionCompileError: ErrorType {
     /// The regex routines ran out of memory.
     case OutOfMemory
     
-    /// Compiled regular expression requires a pattern buffer larger than 64Kb. This is not defined by POSIX.2.
-    case GreaterThan64KB
-    
     /// Invalid use of pattern operators such as group or list.
     case InvalidPatternOperator
     
@@ -183,9 +180,6 @@ public enum RegularExpressionCompileError: ErrorType {
     /// Unknown character class name.
     case UnknownCharacterClassName
     
-    /// Non specific error.  This is not defined by POSIX.2.
-    case GenericError
-    
     /// Trailing backslash.
     case TrailingBackslash
     
@@ -199,6 +193,12 @@ public enum RegularExpressionCompileError: ErrorType {
     
     /// Invalid back reference to a subexpression.
     case InvalidBackReferenceToSubExpression
+    
+    /// Non specific error.  This is not defined by POSIX.2.
+    case GenericError
+    
+    /// Compiled regular expression requires a pattern buffer larger than 64Kb. This is not defined by POSIX.2.
+    case GreaterThan64KB
     
     // MARK: Private Conversion
     
@@ -260,8 +260,22 @@ private func CompileRegex(pattern: String, options: [RegularExpressionCompileOpt
     return regexPointer
 }
 
-private func MatchRegex(string: String, options: [RegularExpressionMatchOption]) throws -> Range<UInt> {
+
+private func MatchRegex(regex: UnsafeMutablePointer<regex_t>, string: String, options: [RegularExpressionMatchOption]) -> Range<UInt>? {
     
+    let flags: Int32 = {
+       
+        var eFlag: Int32 = 0
+        
+        for option in options {
+            
+            eFlag = eFlag | option.eFlagValue
+        }
+        
+        return eFlag
+    }()
     
+    regexec(regex, string, 100, <#T##__pmatch: UnsafeMutablePointer<regmatch_t>##UnsafeMutablePointer<regmatch_t>#>, flags)
 }
+
 
