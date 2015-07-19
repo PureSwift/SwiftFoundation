@@ -12,7 +12,7 @@ public final class FileManager {
     // MARK: - Class Methods
     
     /// Determines whether a file exists at the specified path.
-    static func fileExists(atPath path: String) -> Bool {
+    public static func fileExists(atPath path: String) -> Bool {
         
         let inodeInfo = UnsafeMutablePointer<stat>.alloc(1)
         
@@ -23,7 +23,7 @@ public final class FileManager {
             return false
         }
         
-        guard (inodeInfo.memory.st_mode | S_IFMT) != S_IFDIR else {
+        guard (inodeInfo.memory.st_mode & S_IFMT) != S_IFDIR else {
             
             return false
         }
@@ -32,7 +32,7 @@ public final class FileManager {
     }
     
     /// Determines whether a directory exists at the specified path.
-    static func directoryExists(atPath path: String) -> Bool {
+    public static func directoryExists(atPath path: String) -> Bool {
         
         let inodeInfo = UnsafeMutablePointer<stat>.alloc(1)
         
@@ -43,7 +43,7 @@ public final class FileManager {
             return false
         }
         
-        guard (inodeInfo.memory.st_mode | S_IFMT) == S_IFDIR else {
+        guard (inodeInfo.memory.st_mode & S_IFMT) == S_IFDIR else {
             
             return false
         }
@@ -51,18 +51,28 @@ public final class FileManager {
         return true
     }
     
-    static func changeCurrentDirectory(newCurrentDirectory: String) throws {
+    /// Attempts to change the current directory
+    public static func changeCurrentDirectory(newCurrentDirectory: String) throws {
         
         guard chdir(newCurrentDirectory) == 0 else {
             
-            errno
+            throw StandardError.fromErrorNumber!
         }
     }
     
-    static var currentDirectory: String {
+    /// Gets the current directory
+    public static var currentDirectory: String {
         
-        let path = UnsafeMutablePointer<UInt8>.alloc(Int(PATH_MAX))
+        let stringBufferSize = Int(PATH_MAX)
         
+        let path = UnsafeMutablePointer<CChar>.alloc(stringBufferSize)
         
+        defer { path.dealloc(stringBufferSize) }
+        
+        getcwd(path, stringBufferSize - 1)
+        
+        return String.fromCString(path)!
     }
+    
+    
 }

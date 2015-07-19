@@ -23,7 +23,7 @@ class RegularExpressionTests: XCTestCase {
 
     func test() {
         
-        let regex = RegularExpression(pattern: "(+\\d)", options: [])
+        //let regex = try RegularExpression(pattern: "(+\\d)", options: [])
         
         
     }

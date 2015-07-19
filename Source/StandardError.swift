@@ -6,7 +6,7 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-/// Standard POSIX Errors
+/// Standard POSIX Error
 public enum StandardError: ErrorType {
     
     /// Operation not permitted
@@ -102,8 +102,8 @@ public enum StandardError: ErrorType {
     
     // MARK: - Initialization
     
-    /// Creates error from ```errno```.
-    public func fromErrorNumber() -> StandardError? {
+    /// Creates error from C ```errno```.
+    public static var fromErrorNumber: StandardError? {
         
         switch errno {
             
