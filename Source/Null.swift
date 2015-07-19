@@ -9,8 +9,6 @@
 /** An OOP placeholder for ```nil```. */
 public struct Null: CustomStringConvertible, Equatable {
     
-    // MARK: - CustomStringConvertible
-    
     public var description: String { return "<null>" }
 }
 

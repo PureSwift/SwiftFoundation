@@ -275,7 +275,8 @@ private func MatchRegex(regex: UnsafeMutablePointer<regex_t>, string: String, op
         return eFlag
     }()
     
-    regexec(regex, string, 100, <#T##__pmatch: UnsafeMutablePointer<regmatch_t>##UnsafeMutablePointer<regmatch_t>#>, flags)
+    // regexec(regex, string, 100, <#T##__pmatch: UnsafeMutablePointer<regmatch_t>##UnsafeMutablePointer<regmatch_t>#>, flags)
+    
+    return nil;
 }
-
 
