@@ -74,5 +74,9 @@ public final class FileManager {
         return String.fromCString(path)!
     }
     
+    public func attributesOfFileSystem(forPath path: String) throws -> FileAttributes {
+        
+        
+    }
     
 }

@@ -19,6 +19,9 @@ public protocol DateType: ByteValue, Equatable, Comparable, CustomStringConverti
     
     /** Creates the date with the specified time interval since the reference date (1 January 2001, GMT). */
     init(timeIntervalSinceReferenceDate: TimeInterval)
+    
+    /** Creates the date with the specified time interval since 1 January 1970, GMT. */
+    init(timeIntervalSince1970: TimeInterval)
 }
 
 // MARK: - Protocol Implementation
@@ -26,17 +29,23 @@ public protocol DateType: ByteValue, Equatable, Comparable, CustomStringConverti
 /** Default implementations */
 public extension DateType {
     
+    /// Returns the time interval between the current date and 1 January 1970, GMT.
+    var timeIntervalSince1970: TimeInterval {
+        
+        return timeIntervalSinceReferenceDate - TimeIntervalBetween1970AndReferenceDate
+    }
+    
     func timeIntervalSinceDate(date: Self) -> TimeInterval {
         
         return self - date
     }
     
-    public var byteValue: TimeInterval {
+    var byteValue: TimeInterval {
         
         return self.timeIntervalSinceReferenceDate
     }
     
-    public var description: String {
+    var description: String {
         
         return "\(self.timeIntervalSinceReferenceDate)"
     }
@@ -48,19 +57,24 @@ public struct Date: DateType {
     
     // MARK: - Properties
     
-    /** Returns the time interval between the date and the reference date (1 January 2001, GMT). */
+    /// Returns the time interval between the date and the reference date (1 January 2001, GMT).
     public let timeIntervalSinceReferenceDate: TimeInterval
     
     // MARK: - Initialization
     
     public init() {
         
-        self.timeIntervalSinceReferenceDate = TimeIntervalSinceReferenceDate()
+        timeIntervalSinceReferenceDate = TimeIntervalSinceReferenceDate()
     }
     
-    public init(timeIntervalSinceReferenceDate: TimeInterval) {
+    public init(timeIntervalSinceReferenceDate timeInterval: TimeInterval) {
         
-        self.timeIntervalSinceReferenceDate = timeIntervalSinceReferenceDate
+        timeIntervalSinceReferenceDate = timeInterval
+    }
+    
+    public init(timeIntervalSince1970 timeInterval: TimeInterval) {
+        
+        timeIntervalSinceReferenceDate = timeInterval - TimeIntervalBetween1970AndReferenceDate
     }
 }
 
@@ -108,32 +122,33 @@ public func += <T: DateType> (lhs: T, rhs: TimeInterval) -> T {
 
 // MARK: - Functions
 
-/** Returns the time interval between the current date and the reference date (1 January 2001, GMT). */
+/// Returns the time interval between the current date and the reference date (1 January 2001, GMT). */
 public func TimeIntervalSinceReferenceDate() -> TimeInterval {
     
-    var timeStamp = timeval()
+    return TimeIntervalSince1970() - TimeIntervalBetween1970AndReferenceDate
+}
+
+/// Returns the time interval between the current date and 1 January 1970, GMT */
+public func TimeIntervalSince1970() -> TimeInterval {
     
+    var timeStamp = timeval()
+    	
     gettimeofday(&timeStamp, nil)
     
-    let secondsSinceReferenceDate = TimeInterval(timeStamp.tv_sec) - TimeIntervalSince1970
-    
-    let microseconds = (TimeInterval(timeStamp.tv_usec) / TimeInterval(1000000.0))
-    
-    let timeSinceReferenceDate = secondsSinceReferenceDate + microseconds
-    
-    return timeSinceReferenceDate
+    return timeStamp.timeIntervalValue
 }
 
 // MARK: - Constants
 
-/** Time interval difference between two dates, in seconds. */
+/// Time interval difference between two dates, in seconds.
 public typealias TimeInterval = Double
 
 ///
-/// Time interval between the unix standard reference date of 1 January 1970 and the OpenStep reference date of 1 January 2001
+/// Time interval between the Unix standard reference date of 1 January 1970 and the OpenStep reference date of 1 January 2001
 /// This number comes from:
 ///
 /// ```(((31 years * 365 days) + 8  *(days for leap years)* */) = /* total number of days */ * 24 hours * 60 minutes * 60 seconds)```
 ///
 /// - note: This ignores leap-seconds
-public let TimeIntervalSince1970: TimeInterval = 978307200.0
+public let TimeIntervalBetween1970AndReferenceDate: TimeInterval = 978307200.0
+

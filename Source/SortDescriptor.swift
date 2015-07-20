@@ -16,7 +16,7 @@ public protocol SortDescriptor {
     var ascending: Bool { get }
     
     /** Compares two types and gets their order. */
-    func sort(SortedType, SortedType) -> Order
+    func sort(first: SortedType, second: SortedType) -> Order
 }
 
 // MARK: - Functions

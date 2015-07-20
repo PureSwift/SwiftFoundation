@@ -98,6 +98,11 @@ class DateTests: XCTestCase {
         XCTAssert(foundationDate == foundationDate2)
     }
     
+    func testTimeIntervalSince1970() {
+        
+        XCTAssert(TimeIntervalSince1970 == NSTimeIntervalSince1970, "NSTimeIntervalSince1970 == \(NSTimeIntervalSince1970)")
+    }
+    
     // MARK: - Performance Tests
     
     func testCreationPerformance() {

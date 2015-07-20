@@ -90,7 +90,7 @@ private protocol Callback {
     
     var shouldExecute: Bool { get }
     
-    func execute<T: NotificationType>(T)
+    func execute<T: NotificationType>(_: T)
 }
 
 private struct NotificationCallback<T: AnyObject, U: AnyObject, V: NotificationType>: Callback {
