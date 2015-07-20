@@ -11,7 +11,7 @@ public struct ComparableSortDescriptor<T: Comparable>: SortDescriptor {
         
     public let ascending: Bool
     
-    public func sort(first: T, _ second: T) -> Order {
+    public func sort(first: T, second: T) -> Order {
         
         return first.compare(second)
     }

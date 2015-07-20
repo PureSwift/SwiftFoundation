@@ -31,10 +31,13 @@ public struct FileAttributes {
     
     // MARK: - Initialization
     
+    /*
     public init(fileAttributes: stat) {
         
-        self.modificationDate = Date(timeIntervalSinceReference1970: fileAttributes.st_mtimespec.time)
+        self.modificationDate = Date(timeIntervalSince1970: fileAttributes.st_mtimespec.timeIntervalValue)
+        self.creationDate = Date(timeIntervalSince1970: fileAttributes.st_ctimespec.timeIntervalValue)
     }
+    */
 }
 
 

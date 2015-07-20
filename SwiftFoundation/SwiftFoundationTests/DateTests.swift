@@ -100,7 +100,7 @@ class DateTests: XCTestCase {
     
     func testTimeIntervalSince1970() {
         
-        XCTAssert(TimeIntervalSince1970 == NSTimeIntervalSince1970, "NSTimeIntervalSince1970 == \(NSTimeIntervalSince1970)")
+        XCTAssert(TimeIntervalBetween1970AndReferenceDate == NSTimeIntervalSince1970, "NSTimeIntervalSince1970 == \(NSTimeIntervalSince1970)")
     }
     
     // MARK: - Performance Tests

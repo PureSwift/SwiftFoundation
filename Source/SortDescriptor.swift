@@ -26,7 +26,7 @@ public func Sort<T: CollectionType, S: SortDescriptor where S.SortedType == T.Ge
     
     return collection.sort { (first: T.Generator.Element, second: T.Generator.Element) -> Bool in
         
-        let order = sortDescriptor.sort(first, second)
+        let order = sortDescriptor.sort(first, second: second)
         
         let first: Bool = {
             

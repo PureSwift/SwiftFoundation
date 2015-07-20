@@ -16,7 +16,7 @@ public struct ComparatorSortDescriptor<T>: SortDescriptor {
     /** The closure that will be used for sorting. */
     public let comparator: Comparator
     
-    public func sort(first: T, _ second: T) -> Order {
+    public func sort(first: T, second: T) -> Order {
         
         return self.comparator(first, second)
     }

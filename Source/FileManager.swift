@@ -11,19 +11,23 @@ public final class FileManager {
     
     // MARK: - Class Methods
     
+    /// Determines whether a file descriptor exists at the specified path. Can be regular file, directory, socket, etc.
+    public static func itemExists(atPath path: String) -> Bool {
+        
+        return (stat(path, nil) == 0)
+    }
+    
     /// Determines whether a file exists at the specified path.
     public static func fileExists(atPath path: String) -> Bool {
         
-        let inodeInfo = UnsafeMutablePointer<stat>.alloc(1)
+        var inodeInfo = stat()
         
-        defer { inodeInfo.dealloc(1) }
-        
-        guard stat(path, inodeInfo) == 0  else {
+        guard stat(path, &inodeInfo) == 0 else {
             
             return false
         }
         
-        guard (inodeInfo.memory.st_mode & S_IFMT) != S_IFDIR else {
+        guard (inodeInfo.st_mode & S_IFMT) == S_IFREG else {
             
             return false
         }
@@ -34,16 +38,14 @@ public final class FileManager {
     /// Determines whether a directory exists at the specified path.
     public static func directoryExists(atPath path: String) -> Bool {
         
-        let inodeInfo = UnsafeMutablePointer<stat>.alloc(1)
+        var inodeInfo = stat()
         
-        defer { inodeInfo.dealloc(1) }
-        
-        guard stat(path, inodeInfo) == 0  else {
+        guard stat(path, &inodeInfo) == 0  else {
             
             return false
         }
         
-        guard (inodeInfo.memory.st_mode & S_IFMT) == S_IFDIR else {
+        guard (inodeInfo.st_mode & S_IFMT) == S_IFDIR else {
             
             return false
         }
@@ -74,9 +76,11 @@ public final class FileManager {
         return String.fromCString(path)!
     }
     
+    /*
     public func attributesOfFileSystem(forPath path: String) throws -> FileAttributes {
         
         
     }
+    */
     
 }
