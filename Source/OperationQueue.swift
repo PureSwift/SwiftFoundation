@@ -13,7 +13,7 @@ public protocol OperationQueueType: class {
     /** The operation queue for the main thread. */
     static var mainQueue: Self { get }
     
-    
+    var name: String { get }
 }
 
 // MARK: - Implementation
@@ -21,9 +21,11 @@ public protocol OperationQueueType: class {
 /*
 final public class OperationQueue: OperationQueueType, ByteValue {
     
-    init(byteValue: dispatch_queue_t) {
+    public let byteValue: dispatch_queue_t
+    
+    public init(byteValue: dispatch_queue_t, name: String) {
         
-        
+        self.byteValue = byteValue;
     }
 }
 */

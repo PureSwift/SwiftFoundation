@@ -4,3 +4,6 @@ import SwiftFoundation
 import Foundation
 
 
+var string = ""
+
+string += "Hey"

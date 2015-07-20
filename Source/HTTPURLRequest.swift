@@ -6,48 +6,18 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-// MARK: - Protocol
-
-public protocol HTTPURLRequestType: URLRequest {
-    
-    var body: Data? { get }
-    
-    var headers: [String: String] { get }
-    
-    var method: HTTPMethod { get }
-    
-    var version: HTTPVersion { get }
-}
-
-// MARK: - Implementation
-
 /** HTTP URL request. */
 public struct HTTPURLRequest: URLRequest {
     
-    public let URL: SwiftFoundation.URL
+    public var URL: SwiftFoundation.URL
     
-    public let timeoutInterval: TimeInterval
+    public var timeoutInterval: TimeInterval = 30
     
-    public let body: Data?
+    public var body: Data?
     
-    public let headers: [String: String]
+    public var headers: [String: String]
     
-    public let method: HTTPMethod
+    public var method: HTTPMethod = .GET
     
-    public let version: HTTPVersion
-    
-    public init(URL: SwiftFoundation.URL,
-        timeoutInterval: TimeInterval = 30,
-        body: Data? = nil,
-        headers: [String: String] = [:],
-        method: HTTPMethod = .GET,
-        version: HTTPVersion = HTTPVersion()) {
-        
-        self.URL = URL
-        self.timeoutInterval = timeoutInterval
-        self.body = body
-        self.headers = headers
-        self.method = method
-        self.version = version
-    }
+    public var version: HTTPVersion = HTTPVersion()
 }
