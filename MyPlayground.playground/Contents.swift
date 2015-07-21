@@ -7,3 +7,7 @@ import Foundation
 var string = ""
 
 string += "Hey"
+
+var date = Date()
+
+date.timeIntervalSinceReferenceDate = 100;

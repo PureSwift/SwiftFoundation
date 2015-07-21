@@ -9,34 +9,33 @@
 // MARK: - Protocol
 
 /** UUID interface */
-public protocol UUIDType: RawRepresentable, CustomStringConvertible, Equatable {
+public protocol UUIDType: CustomStringConvertible, Equatable {
     
     var rawValue: String { get }
     
     /** Creates a random UUID. */
     init()
-    
-    // RawRepresentable initializer is the default initializer
 }
 
 // MARK: - Implementation
 
 /// A representation of universally unique identifiers (UUIDs).
-public struct UUID: UUIDType, ByteValue {
+public struct UUID: UUIDType, ByteValue, RawRepresentable {
     
     // MARK: - Public Properties
     
-    public let rawValue: String
-    
     public let byteValue: uuid_t
+    
+    public var rawValue: String {
+        
+        return UUIDConvertToString(self.byteValue)
+    }
     
     // MARK: - Initialization
     
     public init() {
         
         self.byteValue = UUIDCreateRandom()
-        
-        self.rawValue = UUIDConvertToString(self.byteValue)
     }
     
     public init?(rawValue: String) {
@@ -46,16 +45,12 @@ public struct UUID: UUIDType, ByteValue {
             return nil
         }
         
-        self.rawValue = rawValue
-        
         self.byteValue = uuid
     }
     
     public init(bytes: uuid_t) {
         
         self.byteValue = bytes
-        
-        self.rawValue = UUIDConvertToString(self.byteValue)
     }
 }
 
