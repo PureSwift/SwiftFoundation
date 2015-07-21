@@ -71,7 +71,11 @@ public struct URL {
         
         var stringValue = scheme + "://"
         
-        if let user = user, password = password { stringValue += "\(user):\(password)@"}
+        if let user = user { stringValue += user }
+        
+        if let password = password { stringValue += ":\(password)"}
+        
+        if user != nil { stringValue += "@" }
         
         if let host = host { stringValue += host }
         

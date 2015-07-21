@@ -8,16 +8,14 @@
 
 /** HTTP URL request. */
 public struct HTTPURLRequest: URLRequest {
-    
-    static let protocolType = HTTPURLProtocol.self
-    
+        
     public var URL: SwiftFoundation.URL
     
     public var timeoutInterval: TimeInterval = 30
     
     public var body: Data?
     
-    public var headers: [String: String]
+    public var headers = [String: String]()
     
     public var method: HTTPMethod = .GET
     

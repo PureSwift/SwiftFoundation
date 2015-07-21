@@ -20,20 +20,11 @@ public protocol HTTPURLResponseType: URLResponse {
 public struct HTTPURLResponse: URLResponse {
     
     /** Returns a dictionary containing all the HTTP header fields. */
-    public let headers: [String: String]
+    public var headers: [String: String]
     
     /** Returns the HTTP status code for the response. */
-    public let statusCode: Int
+    public var statusCode: Int
     
     /** The HTTP response body. */
-    //public let body: DataType?
-    
-    public init(headers: [String: String] = [:],
-        statusCode: Int = Int(HTTPStatusCode.OK.rawValue),
-        body: Data? = nil) {
-        
-        self.headers = headers
-        self.statusCode = statusCode
-        //self.body = body
-    }
+    public var body: Data
 }

@@ -6,19 +6,12 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-/** defines the HTTP protocol version. */
+/// Defines the HTTP protocol version. Defualts to HTTP 1.1
 public struct HTTPVersion {
     
     /** Major version number. */
-    public let major: UInt8
+    public var major: UInt8 = 1
     
     /** Minor version number. */
-    public let minor: UInt8
-    
-    /** Defaults to ```1.1``` */
-    public init(major: UInt8 = 1, minor: UInt8 = 1) {
-        
-        self.major = major
-        self.minor = minor
-    }
+    public var minor: UInt8 = 1
 }

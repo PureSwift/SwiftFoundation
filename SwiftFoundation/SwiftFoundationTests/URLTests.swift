@@ -21,12 +21,26 @@ class URLTests: XCTestCase {
         super.tearDown()
     }
 
-    func testURLString() {
+    func testBasicURLString() {
         
-        let url = SwiftFoundation.URL(scheme: "https")
+        let host = "google.com"
         
+        let scheme = "http"
         
+        var url = SwiftFoundation.URL(scheme: scheme)
         
+        url.host = host
         
+        let foundationURL = NSURLComponents()
+        
+        foundationURL.scheme = scheme
+        
+        foundationURL.host = host
+        
+        XCTAssert(foundationURL.URL != nil)
+        
+        XCTAssert(url.URLString != nil)
+        
+        XCTAssert(url.URLString! == foundationURL.URL!.absoluteString)
     }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-/** The defined status codes used with the HTTP protocol. */
+/// The standard status codes used with the HTTP protocol.
 public enum HTTPStatusCode: UInt {
     
     case Continue = 100

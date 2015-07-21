@@ -6,7 +6,18 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
+/// Loads HTTP requests
 public final class HTTPURLClient: URLClient {
+        
+    public static func validURL(URL: SwiftFoundation.URL) -> Bool {
+        
+        guard (URL.scheme == "http" ||  URL.scheme == "https") else { return false }
+        
+        return true
+    }
     
-    static let protocolType = HTTPURLProtocol.self
+    public func sendRequest(request: HTTPURLRequest) throws -> HTTPURLResponse {
+        
+        throw StandardError.OperationNotSupported
+    }
 }
