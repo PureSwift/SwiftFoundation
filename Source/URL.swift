@@ -107,36 +107,40 @@ public struct URL: CustomStringConvertible {
     
     public var description: String {
         
+        let separator = " "
+        
+        var description = ""
+        
         if let URLString = URLString {
             
-            return URLString
+            description += "URL: " + URLString + separator
         }
-        
-        var description = "Scheme: " + scheme
+            
+        description += "Scheme: " + scheme
         
         if let user = user {
             
-            description += "\n" + "User: " + user
+            description += separator + "User: " + user
         }
         
         if let password = password {
             
-            description += "\n" + "Password: " + password
+            description += separator + "Password: " + password
         }
         
         if let host = host {
             
-            description += "\n" + "Host: " + host
+            description += separator + "Host: " + host
         }
         
         if let port = port {
             
-            description += "\n" + "Port: " + "\(port)"
+            description += separator + "Port: " + "\(port)"
         }
         
         if let path = path {
             
-            description += "\n" + "Path: " + path
+            description += separator + "Path: " + path
         }
         
         if let query = query {
@@ -155,12 +159,12 @@ public struct URL: CustomStringConvertible {
                 }
             }
             
-            description += "\n" + "Query: " + stringValue
+            description += separator + "Query: " + stringValue
         }
         
         if let fragment = fragment {
             
-            description += "\n" + "Fragment: " + fragment
+            description += separator + "Fragment: " + fragment
         }
         
         return description

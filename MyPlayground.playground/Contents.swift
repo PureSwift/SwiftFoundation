@@ -14,3 +14,11 @@ Order.Ascending == Order.Same
 
 var url = URL(scheme: "https")
 
+url.host = "google.com"
+
+url.path = "/ncr"
+
+
+
+
+
