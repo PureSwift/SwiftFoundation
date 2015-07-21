@@ -18,11 +18,6 @@ public protocol DataType: CollectionType, ByteValue {
     var byteValue: (UnsafePointer<Void>, UInt) { get }
 }
 
-public protocol MutableDataType: DataType, MutableCollectionType {
-    
-    
-}
-
 public extension DataType {
     
     var count: UInt {
@@ -36,7 +31,7 @@ public extension DataType {
     }
 }
 
-final public class Data {
+public struct Data {
     
     // MARK: - Private Properties
     
