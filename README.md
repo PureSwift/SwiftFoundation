@@ -15,10 +15,6 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 - LLVM Compiler
    - Darwin (OS X, iOS, WatchOS)
    - Linux
-- [Silver Compiler](http://elementscompiler.com/elements/silver/)
-   - Java 
-   - Andriod
-   - .NET
 
 ## Implemented
 To see what parts of Foundation are implemented, just look at the unit tests. Completed functionality will be fully unit tested. Note that there are some functionality that is written as a protocol only, that will not be included on this list.
@@ -29,6 +25,7 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 - [x] SortDescriptor
 - [x] UUID
 - [x] FileManager
+- [ ] URL
 - [ ] NotificationCenter
 - [ ] OperationQueue
 - [ ] RegularExpression
