@@ -9,6 +9,8 @@
 /** HTTP URL request. */
 public struct HTTPURLRequest: URLRequest {
     
+    static let protocolType = HTTPURLProtocol.self
+    
     public var URL: SwiftFoundation.URL
     
     public var timeoutInterval: TimeInterval = 30

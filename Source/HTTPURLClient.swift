@@ -8,5 +8,5 @@
 
 public final class HTTPURLClient: URLClient {
     
-    
+    static let protocolType = HTTPURLProtocol.self
 }

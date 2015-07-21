@@ -6,7 +6,12 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-public final class HTTPURLProtocol {
+public final class HTTPURLProtocol: URLProtocol {
     
-    
+    static func validURL(URL: SwiftFoundation.URL) -> Bool {
+        
+        guard (URL.scheme == "http" ||  URL.scheme == "https") else { return false }
+        
+        return true
+    }
 }

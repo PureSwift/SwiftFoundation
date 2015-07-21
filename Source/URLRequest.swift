@@ -8,8 +8,6 @@
 
 public protocol URLRequest {
     
-    typealias Protocol: URLProtocol
-    
     var URL: SwiftFoundation.URL { get }
     
     var timeoutInterval: TimeInterval { get }
