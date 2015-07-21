@@ -8,7 +8,7 @@
 
 // MARK: - Protocol
 
-/** Date Type */
+/// Date Type
 public protocol DateType: ByteValue, Equatable, Comparable, CustomStringConvertible {
     
     /** Returns the time interval between the date and the reference date (1 January 2001, GMT). */
@@ -26,7 +26,7 @@ public protocol DateType: ByteValue, Equatable, Comparable, CustomStringConverti
 
 // MARK: - Protocol Implementation
 
-/** Default implementations */
+/// Default implementations
 public extension DateType {
     
     /// Returns the time interval between the current date and 1 January 1970, GMT.
@@ -58,7 +58,7 @@ public struct Date: DateType {
     // MARK: - Properties
     
     /// Returns the time interval between the date and the reference date (1 January 2001, GMT).
-    public let timeIntervalSinceReferenceDate: TimeInterval
+    public var timeIntervalSinceReferenceDate: TimeInterval
     
     // MARK: - Initialization
     
