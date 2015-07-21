@@ -7,8 +7,6 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 - Provide a base POSIX-based *implementation* for maximum portablility
 - *Rewrite* Foundation with Protocol-Oriented Programming principals
 - Long-term Pure Swift *replacement* for the Cocoa frameworks.
-- Toll-free *Bridges* to Foundation, Java, Andriod, and .NET (thanks to Protocol Oriented Programming)
-- *Pure Swift* implementation only linking against the Swift and C Standard libraries.
 
 ## Targeted Platforms
 
