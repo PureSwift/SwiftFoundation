@@ -6,29 +6,8 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-// MARK: - Protocol
-
-/** Notification Center interface */
-public protocol NotificationCenterType: class {
-    
-    static var defaultCenter: Self { get }
-    
-    /** Posts the notification. */
-    func post<T: NotificationType>(notification: T)
-    
-    /// Forwards the notification calling the block.
-    ///
-    /// - parameter observer: The object whose method will be called.
-    /// - parameter method: The method that will be called when the notification is posted.
-    /// - parameter name: The name of the notification.
-    /// - parameter domain: The domain of the notification. This should be the reverse DNS of the module sending the notification.
-    /// - parameter sender: The object whose notifications will be listened to. Used for filtering so that the callback is only called when a certain object posts a matching notification.
-    func addObserver<T: AnyObject, U: AnyObject, V: NotificationType>(observer: T, method: (T) -> (V) -> (), name: String, domain: String, sender: U?)
-}
-
-// MARK: - Implementation
-
-final public class NotificationCenter: NotificationCenterType {
+/// Class for notification dispatching
+final public class NotificationCenter {
     
     // MARK: - Singleton
     
@@ -36,11 +15,12 @@ final public class NotificationCenter: NotificationCenterType {
     
     // MARK: - Private Properties
     
-    private var notificationCallbacks = [String: [Callback]]()
+    private var notificationCallbacks = [String: [NotificationCallback]]()
     
     // MARK: - Methods
     
-    public func post<T: NotificationType>(notification: T) {
+    /// Posts the notification.
+    public func post<T>(notification: Notification<T>) {
         
         let key = notification.domain + "." + notification.name
         
@@ -58,11 +38,18 @@ final public class NotificationCenter: NotificationCenterType {
         }
     }
     
-    public func addObserver<T: AnyObject, U: AnyObject, V: NotificationType>(observer: T, method: (T) -> (V) -> (), name: String, domain: String, sender: U?) {
+    /// Forwards the notification calling the block.
+    ///
+    /// - parameter observer: The object whose method will be called.
+    /// - parameter method: The method that will be called when the notification is posted.
+    /// - parameter name: The name of the notification.
+    /// - parameter domain: The domain of the notification. This should be the reverse DNS of the module sending the notification.
+    /// - parameter sender: The object whose notifications will be listened to. Used for filtering so that the callback is only called when a certain object posts a matching notification.
+    public func addObserver<Observer: AnyObject, Sender: AnyObject>(observer: Observer, method: (Observer) -> (Notification<Sender>) -> (), name: String, domain: String, sender: Sender? = nil) {
         
         let key = domain + "." + name
         
-        var callbacks: [Callback]
+        var callbacks: [NotificationCallback]
         
         if let notificationCallbacks = self.notificationCallbacks[key] {
             
@@ -70,38 +57,36 @@ final public class NotificationCenter: NotificationCenterType {
         }
         else {
             
-            callbacks = [Callback]()
+            callbacks = [NotificationCallback]()
         }
         
         // create callback
         
-        let callback = NotificationCallback(observer: observer, sender: sender, method: method)
+        let callback = InternalNotificationCallback(observer: observer, sender: sender, method: method)
         
         callbacks.append(callback)
 
     }
-    
-    // MARK: - Private Methods
 }
 
 // MARK: - Private Implemenation
 
-private protocol Callback {
+private protocol NotificationCallback {
     
     var shouldExecute: Bool { get }
     
-    func execute<T: NotificationType>(_: T)
+    func execute<Sender>(notification: Notification<Sender>)
 }
 
-private struct NotificationCallback<T: AnyObject, U: AnyObject, V: NotificationType>: Callback {
+private struct InternalNotificationCallback<Observer: AnyObject, Sender: AnyObject>: NotificationCallback {
     
-    var observer: T
+    let observer: Observer
     
-    weak var sender: U?
+    weak var sender: Sender?
     
-    let method: (T) -> (V) -> ()
+    let method: (Observer) -> (Notification<Sender>) -> ()
     
-    init(observer: T, sender: U?, method: (T) -> (V) -> ()) {
+    init(observer: Observer, sender: Sender?, method: (Observer) -> (Notification<Sender>) -> ()) {
         
         self.observer = observer
         self.sender = sender
@@ -113,11 +98,9 @@ private struct NotificationCallback<T: AnyObject, U: AnyObject, V: NotificationT
         return true
     }
     
-    func execute<T: NotificationType>(notification: T) {
+    func execute<Sender>(notification: Notification<Sender>) {
         
-        let notification = notification as! V
-        
-        self.method(self.observer)(notification)
+        //self.method(self.observer)(notification)
     }
 }
 

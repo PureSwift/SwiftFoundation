@@ -6,25 +6,12 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-// MARK: - Protocol
-
-/** UUID interface */
-public protocol UUIDType: CustomStringConvertible, Equatable {
-    
-    var rawValue: String { get }
-    
-    /** Creates a random UUID. */
-    init()
-}
-
-// MARK: - Implementation
-
-/// A representation of universally unique identifiers (UUIDs).
-public struct UUID: UUIDType, ByteValue, RawRepresentable {
+/// A representation of a universally unique identifier (```UUID```).
+public struct UUID: ByteValue, RawRepresentable, CustomStringConvertible {
     
     // MARK: - Public Properties
     
-    public let byteValue: uuid_t
+    public var byteValue: uuid_t
     
     public var rawValue: String {
         
@@ -52,18 +39,6 @@ public struct UUID: UUIDType, ByteValue, RawRepresentable {
         
         self.byteValue = bytes
     }
-}
-
-// MARK: - Operator Overloading
-
-public func == (lhs: UUID, rhs: UUID) -> Bool {
-    
-    return lhs == rhs
-}
-
-public func == <T: UUIDType> (lhs: T, rhs: T) -> Bool {
-    
-    return lhs.rawValue == rhs.rawValue
 }
 
 // MARK: - Private UUID System Type Functions

@@ -11,10 +11,10 @@ public struct ComparatorSortDescriptor<T>: SortDescriptor {
     
     public typealias Comparator = (T, T) -> Order
     
-    public let ascending: Bool
+    public var ascending: Bool
     
     /** The closure that will be used for sorting. */
-    public let comparator: Comparator
+    public var comparator: Comparator
     
     public func sort(first: T, second: T) -> Order {
         

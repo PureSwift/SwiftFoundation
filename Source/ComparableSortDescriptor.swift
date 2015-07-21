@@ -9,7 +9,7 @@
 /** Sorts ```Comparable``` types. */
 public struct ComparableSortDescriptor<T: Comparable>: SortDescriptor {
         
-    public let ascending: Bool
+    public var ascending: Bool
     
     public func sort(first: T, second: T) -> Order {
         

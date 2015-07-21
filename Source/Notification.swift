@@ -6,34 +6,30 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-// MARK: - Protocol
-
-/** Notification type. */
-public protocol NotificationType: CustomStringConvertible {
+/** The name of the notification. */
+public struct Notification<Sender: AnyObject>: CustomStringConvertible {
     
-    typealias Sender: AnyObject
+    /// The name of the notification.
+    public var name: String
     
-    /** The name of the notification. */
-    var name: String { get }
+    /// The notification's domain.
+    public var domain: String
     
-    /** The notification's domain. */
-    var domain: String { get }
+    /// The object that sent the notification.
+    public var sender: Sender?
     
-    /** The object that sent the notification. */
-    var sender: Sender? { get }
+    /// Accompanying payload for the notification.
+    public var userInfo: [String: Any]?
     
-    /** Accompanying payload for the notification. */
-    var userInfo: [String: Any]? { get }
+    public init(name: String, domain: String, userInfo: [String: Any]? = nil, sender: Sender? = nil) {
+        
+        self.name = name
+        self.domain = domain
+        self.userInfo = userInfo
+        self.sender = sender
+    }
     
-    /** Default initializer. */
-    init(name: String, domain: String, userInfo: [String: Any]?, sender: Sender?)
-}
-
-// MARK: - Protocol Implementation
-
-public extension NotificationType {
-    
-    var description: String {
+    public var description: String {
         
         var description = "Name: \(name), Domain: \(domain)"
         
@@ -43,26 +39,5 @@ public extension NotificationType {
         }
         
         return description
-    }
-}
-
-// MARK: - Implementation
-
-public struct Notification<T: AnyObject>: NotificationType {
-    
-    public let name: String
-    
-    public let domain: String
-    
-    public let sender: T?
-    
-    public let userInfo: [String: Any]?
-    
-    public init(name: String, domain: String, userInfo: [String: Any]? = nil, sender: T? = nil) {
-        
-        self.name = name
-        self.domain = domain
-        self.userInfo = userInfo
-        self.sender = sender
     }
 }

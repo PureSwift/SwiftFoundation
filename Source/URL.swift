@@ -7,11 +7,15 @@
 //
 
 /// Encapsulates the components of an URL.
-public struct URL {
+public struct URL: CustomStringConvertible {
     
     // MARK: - Properties
     
     public var scheme: String
+    
+    public var user: String?
+    
+    public var password: String?
     
     /// The host URL subcomponent (e.g. domain name, IP address)
     public var host: String?
@@ -20,14 +24,10 @@ public struct URL {
     
     public var path: String?
     
-    public var user: String?
-    
-    public var password: String?
+    public var query: [(String, String)]?
     
     /// The fragment URL component (the part after a # symbol)
     public var fragment: String?
-    
-    public var query: [(String, String)]?
     
     // MARK: - Initialization
     
@@ -103,6 +103,67 @@ public struct URL {
         if let fragment = fragment { stringValue += "#\(fragment)" }
         
         return stringValue
+    }
+    
+    public var description: String {
+        
+        if let URLString = URLString {
+            
+            return URLString
+        }
+        
+        var description = "Scheme: " + scheme
+        
+        if let user = user {
+            
+            description += "\n" + "User: " + user
+        }
+        
+        if let password = password {
+            
+            description += "\n" + "Password: " + password
+        }
+        
+        if let host = host {
+            
+            description += "\n" + "Host: " + host
+        }
+        
+        if let port = port {
+            
+            description += "\n" + "Port: " + "\(port)"
+        }
+        
+        if let path = path {
+            
+            description += "\n" + "Path: " + path
+        }
+        
+        if let query = query {
+            
+            var stringValue = ""
+            
+            for (index, queryItem) in query.enumerate() {
+                
+                let (name, value) = queryItem
+                
+                stringValue += name + "=" + value
+                
+                if index != query.count - 1 {
+                    
+                    stringValue += "&"
+                }
+            }
+            
+            description += "\n" + "Query: " + stringValue
+        }
+        
+        if let fragment = fragment {
+            
+            description += "\n" + "Fragment: " + fragment
+        }
+        
+        return description
     }
 }
 

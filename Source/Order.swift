@@ -7,36 +7,14 @@
 //
 
 /// Indicates how items are ordered.
-public enum Order: Int, Comparable, Equatable {
+public enum Order: Int {
     
     case Ascending      =  1
     case Same           =  0
     case Descending     = -1
 }
 
-// MARK: - Operator Overloading
-
-public func < (lhs: Order, rhs: Order) -> Bool {
-    
-    return lhs.rawValue < rhs.rawValue
-}
-
-public func <= (lhs: Order, rhs: Order) -> Bool {
-    
-    return lhs.rawValue <= rhs.rawValue
-}
-
-public func >= (lhs: Order, rhs: Order) -> Bool {
-    
-    return lhs.rawValue >= rhs.rawValue
-}
-
-public func > (lhs: Order, rhs: Order) -> Bool {
-    
-    return lhs.rawValue > rhs.rawValue
-}
-
-// MARK: - Swift Extension
+// MARK: - Implementation
 
 public extension Comparable {
     
