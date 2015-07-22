@@ -715,6 +715,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.colemancda.SwiftFoundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
