@@ -8,6 +8,18 @@
 
 public extension timeval {
     
+    static func timeOfDay() throws -> timeval {
+        
+        var timeStamp = timeval()
+        
+        guard gettimeofday(&timeStamp, nil) == 0 else {
+            
+            throw POSIXError.fromErrorNumber!
+        }
+        
+        return timeStamp
+    }
+    
     var timeIntervalValue: TimeInterval {
         
         let secondsSince1970 = TimeInterval(self.tv_sec)

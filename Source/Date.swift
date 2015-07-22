@@ -112,11 +112,7 @@ public func TimeIntervalSinceReferenceDate() -> TimeInterval {
 /// Returns the time interval between the current date and 1 January 1970, GMT
 public func TimeIntervalSince1970() -> TimeInterval {
     
-    var timeStamp = timeval()
-    	
-    gettimeofday(&timeStamp, nil)
-    
-    return timeStamp.timeIntervalValue
+    return try! timeval.timeOfDay().timeIntervalValue
 }
 
 // MARK: - Constants

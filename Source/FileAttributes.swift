@@ -39,33 +39,3 @@ public struct FileAttributes {
     }
     */
 }
-
-
-public enum FileType {
-    
-    case Regular
-    case Directory
-    case BlockSpecial
-    case CharacterSpecial
-    case Fifo
-    case Socket
-    case SymbolicLink
-    
-    public init() { self = .Regular }
-    
-    public init(fileAttribute: mode_t) {
-        
-        switch (fileAttribute & S_IFMT) {
-            
-        case S_IFBLK: self = .BlockSpecial
-        case S_IFCHR: self = .CharacterSpecial
-        case S_IFDIR: self = .Directory
-        case S_IFIFO: self = .Fifo
-        case S_IFREG: self = .Regular
-        case S_IFLNK: self = .SymbolicLink
-        case S_IFSOCK: self = .Socket
-        
-        default: self = FileType()
-        }
-    }
-}

@@ -58,7 +58,7 @@ public final class FileManager {
         
         guard chdir(newCurrentDirectory) == 0 else {
             
-            throw StandardError.fromErrorNumber!
+            throw POSIXError.fromErrorNumber!
         }
     }
     
