@@ -18,6 +18,6 @@ public final class HTTPURLClient: URLClient {
     
     public func sendRequest(request: HTTPURLRequest) throws -> HTTPURLResponse {
         
-        throw StandardError.OperationNotSupported
+        throw POSIXError.EXDEV
     }
 }

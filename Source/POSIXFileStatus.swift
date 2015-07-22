@@ -10,22 +10,10 @@ public extension stat {
     
     // MARK: - Properties
     
-    var deviceIdentifier: Int {
-        
-        get { return Int(st_dev) }
-        set { st_dev = dev_t(deviceIdentifier) }
-    }
-    
-    var serialNumber: UInt {
-        
-        get { return UInt(st_ino) }
-        set { st_ino = ino_t(serialNumber) }
-    }
-    
     var fileType: FileType {
         
         get { return st_mode.fileType }
-        set { st_mode.fileType }
+        set { st_mode.fileType = fileType }
     }
     
     // MARK: - Initialization
@@ -81,7 +69,7 @@ public extension mode_t {
             case .Socket: fileTypeMask = S_IFSOCK
             }
             
-            self = (self & fileTypeMask)
+            self = (self | fileTypeMask)
         }
     }
     
