@@ -13,7 +13,7 @@ public func POSIXRegexCompile(pattern: String, options: [RegularExpressionCompil
     let regexPointer = UnsafeMutablePointer<regex_t>.alloc(1)
     defer { regexPointer.dealloc(1) }
     
-    let flags = RegularExpressionCompileOption.flagValue(options)
+    let flags = RegularExpressionCompileOption.optionsBitmask(options)
     
     let errorCode = regcomp(regexPointer, pattern, flags)
     
@@ -41,7 +41,7 @@ public func POSIXRegexMatch(regex: UnsafeMutablePointer<regex_t>, string: String
 public typealias POSIXRegularExpressionCompileOptionFlag = Int32
 
 /// POSIX Regular Expression Compilation Options
-public enum RegularExpressionCompileOption {
+public enum RegularExpressionCompileOption: POSIXRegularExpressionCompileOptionFlag, BitMaskOption {
     
     /** Do not differentiate case. */
     case CaseInsensitive
@@ -57,7 +57,20 @@ public enum RegularExpressionCompileOption {
     /// Otherwise, newline acts like any other ordinary character.
     case NewLine
     
-    public var flagValue: POSIXRegularExpressionCompileOptionFlag {
+    public init?(rawValue: POSIXRegularExpressionCompileOptionFlag) {
+        
+        switch rawValue {
+            
+        case REG_ICASE:     self = CaseInsensitive
+        case REG_EXTENDED:  self = ExtendedSyntax
+        case REG_NOSUB:     self = NoSub
+        case REG_NEWLINE:   self = NewLine
+            
+        default: return nil
+        }
+    }
+    
+    public var rawValue: POSIXRegularExpressionCompileOptionFlag {
         
         switch self {
             
@@ -67,24 +80,12 @@ public enum RegularExpressionCompileOption {
         case .NewLine:          return REG_NEWLINE
         }
     }
-    
-    public static func flagValue(options: [RegularExpressionCompileOption]) -> POSIXRegularExpressionCompileOptionFlag {
-        
-        var cFlag: POSIXRegularExpressionCompileOptionFlag = 0
-        
-        for option in options {
-            
-            cFlag = cFlag | option.flagValue
-        }
-        
-        return cFlag
-    }
 }
 
 public typealias POSIXRegularExpressionMatchOptionFlag = Int32
 
 /// POSIX Regular Expression Matching Options */
-public enum RegularExpressionMatchOption {
+public enum RegularExpressionMatchOption: POSIXRegularExpressionMatchOptionFlag, BitMaskOption {
     
     /** Do not regard the beginning of the specified string as the beginning of a line; more generally, don’t make any assumptions about what text might precede it. */
     case NotBeginningOfLine
@@ -92,25 +93,24 @@ public enum RegularExpressionMatchOption {
     /** Do not regard the end of the specified string as the end of a line; more generally, don’t make any assumptions about what text might follow it. */
     case NotEndOfLine
     
-    public var flagValue: POSIXRegularExpressionMatchOptionFlag {
+    public init?(rawValue: POSIXRegularExpressionMatchOptionFlag) {
         
-        switch self {
+        switch rawValue {
             
-        case .NotBeginningOfLine:   return REG_NOTBOL
-        case .NotEndOfLine:         return REG_NOTEOL
+        case REG_NOTBOL: self = NotBeginningOfLine
+        case REG_NOTEOL: self = NotEndOfLine
+            
+        default: return nil
         }
     }
     
-    public static func flagValue(options: [RegularExpressionMatchOption]) -> POSIXRegularExpressionMatchOptionFlag {
+    public var rawValue: POSIXRegularExpressionMatchOptionFlag {
         
-        var cFlag: POSIXRegularExpressionMatchOptionFlag = 0
+        switch self {
         
-        for option in options {
-            
-            cFlag = cFlag | option.flagValue
+        case .NotBeginningOfLine:   return REG_NOTBOL
+        case .NotEndOfLine:         return REG_NOTEOL
         }
-        
-        return cFlag
     }
 }
 
