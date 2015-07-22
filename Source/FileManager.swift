@@ -101,7 +101,7 @@ public final class FileManager {
     
     public static func destinationOfSymbolicLink(atPath path: String) throws -> String {
         
-        
+        fatalError()
     }
     
     // MARK: - Moving and Copying Items
@@ -120,7 +120,7 @@ public final class FileManager {
     
     public static func attributesOfItem(atPath path: String) throws -> FileAttributes {
         
-        
+        return try FileAttributes(attributesOfFileAtPath: path)
     }
     
     public static func setAttributes(attributes: FileAttributes, ofItemAtPath path: String) throws {
@@ -132,7 +132,7 @@ public final class FileManager {
         
         let fileSystemStatus = try statfs(path: path)
         
-        
+        fatalError()
     }
     
     // MARK: - Getting and Comparing File Contents

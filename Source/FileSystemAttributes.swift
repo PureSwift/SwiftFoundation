@@ -9,6 +9,14 @@
 public struct FileSystemAttributes {
     
     
+    /*
+    public init(attributesOfFileSystemAtPath path: String) throws {
+        
+        let status = try statfs(path: path)
+        
+        
+    }
     
-    public init() { }
+    public init(fileSystemStatus)
+*/
 }

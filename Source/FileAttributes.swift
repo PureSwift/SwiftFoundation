@@ -11,33 +11,46 @@ public struct FileAttributes {
     
     // MARK: - Properties
     
-    public var appendOnly: Bool = false
+    /// The identifier for the device on which the file resides.
+    public var deviceID: dev_t
     
-    public var busy: Bool = false
+    /// File's filesystem file number.
+    public var fileSystemFileNumber: ino_t
     
-    public var size: UInt
+    /// POSIX file type and permissions bit mask
+    public var fileMode: mode_t
     
-    public var type: FileType
+    /// File size, in bytes
+    public var size: off_t
     
+    /// Date the file was created
     public var creationDate: Date
     
+    /// Date the file was modified
     public var modificationDate: Date
     
-    public var ownerAccountName: String
+    // User ID of the file
+    public var ownerAccountID: uid_t
     
-    public var fileSystemFileNumber: Int
-    
-    public var fileGroupOwnerAccountID: Int
+    // Group ID of the file
+    public var groupOwnerAccountID: gid_t
     
     // MARK: - Initialization
     
-    // public init() { }
-    
-    /*
-    public init(fileAttributes: stat) {
+    public init(attributesOfFileAtPath path: String) throws {
         
-        self.modificationDate = Date(timeIntervalSince1970: fileAttributes.st_mtimespec.timeIntervalValue)
-        self.creationDate = Date(timeIntervalSince1970: fileAttributes.st_ctimespec.timeIntervalValue)
+        let fileStatus = try stat(path: path)
+        
+        self.init(fileStatus: fileStatus)
     }
-    */
+    
+    init(fileStatus: stat) {
+        
+        self.deviceID = fileStatus.st_dev
+        self.fileSystemFileNumber = fileStatus.st_ino
+        self.fileMode = fileStatus.st_mode
+        self.size = fileStatus.st_size
+        //self.creationDate = fileStatus.la
+        self.
+    }
 }

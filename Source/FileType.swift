@@ -12,7 +12,7 @@ public enum FileType {
     case Directory
     case BlockSpecial
     case CharacterSpecial
-    case Fifo
+    case FIFO
     case Socket
     case SymbolicLink
     
