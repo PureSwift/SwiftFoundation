@@ -8,5 +8,7 @@
 
 public struct FileSystemAttributes {
     
+    
+    
     public init() { }
 }

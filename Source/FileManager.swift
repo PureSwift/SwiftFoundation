@@ -72,7 +72,12 @@ public final class FileManager {
     
     // MARK: - Creating and Deleting Items
     
-    public static func createFileAtPath(path: String, contents: Data?, attributes: FileAttributes?) throws {
+    public static func createFile(atPath path: String, contents: Data?, attributes: FileAttributes?) throws {
+        
+        
+    }
+    
+    public static func createDirectory(atPath path: String, withIntermediateDirectories createIntermediates: Bool, attributes: FileAttributes?) throws {
         
         
     }
@@ -82,9 +87,34 @@ public final class FileManager {
         
     }
     
+    // MARK: - Creating Symbolic and Hard Links
+    
+    public static func createSymbolicLink(atPath path: String, withDestinationPath destinationPath: String) throws {
+        
+        
+    }
+    
+    public static func linkItemAtPath(path: String, toPath destinationPath: String) throws {
+        
+        
+    }
+    
+    public static func destinationOfSymbolicLink(atPath path: String) throws -> String {
+        
+        
+    }
+    
     // MARK: - Moving and Copying Items
     
+    public static func copyItem(atPath sourcePath: String, toPath destinationPath: String) throws {
+        
+        
+    }
     
+    public static func moveItem(atPath sourcePath: String, toPath destinationPath: String) throws {
+        
+        
+    }
     
     // MARK: - Getting and Setting Attributes
     
@@ -100,7 +130,20 @@ public final class FileManager {
     
     public static func attributesOfFileSystem(forPath path: String) throws -> FileSystemAttributes {
         
+        let fileSystemStatus = try statfs(path: path)
+        
+        
+    }
     
+    // MARK: - Getting and Comparing File Contents
+    
+    public static func contents(atPath path: String) -> Data? {
+        
+        guard self.fileExists(atPath: path)
+            else { return nil }
+        
+        return []
     }
     
 }
+
