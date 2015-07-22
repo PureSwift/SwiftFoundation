@@ -6,6 +6,10 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
+public typealias FileSystemAttributes = statfs
+
+public typealias FileAttributes = stat
+
 /// Class for interacting with the file system.
 public final class FileManager {
     
@@ -120,7 +124,7 @@ public final class FileManager {
     
     public static func attributesOfItem(atPath path: String) throws -> FileAttributes {
         
-        return try FileAttributes(attributesOfFileAtPath: path)
+        return try FileAttributes(path: path)
     }
     
     public static func setAttributes(attributes: FileAttributes, ofItemAtPath path: String) throws {
@@ -130,9 +134,7 @@ public final class FileManager {
     
     public static func attributesOfFileSystem(forPath path: String) throws -> FileSystemAttributes {
         
-        let fileSystemStatus = try statfs(path: path)
-        
-        fatalError()
+        return try FileSystemAttributes(path: path)
     }
     
     // MARK: - Getting and Comparing File Contents

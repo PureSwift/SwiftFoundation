@@ -13,8 +13,6 @@
 		1A49A9501B5D8F3200827F1B /* HTTPURLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A94F1B5D8F3200827F1B /* HTTPURLClient.swift */; };
 		1A49A9541B5DCDAC00827F1B /* URLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A9531B5DCDAC00827F1B /* URLTests.swift */; };
 		1A7965FA1B5B988D00A6E4DA /* FileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7965F91B5B988D00A6E4DA /* FileManagerTests.swift */; };
-		1A7965FC1B5BAF0C00A6E4DA /* FileAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7965FB1B5BAF0C00A6E4DA /* FileAttributes.swift */; };
-		1A7965FF1B5BB8E100A6E4DA /* FileSystemAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7965FE1B5BB8E100A6E4DA /* FileSystemAttributes.swift */; };
 		1A7966011B5C413000A6E4DA /* POSIXTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7966001B5C413000A6E4DA /* POSIXTime.swift */; };
 		1A85C4041B5F9B4E002DDADB /* POSIXFileStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A85C4031B5F9B4E002DDADB /* POSIXFileStatus.swift */; };
 		1A85C4081B5F9FFB002DDADB /* FilePermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A85C4071B5F9FFB002DDADB /* FilePermission.swift */; };
@@ -104,8 +102,6 @@
 		1A49A94F1B5D8F3200827F1B /* HTTPURLClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPURLClient.swift; sourceTree = "<group>"; };
 		1A49A9531B5DCDAC00827F1B /* URLTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLTests.swift; sourceTree = "<group>"; };
 		1A7965F91B5B988D00A6E4DA /* FileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerTests.swift; sourceTree = "<group>"; };
-		1A7965FB1B5BAF0C00A6E4DA /* FileAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileAttributes.swift; sourceTree = "<group>"; };
-		1A7965FE1B5BB8E100A6E4DA /* FileSystemAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemAttributes.swift; sourceTree = "<group>"; };
 		1A7966001B5C413000A6E4DA /* POSIXTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXTime.swift; sourceTree = "<group>"; };
 		1A85C4031B5F9B4E002DDADB /* POSIXFileStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXFileStatus.swift; sourceTree = "<group>"; };
 		1A85C4071B5F9FFB002DDADB /* FilePermission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePermission.swift; sourceTree = "<group>"; };
@@ -200,8 +196,6 @@
 			isa = PBXGroup;
 			children = (
 				6E30BA4E1B4142D9009B1B49 /* FileManager.swift */,
-				1A7965FB1B5BAF0C00A6E4DA /* FileAttributes.swift */,
-				1A7965FE1B5BB8E100A6E4DA /* FileSystemAttributes.swift */,
 				1A85C4091B5FA015002DDADB /* FileType.swift */,
 				1A85C4071B5F9FFB002DDADB /* FilePermission.swift */,
 			);
@@ -527,7 +521,6 @@
 				6E66A65D1B48664A00CB82CD /* NotificationCenter.swift in Sources */,
 				6E30BA281B40F66D009B1B49 /* JSON.swift in Sources */,
 				6E16C2FB1B47A92100C07C25 /* Coding.swift in Sources */,
-				1A7965FF1B5BB8E100A6E4DA /* FileSystemAttributes.swift in Sources */,
 				6E16C2F41B47A61E00C07C25 /* DateFormatter.swift in Sources */,
 				1A85C40C1B5FA805002DDADB /* POSIXError.swift in Sources */,
 				6EB4DE3F1B46D08D00C02276 /* ComparatorSortDescriptor.swift in Sources */,
@@ -571,7 +564,6 @@
 				1A85C40A1B5FA015002DDADB /* FileType.swift in Sources */,
 				1A48CD651B59973A00C4D7F7 /* Copying.swift in Sources */,
 				6E30BA4D1B41402B009B1B49 /* SortDescriptor.swift in Sources */,
-				1A7965FC1B5BAF0C00A6E4DA /* FileAttributes.swift in Sources */,
 				6EB4DE3D1B46CF9200C02276 /* Order.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,45 +8,6 @@
 
 public extension stat {
     
-    // MARK: - Properties
-    
-    /// Date of last access. Returns time interval for ```st_atimespec``` or ```st_atime```.
-    ///
-    /// The field ```st_atime``` is changed by file accesses, for example, by ```execve```, ```mknod```, ```pipe```, ```utime```, and ```read``` (of more than zero bytes).
-    /// Other routines, like ```mmap```, may or may not update ```st_atime```.
-    var lastAccessDate: Date {
-        
-        get { return Date(timeIntervalSince1970: st_atimespec.timeIntervalValue) }
-        set { st_atimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
-    }
-    
-    /// Date of last data modification. Returns time interval for ```st_mtimespec``` or ```st_mtime```.
-    ///
-    /// The field ```st_mtime``` is changed by file modifications, for example, by ```mknod```, ```truncate```, ```utime```, and ```write``` (of more than zero bytes).
-    /// Moreover, ```st_mtime``` of a directory is changed by the creation or deletion of files in that directory.
-    /// The ```st_mtime``` field is not changed for changes in owner, group, hard link count, or mode.
-    var lastDataModificationDate: Date {
-        
-        get { return Date(timeIntervalSince1970: st_mtimespec.timeIntervalValue) }
-        set { st_mtimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
-    }
-    
-    /// Date of last status change.  Returns time interval for ```st_ctimespec``` or ```st_ctime```.
-    ///
-    /// The field ```st_ctime``` is changed by writing or by setting inode information (i.e., owner, group, link count, mode, etc.).
-    var lastStatusChangeDate: Date {
-        
-        get { return Date(timeIntervalSince1970: st_ctimespec.timeIntervalValue) }
-        set { st_ctimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
-    }
-    
-    /// Date file was created.  Returns time interval for ```st_birthtimespec``` or ```st_birthtime```.
-    var creationDate: Date {
-        
-        get { return Date(timeIntervalSince1970: st_birthtimespec.timeIntervalValue) }
-        set { st_birthtimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
-    }
-    
     // MARK: - Initialization
     
     init(path: String) throws {
@@ -59,6 +20,45 @@ public extension stat {
         }
         
         self = fileStatus
+    }
+    
+    // MARK: - Properties
+    
+    /// Date of last access. Date of ```st_atimespec``` or ```st_atime```.
+    ///
+    /// The field ```st_atime``` is changed by file accesses, for example, by ```execve```, ```mknod```, ```pipe```, ```utime```, and ```read``` (of more than zero bytes).
+    /// Other routines, like ```mmap```, may or may not update ```st_atime```.
+    var lastAccessDate: Date {
+        
+        get { return Date(timeIntervalSince1970: st_atimespec.timeIntervalValue) }
+        set { st_atimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
+    }
+    
+    /// Date of last data modification. Date of ```st_mtimespec``` or ```st_mtime```.
+    ///
+    /// The field ```st_mtime``` is changed by file modifications, for example, by ```mknod```, ```truncate```, ```utime```, and ```write``` (of more than zero bytes).
+    /// Moreover, ```st_mtime``` of a directory is changed by the creation or deletion of files in that directory.
+    /// The ```st_mtime``` field is not changed for changes in owner, group, hard link count, or mode.
+    var lastDataModificationDate: Date {
+        
+        get { return Date(timeIntervalSince1970: st_mtimespec.timeIntervalValue) }
+        set { st_mtimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
+    }
+    
+    /// Date of last status change. Date of ```st_ctimespec``` or ```st_ctime```.
+    ///
+    /// The field ```st_ctime``` is changed by writing or by setting inode information (i.e., owner, group, link count, mode, etc.).
+    var lastStatusChangeDate: Date {
+        
+        get { return Date(timeIntervalSince1970: st_ctimespec.timeIntervalValue) }
+        set { st_ctimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
+    }
+    
+    /// Date file was created. Date of ```st_birthtimespec``` or ```st_birthtime```.
+    var creationDate: Date {
+        
+        get { return Date(timeIntervalSince1970: st_birthtimespec.timeIntervalValue) }
+        set { st_birthtimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
     }
 }
 
