@@ -196,10 +196,10 @@
 			isa = PBXGroup;
 			children = (
 				6E30BA4E1B4142D9009B1B49 /* FileManager.swift */,
+				1A7965FE1B5BB8E100A6E4DA /* FileSystemAttributes.swift */,
 				1A7965FB1B5BAF0C00A6E4DA /* FileAttributes.swift */,
 				1A85C4071B5F9FFB002DDADB /* FileMode.swift */,
 				1A85C4091B5FA015002DDADB /* FileType.swift */,
-				1A7965FE1B5BB8E100A6E4DA /* FileSystemAttributes.swift */,
 			);
 			name = FileManager;
 			sourceTree = "<group>";

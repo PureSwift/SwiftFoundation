@@ -31,6 +31,8 @@ public struct FileAttributes {
     
     // MARK: - Initialization
     
+    // public init() { }
+    
     /*
     public init(fileAttributes: stat) {
         

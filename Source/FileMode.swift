@@ -6,7 +6,7 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-public enum FileMode {
+public enum FilePermission {
     
     case Write
     case Read

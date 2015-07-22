@@ -9,7 +9,7 @@
 /// Class for interacting with the file system.
 public final class FileManager {
     
-    // MARK: - Class Methods
+    // MARK: - Determining Access to Files
     
     /// Determines whether a file descriptor exists at the specified path. Can be regular file, directory, socket, etc.
     public static func itemExists(atPath path: String) -> Bool {
@@ -22,15 +22,11 @@ public final class FileManager {
         
         var inodeInfo = stat()
         
-        guard stat(path, &inodeInfo) == 0 else {
-            
-            return false
-        }
+        guard stat(path, &inodeInfo) == 0
+            else { return false }
         
-        guard (inodeInfo.st_mode & S_IFMT) == S_IFREG else {
-            
-            return false
-        }
+        guard (inodeInfo.st_mode & S_IFMT) == S_IFREG
+            else { return false }
         
         return true
     }
@@ -40,18 +36,16 @@ public final class FileManager {
         
         var inodeInfo = stat()
         
-        guard stat(path, &inodeInfo) == 0  else {
-            
-            return false
-        }
+        guard stat(path, &inodeInfo) == 0
+            else { return false }
         
-        guard (inodeInfo.st_mode & S_IFMT) == S_IFDIR else {
-            
-            return false
-        }
+        guard (inodeInfo.st_mode & S_IFMT) == S_IFDIR
+            else { return false }
         
         return true
     }
+    
+    // MARK: - Managing the Current Directory
     
     /// Attempts to change the current directory
     public static func changeCurrentDirectory(newCurrentDirectory: String) throws {
@@ -76,11 +70,37 @@ public final class FileManager {
         return String.fromCString(path)!
     }
     
-    /*
-    public func attributesOfFileSystem(forPath path: String) throws -> FileAttributes {
+    // MARK: - Creating and Deleting Items
+    
+    public static func createFileAtPath(path: String, contents: Data?, attributes: FileAttributes?) throws {
         
         
     }
-    */
+    
+    public static func removeItem(atPath path: String) throws {
+        
+        
+    }
+    
+    // MARK: - Moving and Copying Items
+    
+    
+    
+    // MARK: - Getting and Setting Attributes
+    
+    public static func attributesOfItem(atPath path: String) throws -> FileAttributes {
+        
+        
+    }
+    
+    public static func setAttributes(attributes: FileAttributes, ofItemAtPath path: String) throws {
+        
+        
+    }
+    
+    public static func attributesOfFileSystem(forPath path: String) throws -> FileSystemAttributes {
+        
+    
+    }
     
 }
