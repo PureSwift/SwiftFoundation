@@ -78,7 +78,7 @@ final public class RegularExpression: RegularExpressionType {
         self.pattern = pattern
         self.options = options
         
-        self.internalValue = try CompileRegex(pattern, options: options)
+        self.internalValue = try POSIXRegexCompile(pattern, options: options)
     }
     
     public func match(string: String, options: [RegularExpressionMatchOption]) throws -> [Range<UInt>] {

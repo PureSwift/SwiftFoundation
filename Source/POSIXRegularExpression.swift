@@ -8,47 +8,26 @@
 
 // MARK: - POSIX Regular Expression Functions
 
-public func POSIXCompileRegex(pattern: String, options: [RegularExpressionCompileOption]) throws -> UnsafeMutablePointer<regex_t> {
+public func POSIXRegexCompile(pattern: String, options: [RegularExpressionCompileOption]) throws -> UnsafeMutablePointer<regex_t> {
     
     let regexPointer = UnsafeMutablePointer<regex_t>.alloc(1)
     defer { regexPointer.dealloc(1) }
     
-    let regexCompileFlags: Int32 = {
-        
-        var cFlag: Int32 = 0
-        
-        for option in options {
-            
-            cFlag = cFlag | option.cFlagValue
-        }
-        
-        return cFlag
-        }()
+    let flags = RegularExpressionCompileOption.flagValue(options)
     
-    let errorCode = regcomp(regexPointer, pattern, regexCompileFlags)
+    let errorCode = regcomp(regexPointer, pattern, flags)
     
     guard errorCode == 0 else {
         
-        throw RegularExpressionCompileError(eFlagValue: errorCode)!
+        throw RegularExpressionCompileError(rawValue: errorCode)!
     }
     
     return regexPointer
 }
 
-
-public func POSIXMatchRegex(regex: UnsafeMutablePointer<regex_t>, string: String, options: [RegularExpressionMatchOption]) -> Range<UInt>? {
+public func POSIXRegexMatch(regex: UnsafeMutablePointer<regex_t>, string: String, options: [RegularExpressionMatchOption]) -> Range<UInt>? {
     
-    let flags: Int32 = {
-        
-        var eFlag: Int32 = 0
-        
-        for option in options {
-            
-            eFlag = eFlag | option.eFlagValue
-        }
-        
-        return eFlag
-        }()
+    //let flags = RegularExpressionMatchOption.flagValue(options)
     
     // regexec(regex, string, 100, <#T##__pmatch: UnsafeMutablePointer<regmatch_t>##UnsafeMutablePointer<regmatch_t>#>, flags)
     
@@ -82,15 +61,23 @@ public enum RegularExpressionCompileOption {
         
         switch self {
             
-        case .CaseInsensitive: return REG_ICASE
-            
-        case .ExtendedSyntax: return REG_EXTENDED
-            
-        case .NoSub: return REG_NOSUB
-            
-        case .NewLine: return REG_NEWLINE
-            
+        case .CaseInsensitive:  return REG_ICASE
+        case .ExtendedSyntax:   return REG_EXTENDED
+        case .NoSub:            return REG_NOSUB
+        case .NewLine:          return REG_NEWLINE
         }
+    }
+    
+    public static func flagValue(options: [RegularExpressionCompileOption]) -> POSIXRegularExpressionCompileOptionFlag {
+        
+        var cFlag: POSIXRegularExpressionCompileOptionFlag = 0
+        
+        for option in options {
+            
+            cFlag = cFlag | option.flagValue
+        }
+        
+        return cFlag
     }
 }
 
@@ -109,10 +96,21 @@ public enum RegularExpressionMatchOption {
         
         switch self {
             
-        case .NotBeginningOfLine: return REG_NOTBOL
-            
-        case .NotEndOfLine: return REG_NOTEOL
+        case .NotBeginningOfLine:   return REG_NOTBOL
+        case .NotEndOfLine:         return REG_NOTEOL
         }
+    }
+    
+    public static func flagValue(options: [RegularExpressionMatchOption]) -> POSIXRegularExpressionMatchOptionFlag {
+        
+        var cFlag: POSIXRegularExpressionMatchOptionFlag = 0
+        
+        for option in options {
+            
+            cFlag = cFlag | option.flagValue
+        }
+        
+        return cFlag
     }
 }
 
@@ -164,26 +162,30 @@ public enum RegularExpressionCompileError: POSIXRegularExpressionCompileErrorRaw
     /// Invalid back reference to a subexpression.
     case InvalidBackReferenceToSubExpression
     
+    /* Linux
     /// Non specific error.  This is not defined by POSIX.2.
     case GenericError
     
     /// Compiled regular expression requires a pattern buffer larger than 64Kb. This is not defined by POSIX.2.
     case GreaterThan64KB
+    */
     
     public init?(rawValue: POSIXRegularExpressionCompileErrorRawValue) {
         
         switch rawValue {
             
-        case REG_BADRPT: self = .InvalidRepetition
-        case REG_BADBR: self = .InvalidBackReference
-        case REG_ESPACE: self = .OutOfMemory
-        case REG_EBRACE: self = .UnMatchedBraceInterval
-        case REG_ECOLLATE: self = .InvalidCollating
-        case REG_ECTYPE: self = .UnknownCharacterClassName
-        case REG_EESCAPE: self = .TrailingBackslash
-        case REG_EPAREN: self = .UnMatchedParenthesis
-        case REG_ERANGE: self = .InvalidRange
-        case REG_ESUBREG: self = .InvalidBackReferenceToSubExpression
+        case REG_BADRPT:    self = InvalidRepetition
+        case REG_BADBR:     self = InvalidBackReference
+        case REG_ESPACE:    self = OutOfMemory
+        case REG_BADPAT:    self = InvalidPatternOperator
+        case REG_EBRACE:    self = UnMatchedBraceInterval
+        case REG_EBRACK:    self = UnMatchedBracketList
+        case REG_ECOLLATE:  self = InvalidCollating
+        case REG_ECTYPE:    self = UnknownCharacterClassName
+        case REG_EESCAPE:   self = TrailingBackslash
+        case REG_EPAREN:    self = UnMatchedParenthesis
+        case REG_ERANGE:    self = InvalidRange
+        case REG_ESUBREG:   self = InvalidBackReferenceToSubExpression
             
             /*
             #if os(linux)
@@ -195,6 +197,25 @@ public enum RegularExpressionCompileError: POSIXRegularExpressionCompileErrorRaw
             */
             
         default: return nil
+        }
+    }
+    
+    public var rawValue: POSIXRegularExpressionCompileErrorRawValue {
+        
+        switch self {
+            
+        case InvalidRepetition:                    return REG_BADRPT
+        case InvalidBackReference:                 return REG_BADBR
+        case OutOfMemory:                          return REG_ESPACE
+        case InvalidPatternOperator:               return REG_BADPAT
+        case UnMatchedBraceInterval:               return REG_EBRACE
+        case UnMatchedBracketList:                 return REG_EBRACK
+        case InvalidCollating:                     return REG_ECOLLATE
+        case UnknownCharacterClassName:            return REG_ECTYPE
+        case TrailingBackslash:                    return REG_EESCAPE
+        case UnMatchedParenthesis:                 return REG_EPAREN
+        case InvalidRange:                         return REG_ERANGE
+        case InvalidBackReferenceToSubExpression:  return REG_ESUBREG
         }
     }
 }
