@@ -22,13 +22,13 @@ public extension timeval {
     
     init(timeInterval: TimeInterval) {
         
+        typealias Microseconds = __darwin_suseconds_t
+        
         let (integerValue, decimalValue) = modf(timeInterval)
         
         let million: TimeInterval = 1000000.0
         
         let microseconds = decimalValue * million
-        
-        typealias Microseconds = __darwin_suseconds_t
         
         self.init(tv_sec: Int(integerValue), tv_usec: Microseconds(microseconds))
     }

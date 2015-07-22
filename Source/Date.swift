@@ -17,9 +17,9 @@ public struct Date: ByteValue, Equatable, Comparable, CustomStringConvertible {
     /// Returns the time interval between the current date and 1 January 1970, GMT.
     public var timeIntervalSince1970: TimeInterval {
         
-        get { return timeIntervalSinceReferenceDate - TimeIntervalBetween1970AndReferenceDate }
+        get { return timeIntervalSinceReferenceDate + TimeIntervalBetween1970AndReferenceDate }
         
-        set { timeIntervalSinceReferenceDate = timeIntervalSince1970 + TimeIntervalBetween1970AndReferenceDate }
+        set { timeIntervalSinceReferenceDate = timeIntervalSince1970 - TimeIntervalBetween1970AndReferenceDate }
     }
     
     /// Returns the difference between two dates.
