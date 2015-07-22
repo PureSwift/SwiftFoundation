@@ -61,10 +61,10 @@ public enum RegularExpressionCompileOption: POSIXRegularExpressionCompileOptionF
         
         switch rawValue {
             
-        case REG_ICASE:     self = CaseInsensitive
-        case REG_EXTENDED:  self = ExtendedSyntax
-        case REG_NOSUB:     self = NoSub
-        case REG_NEWLINE:   self = NewLine
+        case REG_ICASE:             self = CaseInsensitive
+        case REG_EXTENDED:          self = ExtendedSyntax
+        case REG_NOSUB:             self = NoSub
+        case REG_NEWLINE:           self = NewLine
             
         default: return nil
         }
@@ -74,10 +74,10 @@ public enum RegularExpressionCompileOption: POSIXRegularExpressionCompileOptionF
         
         switch self {
             
-        case .CaseInsensitive:  return REG_ICASE
-        case .ExtendedSyntax:   return REG_EXTENDED
-        case .NoSub:            return REG_NOSUB
-        case .NewLine:          return REG_NEWLINE
+        case .CaseInsensitive:      return REG_ICASE
+        case .ExtendedSyntax:       return REG_EXTENDED
+        case .NoSub:                return REG_NOSUB
+        case .NewLine:              return REG_NEWLINE
         }
     }
 }
@@ -97,8 +97,8 @@ public enum RegularExpressionMatchOption: POSIXRegularExpressionMatchOptionFlag,
         
         switch rawValue {
             
-        case REG_NOTBOL: self = NotBeginningOfLine
-        case REG_NOTEOL: self = NotEndOfLine
+        case REG_NOTBOL:            self = NotBeginningOfLine
+        case REG_NOTEOL:            self = NotEndOfLine
             
         default: return nil
         }
@@ -174,18 +174,18 @@ public enum RegularExpressionCompileError: POSIXRegularExpressionCompileErrorRaw
         
         switch rawValue {
             
-        case REG_BADRPT:    self = InvalidRepetition
-        case REG_BADBR:     self = InvalidBackReference
-        case REG_ESPACE:    self = OutOfMemory
-        case REG_BADPAT:    self = InvalidPatternOperator
-        case REG_EBRACE:    self = UnMatchedBraceInterval
-        case REG_EBRACK:    self = UnMatchedBracketList
-        case REG_ECOLLATE:  self = InvalidCollating
-        case REG_ECTYPE:    self = UnknownCharacterClassName
-        case REG_EESCAPE:   self = TrailingBackslash
-        case REG_EPAREN:    self = UnMatchedParenthesis
-        case REG_ERANGE:    self = InvalidRange
-        case REG_ESUBREG:   self = InvalidBackReferenceToSubExpression
+        case REG_BADRPT:                            self = InvalidRepetition
+        case REG_BADBR:                             self = InvalidBackReference
+        case REG_ESPACE:                            self = OutOfMemory
+        case REG_BADPAT:                            self = InvalidPatternOperator
+        case REG_EBRACE:                            self = UnMatchedBraceInterval
+        case REG_EBRACK:                            self = UnMatchedBracketList
+        case REG_ECOLLATE:                          self = InvalidCollating
+        case REG_ECTYPE:                            self = UnknownCharacterClassName
+        case REG_EESCAPE:                           self = TrailingBackslash
+        case REG_EPAREN:                            self = UnMatchedParenthesis
+        case REG_ERANGE:                            self = InvalidRange
+        case REG_ESUBREG:                           self = InvalidBackReferenceToSubExpression
             
             /*
             #if os(linux)
@@ -204,18 +204,18 @@ public enum RegularExpressionCompileError: POSIXRegularExpressionCompileErrorRaw
         
         switch self {
             
-        case InvalidRepetition:                    return REG_BADRPT
-        case InvalidBackReference:                 return REG_BADBR
-        case OutOfMemory:                          return REG_ESPACE
-        case InvalidPatternOperator:               return REG_BADPAT
-        case UnMatchedBraceInterval:               return REG_EBRACE
-        case UnMatchedBracketList:                 return REG_EBRACK
-        case InvalidCollating:                     return REG_ECOLLATE
-        case UnknownCharacterClassName:            return REG_ECTYPE
-        case TrailingBackslash:                    return REG_EESCAPE
-        case UnMatchedParenthesis:                 return REG_EPAREN
-        case InvalidRange:                         return REG_ERANGE
-        case InvalidBackReferenceToSubExpression:  return REG_ESUBREG
+        case InvalidRepetition:                     return REG_BADRPT
+        case InvalidBackReference:                  return REG_BADBR
+        case OutOfMemory:                           return REG_ESPACE
+        case InvalidPatternOperator:                return REG_BADPAT
+        case UnMatchedBraceInterval:                return REG_EBRACE
+        case UnMatchedBracketList:                  return REG_EBRACK
+        case InvalidCollating:                      return REG_ECOLLATE
+        case UnknownCharacterClassName:             return REG_ECTYPE
+        case TrailingBackslash:                     return REG_EESCAPE
+        case UnMatchedParenthesis:                  return REG_EPAREN
+        case InvalidRange:                          return REG_ERANGE
+        case InvalidBackReferenceToSubExpression:   return REG_ESUBREG
         }
     }
 }
