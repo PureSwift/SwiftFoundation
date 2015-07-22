@@ -6,11 +6,11 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-/** Stores a primitive value. Useful for Swift wrappers for C primitives. */
+/// Stores a primitive value. Useful for Swift wrappers for C primitives.
 public protocol ByteValue {
     
     typealias ByteValueType
     
-    /** Returns the primitive type */
+    /// Returns the primitive type */
     var byteValue: ByteValueType { get }
 }

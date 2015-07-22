@@ -37,7 +37,6 @@
 		6E17CD051B484FE40019AFB2 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD041B484FE30019AFB2 /* Version.swift */; };
 		6E17CD071B4850B40019AFB2 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD061B4850B40019AFB2 /* SemanticVersion.swift */; };
 		6E17CD151B4853DF0019AFB2 /* SwiftFoundationAppleBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E17CD101B4853BF0019AFB2 /* SwiftFoundationAppleBridge.framework */; };
-		6E17CD161B4854AD0019AFB2 /* BridgedTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD001B484D5A0019AFB2 /* BridgedTypes.swift */; };
 		6E30BA111B40F543009B1B49 /* SwiftFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E30BA101B40F543009B1B49 /* SwiftFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E30BA181B40F543009B1B49 /* SwiftFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E30BA0D1B40F543009B1B49 /* SwiftFoundation.framework */; };
 		6E30BA1D1B40F543009B1B49 /* SwiftFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA1C1B40F543009B1B49 /* SwiftFoundationTests.swift */; };
@@ -124,7 +123,6 @@
 		6E16C2FA1B47A92100C07C25 /* Coding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coding.swift; sourceTree = "<group>"; };
 		6E16C2FC1B47ADF700C07C25 /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		6E16C2FE1B47AE0400C07C25 /* OperationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueue.swift; sourceTree = "<group>"; };
-		6E17CD001B484D5A0019AFB2 /* BridgedTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BridgedTypes.swift; path = ../../SwiftFoundationAppleBridge/SwiftFoundationAppleBridge/BridgedTypes.swift; sourceTree = "<group>"; };
 		6E17CD041B484FE30019AFB2 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		6E17CD061B4850B40019AFB2 /* SemanticVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticVersion.swift; sourceTree = "<group>"; };
 		6E17CD0A1B4853BE0019AFB2 /* SwiftFoundationAppleBridge.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftFoundationAppleBridge.xcodeproj; path = ../../SwiftFoundationAppleBridge/SwiftFoundationAppleBridge.xcodeproj; sourceTree = "<group>"; };
@@ -218,14 +216,6 @@
 			name = "POSIX Exensions";
 			sourceTree = "<group>";
 		};
-		6E16C2F01B4533C700C07C25 /* Data Wrappers */ = {
-			isa = PBXGroup;
-			children = (
-				6E30BA291B40F713009B1B49 /* Data.swift */,
-			);
-			name = "Data Wrappers";
-			sourceTree = "<group>";
-		};
 		6E16C2F71B47A87200C07C25 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,10 +293,10 @@
 				6E30BA331B412814009B1B49 /* Predicate.swift */,
 				6E30BA351B4133F3009B1B49 /* Task.swift */,
 				6E30BA421B413A8F009B1B49 /* UUID.swift */,
+				6E16C2EC1B44FC4700C07C25 /* RegularExpression.swift */,
+				6E30BA291B40F713009B1B49 /* Data.swift */,
 				6E16C3001B47AE3C00C07C25 /* Operations */,
 				6EB4DE3B1B46CDA100C02276 /* Sort Descriptors */,
-				6EB4DE3A1B45D49D00C02276 /* Regular Expression */,
-				6E16C2F01B4533C700C07C25 /* Data Wrappers */,
 				6E30BA491B413DE1009B1B49 /* Transformer */,
 				6E30BA461B413BCF009B1B49 /* Formatter */,
 				6E30BA3D1B413865009B1B49 /* URL */,
@@ -320,7 +310,6 @@
 			children = (
 				6E17CD0A1B4853BE0019AFB2 /* SwiftFoundationAppleBridge.xcodeproj */,
 				6E30BA1C1B40F543009B1B49 /* SwiftFoundationTests.swift */,
-				6E17CD001B484D5A0019AFB2 /* BridgedTypes.swift */,
 				6E30BA311B4116E6009B1B49 /* DateTests.swift */,
 				6E16C2EE1B45095900C07C25 /* UUIDTests.swift */,
 				6EB4DE421B46F3E300C02276 /* OrderTests.swift */,
@@ -383,14 +372,6 @@
 				6E574ED21B4A3ED500F629B3 /* String.swift */,
 			);
 			name = "Swift Extensions";
-			sourceTree = "<group>";
-		};
-		6EB4DE3A1B45D49D00C02276 /* Regular Expression */ = {
-			isa = PBXGroup;
-			children = (
-				6E16C2EC1B44FC4700C07C25 /* RegularExpression.swift */,
-			);
-			name = "Regular Expression";
 			sourceTree = "<group>";
 		};
 		6EB4DE3B1B46CDA100C02276 /* Sort Descriptors */ = {
@@ -592,7 +573,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E17CD161B4854AD0019AFB2 /* BridgedTypes.swift in Sources */,
 				6E30BA1D1B40F543009B1B49 /* SwiftFoundationTests.swift in Sources */,
 				6E16C2EF1B45095900C07C25 /* UUIDTests.swift in Sources */,
 				1AEF58831B519F1D002EF80D /* RegularExpressionTests.swift in Sources */,

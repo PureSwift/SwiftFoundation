@@ -9,3 +9,15 @@
 import Foundation
 import SwiftFoundation
 
+public extension NSDate {
+    
+    convenience init(date: Date) {
+        
+        self.init(timeIntervalSinceReferenceDate: date.timeIntervalSinceReferenceDate)
+    }
+    
+    func toDate() -> Date {
+        
+        return Date(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate)
+    }
+}

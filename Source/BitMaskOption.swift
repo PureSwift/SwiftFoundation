@@ -9,7 +9,7 @@
 /// Bit mask that represents various options
 public protocol BitMaskOption: RawRepresentable {
     
-    
+    static func optionsBitmask(options: [Self]) -> Self.RawValue
 }
 
 public extension BitMaskOption where Self.RawValue: IntegerType {

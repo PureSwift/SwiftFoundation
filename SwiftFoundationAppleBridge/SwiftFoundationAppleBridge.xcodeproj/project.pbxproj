@@ -36,7 +36,6 @@
 		6E17CCF91B484B170019AFB2 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		6E17CCFA1B484B170019AFB2 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		6E17CCFB1B484B170019AFB2 /* UUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUID.swift; sourceTree = "<group>"; };
-		6E17CD021B484DCD0019AFB2 /* BridgedTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BridgedTypes.swift; path = SwiftFoundationAppleBridge/BridgedTypes.swift; sourceTree = "<group>"; };
 		6E17CD171B48553F0019AFB2 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,7 +61,6 @@
 		6E17CCD41B484B020019AFB2 = {
 			isa = PBXGroup;
 			children = (
-				6E17CD021B484DCD0019AFB2 /* BridgedTypes.swift */,
 				6E17CCE01B484B020019AFB2 /* SwiftFoundationAppleBridge */,
 				6E17CCEC1B484B020019AFB2 /* SwiftFoundationAppleBridgeTests */,
 				6E17CCDF1B484B020019AFB2 /* Products */,
