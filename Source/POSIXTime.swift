@@ -20,11 +20,26 @@ public extension timeval {
         return timeStamp
     }
     
+    init(timeInterval: TimeInterval) {
+        
+        typealias Microseconds = __darwin_suseconds_t
+        
+        let (integerValue, decimalValue) = modf(timeInterval)
+        
+        let million: TimeInterval = 1000000.0
+        
+        let microseconds = decimalValue * million
+        
+        self.init(tv_sec: Int(integerValue), tv_usec: Microseconds(microseconds))
+    }
+    
     var timeIntervalValue: TimeInterval {
         
         let secondsSince1970 = TimeInterval(self.tv_sec)
         
-        let microseconds = TimeInterval(self.tv_usec) / TimeInterval(1000000.0)
+        let million: TimeInterval = 1000000.0
+        
+        let microseconds = TimeInterval(self.tv_usec) / million
         
         return secondsSince1970 + microseconds
     }
@@ -32,12 +47,25 @@ public extension timeval {
 
 public extension timespec {
     
+    init(timeInterval: TimeInterval) {
+        
+        let (integerValue, decimalValue) = modf(timeInterval)
+        
+        let billion: TimeInterval = 1000000000.0
+        
+        let nanoseconds = decimalValue * billion
+        
+        self.init(tv_sec: Int(integerValue), tv_nsec: Int(nanoseconds))
+    }
+    
     var timeIntervalValue: TimeInterval {
         
         let secondsSince1970 = TimeInterval(self.tv_sec)
         
-        let microseconds = TimeInterval(self.tv_nsec) / TimeInterval(1000000000.0)
+        let billion: TimeInterval = 1000000000.0
         
-        return secondsSince1970 + microseconds
+        let nanoseconds = TimeInterval(self.tv_nsec) / billion
+        
+        return secondsSince1970 + nanoseconds
     }
 }

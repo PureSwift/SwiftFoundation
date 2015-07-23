@@ -1,5 +1,5 @@
 //
-//  Task.swift
+//  Process.swift
 //  SwiftFoundation
 //
 //  Created by Alsey Coleman Miller on 6/29/15.
@@ -8,7 +8,7 @@
 
 /// Class for executing a process.
 @available (OSX 10.9, *) // Not Availible on iOS
-final public class Task {
+final public class Process {
     
     
 }

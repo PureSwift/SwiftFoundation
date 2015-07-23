@@ -6,12 +6,15 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
+/// Raw byte type for UUID
+public typealias UUIDBytes = (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8)
+
 /// A representation of a universally unique identifier (```UUID```).
 public struct UUID: ByteValue, RawRepresentable, CustomStringConvertible {
     
     // MARK: - Public Properties
     
-    public var byteValue: uuid_t
+    public var byteValue: UUIDBytes
     
     public var rawValue: String {
         
@@ -35,7 +38,7 @@ public struct UUID: ByteValue, RawRepresentable, CustomStringConvertible {
         self.byteValue = uuid
     }
     
-    public init(bytes: uuid_t) {
+    public init(bytes: UUIDBytes) {
         
         self.byteValue = bytes
     }

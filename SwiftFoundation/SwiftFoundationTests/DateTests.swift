@@ -98,9 +98,36 @@ class DateTests: XCTestCase {
         XCTAssert(foundationDate == foundationDate2)
     }
     
-    func testTimeIntervalSince1970() {
+    func testTimeIntervalSince1970Constant() {
         
         XCTAssert(TimeIntervalBetween1970AndReferenceDate == NSTimeIntervalSince1970, "NSTimeIntervalSince1970 == \(NSTimeIntervalSince1970)")
+    }
+    
+    func testGetTimeIntervalSince1970() {
+        
+        let date = Date()
+        
+        let foundationDate = NSDate(timeIntervalSinceReferenceDate: date.timeIntervalSinceReferenceDate)
+        
+        XCTAssert(date.timeIntervalSince1970 == foundationDate.timeIntervalSince1970)
+    }
+    
+    func testCreateWithTimeIntervalSince1970() {
+        
+        let date = Date()
+        
+        XCTAssert(Date(timeIntervalSince1970: date.timeIntervalSince1970) == date, "Date should be the same as original")
+    }
+    
+    func testSetWithTimeIntervalSince1970() {
+        
+        var date = Date()
+        
+        let foundationDate = NSDate(timeIntervalSinceReferenceDate: date.timeIntervalSinceReferenceDate)
+        
+        date.timeIntervalSince1970 = foundationDate.timeIntervalSince1970
+        
+        XCTAssert(date.timeIntervalSinceReferenceDate == foundationDate.timeIntervalSinceReferenceDate)
     }
     
     // MARK: - Performance Tests

@@ -37,7 +37,7 @@ class SortDescriptorTests: XCTestCase {
                 
                 if foundationElement as! String != element {
                     
-                    XCTFail("Elements to not match\nSwift:\n\(sortedItems)\nFoundation:\n\(foundationSortedItems)\n")
+                    XCTFail("Elements to not match Swift: \(sortedItems) Foundation: \(foundationSortedItems)\n")
                     
                     return
                 }

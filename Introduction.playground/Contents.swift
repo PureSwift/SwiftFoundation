@@ -21,19 +21,5 @@ let foundationUUID = NSUUID(UUIDString: validRawUUID)!
 
 uuid.rawValue == foundationUUID.UUIDString
 
-//: SwiftFoundation's Protocol-Oriented Programming paradigm permits for toll free bridging between OS-dependent implementations.
-
-func printDate(date: DateType) {
-
-    print(date.timeIntervalSinceReferenceDate)
-}
-
-import SwiftFoundationAppleBridge
-
-extension NSDate: DateType { /* Bridging provided in SwiftFoundationAppleBridge module */ }
-
-printDate(NSDate()) // Foundation-based
-
-printDate(Date()) // POSIX-based
 
 

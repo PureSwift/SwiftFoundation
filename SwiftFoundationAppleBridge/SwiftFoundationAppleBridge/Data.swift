@@ -7,18 +7,18 @@
 //
 
 import Foundation
+import SwiftFoundation
 
-public extension NSData {
+extension NSData {
     
-    /** Number of bytes. */
-    var count: UInt {
-        
-        return UInt(length)
+    public convenience init(bytes: Data) {
+        self.init(bytes: bytes, length: bytes.count)
     }
     
-    /** Data pointer. */
-    var byteValue: (UnsafePointer<Void>, UInt) {
-        
-        return (bytes, count)
+    public func arrayOfBytes() -> Data {
+        let count = self.length / sizeof(UInt8)
+        var bytesArray = [UInt8](count: count, repeatedValue: 0)
+        self.getBytes(&bytesArray, length:count * sizeof(UInt8))
+        return bytesArray
     }
 }
