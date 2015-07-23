@@ -135,6 +135,18 @@ public enum JSONNumber: RawRepresentable {
     }
 }
 
+public protocol JSONEncodeable {
+    
+    /// Encodes the reciever into JSON.
+    func toJSON() -> JSONObject
+}
+
+public protocol JSONDecodeable {
+    
+    /// Decodes the reciever from JSON.
+    init?(JSONObject: JSONObject)
+}
+
 // Typealiases due to compiler error
 
 public typealias StringValue = String
