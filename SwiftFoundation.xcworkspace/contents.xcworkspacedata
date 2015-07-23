@@ -5,9 +5,6 @@
       location = "group:Introduction.playground">
    </FileRef>
    <FileRef
-      location = "group:MyPlayground.playground">
-   </FileRef>
-   <FileRef
       location = "group:SwiftFoundation/SwiftFoundation.xcodeproj">
    </FileRef>
    <FileRef
