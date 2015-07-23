@@ -10,9 +10,7 @@
 
 public typealias Data = [UInt8]
 
-/*
-public extension Array where Element: UInt8 {
+public func Data(voidPointer: UnsafeMutablePointer<Void>) -> Data {
     
     
 }
-*/

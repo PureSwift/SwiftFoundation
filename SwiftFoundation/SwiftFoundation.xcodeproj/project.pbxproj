@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A1B5A861B6092780025FE7C /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5A851B6092780025FE7C /* DataTests.swift */; };
 		1A48CD651B59973A00C4D7F7 /* Copying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A48CD641B59973A00C4D7F7 /* Copying.swift */; };
 		1A49A9441B5D3F0200827F1B /* Bridgable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A9431B5D3F0200827F1B /* Bridgable.swift */; };
 		1A49A94E1B5D8F2600827F1B /* URLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A94D1B5D8F2600827F1B /* URLClient.swift */; };
@@ -96,6 +97,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A1B5A851B6092780025FE7C /* DataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
 		1A48CD641B59973A00C4D7F7 /* Copying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Copying.swift; sourceTree = "<group>"; };
 		1A49A9431B5D3F0200827F1B /* Bridgable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridgable.swift; sourceTree = "<group>"; };
 		1A49A94D1B5D8F2600827F1B /* URLClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLClient.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 			children = (
 				6E17CD0A1B4853BE0019AFB2 /* SwiftFoundationAppleBridge.xcodeproj */,
 				6E30BA1C1B40F543009B1B49 /* SwiftFoundationTests.swift */,
+				1A1B5A851B6092780025FE7C /* DataTests.swift */,
 				6E30BA311B4116E6009B1B49 /* DateTests.swift */,
 				6E16C2EE1B45095900C07C25 /* UUIDTests.swift */,
 				6EB4DE421B46F3E300C02276 /* OrderTests.swift */,
@@ -581,6 +584,7 @@
 				6EB4DE451B47063700C02276 /* SortDescriptorTests.swift in Sources */,
 				1A49A9541B5DCDAC00827F1B /* URLTests.swift in Sources */,
 				1A7965FA1B5B988D00A6E4DA /* FileManagerTests.swift in Sources */,
+				1A1B5A861B6092780025FE7C /* DataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

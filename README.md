@@ -23,8 +23,8 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 - [x] SortDescriptor
 - [x] UUID
 - [x] FileManager
+- [x] Data
 - [ ] URL
 - [ ] NotificationCenter
 - [ ] OperationQueue
 - [ ] RegularExpression
-- [ ] Data
