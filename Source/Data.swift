@@ -9,8 +9,3 @@
 /// Encapsulates data.
 
 public typealias Data = [UInt8]
-
-public func Data(voidPointer: UnsafeMutablePointer<Void>) -> Data {
-    
-    
-}

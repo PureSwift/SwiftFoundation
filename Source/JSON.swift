@@ -10,12 +10,6 @@ public typealias JSONArray = [JSONValue]
 
 public typealias JSONObject = [String: JSONValue]
 
-// Typealiases only due to compiler error
-
-public typealias JSONString = String
-
-public typealias JSONInteger = Int
-
 public enum JSONValue {
     
     case Null
@@ -39,9 +33,15 @@ public enum JSONNumber {
     
     case Integer(Int)
     
+    /* Compiler error
     case Float(Float)
     
     case Double(Double)
     
     case Decimal(Decimal)
+    */
 }
+
+// Typealiases only due to compiler error
+
+public typealias JSONString = String
