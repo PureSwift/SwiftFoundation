@@ -84,4 +84,30 @@ class UUIDTests: XCTestCase {
             }
         }
     }
+    
+    func testStringPerformance() {
+        
+        let uuid = UUID()
+        
+        self.measureBlock { () -> Void in
+            
+            for _ in 0...10000 {
+                
+                _ = uuid.rawValue
+            }
+        }
+    }
+    
+    func testFoundationStringPerformance() {
+        
+        let uuid = NSUUID()
+        
+        self.measureBlock { () -> Void in
+            
+            for _ in 0...10000 {
+                
+                _ = uuid.UUIDString
+            }
+        }
+    }
 }

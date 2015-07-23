@@ -76,19 +76,19 @@ public final class FileManager {
     
     // MARK: - Creating and Deleting Items
     
-    public static func createFile(atPath path: String, contents: Data? = nil, attributes: FileAttributes? = nil) throws {
+    public static func createFile(atPath path: String, contents: Data? = nil, attributes: FileAttributes = FileAttributes()) throws {
         
         
     }
     
-    public static func createDirectory(atPath path: String, withIntermediateDirectories createIntermediates: Bool = false, filePermissions: mode_t) throws {
+    public static func createDirectory(atPath path: String, withIntermediateDirectories createIntermediates: Bool = false, attributes: FileAttributes = FileAttributes()) throws {
         
         if createIntermediates {
             
             fatalError("Not Implemented")
         }
         
-        guard mkdir(path, filePermissions) == 0 else {
+        guard mkdir(path, attributes.st_mode) == 0 else {
             
             throw POSIXError.fromErrorNumber!
         }
