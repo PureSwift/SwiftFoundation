@@ -137,14 +137,21 @@ public enum JSONNumber: RawRepresentable {
 
 public protocol JSONEncodeable {
     
-    /// Encodes the reciever into JSON.
+    /// Encodes the reciever into a JSON object.
     func toJSON() -> JSONObject
 }
 
 public protocol JSONDecodeable {
     
-    /// Decodes the reciever from JSON.
+    /// Decodes the reciever from a JSON object.
     init?(JSONObject: JSONObject)
+}
+
+public protocol JSONValueConvertible {
+    
+    init?(JSONValue: JSONValue)
+    
+    func toJSON() -> JSONValue
 }
 
 // Typealiases due to compiler error
