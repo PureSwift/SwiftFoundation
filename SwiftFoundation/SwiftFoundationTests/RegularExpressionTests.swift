@@ -3,7 +3,7 @@
 //  SwiftFoundation
 //
 //  Created by Alsey Coleman Miller on 7/11/15.
-//  Copyright © 2015 ColemanCDA. All rights reserved.
+//  Copyright © 2015 PureSwift. All rights reserved.
 //
 
 import XCTest

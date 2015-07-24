@@ -3,7 +3,7 @@
 //  SwiftFoundation
 //
 //  Created by Alsey Coleman Miller on 7/22/15.
-//  Copyright © 2015 ColemanCDA. All rights reserved.
+//  Copyright © 2015 PureSwift. All rights reserved.
 //
 
 import XCTest
@@ -23,11 +23,12 @@ class DataTests: XCTestCase {
 
     func testCreateWithVoidPointer() {
         
+        /*
         var bytes = Data()
         
         let googleData = NSData(contentsOfURL: NSURL(string: "http://google.com")!)
         
-        
+        */
     }
 
     func testPerformanceExample() {

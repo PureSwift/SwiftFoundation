@@ -7,7 +7,4 @@
    <FileRef
       location = "group:SwiftFoundation/SwiftFoundation.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:SwiftFoundationAppleBridge/SwiftFoundationAppleBridge.xcodeproj">
-   </FileRef>
 </Workspace>

@@ -3,12 +3,12 @@
 //  SwiftFoundation
 //
 //  Created by Alsey Coleman Miller on 7/2/15.
-//  Copyright © 2015 ColemanCDA. All rights reserved.
+//  Copyright © 2015 PureSwift. All rights reserved.
 //
 
 import XCTest
 @testable import SwiftFoundation
-import SwiftFoundationAppleBridge
+import SwiftFoundation
 
 class UUIDTests: XCTestCase {
 

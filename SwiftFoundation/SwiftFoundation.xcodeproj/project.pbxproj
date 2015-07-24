@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1A1B5A861B6092780025FE7C /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5A851B6092780025FE7C /* DataTests.swift */; };
 		1A1B5A961B60B4F60025FE7C /* Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5A951B60B4F60025FE7C /* Decimal.swift */; };
+		1A1B5ABC1B61C74A0025FE7C /* NSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5AB81B61C74A0025FE7C /* NSData.swift */; };
+		1A1B5ABD1B61C74A0025FE7C /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5AB91B61C74A0025FE7C /* NSDate.swift */; };
+		1A1B5ABE1B61C74A0025FE7C /* NSComparisonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5ABA1B61C74A0025FE7C /* NSComparisonResult.swift */; };
+		1A1B5ABF1B61C74A0025FE7C /* NSUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5ABB1B61C74A0025FE7C /* NSUUID.swift */; };
 		1A48CD651B59973A00C4D7F7 /* Copying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A48CD641B59973A00C4D7F7 /* Copying.swift */; };
 		1A49A9441B5D3F0200827F1B /* Bridgable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A9431B5D3F0200827F1B /* Bridgable.swift */; };
 		1A49A94E1B5D8F2600827F1B /* URLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A94D1B5D8F2600827F1B /* URLClient.swift */; };
@@ -38,7 +42,6 @@
 		6E16C2FF1B47AE0400C07C25 /* OperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2FE1B47AE0400C07C25 /* OperationQueue.swift */; };
 		6E17CD051B484FE40019AFB2 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD041B484FE30019AFB2 /* Version.swift */; };
 		6E17CD071B4850B40019AFB2 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD061B4850B40019AFB2 /* SemanticVersion.swift */; };
-		6E17CD151B4853DF0019AFB2 /* SwiftFoundationAppleBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E17CD101B4853BF0019AFB2 /* SwiftFoundationAppleBridge.framework */; };
 		6E30BA111B40F543009B1B49 /* SwiftFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E30BA101B40F543009B1B49 /* SwiftFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E30BA181B40F543009B1B49 /* SwiftFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E30BA0D1B40F543009B1B49 /* SwiftFoundation.framework */; };
 		6E30BA1D1B40F543009B1B49 /* SwiftFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA1C1B40F543009B1B49 /* SwiftFoundationTests.swift */; };
@@ -74,20 +77,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6E17CD0F1B4853BF0019AFB2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6E17CD0A1B4853BE0019AFB2 /* SwiftFoundationAppleBridge.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6E17CCDE1B484B020019AFB2;
-			remoteInfo = SwiftFoundationAppleBridge;
-		};
-		6E17CD111B4853BF0019AFB2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6E17CD0A1B4853BE0019AFB2 /* SwiftFoundationAppleBridge.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6E17CCE81B484B020019AFB2;
-			remoteInfo = SwiftFoundationAppleBridgeTests;
-		};
 		6E30BA191B40F543009B1B49 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6E30BA041B40F543009B1B49 /* Project object */;
@@ -100,6 +89,10 @@
 /* Begin PBXFileReference section */
 		1A1B5A851B6092780025FE7C /* DataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
 		1A1B5A951B60B4F60025FE7C /* Decimal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decimal.swift; sourceTree = "<group>"; };
+		1A1B5AB81B61C74A0025FE7C /* NSData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSData.swift; sourceTree = "<group>"; };
+		1A1B5AB91B61C74A0025FE7C /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
+		1A1B5ABA1B61C74A0025FE7C /* NSComparisonResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSComparisonResult.swift; sourceTree = "<group>"; };
+		1A1B5ABB1B61C74A0025FE7C /* NSUUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUUID.swift; sourceTree = "<group>"; };
 		1A48CD641B59973A00C4D7F7 /* Copying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Copying.swift; sourceTree = "<group>"; };
 		1A49A9431B5D3F0200827F1B /* Bridgable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridgable.swift; sourceTree = "<group>"; };
 		1A49A94D1B5D8F2600827F1B /* URLClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLClient.swift; sourceTree = "<group>"; };
@@ -129,10 +122,9 @@
 		6E16C2FE1B47AE0400C07C25 /* OperationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationQueue.swift; sourceTree = "<group>"; };
 		6E17CD041B484FE30019AFB2 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		6E17CD061B4850B40019AFB2 /* SemanticVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticVersion.swift; sourceTree = "<group>"; };
-		6E17CD0A1B4853BE0019AFB2 /* SwiftFoundationAppleBridge.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftFoundationAppleBridge.xcodeproj; path = ../../SwiftFoundationAppleBridge/SwiftFoundationAppleBridge.xcodeproj; sourceTree = "<group>"; };
 		6E30BA0D1B40F543009B1B49 /* SwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E30BA101B40F543009B1B49 /* SwiftFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFoundation.h; sourceTree = "<group>"; };
-		6E30BA121B40F543009B1B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E30BA101B40F543009B1B49 /* SwiftFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SwiftFoundation.h; path = ../SwiftFoundation/SwiftFoundation/SwiftFoundation.h; sourceTree = "<group>"; };
+		6E30BA121B40F543009B1B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../SwiftFoundation/SwiftFoundation/Info.plist; sourceTree = "<group>"; };
 		6E30BA171B40F543009B1B49 /* SwiftFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E30BA1C1B40F543009B1B49 /* SwiftFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFoundationTests.swift; sourceTree = "<group>"; };
 		6E30BA1E1B40F543009B1B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -179,7 +171,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E17CD151B4853DF0019AFB2 /* SwiftFoundationAppleBridge.framework in Frameworks */,
 				6E30BA181B40F543009B1B49 /* SwiftFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,6 +178,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A1B5AB71B61C74A0025FE7C /* Darwin Support */ = {
+			isa = PBXGroup;
+			children = (
+				6E30BA121B40F543009B1B49 /* Info.plist */,
+				6E30BA101B40F543009B1B49 /* SwiftFoundation.h */,
+				1A1B5AB81B61C74A0025FE7C /* NSData.swift */,
+				1A1B5AB91B61C74A0025FE7C /* NSDate.swift */,
+				1A1B5ABA1B61C74A0025FE7C /* NSComparisonResult.swift */,
+				1A1B5ABB1B61C74A0025FE7C /* NSUUID.swift */,
+			);
+			name = "Darwin Support";
+			path = "../Darwin Support";
+			sourceTree = "<group>";
+		};
 		1A49A93E1B5C6E5500827F1B /* Standard Library Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,29 +243,11 @@
 			name = Operations;
 			sourceTree = "<group>";
 		};
-		6E17CD0B1B4853BE0019AFB2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6E17CD101B4853BF0019AFB2 /* SwiftFoundationAppleBridge.framework */,
-				6E17CD121B4853BF0019AFB2 /* SwiftFoundationAppleBridgeTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		6E17CD191B4855F90019AFB2 /* SwiftFoundation */ = {
-			isa = PBXGroup;
-			children = (
-				6E30BA121B40F543009B1B49 /* Info.plist */,
-				6E30BA101B40F543009B1B49 /* SwiftFoundation.h */,
-			);
-			path = SwiftFoundation;
-			sourceTree = "<group>";
-		};
 		6E30BA031B40F543009B1B49 = {
 			isa = PBXGroup;
 			children = (
 				6E30BA0F1B40F543009B1B49 /* Source */,
-				6E17CD191B4855F90019AFB2 /* SwiftFoundation */,
+				1A1B5AB71B61C74A0025FE7C /* Darwin Support */,
 				6E30BA1B1B40F543009B1B49 /* SwiftFoundationTests */,
 				6E30BA0E1B40F543009B1B49 /* Products */,
 			);
@@ -312,7 +299,6 @@
 		6E30BA1B1B40F543009B1B49 /* SwiftFoundationTests */ = {
 			isa = PBXGroup;
 			children = (
-				6E17CD0A1B4853BE0019AFB2 /* SwiftFoundationAppleBridge.xcodeproj */,
 				6E30BA1C1B40F543009B1B49 /* SwiftFoundationTests.swift */,
 				1A1B5A851B6092780025FE7C /* DataTests.swift */,
 				6E30BA311B4116E6009B1B49 /* DateTests.swift */,
@@ -468,12 +454,6 @@
 			mainGroup = 6E30BA031B40F543009B1B49;
 			productRefGroup = 6E30BA0E1B40F543009B1B49 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 6E17CD0B1B4853BE0019AFB2 /* Products */;
-					ProjectRef = 6E17CD0A1B4853BE0019AFB2 /* SwiftFoundationAppleBridge.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				6E30BA0C1B40F543009B1B49 /* SwiftFoundation */,
@@ -481,23 +461,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		6E17CD101B4853BF0019AFB2 /* SwiftFoundationAppleBridge.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftFoundationAppleBridge.framework;
-			remoteRef = 6E17CD0F1B4853BF0019AFB2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6E17CD121B4853BF0019AFB2 /* SwiftFoundationAppleBridgeTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SwiftFoundationAppleBridgeTests.xctest;
-			remoteRef = 6E17CD111B4853BF0019AFB2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6E30BA0B1B40F543009B1B49 /* Resources */ = {
@@ -532,7 +495,9 @@
 				6E30BA561B41DB5A009B1B49 /* HTTPVersion.swift in Sources */,
 				6E16C2BE1B42460B00C07C25 /* HTTPStatusCode.swift in Sources */,
 				6E30BA531B41D960009B1B49 /* HTTPMethod.swift in Sources */,
+				1A1B5ABF1B61C74A0025FE7C /* NSUUID.swift in Sources */,
 				6E30BA3C1B413718009B1B49 /* HTTPURLRequest.swift in Sources */,
+				1A1B5ABE1B61C74A0025FE7C /* NSComparisonResult.swift in Sources */,
 				1A49A9501B5D8F3200827F1B /* HTTPURLClient.swift in Sources */,
 				6E66A65D1B48664A00CB82CD /* NotificationCenter.swift in Sources */,
 				6E30BA281B40F66D009B1B49 /* JSON.swift in Sources */,
@@ -541,6 +506,7 @@
 				6EB4DE3F1B46D08D00C02276 /* ComparatorSortDescriptor.swift in Sources */,
 				6EB4DE411B46D5C600C02276 /* ComparableSortDescriptor.swift in Sources */,
 				6E30BA301B4105A5009B1B49 /* Null.swift in Sources */,
+				1A1B5ABD1B61C74A0025FE7C /* NSDate.swift in Sources */,
 				6E30BA431B413A8F009B1B49 /* UUID.swift in Sources */,
 				6E30BA2C1B40F71B009B1B49 /* Date.swift in Sources */,
 				1A49A94E1B5D8F2600827F1B /* URLClient.swift in Sources */,
@@ -568,6 +534,7 @@
 				1A49A9441B5D3F0200827F1B /* Bridgable.swift in Sources */,
 				6E30BA4B1B413DF0009B1B49 /* Transformer.swift in Sources */,
 				1A1B5A961B60B4F60025FE7C /* Decimal.swift in Sources */,
+				1A1B5ABC1B61C74A0025FE7C /* NSData.swift in Sources */,
 				1A85C40A1B5FA015002DDADB /* FileType.swift in Sources */,
 				1A48CD651B59973A00C4D7F7 /* Copying.swift in Sources */,
 				6E30BA4D1B41402B009B1B49 /* SortDescriptor.swift in Sources */,

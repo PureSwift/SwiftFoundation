@@ -3,7 +3,7 @@
 //  SwiftFoundation
 //
 //  Created by Alsey Coleman Miller on 7/17/15.
-//  Copyright © 2015 ColemanCDA. All rights reserved.
+//  Copyright © 2015 PureSwift. All rights reserved.
 //
 
 /// Protocol for classes that can create equivalent duplicates of themselves.
