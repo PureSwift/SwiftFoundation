@@ -11,10 +11,10 @@ public struct Date: ByteValue, Equatable, Comparable, CustomStringConvertible {
     
     // MARK: - Properties
     
-    /// Returns the time interval between the date and the reference date (1 January 2001, GMT).
+    /// The time interval between the date and the reference date (1 January 2001, GMT).
     public var timeIntervalSinceReferenceDate: TimeInterval
     
-    /// Returns the time interval between the current date and 1 January 1970, GMT.
+    /// The time interval between the current date and 1 January 1970, GMT.
     public var timeIntervalSince1970: TimeInterval {
         
         get { return timeIntervalSinceReferenceDate + TimeIntervalBetween1970AndReferenceDate }
