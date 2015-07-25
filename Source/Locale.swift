@@ -63,10 +63,7 @@ public struct Locale {
     
     // MARK: - Properties
     
-    public var localeIdentifier: String {
-        
-        return CFLocaleGetIdentifier(self.internalLocale) as String
-    }
+    public let localeIdentifier: String
     
     // MARK: - Initialization
     
@@ -75,6 +72,7 @@ public struct Locale {
         
         guard let locale = CFLocaleCreate(nil, localeIdentifier) else { return nil }
         
+        self.localeIdentifier = localeIdentifier
         self.internalLocale = locale
     }
     
@@ -89,6 +87,7 @@ public struct Locale {
     
     internal init(internalLocale: CFLocaleRef) {
         
+        self.localeIdentifier = internalLocale.localeIdentifier
         self.internalLocale = internalLocale
     }
 }
@@ -102,3 +101,4 @@ public enum LocaleLanguageDirection {
     case TopToBottom
     case BottomToTop
 }
+

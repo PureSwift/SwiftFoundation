@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-/// Formats a date according to a set style.
+/// Formats a date according to a date and time style.
 public struct StyledDateFormatter: Formatter {
     
     // MARK: - Properties

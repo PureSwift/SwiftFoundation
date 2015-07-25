@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A08D3DB1B633F5A006074D6 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2F31B47A61E00C07C25 /* DateFormatter.swift */; };
 		1A1B5A861B6092780025FE7C /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5A851B6092780025FE7C /* DataTests.swift */; };
 		1A1B5A961B60B4F60025FE7C /* Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5A951B60B4F60025FE7C /* Decimal.swift */; };
 		1A1B5ABC1B61C74A0025FE7C /* NSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5AB81B61C74A0025FE7C /* NSData.swift */; };
@@ -533,6 +534,7 @@
 				6EB4DE411B46D5C600C02276 /* ComparableSortDescriptor.swift in Sources */,
 				6E30BA301B4105A5009B1B49 /* Null.swift in Sources */,
 				1A1B5ABD1B61C74A0025FE7C /* NSDate.swift in Sources */,
+				1A08D3DB1B633F5A006074D6 /* DateFormatter.swift in Sources */,
 				6E30BA431B413A8F009B1B49 /* UUID.swift in Sources */,
 				6E30BA2C1B40F71B009B1B49 /* Date.swift in Sources */,
 				1ADA87BD1B6306C50055A442 /* CFLocale.swift in Sources */,

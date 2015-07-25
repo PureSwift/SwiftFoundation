@@ -19,6 +19,11 @@ public extension CFLocaleRef {
         
         return Locale(internalLocale: self)
     }
+    
+    var localeIdentifier: String {
+        
+        return CFLocaleGetIdentifier(self) as String
+    }
 }
 
 public extension CFLocaleLanguageDirection {
