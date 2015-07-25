@@ -23,11 +23,7 @@ public extension CFDateFormatterRef {
         return CFDateFormatterCreate(nil, locale.internalLocale, CFDateFormatterStyle(style: dateStyle), CFDateFormatterStyle(style: timeStyle))
     }
     
-    var format: String {
-        
-        get { return CFDateFormatterGetFormat(self) as String }
-        set { CFDateFormatterSetFormat(self, format) }
-    }
+    var format: String { return CFDateFormatterGetFormat(self) as String }
     
     func setProperties(properties: [DateFormatterProperty]) {
         

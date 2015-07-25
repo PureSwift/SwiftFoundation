@@ -33,9 +33,11 @@ public struct Date: ByteValue, Equatable, Comparable, CustomStringConvertible {
         return self.timeIntervalSinceReferenceDate
     }
     
+    static private let descriptionDateFormatter = DateFormatter(format: "YYYY-MM-dd hh:mm:ss")
+    
     public var description: String {
         
-        return "\(self.timeIntervalSinceReferenceDate)"
+        return Date.descriptionDateFormatter.stringFromValue(self)
     }
     
     // MARK: - Initialization

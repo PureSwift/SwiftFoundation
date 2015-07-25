@@ -30,7 +30,7 @@ public struct DateFormatter: Formatter {
             }
             
             // set format
-            self.internalFormatter.value.format = format
+            CFDateFormatterSetFormat(self.internalFormatter.value, format)
         }
     }
     
@@ -60,7 +60,7 @@ public struct DateFormatter: Formatter {
     public init(format: String, properties: [DateFormatterProperty] = [], locale: Locale? = nil) {
         
         let formatter = CFDateFormatterRef.withStyle(.NoStyle, timeStyle: .NoStyle, locale: locale)
-        formatter.format = format
+        CFDateFormatterSetFormat(formatter, format)
         
         self.properties = properties
         self.format = format
