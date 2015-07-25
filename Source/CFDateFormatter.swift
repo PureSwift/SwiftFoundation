@@ -16,8 +16,11 @@ public extension CFDateFormatterRef {
     }
     
     static func withStyle(dateStyle: DateFormatterStyle, timeStyle: DateFormatterStyle, locale: Locale? = nil) -> CFDateFormatter {
+        
+        // to get same behavior as NSDateFormatter
+        let locale = locale ?? Locale.currentLocale
                 
-        return CFDateFormatterCreate(nil, locale?.internalLocale, CFDateFormatterStyle(style: dateStyle), CFDateFormatterStyle(style: timeStyle))
+        return CFDateFormatterCreate(nil, locale.internalLocale, CFDateFormatterStyle(style: dateStyle), CFDateFormatterStyle(style: timeStyle))
     }
     
     func dateFromString(string: String) -> Date? {
