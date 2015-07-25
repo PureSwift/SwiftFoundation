@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-/** Used to convert values from one representation to another. */
+/** Used to convert values from one representation to another. Doesn't fail. */
 public protocol Transformer {
     
     typealias OriginalValueType
