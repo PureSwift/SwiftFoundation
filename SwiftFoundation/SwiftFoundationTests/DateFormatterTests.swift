@@ -46,15 +46,15 @@ class DateFormatterTests: XCTestCase {
 
         let formatString = "YYYY-MM-dd hh:mm:ss"
         
-        let foundationDate = NSDate()
-        
         let formatter = DateFormatter(format: formatString, properties: [], locale: nil)
         
         let foundationFormatter = NSDateFormatter()
         
         foundationFormatter.dateFormat = formatString;
         
-        let foundationStringValue = foundationFormatter.stringFromDate(foundationDate)
+        let foundationStringValue = foundationFormatter.stringFromDate(NSDate())
+        
+        let foundationDate = foundationFormatter.dateFromString(foundationStringValue)!
         
         guard let date = formatter.valueFromString(foundationStringValue) else {
             
