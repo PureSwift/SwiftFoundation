@@ -16,6 +16,11 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
    - Darwin (OS X, iOS, WatchOS)
    - Linux
 
+## Dependencies
+- Linux
+	- ICU
+	- CFLite
+
 ## Implemented
 To see what parts of Foundation are implemented, just look at the unit tests. Completed functionality will be fully unit tested. Note that there are some functionality that is written as a protocol only, that will not be included on this list.
 
@@ -26,7 +31,11 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 - [x] UUID
 - [x] FileManager
 - [x] Data
-- [ ] URL
+- [x] URL
+- [x] DateFormatter (CFLite Backed)
+- [x] Locale (CFLite Backed)
+- [ ] JSON
+- [ ] Decimal
 - [ ] NotificationCenter
 - [ ] OperationQueue
 - [ ] RegularExpression
