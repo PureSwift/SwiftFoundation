@@ -19,44 +19,30 @@ public struct StyledDateFormatter: Formatter {
     
     // MARK: - Private Properties
     
-    private var internalFormatter: CFDateFormatterRef
-    
-    private let internalQueue = dispatch_queue_create("StyledDateFormatter Thread Safety Internal Queue", nil)
+    private var internalFormatter: InternalDateFormatter
     
     // MARK: - Initialization
     
     public init(dateStyle: DateFormatterStyle = .NoStyle, timeStyle: DateFormatterStyle = .NoStyle, locale: Locale? = nil) {
         
+        let formatter = CFDateFormatterRef.withStyle(dateStyle, timeStyle: timeStyle, locale: locale)
+        
         self.dateStyle = dateStyle
         self.timeStyle = timeStyle
         self.locale = locale
-        self.internalFormatter = CFDateFormatterRef.withStyle(dateStyle, timeStyle: timeStyle, locale: locale)
+        self.internalFormatter = InternalDateFormatter(value: formatter)
     }
     
     // MARK: - Format
     
-    public func stringForValue(value: Date) -> String {
+    public func stringFromValue(value: Date) -> String {
         
-        var stringValue: String!
-        
-        dispatch_sync(self.internalQueue) { () -> Void in
-            
-            stringValue = self.internalFormatter.stringFromDate(value)
-        }
-        
-        return stringValue
+        return self.internalFormatter.stringFromDate(value)
     }
     
-    public func valueWithString(string: String) -> Date? {
+    public func valueFromString(string: String) -> Date? {
         
-        var date: Date?
-        
-        dispatch_sync(self.internalQueue) { () -> Void in
-            
-            date = self.internalFormatter.dateFromString(string)
-        }
-        
-        return date
+        return self.internalFormatter.dateFromString(string)
     }
         
     // MARK: - Private Methods

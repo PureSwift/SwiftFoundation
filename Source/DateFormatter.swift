@@ -70,28 +70,14 @@ public struct DateFormatter: Formatter {
     
     // MARK: - Format
     
-    public func stringForValue(value: Date) -> String {
+    public func stringFromValue(value: Date) -> String {
         
-        var stringValue: String!
-        
-        dispatch_sync(self.internalQueue) { () -> Void in
-            
-            stringValue = self.internalFormatter.value.stringFromDate(value)
-        }
-        
-        return stringValue
+        return self.internalFormatter.stringFromDate(value)
     }
     
-    public func valueWithString(string: String) -> Date? {
+    public func valueFromString(string: String) -> Date? {
         
-        var date: Date?
-        
-        dispatch_sync(self.internalQueue) { () -> Void in
-            
-            date = self.internalFormatter.value.dateFromString(string)
-        }
-        
-        return date
+        return self.internalFormatter.dateFromString(string)
     }
 }
 
@@ -128,15 +114,41 @@ public enum DateFormatterProperty {
     case DoesRelativeDateFormattingKey(Bool)
 }
 
-// MARK: - Private
+// MARK: - Internal
 
-private final class InternalDateFormatter {
+internal final class InternalDateFormatter {
     
     let value: CFDateFormatterRef
     
     init(value: CFDateFormatterRef) {
         
         self.value = value
+    }
+    
+    let internalQueue = dispatch_queue_create("DateFormatter Thread Safety Queue", nil)
+    
+    func stringFromDate(value: Date) -> String {
+        
+        var stringValue: String!
+        
+        dispatch_sync(self.internalQueue) { () -> Void in
+            
+            stringValue = self.value.stringFromDate(value)
+        }
+        
+        return stringValue
+    }
+    
+    func dateFromString(string: String) -> Date? {
+        
+        var date: Date?
+        
+        dispatch_sync(self.internalQueue) { () -> Void in
+            
+            date = self.value.dateFromString(string)
+        }
+        
+        return date
     }
 }
 

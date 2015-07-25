@@ -34,7 +34,7 @@ class StyledDateFormatterTests: XCTestCase {
         
         let formatter = StyledDateFormatter(dateStyle: .FullStyle, timeStyle: .FullStyle)
         
-        let stringValue = formatter.stringForValue(date)
+        let stringValue = formatter.stringFromValue(date)
         
         XCTAssert(foundationString == stringValue, "\(foundationString) == \(stringValue)")
     }
@@ -64,7 +64,7 @@ class StyledDateFormatterTests: XCTestCase {
                 dateFormatter.dateStyle = style
                 
                 // format value
-                _ = dateFormatter.stringForValue(Date())
+                _ = dateFormatter.stringFromValue(Date())
             
                 if i == numberOfThreads {
                     
@@ -95,9 +95,9 @@ class StyledDateFormatterTests: XCTestCase {
             operationQueue.addOperationWithBlock({ () -> Void in
                 
                 // format value
-                let string = dateFormatter.stringForValue(Date())
+                let string = dateFormatter.stringFromValue(Date())
                 
-                _ = dateFormatter.valueWithString(string)
+                _ = dateFormatter.valueFromString(string)
                 
                 if i == numberOfThreads {
                     
@@ -115,6 +115,8 @@ class StyledDateFormatterTests: XCTestCase {
         // This is an example of a performance test case.
         self.measureBlock {
             // Put the code you want to measure the time of here.
+            
+            
         }
     }
 

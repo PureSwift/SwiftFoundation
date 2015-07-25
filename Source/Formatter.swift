@@ -12,7 +12,7 @@ public protocol Formatter {
     typealias ValueType
     
     /// Primary method for converting an object to a string through formatting. Object will be converted to string according to the formatter's implementation and init parameters. */
-    func stringForValue(value: ValueType) -> String
+    func stringFromValue(value: ValueType) -> String
     
-    func valueWithString(string: String) -> ValueType?
+    func valueFromString(string: String) -> ValueType?
 }
