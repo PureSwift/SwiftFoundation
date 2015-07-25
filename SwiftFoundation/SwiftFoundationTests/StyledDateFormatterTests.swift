@@ -38,6 +38,78 @@ class StyledDateFormatterTests: XCTestCase {
         
         XCTAssert(foundationString == stringValue, "\(foundationString) == \(stringValue)")
     }
+    
+    func testMutateThreadSafety() {
+        
+        var dateFormatter = StyledDateFormatter(dateStyle: .FullStyle, timeStyle: .MediumStyle)
+        
+        let expectation = expectationWithDescription("Operation Finished")
+        
+        let operationQueue = NSOperationQueue()
+        
+        operationQueue.maxConcurrentOperationCount = 10;
+        
+        let numberOfThreads = 5
+        
+        for i in 1...numberOfThreads {
+            
+            var flag = true
+            
+            operationQueue.addOperationWithBlock({ () -> Void in
+                
+                // mutate
+                let style: DateFormatterStyle = flag ? .FullStyle : .ShortStyle
+                flag = !flag
+                
+                dateFormatter.dateStyle = style
+                
+                // format value
+                _ = dateFormatter.stringForValue(Date())
+            
+                if i == numberOfThreads {
+                    
+                    expectation.fulfill()
+                }
+            })
+        }
+        
+        waitForExpectationsWithTimeout(5, handler: { error in
+            XCTAssertNil(error, "Error")
+        })
+    }
+    
+    func testMethodThreadSafety() {
+        
+        let dateFormatter = StyledDateFormatter(dateStyle: .FullStyle, timeStyle: .MediumStyle)
+        
+        let expectation = expectationWithDescription("Operation Finished")
+        
+        let operationQueue = NSOperationQueue()
+        
+        operationQueue.maxConcurrentOperationCount = 10;
+        
+        let numberOfThreads = 5
+        
+        for i in 1...numberOfThreads {
+            
+            operationQueue.addOperationWithBlock({ () -> Void in
+                
+                // format value
+                let string = dateFormatter.stringForValue(Date())
+                
+                _ = dateFormatter.valueWithString(string)
+                
+                if i == numberOfThreads {
+                    
+                    expectation.fulfill()
+                }
+            })
+        }
+        
+        waitForExpectationsWithTimeout(5, handler: { error in
+            XCTAssertNil(error, "Error")
+        })
+    }
 
     func testCreationPerformance() {
         // This is an example of a performance test case.
