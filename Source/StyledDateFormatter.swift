@@ -11,47 +11,60 @@ public struct StyledDateFormatter: Formatter {
     
     // MARK: - Properties
     
-    public var dateStyle: DateFormatterStyle {
-        
-        get { return CFDateFormatterGetDateStyle(self.internalFormatter).toDateFormatterStyle() }
-        set { self.internalFormatter = CFDateFormatterRef.withStyle(self.dateStyle, timeStyle: self.timeStyle) }
-    }
+    public var locale: Locale? { didSet { didMutate() } }
     
-    public var timeStyle: DateFormatterStyle {
-        
-        get { return CFDateFormatterGetTimeStyle(self.internalFormatter).toDateFormatterStyle() }
-        set { self.internalFormatter = CFDateFormatterRef.withStyle(self.dateStyle, timeStyle: self.timeStyle) }
-    }
+    public var dateStyle: DateFormatterStyle { didSet { didMutate() } }
+    
+    public var timeStyle: DateFormatterStyle { didSet { didMutate() } }
     
     // MARK: - Private Properties
     
     private var internalFormatter: CFDateFormatterRef
     
+    private let internalQueue = dispatch_queue_create("StyledDateFormatter Thread Safety Internal Queue", nil)
+    
     // MARK: - Initialization
     
-    public init(dateStyle: DateFormatterStyle = .NoStyle, timeStyle: DateFormatterStyle = .NoStyle) {
+    public init(dateStyle: DateFormatterStyle = .NoStyle, timeStyle: DateFormatterStyle = .NoStyle, locale: Locale? = nil) {
         
-        self.internalFormatter = CFDateFormatterRef.withStyle(dateStyle, timeStyle: timeStyle)
+        self.dateStyle = dateStyle
+        self.timeStyle = timeStyle
+        self.locale = locale
+        self.internalFormatter = CFDateFormatterRef.withStyle(dateStyle, timeStyle: timeStyle, locale: locale)
     }
     
     // MARK: - Format
     
     public func stringForValue(value: Date) -> String {
         
-        return self.internalFormatter.stringFromDate(value)
+        var stringValue: String!
+        
+        dispatch_sync(self.internalQueue) { () -> Void in
+            
+            stringValue = self.internalFormatter.stringFromDate(value)
+        }
+        
+        return stringValue
     }
     
     public func valueWithString(string: String) -> Date? {
         
-        return self.internalFormatter.dateFromString(string)
+        var date: Date?
+        
+        dispatch_sync(self.internalQueue) { () -> Void in
+            
+            date = self.internalFormatter.dateFromString(string)
+        }
+        
+        return date
     }
-}
-
-private final class DateFormatterWrapper {
-    
-    var formatter: CFDateFormatterRef
-    
-    init(formatter: CFDateFormatterRef) { self.formatter = formatter }
+        
+    // MARK: - Private Methods
+        
+    private mutating func didMutate() {
+        
+        self = StyledDateFormatter(dateStyle: self.dateStyle, timeStyle: self.timeStyle, locale: self.locale)
+    }
 }
 
 /// Date and time format style
@@ -63,3 +76,4 @@ public enum DateFormatterStyle {
     case LongStyle
     case FullStyle
 }
+

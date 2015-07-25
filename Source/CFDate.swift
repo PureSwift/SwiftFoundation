@@ -6,6 +6,8 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+import CoreFoundation
+
 public extension CFDateRef {
     
     static func fromDate(date: Date) -> CFDateRef {

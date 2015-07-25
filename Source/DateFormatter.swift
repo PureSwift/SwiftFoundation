@@ -11,7 +11,7 @@ public final class DateFormatter: Formatter {
     
     // MARK: - Properties
     
-    
+    public var locale: Locale
     
     // MARK: - Private Properties
     

@@ -15,9 +15,9 @@ public extension CFDateFormatterRef {
         return CFDateFormatterCreate(nil, nil, .NoStyle, .NoStyle)
     }
     
-    static func withStyle(dateStyle: DateFormatterStyle, timeStyle: DateFormatterStyle) -> CFDateFormatter {
+    static func withStyle(dateStyle: DateFormatterStyle, timeStyle: DateFormatterStyle, locale: Locale? = nil) -> CFDateFormatter {
         
-        return CFDateFormatterCreate(nil, nil, CFDateFormatterStyle(style: dateStyle), CFDateFormatterStyle(style: timeStyle))
+        return CFDateFormatterCreate(nil, locale?.internalLocale, CFDateFormatterStyle(style: dateStyle), CFDateFormatterStyle(style: timeStyle))
     }
     
     func dateFromString(string: String) -> Date? {
