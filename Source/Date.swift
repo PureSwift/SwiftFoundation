@@ -33,26 +33,11 @@ public struct Date: ByteValue, Equatable, Comparable, CustomStringConvertible {
         return self.timeIntervalSinceReferenceDate
     }
     
+    static private let descriptionDateFormatter = DateFormatter(format: "YYYY-MM-dd hh:mm:ss")
+    
     public var description: String {
         
-        //return strftime "%Y-%m-%d %H:%M:%S %z"
-        
-        let format = "%Y-%m-%d %H:%M:%S"
-        
-        let count = 19 // YYYY-MM-dd hh:mm:ss
-        
-        let stringOutput = UnsafeMutablePointer<CChar>.alloc(count)
-        defer { stringOutput.dealloc(count) }
-        
-        var seconds = time_t(self.timeIntervalSince1970)
-        
-        let timePointer = gmtime(&seconds)
-        
-        strftime(stringOutput, count, format, timePointer)
-        
-        let dateString = String.fromCString(stringOutput)!
-        
-        return dateString + " UTC"
+        return Date.descriptionDateFormatter.stringFromValue(self)
     }
     
     // MARK: - Initialization
