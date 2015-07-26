@@ -69,3 +69,15 @@ public extension timespec {
         return secondsSince1970 + nanoseconds
     }
 }
+
+public extension tm {
+    
+    init(UTCSecondsSince1970: time_t) {
+        
+        var seconds = UTCSecondsSince1970
+        
+        let timePointer = gmtime(&seconds)
+        
+        self = timePointer.memory
+    }
+}
