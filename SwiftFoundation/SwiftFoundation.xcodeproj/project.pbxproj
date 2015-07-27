@@ -399,8 +399,8 @@
 			isa = PBXGroup;
 			children = (
 				6E30BA4C1B41402B009B1B49 /* SortDescriptor.swift */,
-				6EB4DE3E1B46D08D00C02276 /* ComparatorSortDescriptor.swift */,
 				6EB4DE401B46D5C600C02276 /* ComparableSortDescriptor.swift */,
+				6EB4DE3E1B46D08D00C02276 /* ComparatorSortDescriptor.swift */,
 			);
 			name = "Sort Descriptors";
 			sourceTree = "<group>";

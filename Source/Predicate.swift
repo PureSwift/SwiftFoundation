@@ -17,7 +17,7 @@ public protocol Predicate {
 
 public extension CollectionType {
     
-    func filterUsingPredicate(predicate: Predicate) -> [Self.Generator.Element] {
+    func filter(predicate: Predicate) -> [Self.Generator.Element] {
         
         return self.filter({ (element: Self.Generator.Element) -> Bool in
             
