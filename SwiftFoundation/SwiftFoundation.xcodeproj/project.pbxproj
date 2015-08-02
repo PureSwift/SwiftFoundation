@@ -28,6 +28,7 @@
 		1A85C40E1B5FAC4C002DDADB /* POSIXUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A85C40D1B5FAC4C002DDADB /* POSIXUUID.swift */; };
 		1A85C4101B5FAFB1002DDADB /* POSIXRegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A85C40F1B5FAFB1002DDADB /* POSIXRegularExpression.swift */; };
 		1A85C4121B5FC2ED002DDADB /* BitMaskOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A85C4111B5FC2ED002DDADB /* BitMaskOption.swift */; };
+		1AABD32C1B6D77BD00E237AA /* cURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABD32B1B6D77BD00E237AA /* cURL.swift */; };
 		1AC4F9BC1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4F9BB1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift */; };
 		1ACC49041B637921000D35B0 /* DateFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACC49031B637921000D35B0 /* DateFormatterTests.swift */; };
 		1ADA87AE1B6286540055A442 /* CFDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADA87AD1B6286540055A442 /* CFDateFormatter.swift */; };
@@ -114,6 +115,7 @@
 		1A85C40D1B5FAC4C002DDADB /* POSIXUUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXUUID.swift; sourceTree = "<group>"; };
 		1A85C40F1B5FAFB1002DDADB /* POSIXRegularExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXRegularExpression.swift; sourceTree = "<group>"; };
 		1A85C4111B5FC2ED002DDADB /* BitMaskOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitMaskOption.swift; sourceTree = "<group>"; };
+		1AABD32B1B6D77BD00E237AA /* cURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cURL.swift; sourceTree = "<group>"; };
 		1AC4F9BB1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXFileSystemStatus.swift; sourceTree = "<group>"; };
 		1AC4F9BD1B601A8B00CC7355 /* POSIXTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXTimeTests.swift; sourceTree = "<group>"; };
 		1ACC49031B637921000D35B0 /* DateFormatterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatterTests.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 		1A49A93E1B5C6E5500827F1B /* Standard Library Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1AABD32A1B6D779E00E237AA /* cURL */,
 				1ADA87AC1B6286370055A442 /* CoreFoundation */,
 				6E66A6621B486A4900CB82CD /* Swift Extensions */,
 				1A7966021B5C413400A6E4DA /* POSIX Exensions */,
@@ -237,6 +240,14 @@
 				1A85C40F1B5FAFB1002DDADB /* POSIXRegularExpression.swift */,
 			);
 			name = "POSIX Exensions";
+			sourceTree = "<group>";
+		};
+		1AABD32A1B6D779E00E237AA /* cURL */ = {
+			isa = PBXGroup;
+			children = (
+				1AABD32B1B6D77BD00E237AA /* cURL.swift */,
+			);
+			name = cURL;
 			sourceTree = "<group>";
 		};
 		1ADA87AC1B6286370055A442 /* CoreFoundation */ = {
@@ -565,6 +576,7 @@
 				1A85C4121B5FC2ED002DDADB /* BitMaskOption.swift in Sources */,
 				1A49A9441B5D3F0200827F1B /* Bridgable.swift in Sources */,
 				1ADA87B01B62A7A60055A442 /* StyledDateFormatter.swift in Sources */,
+				1AABD32C1B6D77BD00E237AA /* cURL.swift in Sources */,
 				1ADA87BF1B6307190055A442 /* Locale.swift in Sources */,
 				6E30BA4B1B413DF0009B1B49 /* Transformer.swift in Sources */,
 				1A1B5A961B60B4F60025FE7C /* Decimal.swift in Sources */,
