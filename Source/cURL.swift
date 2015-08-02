@@ -9,7 +9,7 @@
 import cURL
 
 /// Class that encapsulates cURL handler.
-public final class cURL {
+ public final class cURL: Copying {
     
     // MARK: - Typealiases
     
@@ -35,7 +35,25 @@ public final class cURL {
         internalHandler = curl_easy_init()
     }
     
+    private init(handler: Handler, options: [Option]) {
+        
+        self.internalHandler = handler
+        self.options = options
+    }
+    
     // MARK: - Methods
+    
+    /// Resets the state of the receiver.
+    ///
+    /// Re-initializes the internal ```CURL``` handle to the default values.
+    /// This puts back the handle to the same state as it was in when it was just created.
+    ///
+    /// - Note: It does keep: live connections, the Session ID cache, the DNS cache and the cookies.
+    ///
+    public func reset() {
+        
+        curl_easy_reset(internalHandler)
+    }
     
     public func setOption(option: Option) throws {
         
@@ -86,6 +104,17 @@ public final class cURL {
         }
         
         return values
+    }
+    
+    // MARK: - Copying
+    
+    public var copy: cURL {
+        
+        let handleCopy = curl_easy_duphandle(internalHandler)
+        
+        let copy = cURL(handler: handleCopy, options: self.options)
+        
+        return copy
     }
     
     // MARK: - Supporting Types
@@ -161,7 +190,9 @@ public final class cURL {
             case CURLE_COULDNT_RESOLVE_HOST:   self = .FailedInitialization
             case CURLE_BAD_FUNCTION_ARGUMENT:  self = .BadFunctionArgument
                 
-            default: fatalError("cURL Error code not handled \(code)")
+            default:
+                debugPrint("Case \(code) not handled for CURLcode -> cURL Error")
+                return nil;
             }
         }
     }
