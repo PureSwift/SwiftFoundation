@@ -1,4 +1,4 @@
-//
+ //
 //  cURL.swift
 //  SwiftFoundation
 //
@@ -29,7 +29,7 @@ public final class cURL {
         
         let (optionFlag, value) = option.rawValue
         
-        let code = curl_easy_setopt(internalHandler, option: optionFlag, param: value as! CVarArgType)
+        let code = curl_easy_setopt(internalHandler, option: optionFlag, param: value)
         
         if let error = Error(code: code) { throw error }
         
@@ -41,21 +41,55 @@ public final class cURL {
         let code = curl_easy_perform(internalHandler)
         
         if let error = Error(code: code) { throw error }
-        
-        curl_easy_getinfo(internalHandler, info: CURLINFO, param: UnsafeMutablePointer<>)
     }
     
-    public var info: [Info] {
+    public func info() throws -> [Info] {
         
-        for rawInfoValue in 1...CURLINFO_LASTONE.rawValue {
+        var values = [Info]()
+        
+        for infoRawValue in 1...CURLINFO_LASTONE.rawValue {
             
-            let info = CURLINFO(rawValue: rawInfoValue)
+            let param = UnsafeMutablePointer<Any>()
             
+            let code = curl_easy_getinfo(internalHandler, info: CURLINFO(rawValue: infoRawValue), param: param)
             
+            if let error = Error(code: code) { throw error }
+            
+            guard let info = Info(rawValue: (CURLINFO(infoRawValue), param.memory))
+                else { fatalError("Could not create cURL.Info from \(infoRawValue) \(param.memory)") }
+            
+            values.append(info)
         }
+        
+        return values
     }
     
     // MARK: - Supporting Types
+    
+    public enum Info {
+        
+        case EffectiveURL(String)
+        
+        case ResponseCode(UInt)
+        
+        public init?(rawValue: (CURLINFO, Any)) {
+            
+            let (info, value) = rawValue
+            
+            switch info {
+                
+            case CURLINFO_EFFECTIVE_URL:
+                guard let value = value as? String else { return nil }
+                self = .EffectiveURL(value)
+                
+            case CURLINFO_RESPONSE_CODE:
+                guard let value = value as? curl_long else { return nil }
+                self = .ResponseCode(UInt(value))
+                
+            default: fatalError("cURL Info code not handled \(info) \(value)")
+            }
+        }
+    }
     
     public enum Option {
         
@@ -70,21 +104,8 @@ public final class cURL {
             switch self {
                 
             case .URL(let value): return (CURLOPT_URL, value)
-            case .Port(let value): return (CURLOPT_PORT, Int(value))
-            case .Verbose(let value): return (CURLOPT_VERBOSE, Int(value))
-            }
-        }
-    }
-    
-    public enum Info {
-        
-        case EffectiveURL(String)
-        
-        public var rawValue: (CURLINFO, Any) {
-            
-            switch self {
-                
-            case .EffectiveURL(let value): return (CURLINFO_EFFECTIVE_URL, value)
+            case .Port(let value): return (CURLOPT_PORT, curl_long(value))
+            case .Verbose(let value): return (CURLOPT_VERBOSE, curl_long(value))
             }
         }
     }
@@ -100,6 +121,9 @@ public final class cURL {
         case CouldNotConnect
         case FTPBadServerReply
         case RemoteAccessDenied
+        
+        case BadFunctionArgument
+        
         
         public init?(code: CURLcode) {
                         
@@ -121,7 +145,7 @@ public final class cURL {
             case CURLE_COULDNT_RESOLVE_HOST:   self = .FailedInitialization
             case CURLE_COULDNT_RESOLVE_HOST:   self = .FailedInitialization
             case CURLE_COULDNT_RESOLVE_HOST:   self = .FailedInitialization
-            case CURLE_COULDNT_RESOLVE_HOST:   self = .FailedInitialization
+            case CURLE_BAD_FUNCTION_ARGUMENT:  self = .BadFunctionArgument
                 
             default: fatalError("cURL Error code not handled \(code)")
             }
@@ -134,12 +158,11 @@ public final class cURL {
 
 public typealias curl_handler = UnsafeMutablePointer<Void>
 
-@asmname("curl_easy_setopt") public func curl_easy_setopt(curl: curl_handler, option: CURLoption, param: CVarArgType...) -> CURLcode
+public typealias curl_long = CLong
 
-@asmname("curl_easy_getinfo") public func curl_easy_getinfo(curl: curl_handler, info: CURLINFO, param: CVarArgType...) -> CURLcode
+@asmname("curl_easy_setopt") public func curl_easy_setopt(curl: curl_handler, option: CURLoption, param: Any...) -> CURLcode
 
-public func ~= (lhs: CURLcode, rhs: CURLcode) -> Bool {
-    
-    return lhs.rawValue ~= rhs.rawValue
-}
+@asmname("curl_easy_getinfo") public func curl_easy_getinfo(curl: curl_handler, info: CURLINFO, param: Any...) -> CURLcode
+
+
 

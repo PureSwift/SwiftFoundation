@@ -29,12 +29,35 @@ class cURLTests: XCTestCase {
         
         try! curl.setOption(cURL.Option.Port(80))
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
+    
+    func testGetData() {
+        
+        let curl = cURL()
+        
+        try! curl.setOption(cURL.Option.URL("https://google.com"))
+        
+        try! curl.setOption(cURL.Option.Verbose(true))
+        
+        do { try curl.perform() }
+        catch { XCTFail("Error executing cURL request: \(error)"); return }
+        
+        var response: [cURL.Info]!
+        do { response = try curl.info() }
+        catch { XCTFail("Error getting cURL info: \(error)"); return }
+        
+        var responseCode: UInt!
+        
+        for info in response {
+            
+            switch info {
+                
+            case .ResponseCode(let code): responseCode = code
+                
+            default: continue
+            }
         }
+        
+        XCTAssert(responseCode == 200, "Response code should be 200. (\(responseCode))")
     }
 
 }
