@@ -41,7 +41,16 @@ public final class cURL {
         
         let (optionFlag, value) = option.rawValue
         
-        let code = curl_easy_setopt(internalHandler, option: optionFlag, param: value)
+        var valueCopy = value
+        
+        let code = withUnsafeMutablePointer(&valueCopy) { (pointer: UnsafeMutablePointer<Any>) -> CURLcode in
+            
+            let voidPointer = unsafeBitCast(pointer, UnsafeMutablePointer<Void>.self)
+            
+            let list = CVaListPointer(_fromUnsafeMutablePointer: voidPointer)
+            
+            return Curl_setopt(internalHandler, option: optionFlag, param: list)
+        }
         
         guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
         
@@ -168,9 +177,9 @@ public final class cURL {
 
 // MARK: - Function Declarations
 
-@asmname("curl_easy_setopt") public func curl_easy_setopt(curl: cURL.Handler, option: CURLoption, param: Any...) -> CURLcode
+@asmname("Curl_setopt") public func Curl_setopt(curl: cURL.Handler, option: CURLoption, param: CVaListPointer) -> CURLcode
 
-@asmname("curl_easy_getinfo") public func curl_easy_getinfo(curl: cURL.Handler, info: CURLINFO, param: Any...) -> CURLcode
+@asmname("curl_easy_getinfo") public func curl_easy_getinfo(curl: cURL.Handler, info: CURLINFO, param: Any) -> CURLcode
 
 
 
