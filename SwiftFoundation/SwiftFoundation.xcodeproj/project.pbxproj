@@ -39,6 +39,7 @@
 		1ADA87BD1B6306C50055A442 /* CFLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADA87BC1B6306C50055A442 /* CFLocale.swift */; };
 		1ADA87BF1B6307190055A442 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADA87BE1B6307190055A442 /* Locale.swift */; };
 		1AEF58831B519F1D002EF80D /* RegularExpressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEF58821B519F1D002EF80D /* RegularExpressionTests.swift */; };
+		1AFCAD581B6DF0020054F1C5 /* cURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFCAD571B6DF0020054F1C5 /* cURLTests.swift */; };
 		6E16C2BE1B42460B00C07C25 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2BD1B42460A00C07C25 /* HTTPStatusCode.swift */; };
 		6E16C2ED1B44FC4700C07C25 /* RegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2EC1B44FC4700C07C25 /* RegularExpression.swift */; };
 		6E16C2EF1B45095900C07C25 /* UUIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2EE1B45095900C07C25 /* UUIDTests.swift */; };
@@ -126,6 +127,7 @@
 		1ADA87BC1B6306C50055A442 /* CFLocale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFLocale.swift; sourceTree = "<group>"; };
 		1ADA87BE1B6307190055A442 /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locale.swift; sourceTree = "<group>"; };
 		1AEF58821B519F1D002EF80D /* RegularExpressionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpressionTests.swift; sourceTree = "<group>"; };
+		1AFCAD571B6DF0020054F1C5 /* cURLTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cURLTests.swift; sourceTree = "<group>"; };
 		6E16C2BD1B42460A00C07C25 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		6E16C2EC1B44FC4700C07C25 /* RegularExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpression.swift; sourceTree = "<group>"; };
 		6E16C2EE1B45095900C07C25 /* UUIDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUIDTests.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				1AC4F9BD1B601A8B00CC7355 /* POSIXTimeTests.swift */,
 				1ADA87B51B62B94F0055A442 /* StyledDateFormatterTests.swift */,
 				1ACC49031B637921000D35B0 /* DateFormatterTests.swift */,
+				1AFCAD571B6DF0020054F1C5 /* cURLTests.swift */,
 				6E30BA1E1B40F543009B1B49 /* Info.plist */,
 			);
 			path = SwiftFoundationTests;
@@ -594,6 +597,7 @@
 			files = (
 				6E30BA1D1B40F543009B1B49 /* SwiftFoundationTests.swift in Sources */,
 				1ADA87BB1B6306330055A442 /* POSIXTimeTests.swift in Sources */,
+				1AFCAD581B6DF0020054F1C5 /* cURLTests.swift in Sources */,
 				6E16C2EF1B45095900C07C25 /* UUIDTests.swift in Sources */,
 				1AEF58831B519F1D002EF80D /* RegularExpressionTests.swift in Sources */,
 				1ACC49041B637921000D35B0 /* DateFormatterTests.swift in Sources */,
