@@ -69,6 +69,11 @@ public func == <T where T: RawRepresentable, T.RawValue: Equatable>(lhs: T, rhs:
     return lhs.rawValue == rhs.rawValue
 }
 
+public func ~= <T where T: RawRepresentable, T.RawValue: Equatable>(lhs: T, rhs: T) -> Bool {
+    
+    return lhs.rawValue ~= rhs.rawValue
+}
+
 // MARK: Comparable
 
 public func < <T where T: RawRepresentable, T.RawValue: Comparable>(lhs: T, rhs: T) -> Bool {
