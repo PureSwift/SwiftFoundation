@@ -8,28 +8,6 @@
 
 public extension String {
     
-    // Converts to ASCII
-    func toASCII() -> UnsafePointer<CChar> {
-        
-        var cString = [CChar]()
-        
-        for byte in self.nulTerminatedUTF8 {
-            
-            let char = CChar(byte)
-            
-            cString.append(char)
-        }
-        
-        let pointer = UnsafeMutablePointer<CChar>.alloc(cString.count)
-        
-        for (index, character) in cString.enumerate() {
-            
-            pointer[index] = character as CChar
-        }
-        
-        return unsafeBitCast(pointer, UnsafePointer<CChar>.self)
-    }
-    
     func rangesOfString(findStr:String) -> [Range<String.Index>] {
         
         // from http://sketchytech.blogspot.com/2014/08/swift-pure-swift-method-for-returning.html

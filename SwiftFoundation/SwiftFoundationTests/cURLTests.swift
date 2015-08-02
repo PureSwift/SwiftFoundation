@@ -34,7 +34,7 @@ class cURLTests: XCTestCase {
         
         let curl = cURL()
         
-        try! curl.setOption(cURL.Option.URL("https://google.com"))
+        try! curl.setOption(cURL.Option.URL("http://google.com"))
         
         try! curl.setOption(cURL.Option.Verbose(true))
         
