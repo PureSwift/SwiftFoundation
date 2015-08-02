@@ -25,9 +25,28 @@ class cURLTests: XCTestCase {
         
         let curl = cURL()
         
-        try! curl.setOption(cURL.Option.URL("http://google.com"))
+        let url = "http://google.com"
         
-        try! curl.setOption(cURL.Option.Port(80))
+        let port: UInt = 80
+        
+        try! curl.setOption(cURL.Option.URL(url))
+        
+        try! curl.setOption(cURL.Option.Port(port))
+        
+        var information: [cURL.Info]!
+        
+        do { information = try curl.info() }
+        catch { XCTFail("Error: \(error)"); return }
+        
+        for info in information {
+            
+            switch info {
+                
+            case .EffectiveURL(let value): XCTAssert(value == url, value + " == " + url)
+                
+            default: continue
+            }
+        }
     }
     
     func testGetData() {
