@@ -41,7 +41,16 @@ public final class cURL {
         
         let (optionFlag, value) = option.rawValue
         
-        let code = curl_easy_setopt(internalHandler, option: optionFlag, param: value)
+        var valueCopy = value
+        
+        let code = withUnsafeMutablePointer(&valueCopy) { (pointer: UnsafeMutablePointer<Any>) -> CURLcode in
+            
+            let voidPointer = unsafeBitCast(pointer, UnsafeMutablePointer<Void>.self)
+            
+            let list = CVaListPointer(_fromUnsafeMutablePointer: voidPointer)
+            
+            return Curl_setopt(internalHandler, option: optionFlag, param: list)
+        }
         
         guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
         
@@ -61,26 +70,14 @@ public final class cURL {
         
         for infoRawValue in 1...CURLINFO_LASTONE.rawValue {
             
-            let cURLInfo = CURLINFO(rawValue: infoRawValue)
+            let param = UnsafeMutablePointer<Any>()
             
-            let info: Info = try {
-                
-                switch cURLInfo {
-                    
-                case CURLINFO_EFFECTIVE_URL:
-                    
-                    let pointer = AutoreleasingUnsafeMutablePointer<CChar>()
-                    
-                    let code = getinfo_char(internalHandler, info: cURLInfo, param: pointer)
-                    
-                    guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
-                    
-                    return Info.EffectiveURL(String.fromCString(pointer)!)
-                    
-                default: fatalError("Unhandled case \(cURLInfo.rawValue)")
-                }
-                
-            }()
+            let code = curl_easy_getinfo(internalHandler, info: CURLINFO(rawValue: infoRawValue), param: param)
+            
+            guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
+            
+            guard let info = Info(rawValue: (CURLINFO(infoRawValue), param.memory))
+                else { fatalError("Could not create cURL.Info from \(infoRawValue) \(param.memory)") }
             
             values.append(info)
         }
@@ -123,7 +120,7 @@ public final class cURL {
         
         case Verbose(Bool)
         
-        public var rawValue: (CURLoption, CVarArgType) {
+        public var rawValue: (CURLoption, Any) {
             
             switch self {
                 
@@ -175,16 +172,14 @@ public final class cURL {
             }
         }
     }
-    
-    // MARK: - Function Declarations
-    
-    @asmname("curl_easy_setopt") public func curl_easy_setopt(curl: cURL.Handler, option: CURLoption, param: CVarArgType) -> CURLcode
-    
-    @asmname("curl_easy_getinfo") public func curl_easy_getinfo(curl: cURL.Handler, info: CURLINFO, param: UnsafePointer<Void>) -> CURLcode
-    
-    /// cURL
-    ///
-    /// ```static CURLcode getinfo_char(struct SessionHandle *data, CURLINFO info, char **param_charp)```
-    @asmname("getinfo_char") public func getinfo_char(curl: cURL.Handler, info: CURLINFO, param: AutoreleasingUnsafeMutablePointer<CChar>) -> CURLcode
 }
+
+
+// MARK: - Function Declarations
+
+@asmname("Curl_setopt") public func Curl_setopt(curl: cURL.Handler, option: CURLoption, param: CVaListPointer) -> CURLcode
+
+@asmname("curl_easy_getinfo") public func curl_easy_getinfo(curl: cURL.Handler, info: CURLINFO, param: Any) -> CURLcode
+
+
 
