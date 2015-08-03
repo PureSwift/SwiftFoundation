@@ -197,7 +197,7 @@ import cURL
         case Output(UnsafeMutablePointer<UInt8>)
         
         /// The data to send with a POST request.
-        case PostFields(UnsafePointer<UInt8>)
+        case PostFields(Data)
         
         case PostFieldSize(UInt)
         

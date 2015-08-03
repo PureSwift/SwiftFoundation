@@ -53,7 +53,7 @@ class cURLTests: XCTestCase {
         XCTAssert(responseCode == testStatusCode, "\(responseCode) == \(testStatusCode)")
     }
     
-    func testPostString() {
+    func testPostField() {
         
         let curl = cURL()
         
@@ -63,9 +63,11 @@ class cURLTests: XCTestCase {
         
         try! curl.setOption(cURL.Option.POST(true))
         
-        let data = "{\"hey\"}:{\"hey\"}"
+        let data: Data = [0x54, 0x65, 0x73, 0x74] // "Test"
         
         try! curl.setOption(cURL.Option.PostFields(data))
+        
+        try! curl.setOption(cURL.Option.PostFieldSize(UInt(data.count)))
         
         do { try curl.perform() }
         catch { XCTFail("Error executing cURL request: \(error)"); return }
