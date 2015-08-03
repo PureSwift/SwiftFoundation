@@ -89,21 +89,62 @@ import cURL
         
         var values = [Info]()
         
+        /// from 1 to 43
         for infoRawValue in 1...CURLINFO_LASTONE.rawValue {
             
-            let param = UnsafeMutablePointer<Any>()
+            let cURLInfo = CURLINFO(infoRawValue)
             
-            let code = curl_easy_getinfo(internalHandler, info: CURLINFO(rawValue: infoRawValue), param: param)
+            let info: Info? = try {
+                
+                switch cURLInfo.rawValue {
+                    
+                case CURLINFO_EFFECTIVE_URL.rawValue:
+                    
+                    guard let value = try stringForInfo(cURLInfo) else { return nil }
+                    
+                    return Info.EffectiveURL(value)
+                    
+                case CURLINFO_RESPONSE_CODE.rawValue:
+                    
+                    let value = try longForInfo(cURLInfo)
+                    
+                    guard value != 0 else { return nil }
             
-            guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
+                    return Info.ResponseCode(UInt(value))
+                    
+                default: return nil //fatalError("cURL Info code not handled \(cURLInfo.rawValue)")
+                }
+            }()
             
-            guard let info = Info(rawValue: (CURLINFO(infoRawValue), param.memory))
-                else { fatalError("Could not create cURL.Info from \(infoRawValue) \(param.memory)") }
-            
-            values.append(info)
+            // add to output array if value could be extracted
+            if let info = info { values.append(info) }
         }
         
         return values
+    }
+    
+    // MARK: - Private Methods
+    
+    private func stringForInfo(info: CURLINFO) throws -> String? {
+        
+        var stringBytesPointer = UnsafePointer<CChar>()
+        
+        let code = curl_easy_getinfo(internalHandler, info: info, param: &stringBytesPointer)
+        
+        guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
+        
+        return String.fromCString(stringBytesPointer)
+    }
+    
+    private func longForInfo(info: CURLINFO) throws -> Long {
+        
+        var value: Long = 0
+        
+        let code = curl_easy_getinfo(internalHandler, info: info, param: &value)
+        
+        guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
+        
+        return value
     }
     
     // MARK: - Copying
@@ -124,24 +165,6 @@ import cURL
         case EffectiveURL(String)
         
         case ResponseCode(UInt)
-        
-        public init?(rawValue: (CURLINFO, Any)) {
-            
-            let (info, value) = rawValue
-            
-            switch info {
-                
-            case CURLINFO_EFFECTIVE_URL:
-                guard let value = value as? String else { return nil }
-                self = .EffectiveURL(value)
-                
-            case CURLINFO_RESPONSE_CODE:
-                guard let value = value as? Long else { return nil }
-                self = .ResponseCode(UInt(value))
-                
-            default: fatalError("cURL Info code not handled \(info) \(value)")
-            }
-        }
     }
     
     public enum Option {
@@ -201,7 +224,7 @@ import cURL
     
     @asmname("curl_easy_setopt") public func curl_easy_setopt(curl: Handler, option: CURLoption, param: UnsafePointer<UInt8>) -> CURLcode
     
-    @asmname("curl_easy_getinfo") public func curl_easy_getinfo(curl: Handler, info: CURLINFO, param: Any) -> CURLcode
+    @asmname("curl_easy_getinfo") public func curl_easy_getinfo<T>(curl: Handler, info: CURLINFO, inout param: T) -> CURLcode
 }
 
 

@@ -34,7 +34,7 @@ class cURLTests: XCTestCase {
         
         let curl = cURL()
         
-        try! curl.setOption(cURL.Option.URL("http://google.com"))
+        try! curl.setOption(cURL.Option.URL("https://google.com"))
         
         try! curl.setOption(cURL.Option.Verbose(true))
         
@@ -45,19 +45,16 @@ class cURLTests: XCTestCase {
         do { response = try curl.info() }
         catch { XCTFail("Error getting cURL info: \(error)"); return }
         
-        var responseCode: UInt!
-        
         for info in response {
             
             switch info {
                 
-            case .ResponseCode(let code): responseCode = code
+            case .ResponseCode(let code):
+                XCTAssert(code == 200, "Response code should be 200. (\(code))")
                 
             default: continue
             }
         }
-        
-        XCTAssert(responseCode == 200, "Response code should be 200. (\(responseCode))")
     }
 
 }
