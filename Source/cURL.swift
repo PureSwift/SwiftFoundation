@@ -63,6 +63,17 @@ import cURL
         
         switch option {
             
+        // Object Pointers
+            
+        case .Input(let value):
+            code = curl_easy_setopt(internalHandler, option: CURLOPT_READDATA, param: value)
+            
+        case .Output(let value):
+            code = curl_easy_setopt(internalHandler, option: CURLOPT_WRITEDATA, param: value)
+            
+        case .PostFields(let value):
+            code = curl_easy_setopt(internalHandler, option: CURLOPT_POSTFIELDS, param: value)
+            
         // String Options
             
         case .URL(let value):
@@ -73,6 +84,14 @@ import cURL
             
         // Long Options
             
+        case .PostFieldSize(let value):
+            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
+            code = curl_easy_setopt(internalHandler, option: CURLOPT_POSTFIELDSIZE, param: pointer)
+            
+        case .CopyPostFields(let value):
+            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
+            code = curl_easy_setopt(internalHandler, option: CURLOPT_COPYPOSTFIELDS, param: pointer)
+        
         case .Port(let value):
             let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
             code = curl_easy_setopt(internalHandler, option: CURLOPT_PORT, param: pointer)
@@ -172,6 +191,17 @@ import cURL
     // MARK: - Supporting Types
     
     public enum Option {
+        
+        case Input(Data)
+        
+        case Output(UnsafeMutablePointer<UInt8>)
+        
+        /// The data to send with a POST request.
+        case PostFields(UnsafePointer<UInt8>)
+        
+        case PostFieldSize(UInt)
+        
+        case CopyPostFields(Bool)
         
         case URL(String)
         

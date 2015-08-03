@@ -39,9 +39,11 @@ class cURLTests: XCTestCase {
         
         let testStatusCode = 200
         
+        try! curl.setOption(cURL.Option.Verbose(true))
+        
         try! curl.setOption(cURL.Option.URL("http://httpbin.org/status/\(testStatusCode)"))
         
-        try! curl.setOption(cURL.Option.Verbose(true))
+        try! curl.setOption(cURL.Option.Timeout(10))
         
         do { try curl.perform() }
         catch { XCTFail("Error executing cURL request: \(error)"); return }
@@ -49,6 +51,28 @@ class cURLTests: XCTestCase {
         let responseCode = try! curl.longForInfo(CURLINFO_RESPONSE_CODE)
         
         XCTAssert(responseCode == testStatusCode, "\(responseCode) == \(testStatusCode)")
+    }
+    
+    func testPostString() {
+        
+        let curl = cURL()
+        
+        try! curl.setOption(cURL.Option.Verbose(true))
+        
+        try! curl.setOption(cURL.Option.URL("http://httpbin.org/post"))
+        
+        try! curl.setOption(cURL.Option.POST(true))
+        
+        let data = "{\"hey\"}:{\"hey\"}"
+        
+        try! curl.setOption(cURL.Option.PostFields(data))
+        
+        do { try curl.perform() }
+        catch { XCTFail("Error executing cURL request: \(error)"); return }
+        
+        let responseCode = try! curl.longForInfo(CURLINFO_RESPONSE_CODE)
+        
+        XCTAssert(responseCode == 200, "\(responseCode) == 200")
     }
 
 }
