@@ -53,6 +53,8 @@ import cURL
     public func reset() {
         
         curl_easy_reset(internalHandler)
+        
+        options = []
     }
     
     public func setOption(option: Option) throws {
@@ -61,8 +63,15 @@ import cURL
         
         switch option {
             
+        // String Options
+            
         case .URL(let value):
             code = curl_easy_setopt(internalHandler, option: CURLOPT_URL, param: value)
+            
+        case .CustomRequest(let value):
+            code = curl_easy_setopt(internalHandler, option: CURLOPT_CUSTOMREQUEST, param: value)
+            
+        // Long Options
             
         case .Port(let value):
             let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
@@ -71,6 +80,28 @@ import cURL
         case .Verbose(let value):
             let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
             code = curl_easy_setopt(internalHandler, option: CURLOPT_VERBOSE, param: pointer)
+            
+        case .Timeout(let value):
+            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
+            code = curl_easy_setopt(internalHandler, option: CURLOPT_TIMEOUT, param: pointer)
+            
+        case .POST(let value):
+            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
+            code = curl_easy_setopt(internalHandler, option: CURLOPT_POST, param: pointer)
+            
+        case .PUT(let value):
+            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
+            code = curl_easy_setopt(internalHandler, option: CURLOPT_PUT, param: pointer)
+            
+        case .FailOnError(let value):
+            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
+            code = curl_easy_setopt(internalHandler, option: CURLOPT_FAILONERROR, param: pointer)
+            
+        case .MaxConnections(let value):
+            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
+            code = curl_easy_setopt(internalHandler, option: CURLOPT_MAXCONNECTS, param: pointer)
+            
+        default: fatalError("Setting option \(option) is not implemented")
         }
         
         guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
@@ -85,47 +116,9 @@ import cURL
         guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
     }
     
-    public func info() throws -> [Info] {
-        
-        var values = [Info]()
-        
-        /// from 1 to 43
-        for infoRawValue in 1...CURLINFO_LASTONE.rawValue {
-            
-            let cURLInfo = CURLINFO(infoRawValue)
-            
-            let info: Info? = try {
-                
-                switch cURLInfo.rawValue {
-                    
-                case CURLINFO_EFFECTIVE_URL.rawValue:
-                    
-                    guard let value = try stringForInfo(cURLInfo) else { return nil }
-                    
-                    return Info.EffectiveURL(value)
-                    
-                case CURLINFO_RESPONSE_CODE.rawValue:
-                    
-                    let value = try longForInfo(cURLInfo)
-                    
-                    guard value != 0 else { return nil }
-            
-                    return Info.ResponseCode(UInt(value))
-                    
-                default: return nil //fatalError("cURL Info code not handled \(cURLInfo.rawValue)")
-                }
-            }()
-            
-            // add to output array if value could be extracted
-            if let info = info { values.append(info) }
-        }
-        
-        return values
-    }
+    // MARK: Get Info
     
-    // MARK: - Private Methods
-    
-    private func stringForInfo(info: CURLINFO) throws -> String? {
+    public func stringForInfo(info: CURLINFO) throws -> String? {
         
         var stringBytesPointer = UnsafePointer<CChar>()
         
@@ -136,9 +129,27 @@ import cURL
         return String.fromCString(stringBytesPointer)
     }
     
-    private func longForInfo(info: CURLINFO) throws -> Long {
+    public func stringListForInfo(info: CURLINFO) throws -> [String]? {
+        
+        // TODO: Implement stirng linked-list conversion
+        
+        fatalError("Not Implemented")
+    }
+    
+    public func longForInfo(info: CURLINFO) throws -> Long {
         
         var value: Long = 0
+        
+        let code = curl_easy_getinfo(internalHandler, info: info, param: &value)
+        
+        guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
+        
+        return value
+    }
+    
+    public func doubleForInfo(info: CURLINFO) throws -> Double {
+        
+        var value: Double = 0
         
         let code = curl_easy_getinfo(internalHandler, info: info, param: &value)
         
@@ -160,13 +171,6 @@ import cURL
     
     // MARK: - Supporting Types
     
-    public enum Info {
-        
-        case EffectiveURL(String)
-        
-        case ResponseCode(UInt)
-    }
-    
     public enum Option {
         
         case URL(String)
@@ -174,6 +178,105 @@ import cURL
         case Port(UInt)
         
         case Verbose(Bool)
+        
+        case Timeout(UInt)
+        
+        case FTPPort(String)
+        
+        case UserAgent(String)
+        
+        case HTTPHeaders([String])
+        
+        /// Custom request, for customizing the get command like
+        /// HTTP: DELETE, TRACE and others
+        /// FTP: to use a different list command
+        case CustomRequest(String)
+        
+        /// No output on http error codes >= 400
+        case FailOnError(Bool)
+        
+        /// HTTP POST method
+        case POST(Bool)
+        
+        /// HTTP PUT Method
+        case PUT(Bool)
+        
+        /// Max amount of cached keep alive connections.
+        case MaxConnections(UInt)
+        
+        case HTTPVersion(cURL.HTTPVersion)
+        
+        /// Set if we should verify the Common name from the peer certificate in ssl
+        /// handshake, set 1 to check existence, 2 to ensure that it matches the
+        /// provided hostname.
+        case SSLVerifyHost(Long)
+        
+        /// zero terminated string for pass on to the FTP server when asked for "account" info.
+        case FTPAccount(String)
+        
+        case IgnoreContentLength(Bool)
+        
+        case Username(String)
+        
+        case Password(String)
+        
+        
+    }
+    
+    /// cURL HTTP version
+    public enum HTTPVersion: RawRepresentable {
+        
+        case None
+        case v1_0
+        case v1_1
+        case v2_0
+        
+        public init?(rawValue: Int) {
+            
+            switch rawValue {
+                
+            case CURL_HTTP_VERSION_NONE:    self = .None
+            case CURL_HTTP_VERSION_1_0:     self = .v1_0
+            case CURL_HTTP_VERSION_1_1:     self = .v1_1
+            case CURL_HTTP_VERSION_2_0:     self = .v2_0
+                
+            default: return nil
+            }
+        }
+        
+        public var rawValue: Int {
+            
+            switch self {
+                
+            case .None: return CURL_HTTP_VERSION_NONE
+            case .v1_0: return CURL_HTTP_VERSION_1_0
+            case .v1_1: return CURL_HTTP_VERSION_1_1
+            case .v2_0: return CURL_HTTP_VERSION_2_0
+            }
+        }
+        
+        public init?(version: SwiftFoundation.HTTPVersion) {
+            
+            switch (version.major, version.minor) {
+            
+            case (1,0): self = .v1_0
+            case (1,1): self = .v1_1
+            case (2,0): self = .v2_0
+            
+            default: return nil
+            }
+        }
+        
+        public func toHTTPVersion() -> SwiftFoundation.HTTPVersion? {
+            
+            switch self {
+                
+            case .None: return nil
+            case .v1_0: return SwiftFoundation.HTTPVersion(1, 0)
+            case .v1_1: return SwiftFoundation.HTTPVersion(1, 1)
+            case .v2_0: return SwiftFoundation.HTTPVersion(2, 0)
+            }
+        }
     }
     
     public enum Error: ErrorType {

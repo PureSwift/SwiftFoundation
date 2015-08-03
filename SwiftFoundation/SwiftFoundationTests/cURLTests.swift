@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import cURL
 @testable import SwiftFoundation
 
 class cURLTests: XCTestCase {
@@ -25,36 +26,29 @@ class cURLTests: XCTestCase {
         
         let curl = cURL()
         
-        try! curl.setOption(cURL.Option.URL("http://google.com"))
+        try! curl.setOption(cURL.Option.URL("https://google.com"))
         
         try! curl.setOption(cURL.Option.Port(80))
     }
     
-    func testGetData() {
+    // MARK: - Live Tests
+    
+    func testGetStatusCode() {
         
         let curl = cURL()
         
-        try! curl.setOption(cURL.Option.URL("https://google.com"))
+        let testStatusCode = 200
+        
+        try! curl.setOption(cURL.Option.URL("http://httpbin.org/status/\(testStatusCode)"))
         
         try! curl.setOption(cURL.Option.Verbose(true))
         
         do { try curl.perform() }
         catch { XCTFail("Error executing cURL request: \(error)"); return }
         
-        var response: [cURL.Info]!
-        do { response = try curl.info() }
-        catch { XCTFail("Error getting cURL info: \(error)"); return }
+        let responseCode = try! curl.longForInfo(CURLINFO_RESPONSE_CODE)
         
-        for info in response {
-            
-            switch info {
-                
-            case .ResponseCode(let code):
-                XCTAssert(code == 200, "Response code should be 200. (\(code))")
-                
-            default: continue
-            }
-        }
+        XCTAssert(responseCode == testStatusCode, "\(responseCode) == \(testStatusCode)")
     }
 
 }
