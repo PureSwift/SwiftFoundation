@@ -34,7 +34,7 @@ class cURLTests: XCTestCase {
         
         try! curl.setOption(CURLOPT_URL, "http://httpbin.org/status/\(testStatusCode)")
         
-        try! curl.setOption(CURLOPT_TIMEOUT, 10)
+        try! curl.setOption(CURLOPT_TIMEOUT, 5)
         
         do { try curl.perform() }
         catch { XCTFail("Error executing cURL request: \(error)"); return }
@@ -48,9 +48,15 @@ class cURLTests: XCTestCase {
         
         let curl = cURL()
         
+        let url = "http://httpbin.org/post"
+        
         try! curl.setOption(CURLOPT_VERBOSE, true)
         
-        try! curl.setOption(CURLOPT_URL, "http://httpbin.org/post")
+        try! curl.setOption(CURLOPT_URL, url)
+        
+        let effectiveURL = try! curl.getInfo(CURLINFO_EFFECTIVE_URL) as String
+        
+        XCTAssert(url == effectiveURL)
         
         try! curl.setOption(CURLOPT_TIMEOUT, 10)
         
@@ -65,7 +71,39 @@ class cURLTests: XCTestCase {
         do { try curl.perform() }
         catch { XCTFail("Error executing cURL request: \(error)"); return }
         
-        let responseCode: Int = try! curl.getInfo(CURLINFO_RESPONSE_CODE)
+        let responseCode = try! curl.getInfo(CURLINFO_RESPONSE_CODE) as Int
+        
+        XCTAssert(responseCode == 200, "\(responseCode) == 200")
+    }
+    
+    func testReadFunction() {
+        
+        let curl = cURL()
+        
+        try! curl.setOption(CURLOPT_VERBOSE, true)
+        
+        try! curl.setOption(CURLOPT_URL, "http://httpbin.org/post")
+        
+        try! curl.setOption(CURLOPT_TIMEOUT, 5)
+        
+        try! curl.setOption(CURLOPT_POST, true)
+        
+        let data: Data = [0x54, 0x65, 0x73, 0x74] // "Test"
+        
+        try! curl.setOption(CURLOPT_POSTFIELDSIZE, data.count)
+        
+        let dataStorage = curlReadFunctionStorage(data: data)
+        
+        try! curl.setOption(CURLOPT_READDATA, unsafeBitCast(dataStorage, UnsafePointer<UInt8>.self))
+        
+        let pointer = unsafeBitCast(curlReadFunction as curl_read_callback, UnsafePointer<UInt8>.self)
+        
+        try! curl.setOption(CURLOPT_READFUNCTION, pointer)
+        
+        do { try curl.perform() }
+        catch { print("Error executing cURL request: \(error)") }
+        
+        let responseCode = try! curl.getInfo(CURLINFO_RESPONSE_CODE) as Int
         
         XCTAssert(responseCode == 200, "\(responseCode) == 200")
     }

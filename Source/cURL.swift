@@ -1,4 +1,4 @@
- //
+//
 //  cURL.swift
 //  SwiftFoundation
 //
@@ -9,7 +9,7 @@
 import cURL
 
 /// Class that encapsulates cURL handler.
- public final class cURL: Copying {
+public final class cURL: Copying {
     
     // MARK: - Typealiases
     
@@ -17,8 +17,13 @@ import cURL
     
     public typealias Handler = UnsafeMutablePointer<Void>
     
+    public typealias Option = CURLoption
+    
+    public typealias Info = CURLINFO
+    
     // MARK: - Properties
     
+    /// Private pointer to ```cURL.Handler```.
     private let internalHandler: cURL.Handler
     
     // MARK: - Initialization
@@ -62,37 +67,32 @@ import cURL
     
     // MARK: - Set Option
     
-    public func setOption(option: CURLoption, _ value: String) throws {
+    /// Set object pointer value for ```CURLoption```.
+    public func setOption(option: Option, _ value: UnsafePointer<UInt8>) throws {
         
         let code = curl_easy_setopt(internalHandler, option: option, param: value)
         
         guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
     }
     
-    public func setOption(option: CURLoption, _ value: Data) throws {
+    /// Set ```cURL.Long``` value for ```CURLoption```.
+    public func setOption(option: Option, _ value: Long) throws {
         
-        let code = curl_easy_setopt(internalHandler, option: option, param: value)
+        let pointer = unsafeBitCast(value, UnsafePointer<UInt8>.self)
         
-        guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
+        return try setOption(option, pointer)
     }
     
-    public func setOption(option: CURLoption, _ value: Long) throws {
-        
-        let pointer = unsafeBitCast(value, UnsafeMutablePointer<UInt8>.self)
-        
-        let code = curl_easy_setopt(internalHandler, option: option, param: pointer)
-        
-        guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
-    }
-    
-    public func setOption(option: CURLoption, _ value: Bool) throws {
+    /// Set boolean value for ```CURLoption```.
+    public func setOption(option: Option, _ value: Bool) throws {
         
         return try setOption(option, Long(value))
     }
     
     // MARK: Get Info
     
-    public func getInfo(info: CURLINFO) throws -> String? {
+    /// Get string value for ```CURLINFO```.
+    public func getInfo(info: Info) throws -> String {
         
         var stringBytesPointer = UnsafePointer<CChar>()
         
@@ -100,17 +100,22 @@ import cURL
         
         guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
         
-        return String.fromCString(stringBytesPointer)
+        return String.fromCString(stringBytesPointer)!
     }
     
-    public func getInfo(info: CURLINFO) throws -> [String]? {
+    /// Get string array value for ```CURLINFO```.
+    ///
+    /// - Note: Equivalent for ```curl_slist``` in ```cURL``` C API.
+    ///
+    public func getInfo(info: Info) throws -> [String]? {
         
         // TODO: Implement stirng linked-list conversion
         
         fatalError("Not Implemented")
     }
     
-    public func getInfo(info: CURLINFO) throws -> Long {
+    /// Get ```Long``` value for ```CURLINFO```.
+    public func getInfo(info: Info) throws -> Long {
         
         var value: Long = 0
         
@@ -121,7 +126,8 @@ import cURL
         return value
     }
     
-    public func getInfo(info: CURLINFO) throws -> Double {
+    /// Get ```Double``` value for ```CURLINFO```.
+    public func getInfo(info: Info) throws -> Double {
         
         var value: Double = 0
         
@@ -188,13 +194,12 @@ import cURL
             }
         }
     }
-    
-    // MARK: - Function Declarations
-    
-    @asmname("curl_easy_setopt") public func curl_easy_setopt(curl: Handler, option: CURLoption, param: UnsafePointer<UInt8>) -> CURLcode
-    
-    @asmname("curl_easy_getinfo") public func curl_easy_getinfo<T>(curl: Handler, info: CURLINFO, inout param: T) -> CURLcode
 }
 
+// MARK: - Function Declarations
+
+@asmname("curl_easy_setopt") public func curl_easy_setopt(curl: cURL.Handler, option: CURLoption, param: UnsafePointer<UInt8>) -> CURLcode
+
+@asmname("curl_easy_getinfo") public func curl_easy_getinfo<T>(curl: cURL.Handler, info: CURLINFO, inout param: T) -> CURLcode
 
 
