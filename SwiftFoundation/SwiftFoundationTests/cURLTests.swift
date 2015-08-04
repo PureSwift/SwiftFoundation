@@ -21,15 +21,6 @@ class cURLTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-
-    func testSetOption() {
-        
-        let curl = cURL()
-        
-        try! curl.setOption(cURL.Option.URL("https://google.com"))
-        
-        try! curl.setOption(cURL.Option.Port(80))
-    }
     
     // MARK: - Live Tests
     
@@ -39,16 +30,16 @@ class cURLTests: XCTestCase {
         
         let testStatusCode = 200
         
-        try! curl.setOption(cURL.Option.Verbose(true))
+        try! curl.setOption(CURLOPT_VERBOSE, true)
         
-        try! curl.setOption(cURL.Option.URL("http://httpbin.org/status/\(testStatusCode)"))
+        try! curl.setOption(CURLOPT_URL, "http://httpbin.org/status/\(testStatusCode)")
         
-        try! curl.setOption(cURL.Option.Timeout(10))
+        try! curl.setOption(CURLOPT_TIMEOUT, 10)
         
         do { try curl.perform() }
         catch { XCTFail("Error executing cURL request: \(error)"); return }
         
-        let responseCode = try! curl.longForInfo(CURLINFO_RESPONSE_CODE)
+        let responseCode: cURL.Long = try! curl.getInfo(CURLINFO_RESPONSE_CODE)
         
         XCTAssert(responseCode == testStatusCode, "\(responseCode) == \(testStatusCode)")
     }
@@ -57,22 +48,24 @@ class cURLTests: XCTestCase {
         
         let curl = cURL()
         
-        try! curl.setOption(cURL.Option.Verbose(true))
+        try! curl.setOption(CURLOPT_VERBOSE, true)
         
-        try! curl.setOption(cURL.Option.URL("http://httpbin.org/post"))
+        try! curl.setOption(CURLOPT_URL, "http://httpbin.org/post")
         
-        try! curl.setOption(cURL.Option.POST(true))
+        try! curl.setOption(CURLOPT_TIMEOUT, 10)
+        
+        try! curl.setOption(CURLOPT_POST, true)
         
         let data: Data = [0x54, 0x65, 0x73, 0x74] // "Test"
         
-        try! curl.setOption(cURL.Option.PostFields(data))
+        try! curl.setOption(CURLOPT_POSTFIELDS, data)
         
-        try! curl.setOption(cURL.Option.PostFieldSize(UInt(data.count)))
+        try! curl.setOption(CURLOPT_POSTFIELDSIZE, data.count)
         
         do { try curl.perform() }
         catch { XCTFail("Error executing cURL request: \(error)"); return }
         
-        let responseCode = try! curl.longForInfo(CURLINFO_RESPONSE_CODE)
+        let responseCode: Int = try! curl.getInfo(CURLINFO_RESPONSE_CODE)
         
         XCTAssert(responseCode == 200, "\(responseCode) == 200")
     }

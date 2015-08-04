@@ -19,8 +19,6 @@ import cURL
     
     // MARK: - Properties
     
-    public private(set) var options = [Option]()
-    
     private let internalHandler: cURL.Handler
     
     // MARK: - Initialization
@@ -35,10 +33,9 @@ import cURL
         internalHandler = curl_easy_init()
     }
     
-    private init(handler: Handler, options: [Option]) {
+    private init(handler: Handler) {
         
         self.internalHandler = handler
-        self.options = options
     }
     
     // MARK: - Methods
@@ -53,81 +50,9 @@ import cURL
     public func reset() {
         
         curl_easy_reset(internalHandler)
-        
-        options = []
     }
     
-    public func setOption(option: Option) throws {
-        
-        var code: CURLcode!
-        
-        switch option {
-            
-        // Object Pointers
-            
-        case .Input(let value):
-            code = curl_easy_setopt(internalHandler, option: CURLOPT_READDATA, param: value)
-            
-        case .Output(let value):
-            code = curl_easy_setopt(internalHandler, option: CURLOPT_WRITEDATA, param: value)
-            
-        case .PostFields(let value):
-            code = curl_easy_setopt(internalHandler, option: CURLOPT_POSTFIELDS, param: value)
-            
-        // String Options
-            
-        case .URL(let value):
-            code = curl_easy_setopt(internalHandler, option: CURLOPT_URL, param: value)
-            
-        case .CustomRequest(let value):
-            code = curl_easy_setopt(internalHandler, option: CURLOPT_CUSTOMREQUEST, param: value)
-            
-        // Long Options
-            
-        case .PostFieldSize(let value):
-            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
-            code = curl_easy_setopt(internalHandler, option: CURLOPT_POSTFIELDSIZE, param: pointer)
-            
-        case .CopyPostFields(let value):
-            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
-            code = curl_easy_setopt(internalHandler, option: CURLOPT_COPYPOSTFIELDS, param: pointer)
-        
-        case .Port(let value):
-            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
-            code = curl_easy_setopt(internalHandler, option: CURLOPT_PORT, param: pointer)
-            
-        case .Verbose(let value):
-            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
-            code = curl_easy_setopt(internalHandler, option: CURLOPT_VERBOSE, param: pointer)
-            
-        case .Timeout(let value):
-            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
-            code = curl_easy_setopt(internalHandler, option: CURLOPT_TIMEOUT, param: pointer)
-            
-        case .POST(let value):
-            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
-            code = curl_easy_setopt(internalHandler, option: CURLOPT_POST, param: pointer)
-            
-        case .PUT(let value):
-            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
-            code = curl_easy_setopt(internalHandler, option: CURLOPT_PUT, param: pointer)
-            
-        case .FailOnError(let value):
-            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
-            code = curl_easy_setopt(internalHandler, option: CURLOPT_FAILONERROR, param: pointer)
-            
-        case .MaxConnections(let value):
-            let pointer = unsafeBitCast(Long(value), UnsafeMutablePointer<UInt8>.self)
-            code = curl_easy_setopt(internalHandler, option: CURLOPT_MAXCONNECTS, param: pointer)
-            
-        default: fatalError("Setting option \(option) is not implemented")
-        }
-        
-        guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
-        
-        self.options.append(option)
-    }
-    
+    /// Executes the request. 
     public func perform() throws {
         
         let code = curl_easy_perform(internalHandler)
@@ -135,9 +60,39 @@ import cURL
         guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
     }
     
+    // MARK: - Set Option
+    
+    public func setOption(option: CURLoption, _ value: String) throws {
+        
+        let code = curl_easy_setopt(internalHandler, option: option, param: value)
+        
+        guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
+    }
+    
+    public func setOption(option: CURLoption, _ value: Data) throws {
+        
+        let code = curl_easy_setopt(internalHandler, option: option, param: value)
+        
+        guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
+    }
+    
+    public func setOption(option: CURLoption, _ value: Long) throws {
+        
+        let pointer = unsafeBitCast(value, UnsafeMutablePointer<UInt8>.self)
+        
+        let code = curl_easy_setopt(internalHandler, option: option, param: pointer)
+        
+        guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
+    }
+    
+    public func setOption(option: CURLoption, _ value: Bool) throws {
+        
+        return try setOption(option, Long(value))
+    }
+    
     // MARK: Get Info
     
-    public func stringForInfo(info: CURLINFO) throws -> String? {
+    public func getInfo(info: CURLINFO) throws -> String? {
         
         var stringBytesPointer = UnsafePointer<CChar>()
         
@@ -148,14 +103,14 @@ import cURL
         return String.fromCString(stringBytesPointer)
     }
     
-    public func stringListForInfo(info: CURLINFO) throws -> [String]? {
+    public func getInfo(info: CURLINFO) throws -> [String]? {
         
         // TODO: Implement stirng linked-list conversion
         
         fatalError("Not Implemented")
     }
     
-    public func longForInfo(info: CURLINFO) throws -> Long {
+    public func getInfo(info: CURLINFO) throws -> Long {
         
         var value: Long = 0
         
@@ -166,7 +121,7 @@ import cURL
         return value
     }
     
-    public func doubleForInfo(info: CURLINFO) throws -> Double {
+    public func getInfo(info: CURLINFO) throws -> Double {
         
         var value: Double = 0
         
@@ -183,131 +138,12 @@ import cURL
         
         let handleCopy = curl_easy_duphandle(internalHandler)
         
-        let copy = cURL(handler: handleCopy, options: self.options)
+        let copy = cURL(handler: handleCopy)
         
         return copy
     }
     
     // MARK: - Supporting Types
-    
-    public enum Option {
-        
-        case Input(Data)
-        
-        case Output(UnsafeMutablePointer<UInt8>)
-        
-        /// The data to send with a POST request.
-        case PostFields(Data)
-        
-        case PostFieldSize(UInt)
-        
-        case CopyPostFields(Bool)
-        
-        case URL(String)
-        
-        case Port(UInt)
-        
-        case Verbose(Bool)
-        
-        case Timeout(UInt)
-        
-        case FTPPort(String)
-        
-        case UserAgent(String)
-        
-        case HTTPHeaders([String])
-        
-        /// Custom request, for customizing the get command like
-        /// HTTP: DELETE, TRACE and others
-        /// FTP: to use a different list command
-        case CustomRequest(String)
-        
-        /// No output on http error codes >= 400
-        case FailOnError(Bool)
-        
-        /// HTTP POST method
-        case POST(Bool)
-        
-        /// HTTP PUT Method
-        case PUT(Bool)
-        
-        /// Max amount of cached keep alive connections.
-        case MaxConnections(UInt)
-        
-        case HTTPVersion(cURL.HTTPVersion)
-        
-        /// Set if we should verify the Common name from the peer certificate in ssl
-        /// handshake, set 1 to check existence, 2 to ensure that it matches the
-        /// provided hostname.
-        case SSLVerifyHost(Long)
-        
-        /// zero terminated string for pass on to the FTP server when asked for "account" info.
-        case FTPAccount(String)
-        
-        case IgnoreContentLength(Bool)
-        
-        case Username(String)
-        
-        case Password(String)
-        
-        
-    }
-    
-    /// cURL HTTP version
-    public enum HTTPVersion: RawRepresentable {
-        
-        case None
-        case v1_0
-        case v1_1
-        case v2_0
-        
-        public init?(rawValue: Int) {
-            
-            switch rawValue {
-                
-            case CURL_HTTP_VERSION_NONE:    self = .None
-            case CURL_HTTP_VERSION_1_0:     self = .v1_0
-            case CURL_HTTP_VERSION_1_1:     self = .v1_1
-            case CURL_HTTP_VERSION_2_0:     self = .v2_0
-                
-            default: return nil
-            }
-        }
-        
-        public var rawValue: Int {
-            
-            switch self {
-                
-            case .None: return CURL_HTTP_VERSION_NONE
-            case .v1_0: return CURL_HTTP_VERSION_1_0
-            case .v1_1: return CURL_HTTP_VERSION_1_1
-            case .v2_0: return CURL_HTTP_VERSION_2_0
-            }
-        }
-        
-        public init?(version: SwiftFoundation.HTTPVersion) {
-            
-            switch (version.major, version.minor) {
-            
-            case (1,0): self = .v1_0
-            case (1,1): self = .v1_1
-            case (2,0): self = .v2_0
-            
-            default: return nil
-            }
-        }
-        
-        public func toHTTPVersion() -> SwiftFoundation.HTTPVersion? {
-            
-            switch self {
-                
-            case .None: return nil
-            case .v1_0: return SwiftFoundation.HTTPVersion(1, 0)
-            case .v1_1: return SwiftFoundation.HTTPVersion(1, 1)
-            case .v2_0: return SwiftFoundation.HTTPVersion(2, 0)
-            }
-        }
-    }
     
     public enum Error: ErrorType {
         
