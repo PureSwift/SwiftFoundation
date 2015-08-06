@@ -133,7 +133,7 @@ class cURLTests: XCTestCase {
         
         XCTAssert(responseCode == 200, "\(responseCode) == 200")
         
-        XCTAssert(NSData(bytes: unsafeBitCast(unsafeBitCast(storage.data, Data.self), [UInt8].self)) == NSData(contentsOfURL: NSURL(string: url)!))
+        XCTAssert(NSData(bytes: unsafeBitCast(storage.data, Data.self)) == NSData(contentsOfURL: NSURL(string: url)!))
 
     }
 
