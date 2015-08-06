@@ -10,7 +10,9 @@ import cURL
 
 public final class curlWriteFunctionStorage {
     
-    var data = [CChar]()
+    public var data = [CChar]()
+    
+    public init() { }
 }
 
 public func curlWriteFunction(contents: UnsafeMutablePointer<Int8>, size: Int, nmemb: Int, readData: UnsafeMutablePointer<Void>) -> Int {

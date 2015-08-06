@@ -136,5 +136,33 @@ class cURLTests: XCTestCase {
         XCTAssert(NSData(bytes: unsafeBitCast(storage.data, Data.self)) == NSData(contentsOfURL: NSURL(string: url)!))
 
     }
+    
+    func testHeaderWriteFunction() {
+        
+        let curl = cURL()
+        
+        try! curl.setOption(CURLOPT_VERBOSE, true)
+        
+        let url = "http://httpbin.org"
+        
+        try! curl.setOption(CURLOPT_URL, url)
+        
+        try! curl.setOption(CURLOPT_TIMEOUT, 100)
+        
+        let storage = curlWriteFunctionStorage()
+        
+        try! curl.setOption(CURLOPT_HEADERDATA, unsafeBitCast(storage, UnsafeMutablePointer<UInt8>.self))
+        
+        try! curl.setOption(CURLOPT_HEADERFUNCTION, unsafeBitCast(curlWriteFunction as curl_write_callback, UnsafeMutablePointer<UInt8>.self))
+        
+        do { try curl.perform() }
+        catch { print("Error executing cURL request: \(error)") }
+        
+        let responseCode = try! curl.getInfo(CURLINFO_RESPONSE_CODE) as Int
+        
+        XCTAssert(responseCode == 200, "\(responseCode) == 200")
+        
+        print("Header:\n\(String.fromCString(storage.data)!)")
+    }
 
 }
