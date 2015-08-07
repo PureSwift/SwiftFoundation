@@ -42,7 +42,7 @@ public final class cURL {
                 
                 pointer.memory.free()
                 
-                pointer.dealloc(1)
+                pointer.destroy()
             }
         }
         
@@ -109,11 +109,11 @@ public final class cURL {
     public func setOption(option: Option, _ value: [String]) throws {
         
         // will dealloc in deinit
-        let pointer = UnsafeMutablePointer<StringList>()
+        var pointer = UnsafeMutablePointer<StringList>()
         
         for string in value {
             
-            curl_slist_append(pointer, string)
+            pointer = curl_slist_append(pointer, string)
         }
         
         try setOption(option, unsafeBitCast(pointer, UnsafeMutablePointer<UInt8>.self))

@@ -118,7 +118,7 @@ class cURLTests: XCTestCase {
         
         try! curl.setOption(CURLOPT_URL, url)
         
-        try! curl.setOption(CURLOPT_TIMEOUT, 100)
+        try! curl.setOption(CURLOPT_TIMEOUT, 60)
         
         let storage = curlWriteFunctionStorage()
         
@@ -147,7 +147,7 @@ class cURLTests: XCTestCase {
         
         try! curl.setOption(CURLOPT_URL, url)
         
-        try! curl.setOption(CURLOPT_TIMEOUT, 100)
+        try! curl.setOption(CURLOPT_TIMEOUT, 5)
         
         let storage = curlWriteFunctionStorage()
         
@@ -175,7 +175,17 @@ class cURLTests: XCTestCase {
         
         try! curl.setOption(CURLOPT_URL, url)
         
-        try! curl.setOption(CURLOPT_HTTPHEADER, ["MyHeader:"])
+        let header = "Header"
+        
+        let headerValue = "Value"
+        
+        try! curl.setOption(CURLOPT_HTTPHEADER, [header + ": " + headerValue])
+        
+        let storage = curlWriteFunctionStorage()
+        
+        try! curl.setOption(CURLOPT_WRITEDATA, unsafeBitCast(storage, UnsafeMutablePointer<UInt8>.self))
+        
+        try! curl.setOption(CURLOPT_WRITEFUNCTION, unsafeBitCast(curlWriteFunction as curl_write_callback, UnsafeMutablePointer<UInt8>.self))
         
         do { try curl.perform() }
         catch { print("Error executing cURL request: \(error)") }
@@ -183,6 +193,14 @@ class cURLTests: XCTestCase {
         let responseCode = try! curl.getInfo(CURLINFO_RESPONSE_CODE) as Int
         
         XCTAssert(responseCode == 200, "\(responseCode) == 200")
+        
+        guard let json = try! NSJSONSerialization.JSONObjectWithData(NSData(bytes: unsafeBitCast(storage.data, Data.self)), options: NSJSONReadingOptions()) as? [String: [String: String]]
+            else { XCTFail("Invalid JSON response"); return }
+        
+        guard let headersJSON = json["headers"]
+            else { XCTFail("Invalid JSON response: \(json)"); return }
+        
+        XCTAssert(headersJSON[header] == headerValue)
         
         // invoke deinit
         curl = nil
