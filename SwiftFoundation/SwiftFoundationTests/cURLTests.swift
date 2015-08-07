@@ -164,5 +164,27 @@ class cURLTests: XCTestCase {
         
         print("Header:\n\(String.fromCString(storage.data)!)")
     }
-
+    
+    func testSetHeaderOption() {
+        
+        var curl: cURL! = cURL()
+        
+        try! curl.setOption(CURLOPT_VERBOSE, true)
+        
+        let url = "http://httpbin.org/headers"
+        
+        try! curl.setOption(CURLOPT_URL, url)
+        
+        try! curl.setOption(CURLOPT_HTTPHEADER, ["MyHeader:"])
+        
+        do { try curl.perform() }
+        catch { print("Error executing cURL request: \(error)") }
+        
+        let responseCode = try! curl.getInfo(CURLINFO_RESPONSE_CODE) as Int
+        
+        XCTAssert(responseCode == 200, "\(responseCode) == 200")
+        
+        // invoke deinit
+        curl = nil
+    }
 }

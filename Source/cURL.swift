@@ -9,7 +9,7 @@
 import cURL
 
 /// Class that encapsulates cURL handler.
-public final class cURL: Copying {
+public final class cURL {
     
     // MARK: - Typealiases
     
@@ -21,14 +21,30 @@ public final class cURL: Copying {
     
     public typealias Info = CURLINFO
     
+    public typealias StringList = curl_slist
+    
     // MARK: - Properties
     
     /// Private pointer to ```cURL.Handler```.
-    private let internalHandler: cURL.Handler
+    private let internalHandler: Handler
+    
+    /// Private pointer to
+    private var internalOptionStringLists: [Option.RawValue: UnsafeMutablePointer<StringList>] = [:]
     
     // MARK: - Initialization
     
     deinit {
+        
+        // free string lists
+        for (_, pointer) in self.internalOptionStringLists {
+            
+            if pointer != nil {
+                
+                pointer.memory.free()
+                
+                pointer.dealloc(1)
+            }
+        }
         
         curl_easy_cleanup(internalHandler)
     }
@@ -80,13 +96,29 @@ public final class cURL: Copying {
         
         let pointer = unsafeBitCast(value, UnsafePointer<UInt8>.self)
         
-        return try setOption(option, pointer)
+        try setOption(option, pointer)
     }
     
     /// Set boolean value for ```CURLoption```.
     public func setOption(option: Option, _ value: Bool) throws {
         
-        return try setOption(option, Long(value))
+        try setOption(option, Long(value))
+    }
+    
+    /// Set string list value for ```CURLoption```.
+    public func setOption(option: Option, _ value: [String]) throws {
+        
+        // will dealloc in deinit
+        let pointer = UnsafeMutablePointer<StringList>()
+        
+        for string in value {
+            
+            curl_slist_append(pointer, string)
+        }
+        
+        try setOption(option, unsafeBitCast(pointer, UnsafeMutablePointer<UInt8>.self))
+        
+        internalOptionStringLists[option.rawValue] = pointer
     }
     
     // MARK: Get Info
@@ -137,69 +169,12 @@ public final class cURL: Copying {
         
         return value
     }
-    
-    // MARK: - Copying
-    
-    public var copy: cURL {
-        
-        let handleCopy = curl_easy_duphandle(internalHandler)
-        
-        let copy = cURL(handler: handleCopy)
-        
-        return copy
-    }
-    
-    // MARK: - Supporting Types
-    
-    public enum Error: ErrorType {
-        
-        case UnsupportedProtocol
-        case FailedInitialization
-        case BadURLFormat
-        case NotBuiltIn
-        case CouldNotResolveProxy
-        case CouldNotResolveHost
-        case CouldNotConnect
-        case FTPBadServerReply
-        case RemoteAccessDenied
-        
-        case BadFunctionArgument
-        
-        
-        public init?(code: CURLcode) {
-                        
-            switch code {
-            
-            case CURLE_OK:                     return nil
-            case CURLE_UNSUPPORTED_PROTOCOL:   self = .UnsupportedProtocol
-            case CURLE_FAILED_INIT:            self = .FailedInitialization
-            case CURLE_URL_MALFORMAT:          self = .BadURLFormat
-            case CURLE_NOT_BUILT_IN:           self = .NotBuiltIn
-            case CURLE_COULDNT_RESOLVE_PROXY:  self = .CouldNotResolveProxy
-            case CURLE_COULDNT_RESOLVE_HOST:   self = .CouldNotResolveHost
-            case CURLE_COULDNT_CONNECT:        self = .CouldNotConnect
-            case CURLE_FTP_WEIRD_SERVER_REPLY: self = .FTPBadServerReply
-            case CURLE_REMOTE_ACCESS_DENIED:   self = .RemoteAccessDenied
-            case CURLE_COULDNT_RESOLVE_HOST:   self = .FailedInitialization
-            case CURLE_COULDNT_RESOLVE_HOST:   self = .FailedInitialization
-            case CURLE_COULDNT_RESOLVE_HOST:   self = .FailedInitialization
-            case CURLE_COULDNT_RESOLVE_HOST:   self = .FailedInitialization
-            case CURLE_COULDNT_RESOLVE_HOST:   self = .FailedInitialization
-            case CURLE_COULDNT_RESOLVE_HOST:   self = .FailedInitialization
-            case CURLE_BAD_FUNCTION_ARGUMENT:  self = .BadFunctionArgument
-                
-            default:
-                debugPrint("Case \(code) not handled for CURLcode -> cURL Error")
-                return nil;
-            }
-        }
-    }
 }
 
 // MARK: - Function Declarations
 
-@asmname("curl_easy_setopt") public func curl_easy_setopt(curl: cURL.Handler, option: CURLoption, param: UnsafePointer<UInt8>) -> CURLcode
+@asmname("curl_easy_setopt") public func curl_easy_setopt(curl: cURL.Handler, option: cURL.Option, param: UnsafePointer<UInt8>) -> CURLcode
 
-@asmname("curl_easy_getinfo") public func curl_easy_getinfo<T>(curl: cURL.Handler, info: CURLINFO, inout param: T) -> CURLcode
+@asmname("curl_easy_getinfo") public func curl_easy_getinfo<T>(curl: cURL.Handler, info: cURL.Info, inout param: T) -> CURLcode
 
 
