@@ -8,21 +8,28 @@
 
 import cURL
 
-public final class curlReadFunctionStorage {
+public extension cURL {
     
-    public let data: Data
+    public typealias ReadCallBack = curl_read_callback
     
-    public var currentIndex = 0
+    public static var ReadFunction: ReadCallBack { return curlReadFunction }
     
-    public init(data: Data) {
+    public final class ReadFunctionStorage {
         
-        self.data = data
+        public let data: Data
+        
+        public var currentIndex = 0
+        
+        public init(data: Data) {
+            
+            self.data = data
+        }
     }
 }
 
 public func curlReadFunction(pointer: UnsafeMutablePointer<Int8>, size: Int, nmemb: Int, readData: UnsafeMutablePointer<Void>) -> Int {
     
-    let storage = unsafeBitCast(readData, curlReadFunctionStorage.self)
+    let storage = unsafeBitCast(readData, cURL.ReadFunctionStorage.self)
     
     let data = storage.data
     

@@ -92,7 +92,7 @@ class cURLTests: XCTestCase {
         
         try! curl.setOption(CURLOPT_POSTFIELDSIZE, data.count)
         
-        let dataStorage = curlReadFunctionStorage(data: data)
+        let dataStorage = cURL.ReadFunctionStorage(data: data)
         
         try! curl.setOption(CURLOPT_READDATA, unsafeBitCast(dataStorage, UnsafePointer<UInt8>.self))
         
@@ -120,11 +120,11 @@ class cURLTests: XCTestCase {
         
         try! curl.setOption(CURLOPT_TIMEOUT, 60)
         
-        let storage = curlWriteFunctionStorage()
+        let storage = cURL.WriteFunctionStorage()
         
         try! curl.setOption(CURLOPT_WRITEDATA, unsafeBitCast(storage, UnsafeMutablePointer<UInt8>.self))
         
-        try! curl.setOption(CURLOPT_WRITEFUNCTION, unsafeBitCast(curlWriteFunction as curl_write_callback, UnsafeMutablePointer<UInt8>.self))
+        try! curl.setOption(CURLOPT_WRITEFUNCTION, unsafeBitCast(cURL.WriteFunction, UnsafeMutablePointer<UInt8>.self))
         
         do { try curl.perform() }
         catch { print("Error executing cURL request: \(error)") }
@@ -149,11 +149,11 @@ class cURLTests: XCTestCase {
         
         try! curl.setOption(CURLOPT_TIMEOUT, 5)
         
-        let storage = curlWriteFunctionStorage()
+        let storage = cURL.WriteFunctionStorage()
         
         try! curl.setOption(CURLOPT_HEADERDATA, unsafeBitCast(storage, UnsafeMutablePointer<UInt8>.self))
         
-        try! curl.setOption(CURLOPT_HEADERFUNCTION, unsafeBitCast(curlWriteFunction as curl_write_callback, UnsafeMutablePointer<UInt8>.self))
+        try! curl.setOption(CURLOPT_HEADERFUNCTION, unsafeBitCast(cURL.WriteFunction, UnsafeMutablePointer<UInt8>.self))
         
         do { try curl.perform() }
         catch { print("Error executing cURL request: \(error)") }
@@ -181,7 +181,7 @@ class cURLTests: XCTestCase {
         
         try! curl.setOption(CURLOPT_HTTPHEADER, [header + ": " + headerValue])
         
-        let storage = curlWriteFunctionStorage()
+        let storage = cURL.WriteFunctionStorage()
         
         try! curl.setOption(CURLOPT_WRITEDATA, unsafeBitCast(storage, UnsafeMutablePointer<UInt8>.self))
         

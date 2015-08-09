@@ -8,16 +8,23 @@
 
 import cURL
 
-public final class curlWriteFunctionStorage {
+public extension cURL {
     
-    public var data = [CChar]()
+    public typealias WriteCallBack = curl_write_callback
     
-    public init() { }
+    public static var WriteFunction: WriteCallBack { return curlWriteFunction }
+    
+    public final class WriteFunctionStorage {
+        
+        public var data = [CChar]()
+        
+        public init() { }
+    }
 }
 
 public func curlWriteFunction(contents: UnsafeMutablePointer<Int8>, size: Int, nmemb: Int, readData: UnsafeMutablePointer<Void>) -> Int {
     
-    let storage = unsafeBitCast(readData, curlWriteFunctionStorage.self)
+    let storage = unsafeBitCast(readData, cURL.WriteFunctionStorage.self)
     
     let realsize = size * nmemb
     
