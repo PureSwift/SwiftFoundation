@@ -21,5 +21,8 @@ public struct HTTPRequest: URLRequest {
     
     public var version: HTTPVersion = HTTPVersion()
     
-    public init() { }
+    public init(URL: SwiftFoundation.URL) {
+        
+        self.URL = URL
+    }
 }
