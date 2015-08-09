@@ -9,7 +9,7 @@
 public extension RegularExpression {
     
     /// POSIX Regular Expression Compilation Options
-    public enum CompileOption: POSIXRegularExpression.FlagBitmask, BitMaskOption {
+    public enum CompileOption: Int32, BitMaskOption {
 
         /// Do not differentiate case.
         case CaseInsensitive

@@ -9,7 +9,7 @@
 public extension RegularExpression {
     
     // POSIX Regular Expression compilation error
-    public enum CompileError: POSIXRegularExpression.ErrorCode, ErrorType {
+    public enum CompileError: Int32, ErrorType {
         
         /// Invalid use  of repetition operators such as using '*' as the first character.
         ///

@@ -235,8 +235,8 @@
 			children = (
 				6E16C2EC1B44FC4700C07C25 /* RegularExpression.swift */,
 				1A436ECF1B7748700069F5D9 /* RegularExpressionCompileOption.swift */,
-				1A436ED31B774C5C0069F5D9 /* RegularExpressionCompileError.swift */,
 				1A436ED11B774A850069F5D9 /* RegularExpressionMatchOption.swift */,
+				1A436ED31B774C5C0069F5D9 /* RegularExpressionCompileError.swift */,
 			);
 			name = "Regular Expression";
 			sourceTree = "<group>";
