@@ -23,7 +23,7 @@ class RegularExpressionTests: XCTestCase {
 
     func testSimpleRegex() {
         
-        let regex = try! RegularExpression(pattern: "Welcome", options: [.ExtendedSyntax])
+        let regex = try! RegularExpression(pattern: "Welcome")
         
         let string = "Welcome to RegExr v2.0 by gskinner.com!"
         

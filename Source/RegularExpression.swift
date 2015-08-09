@@ -109,20 +109,23 @@ final public class RegularExpression: RegularExpressionType {
             match.range = Swift.Range(start: Int(expressionMatch.rm_so), end: Int(expressionMatch.rm_eo))
         }
         
-        // Index for subexpressions start at 1, not 0
-        for index in 1...(subexpressionsCount - 1) {
+        if subexpressionsCount > 0 {
             
-            let subexpressionMatch = matches[Int(index)]
-            
-            guard subexpressionMatch.rm_so != -1 else {
+            // Index for subexpressions start at 1, not 0
+            for index in 1...(subexpressionsCount - 1) {
                 
-                match.subexpressionRanges.append(Match.Range.NotFound)
-                continue
+                let subexpressionMatch = matches[Int(index)]
+                
+                guard subexpressionMatch.rm_so != -1 else {
+                    
+                    match.subexpressionRanges.append(Match.Range.NotFound)
+                    continue
+                }
+                
+                let range = Swift.Range(start: Int(subexpressionMatch.rm_so), end: Int(subexpressionMatch.rm_eo))
+                
+                match.subexpressionRanges.append(Match.Range.Found(range))
             }
-            
-            let range = Swift.Range(start: Int(subexpressionMatch.rm_so), end: Int(subexpressionMatch.rm_eo))
-            
-            match.subexpressionRanges.append(Match.Range.Found(range))
         }
         
         return match
