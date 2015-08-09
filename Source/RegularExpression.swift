@@ -13,15 +13,20 @@ public protocol RegularExpressionType: RawRepresentable, CustomStringConvertible
     
     typealias CompileOptions
     
-    typealias MatchingOptions
+    typealias MatchOptions
     
     var pattern: String { get }
     
     var options: CompileOptions { get }
     
+    var subexpressionsCount: UInt { get }
+    
     init(pattern: String, options: CompileOptions) throws
     
-    func match(string: String, options: MatchingOptions) throws -> [Range<UInt>]
+    /// Finds the first match in the string
+    func match(string: String, options: MatchOptions) -> RegularExpressionMatch?
+    
+    
 }
 
 // MARK: - Protocol Implementation
@@ -56,11 +61,18 @@ public extension RegularExpressionType {
 /// POSIX Regular Expression.
 final public class RegularExpression: RegularExpressionType {
     
+    public typealias Match = RegularExpressionMatch
+        
     // MARK: - Properties
     
     public let pattern: String
     
     public let options: [CompileOption]
+    
+    public var subexpressionsCount: UInt {
+        
+        return UInt(internalExpression.re_nsub)
+    }
     
     // MARK: - Private Properties
     
@@ -70,10 +82,10 @@ final public class RegularExpression: RegularExpressionType {
     
     deinit {
         
-        regfree(&internalExpression)
+        internalExpression.free()
     }
     
-    public init(pattern: String, options: [RegularExpression.CompileOption]) throws {
+    public init(pattern: String, options: [RegularExpression.CompileOption] = []) throws {
         
         self.pattern = pattern
         self.options = options
@@ -85,9 +97,66 @@ final public class RegularExpression: RegularExpressionType {
         guard code == 0 else { throw CompileError(rawValue: code)! }
     }
     
-    public func match(string: String, options: [RegularExpression.MatchOption]) throws -> [Range<UInt>] {
+    public func match(string: String, options: [RegularExpression.MatchOption]) -> Match? {
         
-        return []
+        guard let matches = internalExpression.match(string, options: options) else { return nil }
+        
+        var match = RegularExpressionMatch()
+        
+        do {
+            let expressionMatch = matches[0]
+            
+            match.range = Swift.Range(start: Int(expressionMatch.rm_so), end: Int(expressionMatch.rm_eo))
+        }
+        
+        // Index for subexpressions start at 1, not 0
+        for index in 1...(subexpressionsCount - 1) {
+            
+            let subexpressionMatch = matches[Int(index)]
+            
+            guard subexpressionMatch.rm_so != -1 else {
+                
+                match.subexpressionRanges.append(Match.Range.NotFound)
+                continue
+            }
+            
+            let range = Swift.Range(start: Int(subexpressionMatch.rm_so), end: Int(subexpressionMatch.rm_eo))
+            
+            match.subexpressionRanges.append(Match.Range.Found(range))
+        }
+        
+        return match
+    }
+}
+
+// MARK: - Supporting Types
+
+/// Regular Expression Match
+public struct RegularExpressionMatch {
+    
+    public enum Range {
+        
+        case NotFound
+        
+        case Found(Swift.Range<Int>)
+    }
+    
+    /// The range of the match of the regular expression.
+    public var range: Swift.Range<Int>
+    
+    /// The ranges of the regular expression's subexpressions.
+    public var subexpressionRanges: [Range]
+    
+    public init() {
+        
+        self.range = Swift.Range<Int>(start: 0, end: 0)
+        self.subexpressionRanges = []
+    }
+    
+    public init(range: Swift.Range<Int>, subexpressionRanges: [Range]) {
+        
+        self.range = range
+        self.subexpressionRanges = subexpressionRanges
     }
 }
 

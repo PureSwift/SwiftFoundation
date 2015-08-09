@@ -14,6 +14,8 @@ public extension POSIXRegularExpression {
     
     public typealias ErrorCode = Int32
     
+    public typealias Match = regmatch_t
+    
     public static func compile(pattern: String, options: [RegularExpression.CompileOption]) -> (ErrorCode, POSIXRegularExpression) {
         
         var regularExpression = POSIXRegularExpression()
@@ -30,8 +32,31 @@ public extension POSIXRegularExpression {
         regfree(&self)
     }
     
-    public func match(string: String, options: [RegularExpression.MatchOption]) throws -> Range<UInt>? {
+    public func match(string: String, options: [RegularExpression.MatchOption]) -> [Match]? {
         
-        return nil
+        // we are sure that that this method does not mutate the regular expression, so we make a copy
+        var expression = self
+        
+        let numberOfMatches = re_nsub + 1
+        
+        let matchesPointer = UnsafeMutablePointer<Match>.alloc(numberOfMatches)
+        defer { matchesPointer.destroy(numberOfMatches) }
+        
+        let flags = options.optionsBitmask()
+        
+        let code = regexec(&expression, string, numberOfMatches, matchesPointer, flags)
+        
+        guard code == 0 else { return nil }
+        
+        var matches = [Match]()
+        
+        for i in 0...re_nsub {
+            
+            let match = matchesPointer[i]
+            
+            matches.append(match)
+        }
+        
+        return matches
     }
 }

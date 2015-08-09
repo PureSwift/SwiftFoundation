@@ -21,11 +21,20 @@ class RegularExpressionTests: XCTestCase {
         super.tearDown()
     }
 
-    func test() {
+    func testSimpleRegex() {
         
-        //let regex = try RegularExpression(pattern: "(+\\d)", options: [])
+        let regex = try! RegularExpression(pattern: "Welcome", options: [.ExtendedSyntax])
         
+        let string = "Welcome to RegExr v2.0 by gskinner.com!"
         
+        guard let match = regex.match(string, options: [])
+            else { XCTFail("Could not find match"); return }
+        
+        let stringRange = NSRange(match.range)
+        
+        let matchString = (string as NSString).substringWithRange(stringRange)
+        
+        XCTAssert(matchString == "Welcome")
     }
 
 }
