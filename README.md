@@ -21,15 +21,8 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 	- ICU
 	- CFLite
 	- libcurl
-	- libz
-	- libldap
-	- liblber
-	- libidn
 - Darwin (uses [Carthage](https://github.com/Carthage/Carthage))
 	- [libcurl](https://github.com/PureSwift/curl)
-	- libldap
-	- liblber
-	- libidn
 
 ## Implemented
 To see what parts of Foundation are implemented, just look at the unit tests. Completed functionality will be fully unit tested. Note that there are some functionality that is written as a protocol only, that will not be included on this list.
@@ -44,9 +37,9 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 - [x] URL
 - [x] DateFormatter (CFLite Backed)
 - [x] Locale (CFLite Backed)
+- [x] HTTPURLClient (```NSURLConnection```)
+- [ ] RegularExpression
 - [ ] JSON
 - [ ] Decimal
 - [ ] NotificationCenter
 - [ ] OperationQueue
-- [ ] RegularExpression
-- [ ] HTTPURLClient (```NSURLConnection```)
