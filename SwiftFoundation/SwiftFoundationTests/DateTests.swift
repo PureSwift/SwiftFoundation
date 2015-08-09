@@ -59,6 +59,7 @@ class DateTests: XCTestCase {
         XCTAssert(interval == NSInterval, "\(interval) must equal \(NSInterval)")
     }
     
+    /*
     func testTimeIntervalSinceReferenceDateMicroSecondsPrecision() {
         
         let interval = TimeIntervalSinceReferenceDate()
@@ -67,6 +68,7 @@ class DateTests: XCTestCase {
         
         XCTAssert(interval <= NSInterval, "\(interval) must lower than or equal \(NSInterval)")
     }
+    */
     
     func testTimeIntervalSinceDate() {
         

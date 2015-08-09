@@ -8,4 +8,6 @@
 
 /// Encapsulates data.
 
-public typealias Data = [UInt8]
+public typealias Data = [Byte]
+
+public typealias Byte = UInt8

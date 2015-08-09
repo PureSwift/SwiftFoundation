@@ -41,6 +41,8 @@ public struct URL: CustomStringConvertible {
         
         // parse string
         
+        debugPrint("URL parsing from string is not implemented yet!")
+        
         return nil
     }
     
@@ -51,9 +53,8 @@ public struct URL: CustomStringConvertible {
         
         // validate scheme
         
-        
         // host must exist for port to be specified
-        guard !(host != nil && port == nil) else { return false }
+        if port != nil { guard host != nil else { return false } }
         
         // user and password must both be nil or non-nil
         guard !((user != nil || password != nil) && (user == nil || password == nil)) else { return false }
