@@ -135,35 +135,6 @@ public final class cURL {
         return String.fromCString(stringBytesPointer)!
     }
     
-    /// Get string array value for ```CURLINFO```.
-    ///
-    /// - Note: Equivalent for ```curl_slist``` in ```cURL``` C API.
-    ///
-    public func getInfo(info: Info) throws -> [String] {
-        
-        var pointer = UnsafeMutablePointer<curl_slist>()
-        
-        let code = curl_easy_getinfo(internalHandler, info: info, param: &pointer)
-        
-        guard code.rawValue == CURLE_OK.rawValue else { throw Error(code: code)! }
-        
-        var strings = [String]()
-        
-        repeat {
-            
-            let stringList = pointer.memory
-            
-            let stringValue = stringList.value
-            
-            strings.append(stringValue!)
-            
-            pointer = stringList.next
-            
-        } while pointer != nil
-        
-        return strings
-    }
-    
     /// Get ```Long``` value for ```CURLINFO```.
     public func getInfo(info: Info) throws -> Long {
         
