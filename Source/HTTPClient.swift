@@ -88,7 +88,7 @@ public extension HTTP {
             // connect to server
             try curl.perform()
             
-            let responseCode = try! curl.getInfo(CURLINFO_RESPONSE_CODE) as Int
+            let responseCode = try curl.getInfo(CURLINFO_RESPONSE_CODE) as Int
             
             var response = HTTP.Response(statusCode: responseCode)
             
