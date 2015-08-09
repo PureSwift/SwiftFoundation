@@ -25,3 +25,16 @@ public extension CollectionType {
         })
     }
 }
+
+/*
+public extension SequenceType {
+    
+    public func contains(predicate: Predicate -> Bool) -> Bool {
+        
+        return self.contains({ (element: Self.Generator.Element) -> Bool in
+            
+            return predicate.evaluate(element)
+        })
+    }
+}
+*/

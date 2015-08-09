@@ -60,28 +60,32 @@ final public class RegularExpression: RegularExpressionType {
     
     public let pattern: String
     
-    public let options: [RegularExpressionCompileOption]
+    public let options: [CompileOption]
     
     // MARK: - Private Properties
     
-    private var internalValue: UnsafeMutablePointer<regex_t>!
+    private var internalExpression: POSIXRegularExpression
     
     // MARK: - Initialization
     
     deinit {
         
-        regfree(internalValue)
+        regfree(&internalExpression)
     }
     
-    public init(pattern: String, options: [RegularExpressionCompileOption]) throws {
+    public init(pattern: String, options: [RegularExpression.CompileOption]) throws {
         
         self.pattern = pattern
         self.options = options
         
-        self.internalValue = try POSIXRegexCompile(pattern, options: options)
+        let (code, expression) = POSIXRegularExpression.compile(pattern, options: options)
+        
+        self.internalExpression = expression
+
+        guard code == 0 else { throw RegularExpression.CompileError(rawValue: code)! }
     }
     
-    public func match(string: String, options: [RegularExpressionMatchOption]) throws -> [Range<UInt>] {
+    public func match(string: String, options: [RegularExpression.MatchOption]) throws -> [Range<UInt>] {
         
         return []
     }

@@ -26,3 +26,13 @@ public extension BitMaskOption where Self.RawValue: IntegerType {
         return mask
     }
 }
+
+public extension CollectionType where Self.Generator.Element: BitMaskOption, Self.Generator.Element.RawValue: IntegerType {
+    
+    func optionsBitmask() -> Self.Generator.Element.RawValue {
+        
+        let array = self.filter { (_) -> Bool in return true }
+        
+        return Self.Generator.Element.optionsBitmask(array)
+    }
+}
