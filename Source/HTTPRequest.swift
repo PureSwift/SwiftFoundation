@@ -1,5 +1,5 @@
 //
-//  HTTPURLRequest.swift
+//  HTTPRequest.swift
 //  SwiftFoundation
 //
 //  Created by Alsey Coleman Miller on 6/29/15.
@@ -7,7 +7,7 @@
 //
 
 /** HTTP URL request. */
-public struct HTTPURLRequest: URLRequest {
+public struct HTTPRequest: URLRequest {
         
     public var URL: SwiftFoundation.URL
     
@@ -20,4 +20,6 @@ public struct HTTPURLRequest: URLRequest {
     public var method: HTTPMethod = .GET
     
     public var version: HTTPVersion = HTTPVersion()
+    
+    public init() { }
 }

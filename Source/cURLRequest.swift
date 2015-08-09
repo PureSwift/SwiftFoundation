@@ -7,3 +7,11 @@
 //
 
 import cURL
+
+public extension cURL {
+    
+    init(request: HTTPRequest) {
+        
+        
+    }
+}

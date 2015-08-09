@@ -1,5 +1,5 @@
 //
-//  HTTPURLClient.swift
+//  HTTPClient.swift
 //  SwiftFoundation
 //
 //  Created by Alsey Coleman Miller on 7/20/15.
@@ -7,7 +7,7 @@
 //
 
 /// Loads HTTP requests
-public final class HTTPURLClient: URLClient {
+public final class HTTPClient: URLClient {
         
     public static func validURL(URL: SwiftFoundation.URL) -> Bool {
         
@@ -16,7 +16,7 @@ public final class HTTPURLClient: URLClient {
         return true
     }
     
-    public func sendRequest(request: HTTPURLRequest) throws -> HTTPURLResponse {
+    public func sendRequest(request: HTTPRequest) throws -> HTTPResponse {
         
         throw POSIXError.EXDEV
     }
