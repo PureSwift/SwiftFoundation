@@ -21,11 +21,57 @@ class RegularExpressionTests: XCTestCase {
         super.tearDown()
     }
 
-    func test() {
+    func testSimpleRegex() {
         
-        //let regex = try RegularExpression(pattern: "(+\\d)", options: [])
+        let regex = try! RegularExpression(pattern: "Welcome")
         
+        let string = "Welcome to RegExr v2.0 by gskinner.com!"
         
+        guard let match = regex.match(string, options: [])
+            else { XCTFail("Could not find match"); return }
+        
+        let stringRange = NSRange(match.range)
+        
+        let matchString = (string as NSString).substringWithRange(stringRange)
+        
+        XCTAssert(matchString == "Welcome")
     }
-
+    
+    func testExtendedRegex() {
+        
+        do {
+            
+            let regex = try! RegularExpression(pattern: "a{3}", options: [.ExtendedSyntax])
+            
+            let string = "lorem ipsum aaa"
+            
+            guard let match = regex.match(string, options: [])
+                else { XCTFail("Could not find match"); return }
+            
+            let stringRange = NSRange(match.range)
+            
+            let matchString = (string as NSString).substringWithRange(stringRange)
+            
+            XCTAssert(matchString == "aaa")
+        }
+        
+        do {
+            
+            // match 5 letter word
+            let regex = try! RegularExpression(pattern: "[a-z, A-Z]{4}", options: [.ExtendedSyntax])
+            
+            let string = "Bird, Plane, Coleman"
+            
+            guard let match = regex.match(string, options: [])
+                else { XCTFail("Could not find match"); return }
+            
+            let stringRange = NSRange(match.range)
+            
+            let matchString = (string as NSString).substringWithRange(stringRange)
+            
+            XCTAssert(matchString == "Bird", matchString)
+        }
+    }
 }
+
+
