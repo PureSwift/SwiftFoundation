@@ -38,8 +38,8 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 - [x] DateFormatter (CFLite Backed)
 - [x] Locale (CFLite Backed)
 - [x] HTTPURLClient (```NSURLConnection```)
-- [ ] RegularExpression
+- [X] RegularExpression (POSIX, not ICU)
 - [ ] JSON
 - [ ] Decimal
-- [ ] NotificationCenter
 - [ ] OperationQueue
+- [ ] NotificationCenter
