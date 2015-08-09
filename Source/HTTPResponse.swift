@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-public extension HTTP.Client {
+public extension HTTP {
     
     /// HTTP URL response.
     public struct Response: URLResponse {

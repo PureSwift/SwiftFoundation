@@ -8,10 +8,17 @@
 
 import cURL
 
+public extension HTTP {
+    public typealias Client = HTTPClient
+}
+
 /// Loads HTTP requests
 public struct HTTPClient: URLClient {
     
-    public func sendRequest(request: Request) throws -> Response {
+    public func sendRequest(request: HTTP.Request) throws -> HTTP.Response {
+        
+        // Only HTTP 1.1 is supported
+        guard request.version == HTTP.Version(1, 1) else { throw Error.BadRequest }
         
         let curl = cURL()
         
@@ -24,23 +31,42 @@ public struct HTTPClient: URLClient {
         // append data
         if let bodyData = request.body {
             
-            let storage = curlReadFunctionStorage(data: bodyData)
+            try curl.setOption(CURLOPT_POSTFIELDS, bodyData)
             
-            try curl.setOption(CURLOPT_READFUNCTION, unsafeBitCast(curlReadFunction as curl_read_callback, UnsafePointer<UInt8>.self))
-            
-            try curl.setOption(CURLOPT_READDATA, unsafeBitCast(storage, UnsafePointer<UInt8>.self))
+            try curl.setOption(CURLOPT_POSTFIELDSIZE, bodyData.count)
         }
         
         // set HTTP method
         
         switch request.method {
             
+        case .HEAD:
+            try curl.setOption(CURLOPT_NOBODY, true)
+            try curl.setOption(CURLOPT_CUSTOMREQUEST, request.method.rawValue)
             
+        case .POST:
+            try curl.setOption(CURLOPT_POST, true)
+            
+        case .GET: break // GET is default
             
         default:
             
             try curl.setOption(CURLOPT_CUSTOMREQUEST, request.method.rawValue)
         }
+        
+        // set headers
+        if request.headers.count > 0 {
+            
+            var curlHeaders = [String]()
+            
+            for (header, headerValue) in request.headers {
+                
+                curlHeaders.append(header + ": " + headerValue)
+            }
+            
+            try curl.setOption(CURLOPT_HTTPHEADER, curlHeaders)
+        }
+        
         
         var response = Response(statusCode: 200)
         

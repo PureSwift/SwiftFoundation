@@ -7,9 +7,7 @@
 //
 
 public struct HTTP: URLProtocol {
-    
-    public typealias Client = HTTPClient
-    
+        
     public static func validURL(URL: SwiftFoundation.URL) -> Bool {
         
         guard (URL.scheme == "http" ||  URL.scheme == "https") else { return false }

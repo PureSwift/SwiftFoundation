@@ -28,3 +28,8 @@ public extension HTTP {
     }
 }
 
+public func == (lhs: HTTP.Version, rhs: HTTP.Version) -> Bool {
+    
+    return lhs.major == rhs.major && lhs.minor == rhs.minor
+}
+
