@@ -6,21 +6,25 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-/// Defines the HTTP protocol version.
-public struct HTTPVersion {
+public extension HTTP {
     
-    public typealias ValueType = UInt8
-    
-    /** Major version number. */
-    public var major: ValueType
-    
-    /** Minor version number. */
-    public var minor: ValueType
-    
-    /// Defualts to HTTP 1.1
-    public init(_ major: ValueType = 1, _ minor: ValueType = 1) {
+    /// Defines the HTTP protocol version.
+    public struct Version {
         
-        self.major = major
-        self.minor = minor
+        public typealias ValueType = UInt8
+        
+        /// Major version number.
+        public var major: ValueType
+        
+        /// Minor version number.
+        public var minor: ValueType
+        
+        /// Defualts to HTTP 1.1
+        public init(_ major: ValueType = 1, _ minor: ValueType = 1) {
+            
+            self.major = major
+            self.minor = minor
+        }
     }
 }
+

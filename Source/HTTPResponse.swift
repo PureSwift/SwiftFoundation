@@ -6,17 +6,24 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-/** HTTP URL response. */
-public struct HTTPResponse: URLResponse {
+public extension HTTP.Client {
     
-    /** Returns a dictionary containing all the HTTP header fields. */
-    public var headers: [String: String] = [:]
-    
-    /** Returns the HTTP status code for the response. */
-    public var statusCode: Int = 0
-    
-    /** The HTTP response body. */
-    public var body: Data = []
-    
-    public init() { }
+    /// HTTP URL response.
+    public struct Response: URLResponse {
+        
+        /// Returns a dictionary containing all the HTTP header fields.
+        public var headers: [String: String] = [:]
+        
+        /// Returns the HTTP status code for the response.
+        public var statusCode: Int
+        
+        /// The HTTP response body.
+        public var body: Data = []
+        
+        public init(statusCode: Int) {
+            
+            self.statusCode = statusCode
+        }
+    }
 }
+
