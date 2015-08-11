@@ -55,7 +55,7 @@ public extension FileDescriptor {
     ///
     /// - returns: A file handle associated with a null device.
     ///
-    public static let nullDevice = open("/dev/null", O_RDWR | O_BINARY)
+    public static let nullDevice: FileDescriptor = open("/dev/null", O_RDWR | O_BINARY)
 }
 
 public let O_BINARY: Int32 = 0

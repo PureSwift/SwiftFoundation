@@ -6,155 +6,149 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-public typealias JSONArray = [JSONValue]
-
-public typealias JSONObject = [String: JSONValue]
-
-public enum JSONValue: RawRepresentable {
+/// JavaScript Object Notation
+public struct JSON {
     
-    case Null
-    
-    /// JSON value is a String Value
-    case String(StringValue)
-    
-    /// JSON value is a Number Value (specific subtypes)
-    case Number(JSONNumber)
-    
-    /// JSON value is an Array of other JSON values
-    case Array(JSONArray)
-    
-    /// JSON value a JSON object
-    case Object(JSONObject)
-    
-    // MARK: RawRepresentable
-    
-    public var rawValue: Any {
+    /// JSON value type.
+    /// Guarenteed to be valid JSON if root value is array or object.
+    public enum Value: RawRepresentable {
         
-        switch self {
+        case Null
+        
+        /// JSON value is a String Value
+        case String(StringValue)
+        
+        /// JSON value is a Number Value (specific subtypes)
+        case Number(JSON.Number)
+        
+        /// JSON value is an Array of other JSON values
+        case Array([JSON.Value])
+        
+        /// JSON value a JSON object
+        case Object([StringValue: JSON.Value])
+        
+        // MARK: RawRepresentable
+        
+        public var rawValue: Any {
             
-        case .Null: return Null
-            
-        case .String(let string): return string
-            
-        case .Number(let number): return number.rawValue
-            
-        case .Array(let array): return array.rawValues
-            
-        case .Object(let dictionary):
-            
-            var dictionaryValue = [StringValue: Any](minimumCapacity: dictionary.count)
-            
-            for (key, value) in dictionary {
+            switch self {
                 
-                dictionaryValue[key] = value.rawValue
+            case .Null: return Null
+                
+            case .String(let string): return string
+                
+            case .Number(let number): return number.rawValue
+                
+            case .Array(let array): return array.rawValues
+                
+            case .Object(let dictionary):
+                
+                var dictionaryValue = [StringValue: Any](minimumCapacity: dictionary.count)
+                
+                for (key, value) in dictionary {
+                    
+                    dictionaryValue[key] = value.rawValue
+                }
+                
+                return dictionaryValue
+            }
+        }
+        
+        public init?(rawValue: Any) {
+            
+            guard (rawValue as? NullValue) == nil else {
+                
+                self = .Null
+                return
             }
             
-            return dictionaryValue
-        }
-    }
-    
-    public init?(rawValue: Any) {
-        
-        guard (rawValue as? NullValue) == nil else {
-            
-            self = .Null
-            return
-        }
-        
-        if let string = rawValue as? StringValue {
-            
-            self = .String(string)
-            return
-        }
-        
-        if let number = JSONNumber(rawValue: rawValue) {
-            
-            self = .Number(number)
-            return
-        }
-        
-        if let rawArray = rawValue as? [Any], let jsonArray: JSONArray = JSONValue.fromRawValues(rawArray) {
-            
-            self = .Array(jsonArray)
-            return
-        }
-        
-        if let rawDictionary = rawValue as? [StringValue: Any] {
-            
-            var jsonObject = JSONObject(minimumCapacity: rawDictionary.count)
-            
-            for (key, rawValue) in rawDictionary {
+            if let string = rawValue as? StringValue {
                 
-                guard let jsonValue = JSONValue(rawValue: rawValue) else { return nil }
-                
-                jsonObject[key] = jsonValue
+                self = .String(string)
+                return
             }
             
-            self = .Object(jsonObject)
-            return
-        }
-        
-        return nil
-    }
-}
-
-public enum JSONNumber: RawRepresentable {
-    
-    case Boolean(Bool)
-    
-    case Integer(Int)
-    
-    case Float(FloatValue)
-    
-    case Double(DoubleValue)
-    
-    case Decimal(DecimalValue)
-    
-    // MARK: RawRepresentable
-    
-    public var rawValue: Any {
-        
-        switch self {
-        case .Boolean(let value): return value
-        case .Integer(let value): return value
-        case .Float(let value):   return value
-        case .Double(let value):  return value
-        case .Decimal(let value): return value
+            if let number = JSON.Number(rawValue: rawValue) {
+                
+                self = .Number(number)
+                return
+            }
+            
+            if let rawArray = rawValue as? [Any], let jsonArray: [JSON.Value] = JSON.Value.fromRawValues(rawArray) {
+                
+                self = .Array(jsonArray)
+                return
+            }
+            
+            if let rawDictionary = rawValue as? [StringValue: Any] {
+                
+                var jsonObject = [StringValue: JSONValue](minimumCapacity: rawDictionary.count)
+                
+                for (key, rawValue) in rawDictionary {
+                    
+                    guard let jsonValue = JSON.Value(rawValue: rawValue) else { return nil }
+                    
+                    jsonObject[key] = jsonValue
+                }
+                
+                self = .Object(jsonObject)
+                return
+            }
+            
+            return nil
         }
     }
     
-    public init?(rawValue: Any) {
+    public enum Number: RawRepresentable {
         
-        if let value = rawValue as? Bool            { self = .Boolean(value) }
-        if let value = rawValue as? Int             { self = .Integer(value) }
-        if let value = rawValue as? FloatValue      { self = .Float(value)   }
-        if let value = rawValue as? DoubleValue     { self = .Double(value)  }
-        if let value = rawValue as? DecimalValue    { self = .Decimal(value) }
+        case Boolean(Bool)
         
-        return nil
+        case Integer(Int)
+        
+        case Float(FloatValue)
+        
+        case Double(DoubleValue)
+        
+        case Decimal(DecimalValue)
+        
+        // MARK: RawRepresentable
+        
+        public var rawValue: Any {
+            
+            switch self {
+            case .Boolean(let value): return value
+            case .Integer(let value): return value
+            case .Float(let value):   return value
+            case .Double(let value):  return value
+            case .Decimal(let value): return value
+            }
+        }
+        
+        public init?(rawValue: Any) {
+            
+            if let value = rawValue as? Bool            { self = .Boolean(value) }
+            if let value = rawValue as? Int             { self = .Integer(value) }
+            if let value = rawValue as? FloatValue      { self = .Float(value)   }
+            if let value = rawValue as? DoubleValue     { self = .Double(value)  }
+            if let value = rawValue as? DecimalValue    { self = .Decimal(value) }
+            
+            return nil
+        }
     }
 }
 
-public protocol JSONEncodeable {
+public protocol JSONConvertible {
     
-    /// Encodes the reciever into a JSON object.
-    func toJSON() -> JSONObject
-}
-
-public protocol JSONDecodeable {
+    /// Decodes the reciever from JSON.
+    init?(JSONValue: JSON.Value)
     
-    /// Decodes the reciever from a JSON object.
-    init?(JSONObject: JSONObject)
-}
-
-public protocol JSONValueConvertible {
-    
-    init?(JSONValue: JSONValue)
-    
-    func toJSON() -> JSONValue
+    /// Encodes the reciever into JSON.
+    func toJSON() -> JSON.Value
 }
 
 // Typealiases due to compiler error
+
+public typealias JSONValue = JSON.Value
 
 public typealias StringValue = String
 
@@ -165,6 +159,4 @@ public typealias DoubleValue = Double
 public typealias DecimalValue = Decimal
 
 public typealias NullValue = Null
-
-
 
