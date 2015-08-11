@@ -10,18 +10,37 @@ public extension JSON.Value {
     
     init?(string: Swift.String) {
         
-        switch string {
+        // clear leading white space
+        
+        var data = Data()
+        
+        do {
             
-            case "null": self = .Null
-            case "true": self = .Number(.Boolean(true))
-            case "false": self = .Number(.Boolean(false))
+            var startAddingBytes = false
+            
+            for codeUnit in string.utf8 {
+                
+                if !startAddingBytes && !codeUnit.isWhitespace() {
+                    
+                    startAddingBytes = true
+                }
+                
+                data.append(codeUnit)
+            }
         }
+        
+        
     }
 }
 
-public extension JSON {
+private extension JSON.Value {
     
-    public enum Token {
+    func parse
+}
+
+private extension JSON {
+    
+    private enum Token {
         
         // Control Codes
         static let Linefeed         = UInt8(10)
@@ -71,6 +90,48 @@ public extension JSON {
         static let s                = UInt8(115)
         static let t                = UInt8(116)
         static let u                = UInt8(117)
+    }
+}
+
+private extension UInt8 {
+    
+    /// Determines if the `UnicodeScalar` represents one of the standard Unicode whitespace characters.
+    ///
+    /// :return: `true` if the scalar is a Unicode whitespace character; `false` otherwise.
+    func isWhitespace() -> Bool {
+        if self >= 0x09 && self <= 0x0D        { return true }     // White_Space # Cc   [5] <control-0009>..<control-000D>
+        if self == 0x20                        { return true }     // White_Space # Zs       SPACE
+        if self == 0x85                        { return true }     // White_Space # Cc       <control-0085>
+        if self == 0xA0                        { return true }     // White_Space # Zs       NO-BREAK SPACE
+        
+        // TODO: These are no longer possible to be hit... does it matter???
+        //        if self == 0x1680                      { return true }     // White_Space # Zs       OGHAM SPACE MARK
+        //        if self >= 0x2000 && self <= 0x200A    { return true }     // White_Space # Zs  [11] EN QUAD..HAIR SPACE
+        //        if self == 0x2028                      { return true }     // White_Space # Zl       LINE SEPARATOR
+        //        if self == 0x2029                      { return true }     // White_Space # Zp       PARAGRAPH SEPARATOR
+        //        if self == 0x202F                      { return true }     // White_Space # Zs       NARROW NO-BREAK SPACE
+        //        if self == 0x205F                      { return true }     // White_Space # Zs       MEDIUM MATHEMATICAL SPACE
+        //        if self == 0x3000                      { return true }     // White_Space # Zs       IDEOGRAPHIC SPACE
+        
+        return false
+    }
+    
+    /// Determines if the `UnicodeScalar` respresents a numeric digit.
+    ///
+    /// :return: `true` if the scalar is a Unicode numeric character; `false` otherwise.
+    func isDigit() -> Bool {
+        return self >= JSON.Token.Zero && self <= JSON.Token.Nine
+    }
+    
+    /// Determines if the `UnicodeScalar` respresents a valid terminating character.
+    /// :return: `true` if the scalar is a valid terminator, `false` otherwise.
+    func isValidTerminator() -> Bool {
+        if self == JSON.Token.Comma            { return true }
+        if self == JSON.Token.RightBracket     { return true }
+        if self == JSON.Token.RightCurly       { return true }
+        if self.isWhitespace()                 { return true }
+        
+        return false
     }
 }
 
