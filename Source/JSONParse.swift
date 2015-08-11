@@ -1,5 +1,5 @@
 //
-//  JSONSerialization.swift
+//  JSONParse.swift
 //  SwiftFoundation
 //
 //  Created by Alsey Coleman Miller on 8/10/15.
@@ -10,37 +10,101 @@ public extension JSON.Value {
     
     init?(string: Swift.String) {
         
-        // clear leading white space
+        let data: Data = string.utf8.map({ (codeUnit: UTF8.CodeUnit) -> Byte in
+            return codeUnit as Byte
+        })
         
-        var data = Data()
+        self.init(UTF8Data: data)
+    }
+    
+    init?(UTF8Data data: Data) {
         
-        do {
+        for (index, codeUnit) in data.enumerate() {
             
-            var startAddingBytes = false
+            if codeUnit.isWhitespace() { continue }
             
-            for codeUnit in string.utf8 {
+            let trimmedData: Data = {
                 
-                if !startAddingBytes && !codeUnit.isWhitespace() {
+                let originalData = data
+                
+                var i = index
+                
+                var data = Data()
+                
+                for i; i < originalData.count; i++ {
                     
-                    startAddingBytes = true
+                    data.append(originalData[i])
                 }
                 
-                data.append(codeUnit)
+                return data
+            }()
+            
+            if codeUnit == JSON.Token.LeftCurly {
+            
+                guard let value = parseObject(trimmedData) else { return nil }
+                
+                self = JSON.Value.Object(value)
+            }
+            
+            /*
+            else if codeUnit == JSON.Token.LeftBracket { self = parseArray(generator); return }
+            
+            else if codeUnit.isDigit() || codeunit == JSON.Token.Minus {
+                self = parseNumber(generator); return
+            }
+            else if codeUnit == Token.t {
+                self = parseTrue(generator); return
+            }
+            else if codeUnit == Token.f {
+                self = parseFalse(generator); return
+            }
+            else if codeUnit == Token.n {
+                self = parseNull(generator); return
+            }
+            else if codeUnit == Token.DoubleQuote || codeunit == Token.SingleQuote {
+                self = parseString(generator, quote: codeunit); return
+            }
+            */
+            
+            // invalid starting character
+            break
+        }
+        
+        return nil
+    }
+}
+
+private func parseObject(data: Data) -> [String: JSON.Value]? {
+    
+    var state = JSON.ObjectParsingState()
+    
+    var object = [StringValue: JSONValue]()
+    
+    for (index, codeUnit) in data.enumerate() {
+        
+        switch (index, codeUnit) {
+            
+        case (0, JSON.Token.LeftCurly): continue
+            
+        case (_, JSON.Token.RightCurly):
+            
+            switch state {
+                
+                case .Initial: fallthrough
+                
+                case .Value:
             }
         }
         
         
     }
-}
-
-private extension JSON.Value {
     
-    func parse
+    return object
 }
 
 private extension JSON {
     
-    private enum Token {
+    private struct Token {
         
         // Control Codes
         static let Linefeed         = UInt8(10)
@@ -91,6 +155,16 @@ private extension JSON {
         static let t                = UInt8(116)
         static let u                = UInt8(117)
     }
+    
+    private enum ObjectParsingState {
+        case Initial
+        case Key
+        case Value
+        
+        init() { self = .Initial }
+    }
+    
+    
 }
 
 private extension UInt8 {
