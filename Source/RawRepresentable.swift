@@ -62,13 +62,6 @@ public extension RawRepresentable {
 
 // MARK: - Operator Overloading
 
-// MARK: Equatable
-
-public func == <T where T: RawRepresentable, T.RawValue: Equatable>(lhs: T, rhs: T) -> Bool {
-    
-    return lhs.rawValue == rhs.rawValue
-}
-
 public func ~= <T where T: RawRepresentable, T.RawValue: Equatable>(lhs: T, rhs: T) -> Bool {
     
     return lhs.rawValue ~= rhs.rawValue
