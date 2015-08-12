@@ -48,27 +48,63 @@ public extension JSON.Value {
                 guard let value = JSON.parseObject(data, index: &index) else { return nil }
                 
                 self = JSON.Value.Object(value)
+                
+                return
+            }
+                
+            else if codeUnit == JSON.Token.LeftBracket {
+                
+                guard let value = JSON.parseArray(data, index: &index) else { return nil }
+                
+                self = JSON.Value.Array(value)
+                
+                return
             }
             
-            /*
-            else if codeUnit == JSON.Token.LeftBracket { self = parseArray(generator); return }
+            else if codeUnit.isDigit() || codeUnit == JSON.Token.Minus {
+                
+                guard let value = JSON.parseNumber(data, index: &index) else { return nil }
+                
+                self = JSON.Value.Number(value)
+                
+                return
+            }
+                
+            else if codeUnit == JSON.Token.t {
+                
+                guard JSON.parseTrue(data, index: &index) else { return nil }
+                
+                self = JSON.Value.Number(.Boolean(true))
+                
+                return
+            }
             
-            else if codeUnit.isDigit() || codeunit == JSON.Token.Minus {
-                self = parseNumber(generator); return
+            else if codeUnit == JSON.Token.f {
+                
+                guard JSON.parseFalse(data, index: &index) else { return nil }
+                
+                self = JSON.Value.Number(.Boolean(false))
+                
+                return
             }
-            else if codeUnit == Token.t {
-                self = parseTrue(generator); return
+            
+            else if codeUnit == JSON.Token.n {
+                
+                guard JSON.parseNull(data, index: &index) else { return nil }
+                
+                self = JSON.Value.Number(.Boolean(false))
+                
+                return
             }
-            else if codeUnit == Token.f {
-                self = parseFalse(generator); return
+                
+            else if codeUnit == JSON.Token.DoubleQuote || codeUnit == JSON.Token.SingleQuote {
+                
+                guard let value = JSON.parseString(data, index: &index, quote: codeUnit) else { return nil }
+                
+                self = JSON.Value.String(value)
+                
+                return
             }
-            else if codeUnit == Token.n {
-                self = parseNull(generator); return
-            }
-            else if codeUnit == Token.DoubleQuote || codeunit == Token.SingleQuote {
-                self = parseString(generator, quote: codeunit); return
-            }
-            */
             
             // invalid starting character
             break
@@ -202,7 +238,7 @@ private extension JSON {
                     
                     state = .Key
                     
-                    guard let parsedKey = parseString(data, index: index, quote: codeUnit) else { return nil }
+                    guard let parsedKey = parseString(data, index: &index, quote: codeUnit) else { return nil }
                     
                     key = parsedKey
                     
@@ -245,7 +281,7 @@ private extension JSON {
         return nil // unable to parse object
     }
     
-    static private func parseArray(data: Data, index: Int = 0) -> [JSON.Value]? {
+    static private func parseArray(data: Data, inout index: Int) -> [JSON.Value]? {
         
         var index = index
         
@@ -279,7 +315,7 @@ private extension JSON {
     }
     
     /// Parses data for non-boolean number.
-    static private func parseNumber(data: Data, index: Int = 0) -> JSON.Number? {
+    static private func parseNumber(data: Data, inout index: Int) -> JSON.Number? {
         
         var index = index
         
@@ -350,7 +386,7 @@ private extension JSON {
         return JSON.Number(number: number, numberSign: numberSign, depth: depth, exponent: exponent, exponentSign: exponentSign, parsingState: state)
     }
     
-    static func parseTrue(data: Data, index: Int = 0) -> Bool {
+    static func parseTrue(data: Data, inout index: Int) -> Bool {
         
         var index = index
         
@@ -380,7 +416,7 @@ private extension JSON {
         return true
     }
     
-    static func parseFalse(data: Data, index: Int = 0) -> Bool {
+    static func parseFalse(data: Data, inout index: Int) -> Bool {
         
         var index = index
         
@@ -411,7 +447,7 @@ private extension JSON {
         return true
     }
     
-    static func parseNull(data: Data, index: Int = 0) -> Bool {
+    static func parseNull(data: Data, inout index: Int) -> Bool {
         
         var index = index
         
@@ -453,11 +489,9 @@ private extension JSON {
         }
     }
     
-    static private func parseString(data: Data, index: Int = 0, quote: Byte) -> String? {
+    static private func parseString(data: Data, inout index: Int, quote: Byte) -> String? {
         
         var stringBytes = Data()
-        
-        var index = index
         
         for (index; index < data.count; index++) {
             
@@ -507,11 +541,37 @@ private extension JSON {
                     
                 case Token.t:               stringBytes.append(Token.HorizontalTab)
                     
+                case Token.u:
+                    
+                    guard index + 4 < data.count else { return nil }
+                    
+                    let c1 = data[index + 1]
+                    let c2 = data[index + 2]
+                    let c3 = data[index + 3]
+                    let c4 = data[index + 4]
+                    
+                    index = index + 4
+                    
+                    guard let value1 = parseHexDigit(c1) else { return nil } // Invalid unicode escape sequence
+                    guard let value2 = parseHexDigit(c2) else { return nil }
+                    guard let value3 = parseHexDigit(c3) else { return nil }
+                    guard let value4 = parseHexDigit(c4) else { return nil }
+                    
+                    let codepoint = (value1 << 12) | (value2 << 8) | (value3 << 4) | value4
+                    
+                    let character = String(UnicodeScalar(codepoint))
+                    
+                    let escapeBytes: Data = character.utf8.map({ (codeUnit: UTF8.CodeUnit) -> Byte in
+                        return codeUnit as Byte
+                    })
+                    
+                    stringBytes.extend(escapeBytes)
+                    
                 default: return nil
                 
                 }
                 
-            default: return nil
+            default: stringBytes.append(codeUnit)
             }
         }
             
