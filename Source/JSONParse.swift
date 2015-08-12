@@ -8,6 +8,7 @@
 
 public extension JSON.Value {
     
+    /// creates JSON from string
     init?(string: Swift.String) {
         
         let data: Data = string.utf8.map({ (codeUnit: UTF8.CodeUnit) -> Byte in
@@ -17,31 +18,34 @@ public extension JSON.Value {
         self.init(UTF8Data: data)
     }
     
+    /// Parses UTF-8 Data for a JSON value
+    ///
+    /// - parameter data: The data array that will be parsed.
+    ///
     init?(UTF8Data data: Data) {
         
-        for (index, codeUnit) in data.enumerate() {
+        var index = 0
+        
+        self.init(UTF8Data: data, index: &index)
+    }
+    
+    /// Parses UTF-8 Data for a JSON value
+    ///
+    /// - parameter data: The data array that will be parsed.
+    ///
+    /// - parameter index: The index of the data array where the parsing should start. Defaults to 0.
+    ///
+    private init?(UTF8Data data: Data, inout index: Int) {
+        
+        for (index; index < data.count; index++) {
+            
+            let codeUnit = data[index]
             
             if codeUnit.isWhitespace() { continue }
             
-            let trimmedData: Data = {
-                
-                let originalData = data
-                
-                var i = index
-                
-                var data = Data()
-                
-                for i; i < originalData.count; i++ {
-                    
-                    data.append(originalData[i])
-                }
-                
-                return data
-            }()
-            
             if codeUnit == JSON.Token.LeftCurly {
             
-                guard let value = parseObject(trimmedData) else { return nil }
+                guard let value = JSON.parseObject(data, index: &index) else { return nil }
                 
                 self = JSON.Value.Object(value)
             }
@@ -74,33 +78,7 @@ public extension JSON.Value {
     }
 }
 
-private func parseObject(data: Data) -> [String: JSON.Value]? {
-    
-    var state = JSON.ObjectParsingState()
-    
-    var object = [StringValue: JSONValue]()
-    
-    for (index, codeUnit) in data.enumerate() {
-        
-        switch (index, codeUnit) {
-            
-        case (0, JSON.Token.LeftCurly): continue
-            
-        case (_, JSON.Token.RightCurly):
-            
-            switch state {
-                
-                case .Initial: fallthrough
-                
-                case .Value:
-            }
-        }
-        
-        
-    }
-    
-    return object
-}
+// MARK: - Supporting Types
 
 private extension JSON {
     
@@ -157,6 +135,7 @@ private extension JSON {
     }
     
     private enum ObjectParsingState {
+        
         case Initial
         case Key
         case Value
@@ -164,7 +143,380 @@ private extension JSON {
         init() { self = .Initial }
     }
     
+    enum NumberParsingState {
+        
+        case Initial
+        case Whole
+        case Decimal
+        case Exponent
+        case ExponentDigits
+        
+        init() { self = .Initial }
+    }
+}
+
+// MARK: - Parsing Functions
+
+private extension JSON {
     
+    /// Parses UTF-8 Data for a JSON object
+    ///
+    /// - parameter data: The data array that will be parsed
+    ///
+    /// - parameter index: The index of the data array where the parsing should start.
+    ///
+    static private func parseObject(data: Data, inout index: Int) -> [String: JSON.Value]? {
+        
+        var state = JSON.ObjectParsingState()
+        
+        var key = ""
+        
+        var object = [StringValue: JSONValue]()
+        
+        for (index; index < data.count; index++) {
+            
+            let codeUnit = data[index]
+            
+            switch (index, codeUnit) {
+                
+            case (0, JSON.Token.LeftCurly): continue
+                
+            case (_, JSON.Token.RightCurly):
+                
+                switch state {
+                    
+                case .Initial, .Value:
+                    
+                    index++ // eat the '}'
+                    
+                    return object
+                    
+                default: return nil // Expected }
+                }
+                
+            case (_, JSON.Token.SingleQuote), (_, JSON.Token.DoubleQuote):
+                
+                switch state {
+                    
+                case .Initial:
+                    
+                    state = .Key
+                    
+                    guard let parsedKey = parseString(data, index: index, quote: codeUnit) else { return nil }
+                    
+                    key = parsedKey
+                    
+                default: return nil // expected ' or "
+                }
+                
+            case (_, JSON.Token.Colon):
+                
+                switch state {
+                    
+                case .Key:
+                    
+                    state = .Value
+                    
+                    guard let parsedValue = JSON.Value(UTF8Data: data, index: &index) else { return nil }
+                    
+                    object[key] = parsedValue
+                    
+                default: return nil
+                }
+                
+            case (_, JSON.Token.Comma):
+                switch state {
+                    
+                case .Value:
+                    state = .Initial
+                    key = ""
+                    
+                default: return nil // expected ,
+                }
+                
+            default:
+                
+                if codeUnit.isWhitespace() { continue }
+                
+                else { return nil } // unexpected token
+            }
+        }
+        
+        return nil // unable to parse object
+    }
+    
+    static private func parseArray(data: Data, index: Int = 0) -> [JSON.Value]? {
+        
+        var index = index
+        
+        var values = [JSONValue]()
+        
+        for (index; index < data.count; index++) {
+            
+            let codeUnit = data[index]
+            
+            switch (index, codeUnit) {
+                
+            case (0, JSON.Token.LeftBracket): continue
+                
+            case (_, JSON.Token.RightBracket):
+                
+                index++ // eat the ']'
+                
+                return values
+                
+            default:
+                
+                if codeUnit.isWhitespace() || codeUnit == JSON.Token.Comma { continue }
+                
+                guard let parsedValue = JSON.Value(UTF8Data: data, index: &index) else { return nil }
+                
+                values.append(parsedValue)
+            }
+        }
+        
+        return nil // unable to parse array
+    }
+    
+    /// Parses data for non-boolean number.
+    static private func parseNumber(data: Data, index: Int = 0) -> JSON.Number? {
+        
+        var index = index
+        
+        var state = NumberParsingState()
+        
+        var number = 0.0
+        var numberSign = 1.0
+        var depth = 0.1
+        var exponent = 0
+        var exponentSign = 1
+        
+        for (index; index < data.count; index++) {
+            
+            let codeUnit = data[index]
+            
+            switch (index, codeUnit, state) {
+                
+            case (0, Token.Minus, NumberParsingState.Initial):
+                numberSign = -1
+                state = .Whole
+                
+            case (_, Token.Minus, NumberParsingState.Exponent):
+                exponentSign = -1
+                state = .ExponentDigits
+                
+            case (_, Token.Plus, NumberParsingState.Initial):
+                state = .Whole
+                
+            case (_, Token.Plus, NumberParsingState.Exponent):
+                state = .ExponentDigits
+                
+            case (_, Token.Zero...Token.Nine, NumberParsingState.Initial):
+                state = .Whole
+                fallthrough
+                
+            case (_, Token.Zero...Token.Nine, NumberParsingState.Whole):
+                number = number * 10 + Double(codeUnit - Token.Zero)
+                
+            case (_, Token.Zero...Token.Nine, NumberParsingState.Decimal):
+                number = number + depth * Double(codeUnit - Token.Zero)
+                depth /= 10
+                
+            case (_, Token.Zero...Token.Nine, NumberParsingState.Exponent):
+                state = .ExponentDigits
+                fallthrough
+                
+            case (_, Token.Zero...Token.Nine, NumberParsingState.ExponentDigits):
+                exponent = exponent * 10 + Int(codeUnit) - Int(Token.Zero)
+                
+            case (_, Token.Period, NumberParsingState.Whole):
+                state = .Decimal
+                
+            case (_, Token.e, NumberParsingState.Whole):      state = .Exponent
+            case (_, Token.E, NumberParsingState.Whole):      state = .Exponent
+            case (_, Token.e, NumberParsingState.Decimal):    state = .Exponent
+            case (_, Token.E, NumberParsingState.Decimal):    state = .Exponent
+                
+            default:
+                
+                guard codeUnit.isValidTerminator() else { return nil } // unexpected token
+                
+                return JSON.Number(number: number, numberSign: numberSign, depth: depth, exponent: exponent, exponentSign: exponentSign, parsingState: state)
+            }
+        }
+        
+        guard index < data.count else { return nil } // unable to parse array
+        
+        return JSON.Number(number: number, numberSign: numberSign, depth: depth, exponent: exponent, exponentSign: exponentSign, parsingState: state)
+    }
+    
+    static func parseTrue(data: Data, index: Int = 0) -> Bool {
+        
+        var index = index
+        
+        for (index; index < data.count; index++) {
+            
+            let codeUnit = data[index]
+            
+            switch (index, codeUnit) {
+                
+            case (0, Token.t): continue
+            case (1, Token.r): continue
+            case (2, Token.u): continue
+            case (3, Token.e): continue
+            case (4, _):
+                
+                guard codeUnit.isValidTerminator()
+                    else { return false }
+                
+                return true
+                
+            default: return false
+            }
+        }
+        
+        guard index < data.count else { return false }
+        
+        return true
+    }
+    
+    static func parseFalse(data: Data, index: Int = 0) -> Bool {
+        
+        var index = index
+        
+        for (index; index < data.count; index++) {
+            
+            let codeUnit = data[index]
+            
+            switch (index, codeUnit) {
+                
+            case (0, Token.f): continue
+            case (1, Token.a): continue
+            case (2, Token.l): continue
+            case (3, Token.s): continue
+            case (4, Token.e): continue
+            case (5, _):
+                
+                guard codeUnit.isValidTerminator()
+                    else { return false }
+                
+                return true
+                
+            default: return false
+            }
+        }
+        
+        guard index < data.count else { return false }
+        
+        return true
+    }
+    
+    static func parseNull(data: Data, index: Int = 0) -> Bool {
+        
+        var index = index
+        
+        for (index; index < data.count; index++) {
+            
+            let codeUnit = data[index]
+            
+            switch (index, codeUnit) {
+                
+            case (0, Token.n): continue
+            case (1, Token.u): continue
+            case (2, Token.l): continue
+            case (3, Token.l): continue
+            case (4, _):
+                
+                guard codeUnit.isValidTerminator()
+                    else { return false }
+                
+                return true
+                
+            default: return false
+            }
+        }
+        
+        guard index < data.count else { return false }
+        
+        return true
+    }
+    
+    private static func parseHexDigit(digit: UInt8) -> Int? {
+        if Token.Zero <= digit && digit <= Token.Nine {
+            return Int(digit) - Int(Token.Zero)
+        } else if Token.a <= digit && digit <= Token.f {
+            return 10 + Int(digit) - Int(Token.a)
+        } else if Token.A <= digit && digit <= Token.F {
+            return 10 + Int(digit) - Int(Token.A)
+        } else {
+            return nil
+        }
+    }
+    
+    static private func parseString(data: Data, index: Int = 0, quote: Byte) -> String? {
+        
+        var stringBytes = Data()
+        
+        var index = index
+        
+        for (index; index < data.count; index++) {
+            
+            let codeUnit = data[index]
+            
+            switch (index, codeUnit) {
+            
+            // Beginning
+            case (0, quote): continue
+            
+            // End
+            case (_, quote):
+                
+                index++ // eat the quote
+                
+                stringBytes.append(0)
+                
+                let pointer = UnsafePointer<CChar>(stringBytes)
+                
+                guard let string = String.fromCString(pointer) else { return nil }
+                
+                return string
+                
+            case (_, Token.Backslash):
+                
+                guard index < data.count else { return nil }
+                
+                index++
+                
+                let nextByte: Byte = data[index]
+                
+                switch nextByte {
+                    
+                case Token.Backslash:       stringBytes.append(Token.Backslash)
+                    
+                case Token.Forwardslash:    stringBytes.append(Token.Forwardslash)
+                    
+                case quote:                 stringBytes.append(Token.DoubleQuote)
+                    
+                case Token.n:               stringBytes.append(Token.Linefeed)
+                    
+                case Token.b:               stringBytes.append(Token.Backspace)
+                    
+                case Token.f:               stringBytes.append(Token.Formfeed)
+                    
+                case Token.r:               stringBytes.append(Token.CarriageReturn)
+                    
+                case Token.t:               stringBytes.append(Token.HorizontalTab)
+                    
+                default: return nil
+                
+                }
+                
+            default: return nil
+            }
+        }
+            
+        return nil
+    }
 }
 
 private extension UInt8 {
@@ -178,7 +530,7 @@ private extension UInt8 {
         if self == 0x85                        { return true }     // White_Space # Cc       <control-0085>
         if self == 0xA0                        { return true }     // White_Space # Zs       NO-BREAK SPACE
         
-        // TODO: These are no longer possible to be hit... does it matter???
+        // These are no longer possible to be hit... does it matter???
         //        if self == 0x1680                      { return true }     // White_Space # Zs       OGHAM SPACE MARK
         //        if self >= 0x2000 && self <= 0x200A    { return true }     // White_Space # Zs  [11] EN QUAD..HAIR SPACE
         //        if self == 0x2028                      { return true }     // White_Space # Zl       LINE SEPARATOR
@@ -208,4 +560,49 @@ private extension UInt8 {
         return false
     }
 }
+
+private extension JSON.Number {
+    
+    init(number: DoubleValue = 0.0,
+        numberSign: DoubleValue = 1.0,
+        depth: DoubleValue = 0.1,
+        exponent: Int = 0,
+        exponentSign: Int = 1,
+        parsingState state: JSON.NumberParsingState) {
+            
+            typealias JSONNumber = JSON.Number
+        
+            switch state {
+                
+            case .Initial: fatalError("Create number shouldn't be called with an initial state for JSON number parsing")
+                
+            case .Whole:
+                
+                let value = Int(number * numberSign)
+                
+                self = JSONNumber.Integer(value)
+                
+            case .Decimal:
+                
+                let value = number * numberSign
+                
+                self = JSONNumber.Double(value)
+                
+            case .Exponent, .ExponentDigits:
+                
+                let doubleValue = JSONNumber.exp(number, exponent * exponentSign) * numberSign
+                
+                // TODO: Decimal JSON number parse
+                
+                self = JSONNumber.Double(doubleValue)
+            }
+    }
+    
+    static func exp(number: DoubleValue, _ exp: Int) -> DoubleValue {
+        return exp < 0 ?
+            (0 ..< abs(exp)).reduce(number, combine: { x, _ in x / 10 }) :
+            (0 ..< exp).reduce(number, combine: { x, _ in x * 10 })
+    }
+}
+
 

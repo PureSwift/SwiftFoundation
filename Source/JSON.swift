@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-/// JavaScript Object Notation
+/// [JavaScript Object Notation](json.org)
 public struct JSON {
     
     /// JSON value type.
@@ -105,8 +105,6 @@ public struct JSON {
         
         case Integer(Int)
         
-        case Float(FloatValue)
-        
         case Double(DoubleValue)
         
         case Decimal(DecimalValue)
@@ -118,7 +116,6 @@ public struct JSON {
             switch self {
             case .Boolean(let value): return value
             case .Integer(let value): return value
-            case .Float(let value):   return value
             case .Double(let value):  return value
             case .Decimal(let value): return value
             }
@@ -128,7 +125,6 @@ public struct JSON {
             
             if let value = rawValue as? Bool            { self = .Boolean(value) }
             if let value = rawValue as? Int             { self = .Integer(value) }
-            if let value = rawValue as? FloatValue      { self = .Float(value)   }
             if let value = rawValue as? DoubleValue     { self = .Double(value)  }
             if let value = rawValue as? DecimalValue    { self = .Decimal(value) }
             
