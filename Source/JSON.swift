@@ -22,10 +22,10 @@ public struct JSON {
         case Number(JSON.Number)
         
         /// JSON value is an Array of other JSON values
-        case Array([JSON.Value])
+        case Array(JSONArray)
         
         /// JSON value a JSON object
-        case Object([StringValue: JSON.Value])
+        case Object(JSONObject)
         
         // MARK: RawRepresentable
         
@@ -141,6 +141,10 @@ public protocol JSONConvertible {
 // Typealiases due to compiler error
 
 public typealias JSONValue = JSON.Value
+
+public typealias JSONArray = [JSON.Value]
+
+public typealias JSONObject = [String: JSON.Value]
 
 public typealias StringValue = String
 

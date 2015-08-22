@@ -53,12 +53,7 @@ private extension JSON.Value {
             
             let value = json_object_get_boolean(jsonObject)
             
-            let boolean: Bool = {
-                
-                if value == 0 { return false }
-                
-                else { return true }
-            }()
+            let boolean: Bool = { if value == 0 { return false } else { return true } }()
             
             self = .Number(.Boolean(boolean))
             
