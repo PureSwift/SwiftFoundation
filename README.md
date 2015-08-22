@@ -20,26 +20,28 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 - Linux
 	- ICU
 	- CFLite
-	- libcurl
+	- curl
+	- json-c
 - Darwin (uses [Carthage](https://github.com/Carthage/Carthage))
-	- [libcurl](https://github.com/PureSwift/curl)
+	- [curl](https://github.com/PureSwift/curl)
+	- [json-c](https://github.com/PureSwift/json-c)
 
 ## Implemented
 To see what parts of Foundation are implemented, just look at the unit tests. Completed functionality will be fully unit tested. Note that there are some functionality that is written as a protocol only, that will not be included on this list.
 
 - [x] Date
 - [x] Null
-- [x] Order (```NSComparisonResult```)
+- [x] Order (equivalent to ```NSComparisonResult```)
 - [x] SortDescriptor
 - [x] UUID
 - [x] FileManager
 - [x] Data
 - [x] URL
-- [x] DateFormatter (CFLite Backed)
-- [x] Locale (CFLite Backed)
-- [x] HTTPURLClient (```NSURLConnection```)
+- [x] DateFormatter (uses ```CFDateFormatter```)
+- [x] Locale (uses ```CFLocale```)
+- [x] HTTPClient (equivalent to ```NSURLConnection```)
 - [X] RegularExpression (POSIX, not ICU)
-- [ ] JSON
+- [x] JSON
 - [ ] Decimal
 - [ ] OperationQueue
 - [ ] NotificationCenter
