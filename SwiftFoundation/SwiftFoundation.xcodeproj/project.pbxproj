@@ -40,6 +40,7 @@
 		1A98096F1B7190CA0030EF9B /* cURLWriteFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A98096E1B7190CA0030EF9B /* cURLWriteFunction.swift */; };
 		1A9D97421B7720E400D86F7C /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D97411B7720E400D86F7C /* HTTP.swift */; };
 		1A9D97441B77235900D86F7C /* URLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D97431B77235900D86F7C /* URLProtocol.swift */; };
+		1A9F2A1D1B88619700FC02CF /* JSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1C1B88619700FC02CF /* JSONSerialization.swift */; };
 		1AA624CB1B708578000BC58C /* cURLReadFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA624CA1B708578000BC58C /* cURLReadFunction.swift */; };
 		1AABD32C1B6D77BD00E237AA /* cURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABD32B1B6D77BD00E237AA /* cURL.swift */; };
 		1AC4F9BC1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4F9BB1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift */; };
@@ -141,6 +142,7 @@
 		1A98096E1B7190CA0030EF9B /* cURLWriteFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cURLWriteFunction.swift; sourceTree = "<group>"; };
 		1A9D97411B7720E400D86F7C /* HTTP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
 		1A9D97431B77235900D86F7C /* URLProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLProtocol.swift; sourceTree = "<group>"; };
+		1A9F2A1C1B88619700FC02CF /* JSONSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerialization.swift; sourceTree = "<group>"; };
 		1AA624CA1B708578000BC58C /* cURLReadFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cURLReadFunction.swift; sourceTree = "<group>"; };
 		1AABD32B1B6D77BD00E237AA /* cURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cURL.swift; sourceTree = "<group>"; };
 		1AC4F9BB1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXFileSystemStatus.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 			children = (
 				6E30BA271B40F66C009B1B49 /* JSON.swift */,
 				1A62790F1B79AE8E0007CC95 /* JSONParse.swift */,
+				1A9F2A1C1B88619700FC02CF /* JSONSerialization.swift */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				6E574ED31B4A3ED500F629B3 /* String.swift in Sources */,
 				1A7639581B743BB100062A67 /* cURLError.swift in Sources */,
 				1A85C4081B5F9FFB002DDADB /* FilePermission.swift in Sources */,
+				1A9F2A1D1B88619700FC02CF /* JSONSerialization.swift in Sources */,
 				6E66A6641B49A5FC00CB82CD /* BlockOperation.swift in Sources */,
 				6E66A6611B486A4400CB82CD /* RawRepresentable.swift in Sources */,
 				6E16C2FD1B47ADF700C07C25 /* Operation.swift in Sources */,
