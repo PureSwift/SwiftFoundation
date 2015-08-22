@@ -22,6 +22,8 @@ public extension JSON.Value {
         
         let jsonObject = json_tokener_parse_verbose(string, tokenerError)
         
+        defer { json_object_put(jsonObject) }
+        
         // could not parse
         guard tokenerError != nil else { return nil }
         
@@ -33,9 +35,6 @@ private extension JSON.Value {
     
     /// Create a JSON value from a ```json_object``` pointer created by the **json-c** library.
     init(jsonObject: COpaquePointer) {
-        
-        // defer { json_object_put(jsonObject) }
-        
         let type = json_object_get_type(jsonObject)
         
         switch type {

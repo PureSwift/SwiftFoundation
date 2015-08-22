@@ -34,7 +34,7 @@ class JSONTests: XCTestCase {
             let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
             
             guard let jsonValue = JSON.Value(string: jsonString)
-                else { XCTFail("JSON parsing falied"); return }
+                else { XCTFail("JSON parsing failed"); return }
             
             print("Parsed JSON: \(jsonValue)\n")
         }
@@ -60,6 +60,7 @@ class JSONTests: XCTestCase {
     
     // MARK: - Performance Tests
     
+    /*
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock {
@@ -73,5 +74,6 @@ class JSONTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    */
 
 }
