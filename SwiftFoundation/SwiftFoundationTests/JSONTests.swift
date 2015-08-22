@@ -58,6 +58,22 @@ class JSONTests: XCTestCase {
         parseJSON([true, false, 10, 10.10, "string", ["subarrayValue1", "subarrayValue2"], ["subobjectKey", "subobjectValue"]])
     }
     
+    func testJSONWriting() {
+        
+        let json = JSON.Value.Object(["Key": JSON.Value.String("Value")])
+        
+        guard let jsonString = json.toString()
+            else { XCTFail("Could not serialize JSON"); return }
+        
+        print("JSON Output: \(jsonString)")
+        
+        let foundationJSONOutput = try! NSJSONSerialization.dataWithJSONObject(json.toFoundation().rawValue, options: NSJSONWritingOptions())
+        
+        let foundationJSONOutputString = NSString(data: foundationJSONOutput, encoding: NSUTF8StringEncoding)
+        
+        XCTAssert(jsonString == foundationJSONOutputString, "\(jsonString) == \(foundationJSONOutputString)")
+    }
+    
     // MARK: - Performance Tests
     
     /*

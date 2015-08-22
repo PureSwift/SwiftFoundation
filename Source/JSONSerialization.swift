@@ -58,7 +58,17 @@ public extension JSON {
 public extension JSON.Value {
     
     /// Serializes the JSON to a string.
-    func toString(options: [JSON.Serialization.WritingOption]) -> Swift.String {
+    ///
+    /// - Precondition: JSON value must be an array or object.
+    ///
+    func toString(options: [JSON.Serialization.WritingOption] = []) -> Swift.String? {
+        
+        switch self {
+            
+        case .Object(_), .Array(_): break
+            
+        default: return nil
+        }
         
         let jsonObject = self.toJSONObject()
         
@@ -80,7 +90,7 @@ public extension JSON.Value {
         
         switch self {
             
-        case .Null: return json_object_new_array() // FIXME: 
+        case .Null: return nil
             
         case .String(let value): return json_object_new_string(value)
             

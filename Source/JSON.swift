@@ -56,7 +56,7 @@ public struct JSON {
         
         public init?(rawValue: Any) {
             
-            guard (rawValue as? NullValue) == nil else {
+            guard (rawValue as? SwiftFoundation.Null) == nil else {
                 
                 self = .Null
                 return
@@ -80,7 +80,7 @@ public struct JSON {
                 return
             }
             
-            if let rawDictionary = rawValue as? [StringValue: Any] {
+            if let rawDictionary = rawValue as? [Swift.String: Any] {
                 
                 var jsonObject = [StringValue: JSONValue](minimumCapacity: rawDictionary.count)
                 
