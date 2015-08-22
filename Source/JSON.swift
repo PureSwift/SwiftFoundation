@@ -11,7 +11,7 @@ public struct JSON {
     
     /// JSON value type.
     /// Guarenteed to be valid JSON if root value is array or object.
-    public enum Value: RawRepresentable {
+    public enum Value: RawRepresentable, CustomStringConvertible {
         
         case Null
         
@@ -33,7 +33,7 @@ public struct JSON {
             
             switch self {
                 
-            case .Null: return Null
+            case .Null: return SwiftFoundation.Null()
                 
             case .String(let string): return string
                 
@@ -62,7 +62,7 @@ public struct JSON {
                 return
             }
             
-            if let string = rawValue as? StringValue {
+            if let string = rawValue as? Swift.String {
                 
                 self = .String(string)
                 return
@@ -97,9 +97,15 @@ public struct JSON {
             
             return nil
         }
+        
+        // MARK: - CustomStringConvertible
+        
+        public var description: Swift.String { return "\(rawValue)" }
     }
     
-    public enum Number: RawRepresentable {
+    // MARK: - JSON Number
+    
+    public enum Number: RawRepresentable, CustomStringConvertible {
         
         case Boolean(Bool)
         
@@ -125,6 +131,13 @@ public struct JSON {
             if let value = rawValue as? DoubleValue     { self = .Double(value)  }
             
             return nil
+        }
+        
+        // MARK: - CustomStringConvertible
+        
+        public var description: String {
+            
+            return "\(rawValue)"
         }
     }
 }

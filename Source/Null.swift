@@ -9,7 +9,7 @@
 /** An OOP placeholder for ```nil```. */
 public struct Null: CustomStringConvertible, Equatable {
     
-    public var description: String { return "<null>" }
+    public var description: String { return "Null" }
 }
 
 // MARK: - Operator Overloading
