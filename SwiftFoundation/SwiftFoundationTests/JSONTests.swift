@@ -27,9 +27,11 @@ class JSONTests: XCTestCase {
         
         let jsonObject = ["Key": "Value"]
         
-        let data = try! NSJSONSerialization.dataWithJSONObject(jsonObject, options: NSJSONWritingOptions.PrettyPrinted).arrayOfBytes()
+        let data = try! NSJSONSerialization.dataWithJSONObject(jsonObject, options: NSJSONWritingOptions.PrettyPrinted)
         
-        guard let jsonValue = JSON.Value(UTF8Data: data)
+        let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
+        
+        guard let jsonValue = JSON.Value(string: jsonString)
             else { XCTFail("JSON parsing falied"); return }
         
         print(jsonValue)
