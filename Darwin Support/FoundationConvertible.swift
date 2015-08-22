@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Type can be converted to and from Apple's ***Foundation*** equivalent types.
+/// Type that can be converted to and from Apple's ***Foundation*** equivalent types.
 public protocol FoundationConvertible {
     
     typealias FoundationType

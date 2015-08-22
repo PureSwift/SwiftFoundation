@@ -27,7 +27,7 @@ class DateFormatterTests: XCTestCase {
         
         let formatString = "YYYY-MM-dd hh:mm:ss"
         
-        let foundationDate = NSDate(date: date)
+        let foundationDate = date.toFoundation()
         
         let formatter = DateFormatter(format: formatString)
         

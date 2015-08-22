@@ -147,6 +147,7 @@
 		1A9F2A1C1B88619700FC02CF /* JSONSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerialization.swift; sourceTree = "<group>"; };
 		1A9F2A1E1B890CEF00FC02CF /* FoundationConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationConvertible.swift; sourceTree = "<group>"; };
 		1A9F2A201B89124800FC02CF /* NSNull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNull.swift; sourceTree = "<group>"; };
+		1A9F2A231B8914B900FC02CF /* FoundationConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoundationConvertible.swift; path = "../Linux Support/FoundationConvertible.swift"; sourceTree = "<group>"; };
 		1AA624CA1B708578000BC58C /* cURLReadFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cURLReadFunction.swift; sourceTree = "<group>"; };
 		1AABD32B1B6D77BD00E237AA /* cURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cURL.swift; sourceTree = "<group>"; };
 		1AC4F9BB1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXFileSystemStatus.swift; sourceTree = "<group>"; };
@@ -300,6 +301,14 @@
 			name = "POSIX Exensions";
 			sourceTree = "<group>";
 		};
+		1A9F2A221B89146200FC02CF /* Linux Support */ = {
+			isa = PBXGroup;
+			children = (
+				1A9F2A231B8914B900FC02CF /* FoundationConvertible.swift */,
+			);
+			name = "Linux Support";
+			sourceTree = "<group>";
+		};
 		1AABD32A1B6D779E00E237AA /* cURL */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				6E30BA0F1B40F543009B1B49 /* Source */,
+				1A9F2A221B89146200FC02CF /* Linux Support */,
 				1A1B5AB71B61C74A0025FE7C /* Darwin Support */,
 				6E30BA1B1B40F543009B1B49 /* SwiftFoundationTests */,
 				6E30BA0E1B40F543009B1B49 /* Products */,

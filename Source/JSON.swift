@@ -142,6 +142,7 @@ public struct JSON {
     }
 }
 
+/// Type can be converted to and from JSON.
 public protocol JSONConvertible {
     
     /// Decodes the reciever from JSON.
