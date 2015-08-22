@@ -10,6 +10,8 @@ import XCTest
 import SwiftFoundation
 
 class JSONTests: XCTestCase {
+    
+    // MARK: - Tests Setup
 
     override func setUp() {
         super.setUp()
@@ -20,22 +22,43 @@ class JSONTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+    
+    // MARK: - Functional Tests
 
-    func testSimpleJSONParse() {
+    func testJSONParse() {
         
-        //let rawJSON = "{   \"Key\" : [true, null, false, 12345, 1234.666, {\"Key2\": \"value\"}, \"string\"] }"
+        func parseJSON(json: AnyObject) {
+            
+            let data = try! NSJSONSerialization.dataWithJSONObject(json, options: NSJSONWritingOptions.PrettyPrinted)
+            
+            let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
+            
+            guard let jsonValue = JSON.Value(string: jsonString)
+                else { XCTFail("JSON parsing falied"); return }
+            
+            print("Parsed JSON: \(jsonValue)\n")
+        }
         
-        let jsonObject = ["Key": "Value"]
+        parseJSON(["Key": NSNull()])
         
-        let data = try! NSJSONSerialization.dataWithJSONObject(jsonObject, options: NSJSONWritingOptions.PrettyPrinted)
+        parseJSON(["Key": "Value"])
         
-        let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
+        parseJSON(["Key": true])
         
-        guard let jsonValue = JSON.Value(string: jsonString)
-            else { XCTFail("JSON parsing falied"); return }
+        parseJSON(["Key": 10])
         
-        print(jsonValue)
+        parseJSON(["Key": 1.01])
+        
+        parseJSON(["Key": 10])
+        
+        parseJSON(["Key": ["Key2": "Value"]])
+        
+        parseJSON(["Key": ["Key2", "Value"]])
+        
+        parseJSON([true, false, 10, 10.10, "string", ["subarrayValue1", "subarrayValue2"], ["subobjectKey", "subobjectValue"]])
     }
+    
+    // MARK: - Performance Tests
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
