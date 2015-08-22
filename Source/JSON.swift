@@ -107,8 +107,6 @@ public struct JSON {
         
         case Double(DoubleValue)
         
-        case Decimal(DecimalValue)
-        
         // MARK: RawRepresentable
         
         public var rawValue: Any {
@@ -117,7 +115,6 @@ public struct JSON {
             case .Boolean(let value): return value
             case .Integer(let value): return value
             case .Double(let value):  return value
-            case .Decimal(let value): return value
             }
         }
         
@@ -126,7 +123,6 @@ public struct JSON {
             if let value = rawValue as? Bool            { self = .Boolean(value) }
             if let value = rawValue as? Int             { self = .Integer(value) }
             if let value = rawValue as? DoubleValue     { self = .Double(value)  }
-            if let value = rawValue as? DecimalValue    { self = .Decimal(value) }
             
             return nil
         }
