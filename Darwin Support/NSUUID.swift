@@ -8,6 +8,19 @@
 
 import Foundation
 
+public extension UUID {
+    
+    init(foundation: NSUUID) {
+        
+        self.init(bytes: foundation.byteValue)
+    }
+    
+    func toFoundation() -> NSUUID {
+        
+        return NSUUID(byteValue: byteValue)
+    }
+}
+
 public extension NSUUID {
     
     convenience init(byteValue: uuid_t) {

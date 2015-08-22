@@ -8,15 +8,25 @@
 
 import Foundation
 
-public extension NSComparisonResult {
+public extension Order {
     
-    func toOrder() -> Order {
+    init(foundation: NSComparisonResult) {
+        
+        switch foundation {
+            
+        case .OrderedAscending:     self = .Ascending
+        case .OrderedDescending:    self = .Descending
+        case .OrderedSame:          self = .Same
+        }
+    }
+    
+    func toFoundation() -> NSComparisonResult {
         
         switch self {
             
-        case .OrderedAscending: return .Ascending
-        case .OrderedDescending: return .Descending
-        case .OrderedSame: return .Same
+        case .Ascending:     return .OrderedAscending
+        case .Descending:    return .OrderedDescending
+        case .Same:          return .OrderedSame
         }
     }
 }

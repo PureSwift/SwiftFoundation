@@ -7,7 +7,7 @@
 //
 
 /// Indicates how items are ordered.
-public enum Order: Int {
+public enum Order: Int, FoundationConvertible {
     
     case Ascending      =  1
     case Same           =  0

@@ -8,15 +8,16 @@
 
 import Foundation
 
-public extension NSDate {
+public extension Date {
     
-    convenience init(date: Date) {
+    init(foundation: NSDate) {
         
-        self.init(timeIntervalSinceReferenceDate: date.timeIntervalSinceReferenceDate)
+        self.init(timeIntervalSinceReferenceDate: foundation.timeIntervalSinceReferenceDate)
     }
     
-    func toDate() -> Date {
+    func toFoundation() -> NSDate {
         
-        return Date(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate)
+        return NSDate(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate)
     }
 }
+
