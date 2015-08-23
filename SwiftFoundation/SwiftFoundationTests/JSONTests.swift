@@ -60,18 +60,33 @@ class JSONTests: XCTestCase {
     
     func testJSONWriting() {
         
-        let json = JSON.Value.Object(["Key": JSON.Value.String("Value")])
+        func writeJSON(json: JSON.Value) {
+            
+            guard let jsonString = json.toString()
+                else { XCTFail("Could not serialize JSON"); return }
+            
+            let foundationJSONOutput = try! NSJSONSerialization.dataWithJSONObject(json.toFoundation().rawValue, options: NSJSONWritingOptions())
+            
+            let foundationJSONOutputString = NSString(data: foundationJSONOutput, encoding: NSUTF8StringEncoding)
+            
+            XCTAssert(jsonString == foundationJSONOutputString, "\(jsonString) == \(foundationJSONOutputString)")
+            
+            print("JSON Output: \(jsonString)")
+        }
         
-        guard let jsonString = json.toString()
-            else { XCTFail("Could not serialize JSON"); return }
+        writeJSON(JSON.Value.Object([
+            "Key": JSON.Value.String("Value")
+            ]))
         
-        print("JSON Output: \(jsonString)")
-        
-        let foundationJSONOutput = try! NSJSONSerialization.dataWithJSONObject(json.toFoundation().rawValue, options: NSJSONWritingOptions())
-        
-        let foundationJSONOutputString = NSString(data: foundationJSONOutput, encoding: NSUTF8StringEncoding)
-        
-        XCTAssert(jsonString == foundationJSONOutputString, "\(jsonString) == \(foundationJSONOutputString)")
+        writeJSON(JSON.Value.Array([
+            JSON.Value.String("value1"),
+            JSON.Value.String("value2"),
+            JSON.Value.Null,
+            JSON.Value.Number(JSON.Number.Boolean(true)),
+            JSON.Value.Number(JSON.Number.Integer(10)),
+            JSON.Value.Number(JSON.Number.Double(10.10)),
+            JSON.Value.Object(["Key": JSON.Value.String("Value")])
+            ]))
     }
     
     // MARK: - Performance Tests
