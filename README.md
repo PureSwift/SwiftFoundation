@@ -17,7 +17,7 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
    - Linux
 
 ## Dependencies
-- Linux
+- Linux (uses distribution's package manager)
 	- ICU
 	- CFLite
 	- curl
@@ -46,3 +46,10 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 - [ ] Decimal
 - [ ] OperationQueue
 - [ ] NotificationCenter
+
+# License
+
+This program is free software; you can redistribute it and/or modify it under the terms of the MIT License.
+
+- [cURL](http://curl.haxx.se/docs/copyright.html) - MIT License
+- [json-c](https://github.com/json-c/json-c/wiki#license) - MIT License
