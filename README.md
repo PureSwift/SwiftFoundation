@@ -22,9 +22,11 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 	- CFLite
 	- curl
 	- json-c
+	- [libb64](http://libb64.sourceforge.net) (Build from source)
 - Darwin (uses [Carthage](https://github.com/Carthage/Carthage))
 	- [curl](https://github.com/PureSwift/curl)
 	- [json-c](https://github.com/PureSwift/json-c)
+	- libb64
 
 ## Implemented
 To see what parts of Foundation are implemented, just look at the unit tests. Completed functionality will be fully unit tested. Note that there are some functionality that is written as a protocol only, that will not be included on this list.
@@ -53,3 +55,4 @@ This program is free software; you can redistribute it and/or modify it under th
 
 - [cURL](http://curl.haxx.se/docs/copyright.html) - MIT/X derivate license
 - [json-c](https://github.com/json-c/json-c/wiki#license) - MIT License
+- [libb64](http://sourceforge.net/p/libb64/git/ci/master/tree/LICENSE) - Public Domain

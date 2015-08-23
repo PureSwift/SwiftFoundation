@@ -5,20 +5,45 @@
 //  Created by Alsey Coleman Miller on 6/28/15.
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
-//  Algorithm by Doug Richardson https://github.com/drichardson/SwiftyBase64
+//  Encoder Algorithm by Doug Richardson https://github.com/drichardson/SwiftyBase64
+
+import b64
 
 public struct Base64 {
     
+    static public func decode(bytes: [UInt8]) -> [UInt8] {
+        
+        var decodeState = base64_decodestate()
+        
+        base64_init_decodestate(&decodeState)
+        
+        let outputBufferSize = bytes.count
+        
+        let outputBuffer = UnsafeMutablePointer<CChar>.alloc(outputBufferSize)
+        
+        let inputString = String.fromCString(unsafeBitCast(bytes, UnsafePointer<CChar>.self))!
+        
+        let outputBytesCount = base64_decode_block(inputString, CInt(strlen(inputString)), outputBuffer, &decodeState)
+        
+        let outputString = String.fromCString(outputBuffer)!
+        
+        var outputBytes: Data = outputString.utf8.map { (element: UTF8.CodeUnit) -> Byte in
+            
+            return element as Byte
+        }
+        
+        assert(outputBytes.count == Int(outputBytesCount))
+        
+        return outputBytes
+    }
+    
     /// Base64 Alphabet to use during encoding.
-    ///
-    /// - Standard: The standard Base64 encoding, defined in RFC 4648 section 4.
-    /// - URLAndFilenameSafe: The base64url encoding, defined in RFC 4648 section 5.
     public enum Alphabet {
         
-        /// The standard Base64 alphabet
+        /// The standard Base64 encoding, defined in RFC 4648 section 4.
         case Standard
         
-        /// The URL and Filename Safe Base64 alphabet
+        /// The ```base64url``` encoding, defined in RFC 4648 section 5.
         case URLAndFilenameSafe
     }
     
@@ -44,7 +69,7 @@ public struct Base64 {
     /// :param: bytes Bytes to encode.
     /// :param: alphabet The Base64 alphabet to encode with.
     /// :returns: Base64 encoded ASCII bytes.
-    static public func encode(bytes : [UInt8], alphabet : Alphabet = .Standard) -> [UInt8] {
+    static public func encode(bytes: [UInt8], alphabet : Alphabet = .Standard) -> [UInt8] {
         var encoded : [UInt8] = []
         
         var b = bytes[0..<bytes.count]

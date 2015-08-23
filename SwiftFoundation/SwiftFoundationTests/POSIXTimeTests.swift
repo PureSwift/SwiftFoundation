@@ -41,9 +41,9 @@ class POSIXTimeTests: XCTestCase {
     
     func testStaticTimeVal() {
         
-        let date = Date()
+        //let date = Date()
         
-        let time = timeval(timeInterval: 123456.7898)
+        //let time = timeval(timeInterval: 123456.7898)
         
         //XCTAssert(Int(time.timeIntervalValue) == Int(date.timeIntervalSince1970), "TimeVal derived interval: \(time.timeIntervalValue) must equal original constant")
     }
