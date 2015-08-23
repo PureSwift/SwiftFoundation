@@ -44,7 +44,7 @@ public struct Base64 {
     /// :param: bytes Bytes to encode.
     /// :param: alphabet The Base64 alphabet to encode with.
     /// :returns: Base64 encoded ASCII bytes.
-    static public func Encode(bytes : [UInt8], alphabet : Alphabet = .Standard) -> [UInt8] {
+    static public func encode(bytes : [UInt8], alphabet : Alphabet = .Standard) -> [UInt8] {
         var encoded : [UInt8] = []
         
         var b = bytes[0..<bytes.count]
