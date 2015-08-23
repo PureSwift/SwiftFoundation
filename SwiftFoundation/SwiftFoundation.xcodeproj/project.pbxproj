@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A08D3DB1B633F5A006074D6 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2F31B47A61E00C07C25 /* DateFormatter.swift */; };
+		1A1482F81B7B307E00ECDD86 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1482F71B7B307E00ECDD86 /* JSONTests.swift */; };
 		1A1B5A861B6092780025FE7C /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5A851B6092780025FE7C /* DataTests.swift */; };
 		1A1B5A961B60B4F60025FE7C /* Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5A951B60B4F60025FE7C /* Decimal.swift */; };
 		1A1B5ABC1B61C74A0025FE7C /* NSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5AB81B61C74A0025FE7C /* NSData.swift */; };
@@ -24,6 +25,7 @@
 		1A49A9501B5D8F3200827F1B /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A94F1B5D8F3200827F1B /* HTTPClient.swift */; };
 		1A49A9541B5DCDAC00827F1B /* URLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A9531B5DCDAC00827F1B /* URLTests.swift */; };
 		1A62790D1B799D4C0007CC95 /* FileDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A62790C1B799D4C0007CC95 /* FileDescriptor.swift */; };
+		1A6279101B79AE8E0007CC95 /* JSONParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A62790F1B79AE8E0007CC95 /* JSONParse.swift */; };
 		1A7639561B73179300062A67 /* cURLStringList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7639551B73179300062A67 /* cURLStringList.swift */; };
 		1A7639581B743BB100062A67 /* cURLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7639571B743BB100062A67 /* cURLError.swift */; };
 		1A7965FA1B5B988D00A6E4DA /* FileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7965F91B5B988D00A6E4DA /* FileManagerTests.swift */; };
@@ -38,6 +40,10 @@
 		1A98096F1B7190CA0030EF9B /* cURLWriteFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A98096E1B7190CA0030EF9B /* cURLWriteFunction.swift */; };
 		1A9D97421B7720E400D86F7C /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D97411B7720E400D86F7C /* HTTP.swift */; };
 		1A9D97441B77235900D86F7C /* URLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D97431B77235900D86F7C /* URLProtocol.swift */; };
+		1A9F2A1D1B88619700FC02CF /* JSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1C1B88619700FC02CF /* JSONSerialization.swift */; };
+		1A9F2A1F1B890CEF00FC02CF /* FoundationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1E1B890CEF00FC02CF /* FoundationConvertible.swift */; };
+		1A9F2A211B89124800FC02CF /* NSNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A201B89124800FC02CF /* NSNull.swift */; };
+		1A9F2A261B8928EF00FC02CF /* NSJSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A251B8928EF00FC02CF /* NSJSONSerialization.swift */; };
 		1AA624CB1B708578000BC58C /* cURLReadFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA624CA1B708578000BC58C /* cURLReadFunction.swift */; };
 		1AABD32C1B6D77BD00E237AA /* cURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABD32B1B6D77BD00E237AA /* cURL.swift */; };
 		1AC4F9BC1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4F9BB1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift */; };
@@ -107,6 +113,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A1482F71B7B307E00ECDD86 /* JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		1A1B5A851B6092780025FE7C /* DataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
 		1A1B5A951B60B4F60025FE7C /* Decimal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decimal.swift; sourceTree = "<group>"; };
 		1A1B5AB81B61C74A0025FE7C /* NSData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSData.swift; sourceTree = "<group>"; };
@@ -123,6 +130,7 @@
 		1A49A94F1B5D8F3200827F1B /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		1A49A9531B5DCDAC00827F1B /* URLTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLTests.swift; sourceTree = "<group>"; };
 		1A62790C1B799D4C0007CC95 /* FileDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDescriptor.swift; sourceTree = "<group>"; };
+		1A62790F1B79AE8E0007CC95 /* JSONParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParse.swift; sourceTree = "<group>"; };
 		1A7639551B73179300062A67 /* cURLStringList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cURLStringList.swift; sourceTree = "<group>"; };
 		1A7639571B743BB100062A67 /* cURLError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cURLError.swift; sourceTree = "<group>"; };
 		1A7965F91B5B988D00A6E4DA /* FileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerTests.swift; sourceTree = "<group>"; };
@@ -137,6 +145,11 @@
 		1A98096E1B7190CA0030EF9B /* cURLWriteFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cURLWriteFunction.swift; sourceTree = "<group>"; };
 		1A9D97411B7720E400D86F7C /* HTTP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
 		1A9D97431B77235900D86F7C /* URLProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLProtocol.swift; sourceTree = "<group>"; };
+		1A9F2A1C1B88619700FC02CF /* JSONSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerialization.swift; sourceTree = "<group>"; };
+		1A9F2A1E1B890CEF00FC02CF /* FoundationConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationConvertible.swift; sourceTree = "<group>"; };
+		1A9F2A201B89124800FC02CF /* NSNull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNull.swift; sourceTree = "<group>"; };
+		1A9F2A231B8914B900FC02CF /* FoundationConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoundationConvertible.swift; path = "../Linux Support/FoundationConvertible.swift"; sourceTree = "<group>"; };
+		1A9F2A251B8928EF00FC02CF /* NSJSONSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSJSONSerialization.swift; sourceTree = "<group>"; };
 		1AA624CA1B708578000BC58C /* cURLReadFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cURLReadFunction.swift; sourceTree = "<group>"; };
 		1AABD32B1B6D77BD00E237AA /* cURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cURL.swift; sourceTree = "<group>"; };
 		1AC4F9BB1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXFileSystemStatus.swift; sourceTree = "<group>"; };
@@ -223,10 +236,13 @@
 			children = (
 				6E30BA121B40F543009B1B49 /* Info.plist */,
 				6E30BA101B40F543009B1B49 /* SwiftFoundation.h */,
+				1A9F2A1E1B890CEF00FC02CF /* FoundationConvertible.swift */,
 				1A1B5AB81B61C74A0025FE7C /* NSData.swift */,
 				1A1B5AB91B61C74A0025FE7C /* NSDate.swift */,
 				1A1B5ABA1B61C74A0025FE7C /* NSComparisonResult.swift */,
 				1A1B5ABB1B61C74A0025FE7C /* NSUUID.swift */,
+				1A9F2A201B89124800FC02CF /* NSNull.swift */,
+				1A9F2A251B8928EF00FC02CF /* NSJSONSerialization.swift */,
 			);
 			name = "Darwin Support";
 			path = "../Darwin Support";
@@ -254,6 +270,16 @@
 			name = "Standard Library Extensions";
 			sourceTree = "<group>";
 		};
+		1A62790E1B79AE630007CC95 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				6E30BA271B40F66C009B1B49 /* JSON.swift */,
+				1A62790F1B79AE8E0007CC95 /* JSONParse.swift */,
+				1A9F2A1C1B88619700FC02CF /* JSONSerialization.swift */,
+			);
+			name = JSON;
+			sourceTree = "<group>";
+		};
 		1A7965FD1B5BB88400A6E4DA /* File */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,6 +302,14 @@
 				1A85C40F1B5FAFB1002DDADB /* POSIXRegularExpression.swift */,
 			);
 			name = "POSIX Exensions";
+			sourceTree = "<group>";
+		};
+		1A9F2A221B89146200FC02CF /* Linux Support */ = {
+			isa = PBXGroup;
+			children = (
+				1A9F2A231B8914B900FC02CF /* FoundationConvertible.swift */,
+			);
+			name = "Linux Support";
 			sourceTree = "<group>";
 		};
 		1AABD32A1B6D779E00E237AA /* cURL */ = {
@@ -323,6 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				6E30BA0F1B40F543009B1B49 /* Source */,
+				1A9F2A221B89146200FC02CF /* Linux Support */,
 				1A1B5AB71B61C74A0025FE7C /* Darwin Support */,
 				6E30BA1B1B40F543009B1B49 /* SwiftFoundationTests */,
 				6E30BA0E1B40F543009B1B49 /* Products */,
@@ -354,7 +389,7 @@
 				1A1B5A951B60B4F60025FE7C /* Decimal.swift */,
 				6E30BA461B413BCF009B1B49 /* Formatter */,
 				1A7965FD1B5BB88400A6E4DA /* File */,
-				6E30BA271B40F66C009B1B49 /* JSON.swift */,
+				1A62790E1B79AE630007CC95 /* JSON */,
 				1ADA87BE1B6307190055A442 /* Locale.swift */,
 				6E16C2F71B47A87200C07C25 /* Notifications */,
 				6E30BA2F1B4105A5009B1B49 /* Null.swift */,
@@ -390,6 +425,7 @@
 				1ACC49031B637921000D35B0 /* DateFormatterTests.swift */,
 				1AFCAD571B6DF0020054F1C5 /* cURLTests.swift */,
 				1A436ECC1B7741230069F5D9 /* HTTPClientTests.swift */,
+				1A1482F71B7B307E00ECDD86 /* JSONTests.swift */,
 				6E30BA1E1B40F543009B1B49 /* Info.plist */,
 			);
 			path = SwiftFoundationTests;
@@ -593,6 +629,7 @@
 				6E30BA281B40F66D009B1B49 /* JSON.swift in Sources */,
 				6E16C2FB1B47A92100C07C25 /* Coding.swift in Sources */,
 				6EB4DE3F1B46D08D00C02276 /* ComparatorSortDescriptor.swift in Sources */,
+				1A9F2A211B89124800FC02CF /* NSNull.swift in Sources */,
 				6EB4DE411B46D5C600C02276 /* ComparableSortDescriptor.swift in Sources */,
 				6E30BA301B4105A5009B1B49 /* Null.swift in Sources */,
 				1A1B5ABD1B61C74A0025FE7C /* NSDate.swift in Sources */,
@@ -600,8 +637,10 @@
 				1A98096F1B7190CA0030EF9B /* cURLWriteFunction.swift in Sources */,
 				6E30BA431B413A8F009B1B49 /* UUID.swift in Sources */,
 				1A436ED21B774A850069F5D9 /* RegularExpressionMatchOption.swift in Sources */,
+				1A9F2A261B8928EF00FC02CF /* NSJSONSerialization.swift in Sources */,
 				6E30BA2C1B40F71B009B1B49 /* Date.swift in Sources */,
 				1ADA87BD1B6306C50055A442 /* CFLocale.swift in Sources */,
+				1A9F2A1F1B890CEF00FC02CF /* FoundationConvertible.swift in Sources */,
 				1A49A94E1B5D8F2600827F1B /* URLClient.swift in Sources */,
 				6E16C2F21B47851600C07C25 /* ByteValue.swift in Sources */,
 				6E17CD051B484FE40019AFB2 /* Version.swift in Sources */,
@@ -618,6 +657,7 @@
 				6E574ED31B4A3ED500F629B3 /* String.swift in Sources */,
 				1A7639581B743BB100062A67 /* cURLError.swift in Sources */,
 				1A85C4081B5F9FFB002DDADB /* FilePermission.swift in Sources */,
+				1A9F2A1D1B88619700FC02CF /* JSONSerialization.swift in Sources */,
 				6E66A6641B49A5FC00CB82CD /* BlockOperation.swift in Sources */,
 				6E66A6611B486A4400CB82CD /* RawRepresentable.swift in Sources */,
 				6E16C2FD1B47ADF700C07C25 /* Operation.swift in Sources */,
@@ -626,6 +666,7 @@
 				6E16C2F91B47A88100C07C25 /* Notification.swift in Sources */,
 				1A85C4121B5FC2ED002DDADB /* BitMaskOption.swift in Sources */,
 				1A49A9441B5D3F0200827F1B /* Bridgable.swift in Sources */,
+				1A6279101B79AE8E0007CC95 /* JSONParse.swift in Sources */,
 				1ADA87B01B62A7A60055A442 /* StyledDateFormatter.swift in Sources */,
 				1A62790D1B799D4C0007CC95 /* FileDescriptor.swift in Sources */,
 				1AABD32C1B6D77BD00E237AA /* cURL.swift in Sources */,
@@ -650,6 +691,7 @@
 				1ADA87BB1B6306330055A442 /* POSIXTimeTests.swift in Sources */,
 				1AFCAD581B6DF0020054F1C5 /* cURLTests.swift in Sources */,
 				6E16C2EF1B45095900C07C25 /* UUIDTests.swift in Sources */,
+				1A1482F81B7B307E00ECDD86 /* JSONTests.swift in Sources */,
 				1AEF58831B519F1D002EF80D /* RegularExpressionTests.swift in Sources */,
 				1ACC49041B637921000D35B0 /* DateFormatterTests.swift in Sources */,
 				6EB4DE431B46F3E300C02276 /* OrderTests.swift in Sources */,

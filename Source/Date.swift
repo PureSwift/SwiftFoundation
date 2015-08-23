@@ -7,7 +7,7 @@
 //
 
 /// Represents a point in time
-public struct Date: ByteValue, Equatable, Comparable, CustomStringConvertible {
+public struct Date: ByteValue, Equatable, Comparable, CustomStringConvertible, FoundationConvertible {
     
     // MARK: - Properties
     

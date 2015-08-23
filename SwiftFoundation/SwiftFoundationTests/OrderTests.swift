@@ -26,19 +26,19 @@ class OrderTests: XCTestCase {
         
         // number
         
-        XCTAssert(1.compare(2) == 1.compare(NSNumber(integer: 2)).toOrder())
+        XCTAssert(1.compare(2) == Order(foundation: 1.compare(NSNumber(integer: 2))))
         
-        XCTAssert(2.compare(1) == 2.compare(NSNumber(integer: 1)).toOrder())
+        XCTAssert(2.compare(1) == Order(foundation: 2.compare(NSNumber(integer: 1))))
         
-        XCTAssert(1.compare(1) == 1.compare(NSNumber(integer: 1)).toOrder())
+        XCTAssert(1.compare(1) == Order(foundation: 1.compare(NSNumber(integer: 1))))
         
         // string
         
-        XCTAssert("a".compare("b") == ("a" as NSString).compare("b" as String).toOrder())
+        XCTAssert("a".compare("b") == Order(foundation: ("a" as NSString).compare("b" as String)))
         
-        XCTAssert("b".compare("a") == ("b" as NSString).compare("a" as String).toOrder())
+        XCTAssert("b".compare("a") == Order(foundation: ("b" as NSString).compare("a" as String)))
         
-        XCTAssert("a".compare("a") == ("a" as NSString).compare("a" as String).toOrder())
+        XCTAssert("a".compare("a") == Order(foundation: ("a" as NSString).compare("a" as String)))
         
         // dates
         
@@ -50,7 +50,7 @@ class OrderTests: XCTestCase {
         
         let foundationLater = foundationNow.dateByAddingTimeInterval(0.5)
         
-        XCTAssert(now.compare(later) == foundationNow.compare(foundationLater).toOrder())
+        XCTAssert(now.compare(later) == Order(foundation: foundationNow.compare(foundationLater)))
         
         XCTAssert(now < later)
     }
