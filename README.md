@@ -51,5 +51,5 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 
 This program is free software; you can redistribute it and/or modify it under the terms of the MIT License.
 
-- [cURL](http://curl.haxx.se/docs/copyright.html) - MIT License
+- [cURL](http://curl.haxx.se/docs/copyright.html) - MIT/X derivate license
 - [json-c](https://github.com/json-c/json-c/wiki#license) - MIT License
