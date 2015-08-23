@@ -42,6 +42,7 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 - [x] HTTPClient (equivalent to ```NSURLConnection```)
 - [X] RegularExpression (POSIX, not ICU)
 - [x] JSON
+- [x] Base64
 - [ ] Decimal
 - [ ] OperationQueue
 - [ ] NotificationCenter
