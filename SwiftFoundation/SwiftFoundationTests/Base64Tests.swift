@@ -36,9 +36,7 @@ class Base64Tests: XCTestCase {
     
     func testDecode() {
         
-        let string = "TestData 1234 $%^&* 😀"
-        
-        let inputData = string.dataUsingEncoding(NSUTF8StringEncoding)!
+        let inputData = NSData(contentsOfURL: NSURL(string: "http://httpbin.org/image/png")!)!
         
         let encodedData = Base64.encode(inputData.arrayOfBytes())
         
@@ -48,7 +46,7 @@ class Base64Tests: XCTestCase {
         
         let decodedData = Base64.decode(encodedData)
         
-        XCTAssert(decodedData == inputData.arrayOfBytes())
+        XCTAssert(decodedData == inputData.arrayOfBytes(), "\(NSData(bytes: decodedData)) == \(inputData)")
     }
 
     func testPerformanceExample() {

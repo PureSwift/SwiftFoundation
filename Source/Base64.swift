@@ -17,20 +17,18 @@ public struct Base64 {
         
         base64_init_decodestate(&decodeState)
         
-        let outputBufferSize = bytes.count
+        let inputCharArray: [CChar] = bytes.map { (element: Byte) -> CChar in return CChar(element) }
+        
+        // http://stackoverflow.com/questions/13378815/base64-length-calculation
+        let outputBufferSize = ((inputCharArray.count * 3) / 4) - 1
         
         let outputBuffer = UnsafeMutablePointer<CChar>.alloc(outputBufferSize)
         
-        var inputCharArray: [CChar] = bytes.map { (element: Byte) -> CChar in return CChar(element) }
+        let outputBufferCount = base64_decode_block(inputCharArray, CInt(inputCharArray.count), outputBuffer, &decodeState)
         
-        let inputString = String.fromCString(inputCharArray)!
+        assert(outputBufferCount == CInt(outputBufferSize))
         
-        let outputBytesCount = base64_decode_block(inputString, CInt(strlen(inputString)), outputBuffer, &decodeState)
-        
-        let outputString = String.fromCString(outputBuffer)!
-        
-        var outputBytes: Data = outputString.utf8.map {
-            (element: UTF8.CodeUnit) -> Byte in return element as Byte }
+        let outputBytes = unsafeBitCast(outputBuffer, Data.self)
         
         return outputBytes
     }
