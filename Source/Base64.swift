@@ -21,18 +21,16 @@ public struct Base64 {
         
         let outputBuffer = UnsafeMutablePointer<CChar>.alloc(outputBufferSize)
         
-        let inputString = String.fromCString(unsafeBitCast(bytes, UnsafePointer<CChar>.self))!
+        var inputCharArray: [CChar] = bytes.map { (element: Byte) -> CChar in return CChar(element) }
+        
+        let inputString = String.fromCString(inputCharArray)!
         
         let outputBytesCount = base64_decode_block(inputString, CInt(strlen(inputString)), outputBuffer, &decodeState)
         
         let outputString = String.fromCString(outputBuffer)!
         
-        var outputBytes: Data = outputString.utf8.map { (element: UTF8.CodeUnit) -> Byte in
-            
-            return element as Byte
-        }
-        
-        assert(outputBytes.count == Int(outputBytesCount))
+        var outputBytes: Data = outputString.utf8.map {
+            (element: UTF8.CodeUnit) -> Byte in return element as Byte }
         
         return outputBytes
     }
