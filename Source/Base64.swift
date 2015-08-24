@@ -24,11 +24,24 @@ public struct Base64 {
         
         let outputBuffer = UnsafeMutablePointer<CChar>.alloc(outputBufferSize)
         
+        defer { outputBuffer.dealloc(outputBufferSize) }
+        
         let outputBufferCount = base64_decode_block(inputCharArray, CInt(inputCharArray.count), outputBuffer, &decodeState)
         
         assert(outputBufferCount == CInt(outputBufferSize))
         
-        let outputBytes = unsafeBitCast(outputBuffer, Data.self)
+        var outputBytes = Data()
+        
+        var bytePointer = unsafeBitCast(outputBuffer, UnsafePointer<Byte>.self)
+        
+        while bytePointer != nil {
+            
+            let byte = bytePointer.memory
+            
+            outputBytes.append(byte)
+            
+            bytePointer = bytePointer.successor()
+        }
         
         return outputBytes
     }
