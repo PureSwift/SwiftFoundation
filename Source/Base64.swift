@@ -32,9 +32,7 @@ public struct Base64 {
         
         var outputBytes = Data()
         
-        for index in 1 ... Int(outputBufferCount) {
-            
-            assert(outputBuffer != nil)
+        for index in 0...Int(outputBufferCount - 1) {
             
             let char = outputBuffer[index]
             

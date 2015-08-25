@@ -29,6 +29,8 @@ class Base64Tests: XCTestCase {
         
         let encodedData = Base64.encode(inputData.arrayOfBytes())
         
+        print("Base64 Encoded string: \(NSString(data: NSData(bytes: encodedData), encoding: NSUTF8StringEncoding))")
+        
         let foundationEncodedData = inputData.base64EncodedDataWithOptions(NSDataBase64EncodingOptions())
         
         XCTAssert(encodedData == foundationEncodedData.arrayOfBytes())
@@ -36,23 +38,29 @@ class Base64Tests: XCTestCase {
     
     func testDecode() {
         
-        let inputData = NSData(contentsOfURL: NSURL(string: "http://google.com")!)!
+        let string = "TestData 1234 😀"
         
-        let encodedData = Base64.encode(inputData.arrayOfBytes())
+        let inputData = string.dataUsingEncoding(NSUTF8StringEncoding)!.arrayOfBytes()
         
-        let foundationEncodedData = inputData.base64EncodedDataWithOptions(NSDataBase64EncodingOptions())
+        let foundationEncodedData = NSData(bytes: inputData).base64EncodedDataWithOptions(NSDataBase64EncodingOptions()).arrayOfBytes()
         
-        XCTAssert(encodedData == foundationEncodedData.arrayOfBytes())
+        let decodedData = Base64.decode(foundationEncodedData)
         
-        let decodedData = Base64.decode(encodedData)
+        XCTAssert(decodedData != foundationEncodedData)
         
-        print("Swift Decoded: \(NSString(data: NSData(bytes: encodedData), encoding: NSASCIIStringEncoding)!)")
+        XCTAssert(decodedData.count == inputData.count)
         
-        let foundationDecoded = NSData(base64EncodedData: NSData(bytes: encodedData), options: NSDataBase64DecodingOptions())!
+        XCTAssert(decodedData == inputData)
         
-        print("NSData Decoded: \(NSString(data: foundationDecoded, encoding: NSASCIIStringEncoding)!)")
+        let decodedString = NSString(data: NSData(bytes: decodedData), encoding: NSUTF8StringEncoding)!
         
-        XCTAssert(decodedData == foundationDecoded.arrayOfBytes())
+        XCTAssert(decodedString == string)
+        
+        let foundationDecoded = NSData(base64EncodedData: NSData(bytes: foundationEncodedData), options: NSDataBase64DecodingOptions())!.arrayOfBytes()
+        
+        let foundationDecodedString = NSString(data: NSData(bytes: foundationDecoded), encoding: NSUTF8StringEncoding)!
+        
+        XCTAssert(foundationDecodedString == string)
     }
 
     func testPerformanceExample() {
