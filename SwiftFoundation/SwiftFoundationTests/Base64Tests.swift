@@ -36,7 +36,7 @@ class Base64Tests: XCTestCase {
     
     func testDecode() {
         
-        let inputData = NSData(contentsOfURL: NSURL(string: "http://httpbin.org/image/png")!)!
+        let inputData = NSData(contentsOfURL: NSURL(string: "http://httpbin.org/status/200")!)!
         
         let encodedData = Base64.encode(inputData.arrayOfBytes())
         

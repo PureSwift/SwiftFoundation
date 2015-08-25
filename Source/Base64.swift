@@ -22,7 +22,7 @@ public struct Base64 {
         // http://stackoverflow.com/questions/13378815/base64-length-calculation
         let outputBufferSize = ((inputCharArray.count * 3) / 4) - 1
         
-        let outputBuffer = UnsafeMutablePointer<CChar>.alloc(outputBufferSize)
+        var outputBuffer = UnsafeMutablePointer<CChar>.alloc(outputBufferSize)
         
         defer { outputBuffer.dealloc(outputBufferSize) }
         
@@ -32,15 +32,19 @@ public struct Base64 {
         
         var outputBytes = Data()
         
-        var bytePointer = unsafeBitCast(outputBuffer, UnsafePointer<Byte>.self)
-        
-        while bytePointer != nil {
+        while outputBuffer != nil {
             
-            let byte = bytePointer.memory
+            let char = outputBuffer.memory
+            
+            let byte: Byte
+            
+            if char < 0 { byte = Byte(bits: char.bits) }
+            
+            else { byte = Byte(char) }
             
             outputBytes.append(byte)
             
-            bytePointer = bytePointer.successor()
+            outputBuffer = outputBuffer.successor()
         }
         
         return outputBytes
