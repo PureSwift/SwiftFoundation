@@ -13,6 +13,8 @@ public struct Base64 {
     
     static public func decode(bytes: [UInt8]) -> [UInt8] {
         
+        guard bytes.count > 0 else { return bytes }
+        
         var decodeState = base64_decodestate()
         
         base64_init_decodestate(&decodeState)
@@ -20,31 +22,25 @@ public struct Base64 {
         let inputCharArray: [CChar] = bytes.map { (element: Byte) -> CChar in return CChar(element) }
         
         // http://stackoverflow.com/questions/13378815/base64-length-calculation
-        let outputBufferSize = ((inputCharArray.count * 3) / 4) - 1
+        let outputBufferSize = ((inputCharArray.count * 3) / 4)
         
-        var outputBuffer = UnsafeMutablePointer<CChar>.alloc(outputBufferSize)
+        let outputBuffer = UnsafeMutablePointer<CChar>.alloc(outputBufferSize)
         
         defer { outputBuffer.dealloc(outputBufferSize) }
         
         let outputBufferCount = base64_decode_block(inputCharArray, CInt(inputCharArray.count), outputBuffer, &decodeState)
         
-        assert(outputBufferCount == CInt(outputBufferSize))
-        
         var outputBytes = Data()
         
-        while outputBuffer != nil {
+        for index in 1 ... Int(outputBufferCount) {
             
-            let char = outputBuffer.memory
+            assert(outputBuffer != nil)
             
-            let byte: Byte
+            let char = outputBuffer[index]
             
-            if char < 0 { byte = Byte(bits: char.bits) }
-            
-            else { byte = Byte(char) }
+            let byte = unsafeBitCast(char, Byte.self)
             
             outputBytes.append(byte)
-            
-            outputBuffer = outputBuffer.successor()
         }
         
         return outputBytes

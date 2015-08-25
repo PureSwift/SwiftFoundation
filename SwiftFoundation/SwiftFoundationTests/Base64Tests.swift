@@ -36,7 +36,7 @@ class Base64Tests: XCTestCase {
     
     func testDecode() {
         
-        let inputData = NSData(contentsOfURL: NSURL(string: "http://httpbin.org/status/200")!)!
+        let inputData = NSData(contentsOfURL: NSURL(string: "http://google.com")!)!
         
         let encodedData = Base64.encode(inputData.arrayOfBytes())
         
@@ -46,7 +46,13 @@ class Base64Tests: XCTestCase {
         
         let decodedData = Base64.decode(encodedData)
         
-        XCTAssert(decodedData == inputData.arrayOfBytes(), "\(NSData(bytes: decodedData)) == \(inputData)")
+        print("Swift Decoded: \(NSString(data: NSData(bytes: encodedData), encoding: NSASCIIStringEncoding)!)")
+        
+        let foundationDecoded = NSData(base64EncodedData: NSData(bytes: encodedData), options: NSDataBase64DecodingOptions())!
+        
+        print("NSData Decoded: \(NSString(data: foundationDecoded, encoding: NSASCIIStringEncoding)!)")
+        
+        XCTAssert(decodedData == foundationDecoded.arrayOfBytes())
     }
 
     func testPerformanceExample() {

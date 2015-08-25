@@ -8,7 +8,7 @@
 
 public extension UnsignedIntegerType {
     
-    /** build bit pattern from array of bits */
+    /// Build bit pattern from array of bits.
     init(bits: [Bit]) {
     
         var bitPattern: Self = 0
@@ -25,7 +25,7 @@ public extension UnsignedIntegerType {
 
 public extension Byte {
     
-    /** array of bits */
+    /// Array of bits
     var bits: [Bit] {
         let totalBitsCount = sizeofValue(self) * 8
         
@@ -41,11 +41,6 @@ public extension Byte {
         }
         return bitsArray
     }
-}
-
-public extension CChar {
-    
-    
 }
 
 
