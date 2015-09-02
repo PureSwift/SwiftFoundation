@@ -1,3 +1,2 @@
-github "PureSwift/curl" "master"
 github "PureSwift/json-c" "master"
 github "PureSwift/libb64" "Xcode"
