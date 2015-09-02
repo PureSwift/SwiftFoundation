@@ -11,15 +11,15 @@ public extension HTTP {
     /// HTTP Method.
     public enum Method: String {
         
-        case GET = "GET"
-        case PUT = "PUT"
-        case DELETE = "DELETE"
-        case POST = "POST"
-        case OPTIONS = "OPTIONS"
-        case HEAD = "HEAD"
-        case TRACE = "TRACE"
-        case CONNECT = "CONNECT"
-        case PATCH = "PATCH"
+        case GET
+        case PUT
+        case DELETE
+        case POST
+        case OPTIONS
+        case HEAD
+        case TRACE
+        case CONNECT
+        case PATCH
         
         init() { self = .GET }
     }

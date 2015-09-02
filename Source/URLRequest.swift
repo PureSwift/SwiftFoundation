@@ -8,7 +8,7 @@
 
 public protocol URLRequest {
     
-    var URL: SwiftFoundation.URL { get }
+    var URL: String { get }
     
     var timeoutInterval: TimeInterval { get }
 }

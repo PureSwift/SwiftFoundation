@@ -9,7 +9,7 @@
 public extension HTTP {
     
     /// The standard status codes used with the HTTP protocol.
-    public enum StatusCode: UInt {
+    public enum StatusCode: Int {
         
         case Continue                       = 100
         case SwitchingProtocols             = 101

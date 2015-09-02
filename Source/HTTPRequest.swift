@@ -8,10 +8,10 @@
 
 public extension HTTP {
     
-    /** HTTP URL request. */
+    /// HTTP request. 
     public struct Request: URLRequest {
         
-        public var URL: SwiftFoundation.URL
+        public var URL: String
         
         public var timeoutInterval: TimeInterval = 30
         
@@ -23,7 +23,7 @@ public extension HTTP {
         
         public var version: HTTP.Version = HTTP.Version()
         
-        public init(URL: SwiftFoundation.URL) {
+        public init(URL: String) {
             
             self.URL = URL
         }

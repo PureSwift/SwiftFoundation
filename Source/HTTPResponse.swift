@@ -15,15 +15,12 @@ public extension HTTP {
         public var headers: [String: String] = [:]
         
         /// Returns the HTTP status code for the response.
-        public var statusCode: Int
+        public var statusCode: Int = HTTP.StatusCode.OK.rawValue
         
         /// The HTTP response body.
         public var body: Data = []
         
-        public init(statusCode: Int) {
-            
-            self.statusCode = statusCode
-        }
+        public init() { }
     }
 }
 
