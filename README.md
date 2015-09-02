@@ -17,7 +17,7 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
    - Linux
 
 ## Dependencies
-- Linux (uses distribution's package manager)
+- Linux (use distribution's package manager)
 	- ICU
 	- CFLite
 	- curl
@@ -26,7 +26,7 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 - Darwin (uses [Carthage](https://github.com/Carthage/Carthage))
 	- [curl](https://github.com/PureSwift/curl)
 	- [json-c](https://github.com/PureSwift/json-c)
-	- libb64
+	- [libb64](https://github.com/PureSwift/libb64)
 
 ## Implemented
 To see what parts of Foundation are implemented, just look at the unit tests. Completed functionality will be fully unit tested. Note that there are some functionality that is written as a protocol only, that will not be included on this list.
