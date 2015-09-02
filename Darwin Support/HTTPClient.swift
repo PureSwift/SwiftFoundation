@@ -12,7 +12,7 @@ import Foundation
 public extension HTTP {
     
     /// Loads HTTP requests
-    public struct Client: URLClient {
+    public final class Client: URLClient {
         
         public init(session: NSURLSession = NSURLSession.sharedSession()) {
             
