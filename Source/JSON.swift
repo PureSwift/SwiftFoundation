@@ -11,7 +11,7 @@ public struct JSON {
     
     /// JSON value type.
     /// Guarenteed to be valid JSON if root value is array or object.
-    public enum Value: RawRepresentable, CustomStringConvertible {
+    public enum Value: RawRepresentable, Equatable, CustomStringConvertible {
         
         case Null
         
@@ -105,7 +105,7 @@ public struct JSON {
     
     // MARK: - JSON Number
     
-    public enum Number: RawRepresentable, CustomStringConvertible {
+    public enum Number: RawRepresentable, Equatable, CustomStringConvertible {
         
         case Boolean(Bool)
         
@@ -141,6 +141,42 @@ public struct JSON {
         }
     }
 }
+
+// MARK: Equatable
+
+public func ==(lhs: JSON.Value, rhs: JSON.Value) -> Bool {
+    
+    switch (lhs, rhs) {
+        
+    case (.Null, .Null): return true
+        
+    case let (.String(leftValue), .String(rightValue)): return leftValue == rightValue
+        
+    case let (.Number(leftValue), .Number(rightValue)): return leftValue == rightValue
+        
+    case let (.Array(leftValue), .Array(rightValue)): return leftValue == rightValue
+        
+    case let (.Object(leftValue), .Object(rightValue)): return leftValue == rightValue
+        
+    default: return false
+    }
+}
+
+public func ==(lhs: JSON.Number, rhs: JSON.Number) -> Bool {
+    
+    switch (lhs, rhs) {
+        
+    case let (.Boolean(leftValue), .Boolean(rightValue)): return leftValue == rightValue
+        
+    case let (.Integer(leftValue), .Integer(rightValue)): return leftValue == rightValue
+        
+    case let (.Double(leftValue), .Double(rightValue)): return leftValue == rightValue
+        
+    default: return false
+    }
+}
+
+// MARK: - Protocol
 
 /// Type can be converted to and from JSON.
 public protocol JSONConvertible {
