@@ -20,11 +20,9 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 - Linux (use distribution's package manager)
 	- ICU
 	- CFLite
-	- curl
 	- json-c
 	- [libb64](http://libb64.sourceforge.net) (Build from source)
 - Darwin (uses [Carthage](https://github.com/Carthage/Carthage))
-	- [curl](https://github.com/PureSwift/curl)
 	- [json-c](https://github.com/PureSwift/json-c)
 	- [libb64](https://github.com/PureSwift/libb64)
 
@@ -41,7 +39,6 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 - [x] URL
 - [x] DateFormatter (uses ```CFDateFormatter```)
 - [x] Locale (uses ```CFLocale```)
-- [x] HTTPClient (equivalent to ```NSURLConnection```)
 - [X] RegularExpression (POSIX, not ICU)
 - [x] JSON
 - [x] Base64
@@ -53,6 +50,5 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 
 This program is free software; you can redistribute it and/or modify it under the terms of the MIT License.
 
-- [cURL](http://curl.haxx.se/docs/copyright.html) - MIT/X derivate license
 - [json-c](https://github.com/json-c/json-c/wiki#license) - MIT License
 - [libb64](http://sourceforge.net/p/libb64/git/ci/master/tree/LICENSE) - Public Domain
