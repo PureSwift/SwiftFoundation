@@ -80,7 +80,7 @@ public struct JSON {
             }
         }
         
-        public init?(rawValue: AnyObject) {
+        public init?(rawValue: Any) {
             
             guard (rawValue as? SwiftFoundation.Null) == nil else {
                 
@@ -266,9 +266,9 @@ public protocol JSONParametrizedDecodable {
 
 public typealias JSONValue = JSON.Value
 
-public typealias JSONArray = JSON.Array
+public typealias JSONArray = [JSONValue]
 
-public typealias JSONObject = JSON.Object
+public typealias JSONObject = [String: JSONValue]
 
 public typealias StringValue = String
 
