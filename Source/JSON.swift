@@ -27,6 +27,28 @@ public struct JSON {
         /// JSON value a JSON object
         case Object(JSONObject)
         
+        // MARK: - Extract Values
+        
+        public var arrayValue: JSONArray? {
+            
+            switch self {
+                
+            case let .Array(value): return value
+                
+            default: return nil
+            }
+        }
+        
+        public var objectValue: JSONObject? {
+            
+            switch self {
+                
+            case let .Object(value): return value
+                
+            default: return nil
+            }
+        }
+        
         // MARK: RawRepresentable
         
         public var rawValue: Any {
@@ -178,14 +200,27 @@ public func ==(lhs: JSON.Number, rhs: JSON.Number) -> Bool {
 
 // MARK: - Protocol
 
-/// Type can be converted to and from JSON.
-public protocol JSONConvertible {
-    
-    /// Decodes the reciever from JSON.
-    init?(JSONValue: JSON.Value)
+/// Type can be converted to JSON.
+public protocol JSONEncodable {
     
     /// Encodes the reciever into JSON.
     func toJSON() -> JSON.Value
+}
+
+/// Type can be converted from JSON.
+public protocol JSONDecodable {
+    
+    /// Decodes the reciever from JSON.
+    init?(JSONValue: JSON.Value)
+}
+
+/// Type can be converted from JSON according to parameters.
+public protocol JSONParametrizedDecodable {
+    
+    typealias JSONDecodingParameters
+    
+    /// Decodes the reciever from JSON according to the specified parameters.
+    init?(JSONValue: JSON.Value, parameters: JSONDecodingParameters)
 }
 
 // Typealiases due to compiler error
@@ -201,8 +236,6 @@ public typealias StringValue = String
 public typealias FloatValue = Float
 
 public typealias DoubleValue = Double
-
-public typealias DecimalValue = Decimal
 
 public typealias NullValue = Null
 
