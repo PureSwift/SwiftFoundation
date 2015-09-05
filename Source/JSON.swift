@@ -9,6 +9,10 @@
 /// [JavaScript Object Notation](json.org)
 public struct JSON {
     
+    public typealias Array = [JSON.Value]
+    
+    public typealias Object = [String: JSON.Value]
+    
     /// JSON value type.
     /// Guarenteed to be valid JSON if root value is array or object.
     public enum Value: RawRepresentable, Equatable, CustomStringConvertible {
@@ -29,7 +33,7 @@ public struct JSON {
         
         // MARK: - Extract Values
         
-        public var arrayValue: JSONArray? {
+        public var arrayValue: JSON.Array? {
             
             switch self {
                 
@@ -39,7 +43,7 @@ public struct JSON {
             }
         }
         
-        public var objectValue: JSONObject? {
+        public var objectValue: JSON.Object? {
             
             switch self {
                 
@@ -76,7 +80,7 @@ public struct JSON {
             }
         }
         
-        public init?(rawValue: Any) {
+        public init?(rawValue: AnyObject) {
             
             guard (rawValue as? SwiftFoundation.Null) == nil else {
                 
@@ -207,11 +211,46 @@ public protocol JSONEncodable {
     func toJSON() -> JSON.Value
 }
 
+public extension CollectionType where Generator.Element: JSONEncodable {
+    
+    func toJSON() -> JSON.Value {
+        
+        var jsonArray = JSONArray()
+        
+        for jsonEncodable in self {
+            
+            let jsonValue = jsonEncodable.toJSON()
+            
+            jsonArray.append(jsonValue)
+        }
+        
+        return JSON.Value.Array(jsonArray)
+    }
+}
+
 /// Type can be converted from JSON.
 public protocol JSONDecodable {
     
     /// Decodes the reciever from JSON.
     init?(JSONValue: JSON.Value)
+}
+
+public extension JSONDecodable {
+    
+    /// Decodes from an array of JSON values. 
+    static func fromJSON(JSONArray: JSON.Array) -> [Self]? {
+        
+        var representables = [Self]()
+        
+        for jsonValue in JSONArray {
+            
+            guard let jsonDecodable = self.init(JSONValue: jsonValue) else { return nil }
+            
+            representables.append(jsonDecodable)
+        }
+        
+        return representables
+    }
 }
 
 /// Type can be converted from JSON according to parameters.
@@ -227,9 +266,9 @@ public protocol JSONParametrizedDecodable {
 
 public typealias JSONValue = JSON.Value
 
-public typealias JSONArray = [JSON.Value]
+public typealias JSONArray = JSON.Array
 
-public typealias JSONObject = [String: JSON.Value]
+public typealias JSONObject = JSON.Object
 
 public typealias StringValue = String
 

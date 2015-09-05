@@ -17,10 +17,7 @@ public extension RawRepresentable {
         
         for element in rawValues {
             
-            guard let rawRepresentable = self.init(rawValue: element) else {
-                
-                return nil
-            }
+            guard let rawRepresentable = self.init(rawValue: element) else { return nil }
             
             representables.append(rawRepresentable)
         }
