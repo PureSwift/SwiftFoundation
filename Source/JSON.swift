@@ -240,16 +240,16 @@ public extension JSONDecodable {
     /// Decodes from an array of JSON values. 
     static func fromJSON(JSONArray: JSON.Array) -> [Self]? {
         
-        var representables = [Self]()
+        var jsonDecodables = [Self]()
         
         for jsonValue in JSONArray {
             
             guard let jsonDecodable = self.init(JSONValue: jsonValue) else { return nil }
             
-            representables.append(jsonDecodable)
+            jsonDecodables.append(jsonDecodable)
         }
         
-        return representables
+        return jsonDecodables
     }
 }
 
@@ -260,6 +260,25 @@ public protocol JSONParametrizedDecodable {
     
     /// Decodes the reciever from JSON according to the specified parameters.
     init?(JSONValue: JSON.Value, parameters: JSONDecodingParameters)
+}
+
+public extension JSONParametrizedDecodable {
+    
+    /// Decodes from an array of JSON values.
+    static func fromJSON(JSONArray: JSON.Array, parameters: JSONDecodingParameters) -> [Self]? {
+        
+        var jsonDecodables = [Self]()
+        
+        for jsonValue in JSONArray {
+            
+            guard let jsonDecodable = self.init(JSONValue: jsonValue, parameters: parameters)
+                else { return nil }
+            
+            jsonDecodables.append(jsonDecodable)
+        }
+        
+        return jsonDecodables
+    }
 }
 
 // Typealiases due to compiler error
