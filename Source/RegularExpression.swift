@@ -19,7 +19,7 @@ public protocol RegularExpressionType: RawRepresentable, CustomStringConvertible
     
     var options: CompileOptions { get }
     
-    var subexpressionsCount: UInt { get }
+    var subexpressionsCount: Int { get }
     
     init(pattern: String, options: CompileOptions) throws
     
@@ -69,9 +69,9 @@ final public class RegularExpression: RegularExpressionType {
     
     public let options: [CompileOption]
     
-    public var subexpressionsCount: UInt {
+    public var subexpressionsCount: Int {
         
-        return UInt(internalExpression.re_nsub)
+        return internalExpression.re_nsub
     }
     
     // MARK: - Private Properties
@@ -99,7 +99,7 @@ final public class RegularExpression: RegularExpressionType {
     
     public func match(string: String, options: [RegularExpression.MatchOption]) -> Match? {
         
-        guard let matches = internalExpression.match(string, options: options) else { return nil }
+        guard let matches = internalExpression.firstMatch(string, options: options) else { return nil }
         
         var match = RegularExpressionMatch()
         

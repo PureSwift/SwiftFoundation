@@ -32,7 +32,7 @@ public extension POSIXRegularExpression {
         regfree(&self)
     }
     
-    public func match(string: String, options: [RegularExpression.MatchOption]) -> [Match]? {
+    public func firstMatch(string: String, options: [RegularExpression.MatchOption]) -> [Match]? {
         
         // we are sure that that this method does not mutate the regular expression, so we make a copy
         var expression = self
