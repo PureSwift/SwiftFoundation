@@ -84,7 +84,7 @@ public extension JSON.Value {
     }
 }
 
-public extension JSON.Value {
+private extension JSON.Value {
     
     func toJSONObject() -> COpaquePointer {
         
