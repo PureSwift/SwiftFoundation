@@ -97,36 +97,9 @@ final public class RegularExpression: RegularExpressionType {
         guard code == 0 else { throw CompileError(rawValue: code)! }
     }
     
-    public func match(string: String, options: [RegularExpression.MatchOption]) -> Match? {
+    public func match(string: String, options: [RegularExpression.MatchOption]) -> RegularExpressionMatch? {
         
-        guard let matches = internalExpression.firstMatch(string, options: options) else { return nil }
-        
-        var match = RegularExpressionMatch()
-        
-        do {
-            let expressionMatch = matches[0]
-            
-            match.range = Swift.Range(start: Int(expressionMatch.rm_so), end: Int(expressionMatch.rm_eo))
-        }
-        
-        if subexpressionsCount > 0 {
-            
-            // Index for subexpressions start at 1, not 0
-            for index in 1...(subexpressionsCount - 1) {
-                
-                let subexpressionMatch = matches[Int(index)]
-                
-                guard subexpressionMatch.rm_so != -1 else {
-                    
-                    match.subexpressionRanges.append(Match.Range.NotFound)
-                    continue
-                }
-                
-                let range = Swift.Range(start: Int(subexpressionMatch.rm_so), end: Int(subexpressionMatch.rm_eo))
-                
-                match.subexpressionRanges.append(Match.Range.Found(range))
-            }
-        }
+        guard let match = internalExpression.firstMatch(string, options: options) else { return nil }
         
         return match
     }
