@@ -21,7 +21,7 @@ public protocol RegularExpressionType: RawRepresentable, CustomStringConvertible
     
     var subexpressionsCount: Int { get }
     
-    init(pattern: String, options: CompileOptions) throws
+    init(_ pattern: String, options: CompileOptions) throws
     
     /// Finds the first match in the string
     func match(string: String, options: MatchOptions) -> RegularExpressionMatch?
@@ -37,7 +37,7 @@ public extension RegularExpressionType {
         
         do {
             
-            try self.init(pattern: rawValue.0, options: rawValue.1)
+            try self.init(rawValue.0, options: rawValue.1)
         }
         catch _ {
             
@@ -85,7 +85,7 @@ final public class RegularExpression: RegularExpressionType {
         internalExpression.free()
     }
     
-    public init(pattern: String, options: [RegularExpression.CompileOption] = []) throws {
+    public init(_ pattern: String, options: [RegularExpression.CompileOption] = []) throws {
         
         self.pattern = pattern
         self.options = options
