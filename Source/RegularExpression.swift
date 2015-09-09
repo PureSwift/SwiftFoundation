@@ -97,7 +97,7 @@ final public class RegularExpression: RegularExpressionType {
         guard code == 0 else { throw CompileError(rawValue: code)! }
     }
     
-    public func match(string: String, options: [RegularExpression.MatchOption]) -> RegularExpressionMatch? {
+    public func match(string: String, options: [RegularExpression.MatchOption] = []) -> RegularExpressionMatch? {
         
         guard let match = internalExpression.firstMatch(string, options: options) else { return nil }
         
