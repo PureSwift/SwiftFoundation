@@ -10,6 +10,8 @@
 public struct Null: CustomStringConvertible, Equatable, FoundationConvertible {
     
     public var description: String { return "Null" }
+    
+    public init() { }
 }
 
 // MARK: - Operator Overloading

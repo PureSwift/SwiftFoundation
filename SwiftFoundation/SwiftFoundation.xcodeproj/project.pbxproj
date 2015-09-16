@@ -233,6 +233,8 @@
 		6E66A65D1B48664A00CB82CD /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA501B4143A2009B1B49 /* NotificationCenter.swift */; };
 		6E66A6611B486A4400CB82CD /* RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E66A6601B486A4400CB82CD /* RawRepresentable.swift */; };
 		6E66A6641B49A5FC00CB82CD /* BlockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E66A6631B49A5FC00CB82CD /* BlockOperation.swift */; };
+		6E783EC81BA96CAF0086115D /* b64.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6E783EC01BA96C690086115D /* b64.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6E783EC91BA96CAF0086115D /* JSON.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6E783EC21BA96C690086115D /* JSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6EB4DE3D1B46CF9200C02276 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB4DE3C1B46CF9200C02276 /* Order.swift */; };
 		6EB4DE3F1B46D08D00C02276 /* ComparatorSortDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB4DE3E1B46D08D00C02276 /* ComparatorSortDescriptor.swift */; };
 		6EB4DE411B46D5C600C02276 /* ComparableSortDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB4DE401B46D5C600C02276 /* ComparableSortDescriptor.swift */; };
@@ -249,6 +251,21 @@
 			remoteInfo = SwiftFoundation;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6E783EC71BA96C8C0086115D /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6E783EC81BA96CAF0086115D /* b64.framework in Copy Frameworks */,
+				6E783EC91BA96CAF0086115D /* JSON.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1A1482F71B7B307E00ECDD86 /* JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
@@ -340,6 +357,11 @@
 		6E574ED21B4A3ED500F629B3 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		6E66A6601B486A4400CB82CD /* RawRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawRepresentable.swift; sourceTree = "<group>"; };
 		6E66A6631B49A5FC00CB82CD /* BlockOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockOperation.swift; sourceTree = "<group>"; };
+		6E783EBB1BA96C690086115D /* b64.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = b64.framework; sourceTree = "<group>"; };
+		6E783EBD1BA96C690086115D /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
+		6E783EC01BA96C690086115D /* b64.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = b64.framework; sourceTree = "<group>"; };
+		6E783EC21BA96C690086115D /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
+		6E783EC51BA96C690086115D /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
 		6EB4DE3C1B46CF9200C02276 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		6EB4DE3E1B46D08D00C02276 /* ComparatorSortDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComparatorSortDescriptor.swift; sourceTree = "<group>"; };
 		6EB4DE401B46D5C600C02276 /* ComparableSortDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComparableSortDescriptor.swift; sourceTree = "<group>"; };
@@ -493,6 +515,7 @@
 		6E30BA031B40F543009B1B49 = {
 			isa = PBXGroup;
 			children = (
+				6E783EB91BA96C2C0086115D /* Dependencies */,
 				6E30BA0F1B40F543009B1B49 /* Source */,
 				1A9F2A221B89146200FC02CF /* Linux Support */,
 				1A1B5AB71B61C74A0025FE7C /* Darwin Support */,
@@ -624,6 +647,45 @@
 			name = "Swift Extensions";
 			sourceTree = "<group>";
 		};
+		6E783EB91BA96C2C0086115D /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				6E783EBA1BA96C690086115D /* iOS */,
+				6E783EBF1BA96C690086115D /* Mac */,
+				6E783EC41BA96C690086115D /* watchOS */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		6E783EBA1BA96C690086115D /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6E783EBB1BA96C690086115D /* b64.framework */,
+				6E783EBD1BA96C690086115D /* JSON.framework */,
+			);
+			name = iOS;
+			path = ../Carthage/Build/iOS;
+			sourceTree = "<group>";
+		};
+		6E783EBF1BA96C690086115D /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				6E783EC01BA96C690086115D /* b64.framework */,
+				6E783EC21BA96C690086115D /* JSON.framework */,
+			);
+			name = Mac;
+			path = ../Carthage/Build/Mac;
+			sourceTree = "<group>";
+		};
+		6E783EC41BA96C690086115D /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				6E783EC51BA96C690086115D /* JSON.framework */,
+			);
+			name = watchOS;
+			path = ../Carthage/Build/watchOS;
+			sourceTree = "<group>";
+		};
 		6EB4DE3B1B46CDA100C02276 /* Sort Descriptors */ = {
 			isa = PBXGroup;
 			children = (
@@ -725,6 +787,7 @@
 				6E30BA131B40F543009B1B49 /* Sources */,
 				6E30BA141B40F543009B1B49 /* Frameworks */,
 				6E30BA151B40F543009B1B49 /* Resources */,
+				6E783EC71BA96C8C0086115D /* Copy Frameworks */,
 			);
 			buildRules = (
 			);

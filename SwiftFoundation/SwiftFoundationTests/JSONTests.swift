@@ -89,6 +89,40 @@ class JSONTests: XCTestCase {
             ]))
     }
     
+    func testRawValue() {
+        
+        /*
+        do {
+            
+            let jsonArray = JSON.Value.Array([
+                JSON.Value.String("value1"),
+                JSON.Value.String("value2"),
+                JSON.Value.Number(JSON.Number.Boolean(true)),
+                JSON.Value.Number(JSON.Number.Integer(10)),
+                JSON.Value.Number(JSON.Number.Double(10.10)),
+                JSON.Value.Object(["Key": JSON.Value.String("Value")])
+                ])
+            
+            let rawValue: [AnyObject] = ["value1", "value2", true, 10 as Int, 10.10 as Double, ["Key": "Value"]]
+            
+            let jsonRawValue = jsonArray.rawValue as? [AnyObject]
+            
+            XCTAssert(jsonRawValue! == rawValue)
+        }
+        */
+        
+        do {
+            
+            let jsonObject = JSON.Value.Object(["date": JSON.Value.Number(JSON.Number.Boolean(true))])
+            
+            let rawValue = ["date": true]
+            
+            let jsonRawValue = (jsonObject.rawValue as! [String: Any]) as! [String: Bool]
+            
+            XCTAssert(jsonRawValue == rawValue)
+        }
+    }
+    
     // MARK: - Performance Tests
     
     /*
