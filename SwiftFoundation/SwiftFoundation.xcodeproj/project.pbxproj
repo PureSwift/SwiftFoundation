@@ -362,6 +362,7 @@
 		6E783EC01BA96C690086115D /* b64.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = b64.framework; sourceTree = "<group>"; };
 		6E783EC21BA96C690086115D /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
 		6E783EC51BA96C690086115D /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
+		6E933E731BACCA0700454193 /* b64.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = b64.framework; sourceTree = "<group>"; };
 		6EB4DE3C1B46CF9200C02276 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		6EB4DE3E1B46D08D00C02276 /* ComparatorSortDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComparatorSortDescriptor.swift; sourceTree = "<group>"; };
 		6EB4DE401B46D5C600C02276 /* ComparableSortDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComparableSortDescriptor.swift; sourceTree = "<group>"; };
@@ -680,6 +681,7 @@
 		6E783EC41BA96C690086115D /* watchOS */ = {
 			isa = PBXGroup;
 			children = (
+				6E933E731BACCA0700454193 /* b64.framework */,
 				6E783EC51BA96C690086115D /* JSON.framework */,
 			);
 			name = watchOS;
