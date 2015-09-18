@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import SwiftFoundation
+import SwiftFoundation
 import SwiftFoundation
 
 class UUIDTests: XCTestCase {
