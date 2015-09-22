@@ -60,6 +60,12 @@ public extension stat {
         get { return Date(timeIntervalSince1970: st_birthtimespec.timeIntervalValue) }
         set { st_birthtimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
     }
+    
+    var fileSize: Int {
+        
+        get { return Int(st_size) }
+        set { st_size = off_t(fileSize) }
+    }
 }
 
 public extension mode_t {

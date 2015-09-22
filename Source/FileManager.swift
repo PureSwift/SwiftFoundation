@@ -86,18 +86,12 @@ public final class FileManager {
             fatalError("Create Intermediate Directories Not Implemented")
         }
         
-        guard mkdir(path, attributes.st_mode) == 0 else {
-            
-            throw POSIXError.fromErrorNumber!
-        }
+        guard mkdir(path, attributes.st_mode) == 0 else { throw POSIXError.fromErrorNumber! }
     }
     
     public static func removeItem(path: String) throws {
         
-        guard remove(path) == 0 else {
-            
-            throw POSIXError.fromErrorNumber!
-        }
+        guard remove(path) == 0 else { throw POSIXError.fromErrorNumber! }
     }
     
     // MARK: - Creating Symbolic and Hard Links
@@ -150,25 +144,41 @@ public final class FileManager {
     
     // MARK: - Getting and Comparing File Contents
     
-    public static func contents(path: String) -> Data? {
+    public static func contents(path: String) throws -> Data {
         
-        // get file descriptor for path
-        let file = open(path)
+        // get file descriptor for path (open file)
+        let file = open(path, O_RDONLY)
         
-        defer { fclose(file) } // close file
+        guard file != -1 else { throw POSIXError.fromErrorNumber! }
         
-        guard fileDescriptor != nil else { return nil }
+        // close file
+        defer { guard close(file) != -1 else { fatalError("Could not close file: \(path)") } }
         
         // get file size
-        guard let attributes = try? FileAttributes(path: path) else { return nil }
+        let attributes = try FileAttributes(path: path)
         
-        let memoryPointer = UnsafeMutablePointer<Byte>.alloc(attributes)
+        let fileSize = attributes.fileSize
         
-        fread()
+        assert(fileSize <= SSIZE_MAX, "File size (\(fileSize)) is larger than the max number of bytes allowed (\(SSIZE_MAX))")
         
+        let memoryPointer = UnsafeMutablePointer<Byte>.alloc(fileSize)
         
+        defer { memoryPointer.dealloc(fileSize) }
         
-        return []
+        let readBytes = read(file, memoryPointer, fileSize)
+        
+        guard readBytes != -1 else { throw POSIXError.fromErrorNumber! }
+        
+        var data = Data()
+        
+        for i in 0...fileSize - 1 {
+            
+            let byte = memoryPointer[i]
+            
+            data.append(byte)
+        }
+        
+        return data
     }
     
 }
