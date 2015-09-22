@@ -144,6 +144,7 @@ public final class FileManager {
     
     // MARK: - Getting and Comparing File Contents
     
+    /// Reads the contents of a file.
     public static func contents(path: String) throws -> Data {
         
         // get file descriptor for path (open file)
@@ -169,9 +170,11 @@ public final class FileManager {
         
         guard readBytes != -1 else { throw POSIXError.fromErrorNumber! }
         
+        //guard readBytes == fileSize else { fatalError() }
+        
         var data = Data()
         
-        for i in 0...fileSize - 1 {
+        for i in 0...readBytes - 1 {
             
             let byte = memoryPointer[i]
             
@@ -181,5 +184,20 @@ public final class FileManager {
         return data
     }
     
+    /// Sets the contents of an existing file.
+    public static func setContents(path: String, data: Data) throws {
+        
+        // get file descriptor for path (open file)
+        let file = open(path, O_WRONLY)
+        
+        guard file != -1 else { throw POSIXError.fromErrorNumber! }
+        
+        // close file
+        defer { guard close(file) != -1 else { fatalError("Could not close file: \(path)") } }
+        
+        let writtenBytes = write(file, data, data.count)
+        
+        guard writtenBytes != -1 else { throw POSIXError.fromErrorNumber! }
+    }
 }
 

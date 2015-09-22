@@ -28,7 +28,7 @@ class FileManagerTests: XCTestCase {
     
     func testFileExists() {
         
-        let fileName = "SwiftFoundationTestFile-\(NSDate())"
+        let fileName = "SwiftFoundationTestFile-\(UUID())"
         
         let path = NSTemporaryDirectory() + "/" + fileName
         
@@ -57,7 +57,7 @@ class FileManagerTests: XCTestCase {
         
         let data: Data = "Test File: testReadFile 📱".utf8.map { (codeUnit) -> Byte in return codeUnit }
         
-        let fileName = "SwiftFoundationTestFile-\(NSDate())"
+        let fileName = "SwiftFoundationTestFile-\(UUID())"
         
         let path = NSTemporaryDirectory() + "/" + fileName
         
@@ -69,6 +69,35 @@ class FileManagerTests: XCTestCase {
         
         do { readData = try FileManager.contents(path) }
         
+        catch { XCTFail("\(error)"); return }
+        
+        XCTAssert(data == readData)
+    }
+    
+    func testWriteFile() {
+        
+        // create file
+        
+        let data: Data = "Test File: testReadFile 📱".utf8.map { (codeUnit) -> Byte in return codeUnit }
+        
+        let fileName = "SwiftFoundationTestFile-\(UUID())"
+        
+        let path = NSTemporaryDirectory() + "/" + fileName
+        
+        // create empty file
+        XCTAssert(NSFileManager.defaultManager().createFileAtPath(path, contents: NSData(), attributes: nil))
+        
+        // write file
+        do { try FileManager.setContents(path, data: data) }
+        
+        catch { XCTFail("\(error)"); return }
+        
+        // read file
+        
+        var readData: Data
+        
+        do { readData = try FileManager.contents(path) }
+            
         catch { XCTFail("\(error)"); return }
         
         XCTAssert(data == readData)
