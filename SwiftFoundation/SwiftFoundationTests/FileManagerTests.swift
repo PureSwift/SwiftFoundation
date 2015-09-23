@@ -113,7 +113,7 @@ class FileManagerTests: XCTestCase {
         
         // create file 
         
-        do { try FileManager.createFile(path) }
+        do { try FileManager.createFile(path, contents: data) }
         
         catch { XCTFail("\(error)"); return }
         

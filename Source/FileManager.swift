@@ -77,7 +77,7 @@ public final class FileManager {
     public static func createFile(path: String, contents data: Data? = nil, attributes: FileAttributes = FileAttributes()) throws {
         
         // get file descriptor for path (open file)
-        let file = open(path, O_CREAT, 0644)
+        let file = open(path, O_CREAT, DefaultFileMode)
         
         guard file != -1 else { throw POSIXError.fromErrorNumber! }
         
@@ -89,6 +89,9 @@ public final class FileManager {
             
             try self.setContents(path, data: data)
         }
+        
+        // TODO: set attributes
+        
     }
     
     public static func createDirectory(path: String, withIntermediateDirectories createIntermediates: Bool = false, attributes: FileAttributes = FileAttributes()) throws {
@@ -212,4 +215,7 @@ public final class FileManager {
         guard writtenBytes != -1 else { throw POSIXError.fromErrorNumber! }
     }
 }
+
+public let DefaultFileMode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH
+
 
