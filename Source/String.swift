@@ -8,18 +8,38 @@
 
 public extension String {
     
-    init(UTF8Data data: Data) {
+    init?(UTF8Data: Data) {
+        
+        let data = UTF8Data
         
         var string = ""
         
-        for byte in data {
-            
-            let unicodeScalar = UnicodeScalar(byte)
-            
-            string.append(unicodeScalar)
-        }
+        var generator = data.generate()
         
-        self = string
+        var encoding = UTF8()
+                
+        repeat {
+        
+            switch encoding.decode(&generator) {
+                
+            case .Result (let scalar):
+                
+                string.append(scalar)
+                
+            case .EmptyInput:
+                
+                self = string
+                
+                return
+                
+            case .Error:
+                
+                return nil
+            }
+            
+        } while true
+        
+        return nil
     }
     
     func toUTF8Data() -> Data {
