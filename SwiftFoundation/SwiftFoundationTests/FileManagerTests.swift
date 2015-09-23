@@ -28,7 +28,7 @@ class FileManagerTests: XCTestCase {
     
     func testFileExists() {
         
-        let fileName = "SwiftFoundationTestFile-\(UUID())"
+        let fileName = "SwiftFoundationTestFileExists-\(UUID())"
         
         let path = NSTemporaryDirectory() + "/" + fileName
         
@@ -57,7 +57,7 @@ class FileManagerTests: XCTestCase {
         
         let data: Data = "Test File: testReadFile 📱".utf8.map { (codeUnit) -> Byte in return codeUnit }
         
-        let fileName = "SwiftFoundationTestFile-\(UUID())"
+        let fileName = "SwiftFoundationTestReadFile-\(UUID())"
         
         let path = NSTemporaryDirectory() + "/" + fileName + ".txt"
         
@@ -80,7 +80,7 @@ class FileManagerTests: XCTestCase {
         
         let data: Data = "Test File: testWriteFile 📱".utf8.map { (codeUnit) -> Byte in return codeUnit }
         
-        let fileName = "SwiftFoundationTestFile-\(UUID())"
+        let fileName = "SwiftFoundationTestWriteFile-\(UUID())"
         
         let path = NSTemporaryDirectory() + fileName + ".txt"
         
