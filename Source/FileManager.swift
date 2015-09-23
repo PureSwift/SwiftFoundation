@@ -74,9 +74,21 @@ public final class FileManager {
     
     // MARK: - Creating and Deleting Items
     
-    public static func createFile(path: String, contents: Data? = nil, attributes: FileAttributes = FileAttributes()) throws {
+    public static func createFile(path: String, contents data: Data? = nil, attributes: FileAttributes = FileAttributes()) throws {
         
-        fatalError()
+        // get file descriptor for path (open file)
+        let file = open(path, O_CREAT, 0644)
+        
+        guard file != -1 else { throw POSIXError.fromErrorNumber! }
+        
+        // close file
+        defer { guard close(file) != -1 else { fatalError("Could not close file: \(path)") } }
+        
+        // write data
+        if let data = data {
+            
+            try self.setContents(path, data: data)
+        }
     }
     
     public static func createDirectory(path: String, withIntermediateDirectories createIntermediates: Bool = false, attributes: FileAttributes = FileAttributes()) throws {

@@ -59,7 +59,7 @@ class FileManagerTests: XCTestCase {
         
         let fileName = "SwiftFoundationTestFile-\(UUID())"
         
-        let path = NSTemporaryDirectory() + "/" + fileName
+        let path = NSTemporaryDirectory() + "/" + fileName + ".txt"
         
         XCTAssert(NSFileManager.defaultManager().createFileAtPath(path, contents: NSData(bytes: data), attributes: nil))
         
@@ -78,11 +78,11 @@ class FileManagerTests: XCTestCase {
         
         // create file
         
-        let data: Data = "Test File: testReadFile 📱".utf8.map { (codeUnit) -> Byte in return codeUnit }
+        let data: Data = "Test File: testWriteFile 📱".utf8.map { (codeUnit) -> Byte in return codeUnit }
         
         let fileName = "SwiftFoundationTestFile-\(UUID())"
         
-        let path = NSTemporaryDirectory() + "/" + fileName
+        let path = NSTemporaryDirectory() + fileName + ".txt"
         
         // create empty file
         XCTAssert(NSFileManager.defaultManager().createFileAtPath(path, contents: NSData(), attributes: nil))
@@ -99,6 +99,32 @@ class FileManagerTests: XCTestCase {
         do { readData = try FileManager.contents(path) }
             
         catch { XCTFail("\(error)"); return }
+        
+        XCTAssert(data == readData)
+    }
+    
+    func testCreateFile() {
+        
+        let data: Data = "Test File: testCreateFile 📱".utf8.map { (codeUnit) -> Byte in return codeUnit }
+        
+        let fileName = "SwiftFoundationTestCreateFile-\(UUID())"
+        
+        let path = NSTemporaryDirectory() + fileName + ".txt"
+        
+        // create file 
+        
+        do { try FileManager.createFile(path) }
+        
+        catch { XCTFail("\(error)"); return }
+        
+        // read data
+        
+        XCTAssert(NSFileManager.defaultManager().fileExistsAtPath(path))
+        
+        NSFileManager.defaultManager()
+        
+        guard let readData: Data = NSData(contentsOfFile: path)?.arrayOfBytes()
+            else { XCTFail("Could not read data"); return }
         
         XCTAssert(data == readData)
     }
