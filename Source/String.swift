@@ -8,7 +8,7 @@
 
 public extension String {
     
-    init(UTF8 data: Data) {
+    init(UTF8Data data: Data) {
         
         var string = ""
         
@@ -20,5 +20,10 @@ public extension String {
         }
         
         self = string
+    }
+    
+    func toUTF8Data() -> Data {
+        
+        return self.utf8.map({ (codeunit) -> Byte in codeunit })
     }
 }

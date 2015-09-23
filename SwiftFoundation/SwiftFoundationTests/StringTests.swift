@@ -24,9 +24,9 @@ class StringTests: XCTestCase {
         
         let string = "Test Text 😃"
         
-        let data = (string as NSString).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!.arrayOfBytes()
+        let data = string.toUTF8Data()
         
-        let decodedString = String(UTF8: data)
+        let decodedString = NSString(data: NSData(bytes: data), encoding: NSUTF8StringEncoding)
         
         XCTAssert(string == decodedString, "\(string) == \(decodedString)")
     }
