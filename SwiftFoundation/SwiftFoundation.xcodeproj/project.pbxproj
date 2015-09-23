@@ -196,6 +196,10 @@
 		1AE78FBF1B96774300CDEF17 /* SwiftFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E30BA101B40F543009B1B49 /* SwiftFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1AE9AA4D1B8AEE6E008F5C58 /* Integer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE9AA4C1B8AEE6E008F5C58 /* Integer.swift */; };
 		1AEF58831B519F1D002EF80D /* RegularExpressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEF58821B519F1D002EF80D /* RegularExpressionTests.swift */; };
+		6E10FCC01BB2805C007CB984 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E574ED21B4A3ED500F629B3 /* String.swift */; settings = {ASSET_TAGS = (); }; };
+		6E10FCC11BB2805D007CB984 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E574ED21B4A3ED500F629B3 /* String.swift */; settings = {ASSET_TAGS = (); }; };
+		6E10FCC21BB2805E007CB984 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E574ED21B4A3ED500F629B3 /* String.swift */; settings = {ASSET_TAGS = (); }; };
+		6E10FCC61BB28144007CB984 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10FCC51BB28144007CB984 /* StringTests.swift */; settings = {ASSET_TAGS = (); }; };
 		6E16C2BE1B42460B00C07C25 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2BD1B42460A00C07C25 /* HTTPStatusCode.swift */; };
 		6E16C2ED1B44FC4700C07C25 /* RegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2EC1B44FC4700C07C25 /* RegularExpression.swift */; };
 		6E16C2EF1B45095900C07C25 /* UUIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2EE1B45095900C07C25 /* UUIDTests.swift */; };
@@ -315,6 +319,7 @@
 		1AE78FC41B96774300CDEF17 /* SwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AE9AA4C1B8AEE6E008F5C58 /* Integer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Integer.swift; sourceTree = "<group>"; };
 		1AEF58821B519F1D002EF80D /* RegularExpressionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpressionTests.swift; sourceTree = "<group>"; };
+		6E10FCC51BB28144007CB984 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		6E16C2BD1B42460A00C07C25 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		6E16C2EC1B44FC4700C07C25 /* RegularExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpression.swift; sourceTree = "<group>"; };
 		6E16C2EE1B45095900C07C25 /* UUIDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUIDTests.swift; sourceTree = "<group>"; };
@@ -588,6 +593,7 @@
 				1ACC49031B637921000D35B0 /* DateFormatterTests.swift */,
 				1A1482F71B7B307E00ECDD86 /* JSONTests.swift */,
 				1A8618781B8A83FF002A0E9D /* Base64Tests.swift */,
+				6E10FCC51BB28144007CB984 /* StringTests.swift */,
 				6E30BA1E1B40F543009B1B49 /* Info.plist */,
 			);
 			path = SwiftFoundationTests;
@@ -905,6 +911,7 @@
 				1AE78F341B96774100CDEF17 /* NSDate.swift in Sources */,
 				1AE78F351B96774100CDEF17 /* DateFormatter.swift in Sources */,
 				1AE78F371B96774100CDEF17 /* UUID.swift in Sources */,
+				6E10FCC01BB2805C007CB984 /* String.swift in Sources */,
 				1AE78F381B96774100CDEF17 /* RegularExpressionMatchOption.swift in Sources */,
 				1AE78F391B96774100CDEF17 /* NSJSONSerialization.swift in Sources */,
 				1AE78F3A1B96774100CDEF17 /* Date.swift in Sources */,
@@ -983,6 +990,7 @@
 				1AE78F8C1B96774300CDEF17 /* NSDate.swift in Sources */,
 				1AE78F8D1B96774300CDEF17 /* DateFormatter.swift in Sources */,
 				1AE78F8F1B96774300CDEF17 /* UUID.swift in Sources */,
+				6E10FCC11BB2805D007CB984 /* String.swift in Sources */,
 				1AE78F901B96774300CDEF17 /* RegularExpressionMatchOption.swift in Sources */,
 				1AE78F911B96774300CDEF17 /* NSJSONSerialization.swift in Sources */,
 				1AE78F921B96774300CDEF17 /* Date.swift in Sources */,
@@ -1061,6 +1069,7 @@
 				1A1B5ABD1B61C74A0025FE7C /* NSDate.swift in Sources */,
 				1A08D3DB1B633F5A006074D6 /* DateFormatter.swift in Sources */,
 				6E30BA431B413A8F009B1B49 /* UUID.swift in Sources */,
+				6E10FCC21BB2805E007CB984 /* String.swift in Sources */,
 				1A436ED21B774A850069F5D9 /* RegularExpressionMatchOption.swift in Sources */,
 				1A9F2A261B8928EF00FC02CF /* NSJSONSerialization.swift in Sources */,
 				6E30BA2C1B40F71B009B1B49 /* Date.swift in Sources */,
@@ -1110,6 +1119,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E30BA1D1B40F543009B1B49 /* SwiftFoundationTests.swift in Sources */,
+				6E10FCC61BB28144007CB984 /* StringTests.swift in Sources */,
 				1ADA87BB1B6306330055A442 /* POSIXTimeTests.swift in Sources */,
 				6E16C2EF1B45095900C07C25 /* UUIDTests.swift in Sources */,
 				1A8618791B8A83FF002A0E9D /* Base64Tests.swift in Sources */,
