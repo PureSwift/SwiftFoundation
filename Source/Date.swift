@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-/// Represents a point in time
+/// Represents a point in time.
 public struct Date: ByteValue, Equatable, Comparable, CustomStringConvertible, FoundationConvertible {
     
     // MARK: - Properties
@@ -98,9 +98,9 @@ public func + (lhs: Date, rhs: TimeInterval) -> Date {
     return Date(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate + rhs)
 }
 
-public func += (lhs: Date, rhs: TimeInterval) -> Date {
+public func += (inout lhs: Date, rhs: TimeInterval) {
     
-    return lhs + rhs
+    lhs = lhs + rhs
 }
 
 // MARK: - Functions
