@@ -512,7 +512,6 @@ public extension HTTP {
         /// but is used by CloudFlare's reverse proxies to signal that a server connection timed out.
         case OriginConnectionTimeOut        = 522
         
-        ///
     }
 }
 
