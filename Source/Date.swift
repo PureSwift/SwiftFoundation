@@ -103,6 +103,16 @@ public func += (inout lhs: Date, rhs: TimeInterval) {
     lhs = lhs + rhs
 }
 
+public func - (lhs: Date, rhs: TimeInterval) -> Date {
+    
+    return Date(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate - rhs)
+}
+
+public func -= (inout lhs: Date, rhs: TimeInterval) {
+    
+    lhs = lhs - rhs
+}
+
 // MARK: - Functions
 
 /// Returns the time interval between the current date and the reference date (1 January 2001, GMT).
