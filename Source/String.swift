@@ -44,6 +44,6 @@ public extension String {
     
     func toUTF8Data() -> Data {
         
-        return self.utf8.map({ (codeunit) -> Byte in codeunit })
+        return [] + utf8
     }
 }

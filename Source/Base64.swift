@@ -30,16 +30,7 @@ public struct Base64 {
         
         let outputBufferCount = base64_decode_block(inputCharArray, CInt(inputCharArray.count), outputBuffer, &decodeState)
         
-        var outputBytes = Data()
-        
-        for index in 0...Int(outputBufferCount - 1) {
-            
-            let char = outputBuffer[index]
-            
-            let byte = unsafeBitCast(char, Byte.self)
-            
-            outputBytes.append(byte)
-        }
+        let outputBytes = DataFromBytePointer(outputBuffer, length: Int(outputBufferCount))
         
         return outputBytes
     }
@@ -68,16 +59,7 @@ public struct Base64 {
         
         let outputBufferCount = base64_encode_block(inputCharArray, CInt(inputCharArray.count), outputBuffer, &encodeState)
         
-        var outputBytes = Data()
-        
-        for index in 0...Int(outputBufferCount - 1) {
-            
-            let char = outputBuffer[index]
-            
-            let byte = unsafeBitCast(char, Byte.self)
-            
-            outputBytes.append(byte)
-        }
+        let outputBytes = DataFromBytePointer(outputBuffer, length: Int(outputBufferCount))
         
         return outputBytes
     }
