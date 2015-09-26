@@ -74,18 +74,18 @@ class JSONTests: XCTestCase {
             print("JSON Output: \(jsonString)")
         }
         
-        writeJSON(JSON.Value.Object([
-            "Key": JSON.Value.String("Value")
+        writeJSON(.Object([
+            "Key": .String("Value")
             ]))
         
-        writeJSON(JSON.Value.Array([
-            JSON.Value.String("value1"),
-            JSON.Value.String("value2"),
-            JSON.Value.Null,
-            JSON.Value.Number(JSON.Number.Boolean(true)),
-            JSON.Value.Number(JSON.Number.Integer(10)),
-            JSON.Value.Number(JSON.Number.Double(10.10)),
-            JSON.Value.Object(["Key": JSON.Value.String("Value")])
+        writeJSON(.Array([
+            .String("value1"),
+            .String("value2"),
+            .Null,
+            .Number(.Boolean(true)),
+            .Number(.Integer(10)),
+            .Number(.Double(10.10)),
+            .Object(["Key": .String("Value")])
             ]))
     }
     
@@ -113,7 +113,7 @@ class JSONTests: XCTestCase {
         
         do {
             
-            let jsonObject = JSON.Value.Object(["date": JSON.Value.Number(JSON.Number.Boolean(true))])
+            let jsonObject = JSON.Value.Object(["date": .Number(.Boolean(true))])
             
             let rawValue = ["date": true]
             
@@ -125,20 +125,70 @@ class JSONTests: XCTestCase {
     
     // MARK: - Performance Tests
     
-    /*
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
+    let performanceJSON: JSON.Value = {
+        
+        var jsonArray = JSON.Array([
+            .String("value1"),
+            .String("value2"),
+            .Null,
+            .Number(.Boolean(true)),
+            .Number(.Integer(10)),
+            .Number(.Double(10.10)),
+            .Object(["Key": .String("Value")])
+            ])
+        
+        for _ in 0...10 {
+            
+            jsonArray += jsonArray
+        }
+        
+        return JSON.Value.Array(jsonArray)
+    }()
+    
+    func testWritingPerformance() {
+        
+        let jsonValue = performanceJSON
+        
+        measureBlock {
+            
+            let _ = jsonValue.toString()!
         }
     }
-
-    func testFoundationPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
+    
+    func testFoundationWritingPerformance() {
+        
+        let jsonValue = performanceJSON
+        
+        let foundationJSON = jsonValue.toFoundation().rawValue as! NSArray
+        
+        measureBlock {
+            
+            let _ = try! NSJSONSerialization.dataWithJSONObject(foundationJSON, options: NSJSONWritingOptions())
+        }
+        
+    }
+    
+    lazy var performanceJSONString: String = self.performanceJSON.toString()!
+    
+    func testParsePerformance() {
+        
+        let jsonString = performanceJSONString
+        
+        measureBlock {
+            
+            let _ = JSON.Value(string: jsonString)!
         }
     }
-    */
-
+    
+    func testFoundationParsePerformance() {
+        
+        let jsonString = performanceJSONString
+        
+        let jsonData = NSData(bytes: jsonString.toUTF8Data())
+        
+        measureBlock {
+            
+            let _ = try! NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions())
+        }
+    }
 }

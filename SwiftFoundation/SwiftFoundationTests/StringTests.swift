@@ -19,6 +19,8 @@ class StringTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+    
+    // MARK: - Functional Tests
 
     func testUTF8Data() {
         
@@ -30,5 +32,9 @@ class StringTests: XCTestCase {
         
         XCTAssert(string == decodedString, "\(string) == \(decodedString)")
     }
+    
+    // MARK: - Performance Tests
+    
+    
 
 }
