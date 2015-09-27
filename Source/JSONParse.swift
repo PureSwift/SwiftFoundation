@@ -5,9 +5,6 @@
 //  Created by Alsey Coleman Miller on 8/10/15.
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
-// Based on David Owens II's JSON parser in Swift
-// https://github.com/owensd/json-swift
-//
 
 import JSON
 
