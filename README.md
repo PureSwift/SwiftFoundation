@@ -45,3 +45,8 @@ This program is free software; you can redistribute it and/or modify it under th
 
 - [json-c](https://github.com/json-c/json-c/wiki#license) - MIT License
 - [libb64](http://sourceforge.net/p/libb64/git/ci/master/tree/LICENSE) - Public Domain
+
+# See Also
+
+- [cURLSwift](https://github.com/PureSwift/cURLSwift) - Swift wrapper for cURL
+- [SwiftCF](https://github.com/PureSwift/SwiftCF) - Swift Protocol-Oriented Structs for CoreFoundation
