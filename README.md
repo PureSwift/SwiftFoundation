@@ -18,8 +18,6 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 
 ## Dependencies
 - Linux (use distribution's package manager)
-	- ICU
-	- CFLite
 	- json-c
 	- [libb64](http://libb64.sourceforge.net) (Build from source)
 - Darwin (uses [Carthage](https://github.com/Carthage/Carthage))
@@ -37,14 +35,10 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 - [x] FileManager
 - [x] Data
 - [x] URL
-- [x] DateFormatter (uses ```CFDateFormatter```)
-- [x] Locale (uses ```CFLocale```)
+- [x] DateFormatter (POSIX, not ICU)
 - [X] RegularExpression (POSIX, not ICU)
 - [x] JSON
 - [x] Base64
-- [ ] Decimal
-- [ ] OperationQueue
-- [ ] NotificationCenter
 
 # License
 

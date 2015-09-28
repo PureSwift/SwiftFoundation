@@ -25,8 +25,6 @@ public protocol RegularExpressionType: RawRepresentable, CustomStringConvertible
     
     /// Finds the first match in the string
     func match(string: String, options: MatchOptions) -> RegularExpressionMatch?
-    
-    
 }
 
 // MARK: - Protocol Implementation
