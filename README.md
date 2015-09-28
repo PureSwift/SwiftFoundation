@@ -35,7 +35,6 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 - [x] FileManager
 - [x] Data
 - [x] URL
-- [x] DateFormatter (POSIX, not ICU)
 - [X] RegularExpression (POSIX, not ICU)
 - [x] JSON
 - [x] Base64
