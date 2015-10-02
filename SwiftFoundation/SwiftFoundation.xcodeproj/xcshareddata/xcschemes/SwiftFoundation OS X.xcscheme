@@ -34,7 +34,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6E30BA161B40F543009B1B49"
-               BuildableName = "SwiftFoundationTests OS X.xctest"
+               BuildableName = "SwiftFoundationTests.xctest"
                BlueprintName = "SwiftFoundationTests OS X"
                ReferencedContainer = "container:SwiftFoundation.xcodeproj">
             </BuildableReference>
