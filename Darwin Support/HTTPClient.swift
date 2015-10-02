@@ -48,7 +48,7 @@ public extension HTTP {
             
             for (headerName, headerValue) in request.headers {
                 
-                urlRequest.addValue(headerValue, forHTTPHeaderField: headerName)
+                urlRequest.setValue(headerValue, forHTTPHeaderField: headerName)
             }
             
             urlRequest.HTTPMethod = request.method.rawValue
