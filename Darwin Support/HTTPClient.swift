@@ -33,25 +33,8 @@ public extension HTTP {
             
             // build request... 
             
-            guard request.version == HTTP.Version(1, 1) else { throw Error.BadRequest }
-            
-            guard let url = NSURL(string: request.URL) else { throw Error.BadRequest }
-            
-            let urlRequest = NSMutableURLRequest(URL: url)
-            
-            urlRequest.timeoutInterval = request.timeoutInterval
-            
-            if let data = request.body {
-                
-                urlRequest.HTTPBody = NSData(bytes: data)
-            }
-            
-            for (headerName, headerValue) in request.headers {
-                
-                urlRequest.setValue(headerValue, forHTTPHeaderField: headerName)
-            }
-            
-            urlRequest.HTTPMethod = request.method.rawValue
+            guard let urlRequest = NSMutableURLRequest(request: request)
+                else { throw Error.BadRequest }
             
             // execute request
             
@@ -91,10 +74,7 @@ public extension HTTP {
                 response.body = data.arrayOfBytes()
             }
             
-            for (header, headerValue) in urlResponse!.allHeaderFields as! [String: String] {
-                
-                response.headers[header] = headerValue
-            }
+            response.headers = urlResponse!.allHeaderFields as! [String: String]
             
             return response
         }

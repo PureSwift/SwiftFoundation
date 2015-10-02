@@ -12,13 +12,13 @@ public extension HTTP {
     public struct Response: URLResponse {
         
         /// Returns a dictionary containing all the HTTP header fields.
-        public var headers: [String: String] = [:]
+        public var headers = [String: String]()
         
         /// Returns the HTTP status code for the response.
         public var statusCode: Int = HTTP.StatusCode.OK.rawValue
         
         /// The HTTP response body.
-        public var body: Data = []
+        public var body = Data()
         
         public init() { }
     }
