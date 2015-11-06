@@ -24,6 +24,21 @@ class JSONTests: XCTestCase {
     }
     
     // MARK: - Functional Tests
+    
+    func testJSONEncodable() {
+        
+        do {
+            
+            let string = "Hey"
+            
+            let json: JSON.Value = string.toJSON()
+            
+            guard let rawValue = json.rawValue as? String
+                else { XCTFail("rawValue should be String"); return }
+            
+            XCTAssert(rawValue == string)
+        }
+    }
 
     func testJSONParse() {
         

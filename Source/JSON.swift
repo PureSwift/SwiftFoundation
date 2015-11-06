@@ -211,46 +211,11 @@ public protocol JSONEncodable {
     func toJSON() -> JSON.Value
 }
 
-public extension CollectionType where Generator.Element: JSONEncodable {
-    
-    func toJSON() -> JSON.Value {
-        
-        var jsonArray = JSONArray()
-        
-        for jsonEncodable in self {
-            
-            let jsonValue = jsonEncodable.toJSON()
-            
-            jsonArray.append(jsonValue)
-        }
-        
-        return JSON.Value.Array(jsonArray)
-    }
-}
-
 /// Type can be converted from JSON.
 public protocol JSONDecodable {
     
     /// Decodes the reciever from JSON.
     init?(JSONValue: JSON.Value)
-}
-
-public extension JSONDecodable {
-    
-    /// Decodes from an array of JSON values. 
-    static func fromJSON(JSONArray: JSON.Array) -> [Self]? {
-        
-        var jsonDecodables = [Self]()
-        
-        for jsonValue in JSONArray {
-            
-            guard let jsonDecodable = self.init(JSONValue: jsonValue) else { return nil }
-            
-            jsonDecodables.append(jsonDecodable)
-        }
-        
-        return jsonDecodables
-    }
 }
 
 /// Type can be converted from JSON according to parameters.
@@ -260,25 +225,6 @@ public protocol JSONParametrizedDecodable {
     
     /// Decodes the reciever from JSON according to the specified parameters.
     init?(JSONValue: JSON.Value, parameters: JSONDecodingParameters)
-}
-
-public extension JSONParametrizedDecodable {
-    
-    /// Decodes from an array of JSON values.
-    static func fromJSON(JSONArray: JSON.Array, parameters: JSONDecodingParameters) -> [Self]? {
-        
-        var jsonDecodables = [Self]()
-        
-        for jsonValue in JSONArray {
-            
-            guard let jsonDecodable = self.init(JSONValue: jsonValue, parameters: parameters)
-                else { return nil }
-            
-            jsonDecodables.append(jsonDecodable)
-        }
-        
-        return jsonDecodables
-    }
 }
 
 // Typealiases due to compiler error
