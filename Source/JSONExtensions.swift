@@ -149,3 +149,29 @@ public extension JSONParametrizedDecodable {
         return jsonDecodables
     }
 }
+
+// MARK: - RawRepresentable Extensions
+
+// MARK: Encode
+
+public extension RawRepresentable where RawValue: JSONEncodable {
+    
+    /// Encodes the reciever into JSON.
+    func toJSON() -> JSON.Value {
+        
+        return rawValue.toJSON()
+    }
+}
+
+// MARK: Decode
+
+public extension RawRepresentable where RawValue: JSONDecodable {
+    
+    /// Decodes the reciever from JSON.
+    init?(JSONValue: JSON.Value) {
+        
+        guard let rawValue = RawValue(JSONValue: JSONValue) else { return nil }
+        
+        self.init(rawValue: rawValue)
+    }
+}
