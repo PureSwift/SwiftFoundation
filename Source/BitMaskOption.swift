@@ -14,20 +14,14 @@ public protocol BitMaskOption: RawRepresentable {
 
 public extension BitMaskOption where Self.RawValue: IntegerType {
     
-    static func optionsBitmask(options: [Self]) -> Self.RawValue {
-        
-        var mask: Self.RawValue = 0
-        
-        for option in options {
-            
-            mask = mask | option.rawValue
+    static func optionsBitmask<S: SequenceType where S.Generator.Element == Self>(options: S) -> Self.RawValue {
+        return options.reduce(0) { mask, option in
+            mask | option.rawValue
         }
-        
-        return mask
     }
 }
 
-public extension CollectionType where Self.Generator.Element: BitMaskOption, Self.Generator.Element.RawValue: IntegerType {
+public extension SequenceType where Self.Generator.Element: BitMaskOption, Self.Generator.Element.RawValue: IntegerType {
     
     func optionsBitmask() -> Self.Generator.Element.RawValue {
         

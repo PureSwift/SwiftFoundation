@@ -26,22 +26,13 @@ public extension RawRepresentable {
     }
 }
 
-public extension CollectionType where Self.Generator.Element: RawRepresentable {
-    
-    /// Converts a collection of ```RawRepresentable``` to its raw values.
+public extension SequenceType where Self.Generator.Element: RawRepresentable {
+
+    /// Convertes a sequence of `RawRepresentable` to its raw values.
     var rawValues: [Self.Generator.Element.RawValue] {
-        
-        typealias rawValueType = Self.Generator.Element.RawValue
-        
-        var rawValues = [rawValueType]()
-        
-        for rawRepresentable in self {
-            
-            rawValues.append(rawRepresentable.rawValue)
-        }
-        
-        return rawValues
+        return self.map { $0.rawValue }
     }
+
 }
 
 // MARK: - SwiftFoundation Default Implementations
