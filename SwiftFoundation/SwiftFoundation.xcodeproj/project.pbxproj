@@ -497,7 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				6E783EB91BA96C2C0086115D /* Dependencies */,
-				6E30BA0F1B40F543009B1B49 /* Source */,
+				6E30BA0F1B40F543009B1B49 /* Sources */,
 				1A9F2A221B89146200FC02CF /* Linux Support */,
 				1A1B5AB71B61C74A0025FE7C /* Darwin Support */,
 				6E30BA1B1B40F543009B1B49 /* SwiftFoundationTests */,
@@ -517,7 +517,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6E30BA0F1B40F543009B1B49 /* Source */ = {
+		6E30BA0F1B40F543009B1B49 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				6E17CD041B484FE30019AFB2 /* Version.swift */,
@@ -545,8 +545,8 @@
 				6E30BA421B413A8F009B1B49 /* UUID.swift */,
 				6E30BA3D1B413865009B1B49 /* URL */,
 			);
-			name = Source;
-			path = ../Source;
+			name = Sources;
+			path = ../Sources;
 			sourceTree = SOURCE_ROOT;
 		};
 		6E30BA1B1B40F543009B1B49 /* SwiftFoundationTests */ = {
