@@ -6,7 +6,7 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 ## Goals
 
 - Provide a cross-platform *interface* that mimics Apple's Foundation framework.
-- Provide a POSIX-based *implementation* for maximum .portablility
+- Provide a POSIX-based *implementation* for maximum portablility.
 - *Rewrite* Foundation with Protocol-Oriented Programming principals.
 - Long-term Pure Swift *replacement* for the Cocoa frameworks.
 
@@ -23,6 +23,16 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 - Darwin (uses [Carthage](https://github.com/Carthage/Carthage))
 	- [json-c](https://github.com/PureSwift/json-c)
 	- [libb64](https://github.com/PureSwift/libb64)
+
+## Compiling on Ubuntu
+
+Install Swift from [here](https://swift.org/download/).
+
+Install the required dependencies with:
+
+```sudo apt-get install libb64-dev libjson0 libjson0-dev```
+
+Try compiling the [example project](https://github.com/PureSwift/SwiftFoundationExample).
 
 ## Implemented
 To see what parts of Foundation are implemented, just look at the unit tests. Completed functionality will be fully unit tested. Note that there are some functionality that is written as a protocol only, that will not be included on this list.
