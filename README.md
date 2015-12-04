@@ -30,7 +30,7 @@ Install Swift from [here](https://swift.org/download/).
 
 Install the required dependencies with:
 
-```sudo apt-get install libb64-dev libjson0 libjson0-dev```
+```sudo apt-get install libb64-dev libjson-c-dev libjson0-dev```
 
 Try compiling the [example project](https://github.com/PureSwift/SwiftFoundationExample).
 
