@@ -1,0 +1,5 @@
+module JSON [system] {
+    header "/usr/include/json-c/json.h"
+    link "json-c"
+    export *
+}
