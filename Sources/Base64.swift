@@ -22,21 +22,6 @@ public struct Base64 {
     // MARK: - Encoding
     
     /**
-     Encode a [UInt8] byte array as a Base64 String.
-     - parameter bytes: Bytes to encode.
-     - parameter alphabet: The Base64 alphabet to encode with.
-     - returns: A String of the encoded bytes.
-     */
-    public static func encodeString(bytes: Data, alphabet: Alphabet = .Standard) -> String {
-        let encoded = encode(bytes, alphabet : alphabet)
-        var result = String()
-        for b in encoded {
-            result.append(UnicodeScalar(b))
-        }
-        return result
-    }
-    
-    /**
      Use the Base64 algorithm as decribed by RFC 4648 section 4 to
      encode the input bytes. The alphabet specifies the translation
      table to use. RFC 4648 defines two such alphabets:
