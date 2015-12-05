@@ -15,7 +15,7 @@
 public extension RegularExpression {
     
     // POSIX Regular Expression compilation error
-    public enum CompileError: POSIXRegularExpression.ErrorCode, ErrorType {
+    public enum CompileError: RawRepresentable, ErrorType {
         
         /// Invalid use  of repetition operators such as using '*' as the first character.
         ///
