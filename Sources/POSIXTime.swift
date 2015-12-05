@@ -28,15 +28,13 @@ public extension timeval {
     
     init(timeInterval: TimeInterval) {
         
-        typealias Microseconds = __darwin_suseconds_t
-        
         let (integerValue, decimalValue) = modf(timeInterval)
         
         let million: TimeInterval = 1000000.0
         
         let microseconds = decimalValue * million
         
-        self.init(tv_sec: Int(integerValue), tv_usec: Microseconds(microseconds))
+        self.init(tv_sec: Int(integerValue), tv_usec: POSIXMicroseconds(microseconds))
     }
     
     var timeIntervalValue: TimeInterval {
@@ -87,3 +85,24 @@ public extension tm {
         self = timePointer.memory
     }
 }
+
+// MARK: - Cross-Platform Support
+
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    
+    public typealias POSIXMicroseconds = __darwin_suseconds_t
+    
+#elseif os(Linux)
+    
+    public typealias POSIXMicroseconds = Int32
+    
+    public func modf(value: Double) -> (Double, Double) {
+        
+        var integerValue: Double = 0
+        
+        let decimalValue = modf(value, &integerValue)
+        
+        return (decimalValue, integerValue)
+    }
+    
+#endif
