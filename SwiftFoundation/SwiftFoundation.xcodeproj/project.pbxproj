@@ -76,7 +76,6 @@
 		1AE78F3E1B96774100CDEF17 /* ByteValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2F11B47851600C07C25 /* ByteValue.swift */; };
 		1AE78F3F1B96774100CDEF17 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD041B484FE30019AFB2 /* Version.swift */; };
 		1AE78F401B96774100CDEF17 /* POSIXTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7966001B5C413000A6E4DA /* POSIXTime.swift */; };
-		1AE78F411B96774100CDEF17 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA351B4133F3009B1B49 /* Task.swift */; };
 		1AE78F431B96774100CDEF17 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA391B413510009B1B49 /* URLRequest.swift */; };
 		1AE78F451B96774100CDEF17 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD061B4850B40019AFB2 /* SemanticVersion.swift */; };
 		1AE78F461B96774100CDEF17 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA291B40F713009B1B49 /* Data.swift */; };
@@ -133,7 +132,6 @@
 		1AE78F961B96774300CDEF17 /* ByteValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2F11B47851600C07C25 /* ByteValue.swift */; };
 		1AE78F971B96774300CDEF17 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD041B484FE30019AFB2 /* Version.swift */; };
 		1AE78F981B96774300CDEF17 /* POSIXTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7966001B5C413000A6E4DA /* POSIXTime.swift */; };
-		1AE78F991B96774300CDEF17 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA351B4133F3009B1B49 /* Task.swift */; };
 		1AE78F9B1B96774300CDEF17 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA391B413510009B1B49 /* URLRequest.swift */; };
 		1AE78F9D1B96774300CDEF17 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD061B4850B40019AFB2 /* SemanticVersion.swift */; };
 		1AE78F9E1B96774300CDEF17 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA291B40F713009B1B49 /* Data.swift */; };
@@ -888,7 +886,6 @@
 				1AE78F3E1B96774100CDEF17 /* ByteValue.swift in Sources */,
 				1AE78F3F1B96774100CDEF17 /* Version.swift in Sources */,
 				1AE78F401B96774100CDEF17 /* POSIXTime.swift in Sources */,
-				1AE78F411B96774100CDEF17 /* Task.swift in Sources */,
 				1AE78F431B96774100CDEF17 /* URLRequest.swift in Sources */,
 				1AE78F451B96774100CDEF17 /* SemanticVersion.swift in Sources */,
 				1AE78F461B96774100CDEF17 /* Data.swift in Sources */,
@@ -957,7 +954,6 @@
 				1AE78F961B96774300CDEF17 /* ByteValue.swift in Sources */,
 				1AE78F971B96774300CDEF17 /* Version.swift in Sources */,
 				1AE78F981B96774300CDEF17 /* POSIXTime.swift in Sources */,
-				1AE78F991B96774300CDEF17 /* Task.swift in Sources */,
 				1AE78F9B1B96774300CDEF17 /* URLRequest.swift in Sources */,
 				1AE78F9D1B96774300CDEF17 /* SemanticVersion.swift in Sources */,
 				1AE78F9E1B96774300CDEF17 /* Data.swift in Sources */,
