@@ -21,7 +21,7 @@ public extension POSIXError {
 #if os(Linux)
     
     /// Enumeration describing POSIX error codes.
-    @objc public enum POSIXError: RawRepresentable {
+    public enum POSIXError: RawRepresentable {
         
         case Value(CInt)
         
