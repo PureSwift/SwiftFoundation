@@ -177,8 +177,6 @@
 		6E08F84B1BBE7B8800548B1E /* FileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7965F91B5B988D00A6E4DA /* FileManagerTests.swift */; };
 		6E08F84C1BBE7B8800548B1E /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5A851B6092780025FE7C /* DataTests.swift */; };
 		6E08F84D1BBE7B8800548B1E /* NSURLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E08F83A1BBE79F800548B1E /* NSURLSessionTests.swift */; };
-		6E08F85B1BBE7BBE00548B1E /* b64.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6E783EBB1BA96C690086115D /* b64.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6E08F85C1BBE7BBE00548B1E /* JSON.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6E783EBD1BA96C690086115D /* JSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E08F85D1BBE7DE900548B1E /* SwiftFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE78F6C1B96774100CDEF17 /* SwiftFoundation.framework */; };
 		6E10FCC01BB2805C007CB984 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E574ED21B4A3ED500F629B3 /* String.swift */; };
 		6E10FCC11BB2805D007CB984 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E574ED21B4A3ED500F629B3 /* String.swift */; };
@@ -221,8 +219,6 @@
 		6E3C122C1C134B8E00112B11 /* JSONCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C122A1C134B8E00112B11 /* JSONCore.swift */; };
 		6E3C122D1C134B8E00112B11 /* JSONCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C122A1C134B8E00112B11 /* JSONCore.swift */; };
 		6E66A6611B486A4400CB82CD /* RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E66A6601B486A4400CB82CD /* RawRepresentable.swift */; };
-		6E783EC81BA96CAF0086115D /* b64.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6E783EC01BA96C690086115D /* b64.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6E783EC91BA96CAF0086115D /* JSON.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6E783EC21BA96C690086115D /* JSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E94F0691BB8B92000C4BE24 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E94F0681BB8B92000C4BE24 /* Formatter.swift */; };
 		6E94F06A1BB8B92000C4BE24 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E94F0681BB8B92000C4BE24 /* Formatter.swift */; };
 		6E94F06B1BB8B92000C4BE24 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E94F0681BB8B92000C4BE24 /* Formatter.swift */; };
@@ -260,8 +256,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6E08F85B1BBE7BBE00548B1E /* b64.framework in Copy Frameworks */,
-				6E08F85C1BBE7BBE00548B1E /* JSON.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,8 +266,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6E783EC81BA96CAF0086115D /* b64.framework in Copy Frameworks */,
-				6E783EC91BA96CAF0086115D /* JSON.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,12 +353,6 @@
 		6E3C122A1C134B8E00112B11 /* JSONCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCore.swift; sourceTree = "<group>"; };
 		6E574ED21B4A3ED500F629B3 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		6E66A6601B486A4400CB82CD /* RawRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawRepresentable.swift; sourceTree = "<group>"; };
-		6E783EBB1BA96C690086115D /* b64.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = b64.framework; sourceTree = "<group>"; };
-		6E783EBD1BA96C690086115D /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
-		6E783EC01BA96C690086115D /* b64.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = b64.framework; sourceTree = "<group>"; };
-		6E783EC21BA96C690086115D /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
-		6E783EC51BA96C690086115D /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
-		6E933E731BACCA0700454193 /* b64.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = b64.framework; sourceTree = "<group>"; };
 		6E94F0681BB8B92000C4BE24 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		6EB4DE3C1B46CF9200C02276 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		6EB4DE3E1B46D08D00C02276 /* ComparatorSortDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComparatorSortDescriptor.swift; sourceTree = "<group>"; };
@@ -502,7 +488,6 @@
 		6E30BA031B40F543009B1B49 = {
 			isa = PBXGroup;
 			children = (
-				6E783EB91BA96C2C0086115D /* Dependencies */,
 				6E30BA0F1B40F543009B1B49 /* Sources */,
 				1A9F2A221B89146200FC02CF /* Linux Support */,
 				1A1B5AB71B61C74A0025FE7C /* Darwin Support */,
@@ -615,46 +600,6 @@
 			name = "Swift Extensions";
 			sourceTree = "<group>";
 		};
-		6E783EB91BA96C2C0086115D /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				6E783EBA1BA96C690086115D /* iOS */,
-				6E783EBF1BA96C690086115D /* Mac */,
-				6E783EC41BA96C690086115D /* watchOS */,
-			);
-			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		6E783EBA1BA96C690086115D /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				6E783EBB1BA96C690086115D /* b64.framework */,
-				6E783EBD1BA96C690086115D /* JSON.framework */,
-			);
-			name = iOS;
-			path = ../Carthage/Build/iOS;
-			sourceTree = "<group>";
-		};
-		6E783EBF1BA96C690086115D /* Mac */ = {
-			isa = PBXGroup;
-			children = (
-				6E783EC01BA96C690086115D /* b64.framework */,
-				6E783EC21BA96C690086115D /* JSON.framework */,
-			);
-			name = Mac;
-			path = ../Carthage/Build/Mac;
-			sourceTree = "<group>";
-		};
-		6E783EC41BA96C690086115D /* watchOS */ = {
-			isa = PBXGroup;
-			children = (
-				6E933E731BACCA0700454193 /* b64.framework */,
-				6E783EC51BA96C690086115D /* JSON.framework */,
-			);
-			name = watchOS;
-			path = ../Carthage/Build/watchOS;
-			sourceTree = "<group>";
-		};
 		6EB4DE3B1B46CDA100C02276 /* Sort Descriptors */ = {
 			isa = PBXGroup;
 			children = (
@@ -739,6 +684,7 @@
 				6E08F84E1BBE7B8800548B1E /* Frameworks */,
 				6E08F8501BBE7B8800548B1E /* Resources */,
 				6E08F8511BBE7B8800548B1E /* Copy Frameworks */,
+				6E3C122F1C13584C00112B11 /* Generate JSON */,
 			);
 			buildRules = (
 			);
@@ -776,6 +722,7 @@
 				6E30BA141B40F543009B1B49 /* Frameworks */,
 				6E30BA151B40F543009B1B49 /* Resources */,
 				6E783EC71BA96C8C0086115D /* Copy Frameworks */,
+				6E3C122E1C13583400112B11 /* Generate JSON */,
 			);
 			buildRules = (
 			);
@@ -867,6 +814,37 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6E3C122E1C13583400112B11 /* Generate JSON */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate JSON";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ${PROJECT_DIR}/SwiftFoundationTests\nif [ ! -e \"1.json\" ]; then\n/usr/bin/env ruby generate_json.rb\nfi\n";
+		};
+		6E3C122F1C13584C00112B11 /* Generate JSON */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate JSON";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ${PROJECT_DIR}/SwiftFoundationTests\nif [ ! -e \"1.json\" ]; then\n/usr/bin/env ruby generate_json.rb\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1AE78F171B96774100CDEF17 /* Sources */ = {

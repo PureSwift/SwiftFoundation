@@ -136,9 +136,7 @@ internal extension JSONCoreValue {
         case .Null: self = .JSONNull
             
         case .String(let value): self = .JSONString(value)
-            
-        case .String(let value): self = .JSONString(value)
-            
+                        
         case .Array(let arrayValue):
             
             let convertedArray = arrayValue.map { (JSONValue) in return JSONCoreValue(JSONValue: JSONValue) }

@@ -38,6 +38,7 @@ class Base64Tests: XCTestCase {
         XCTAssert(encodedData == foundationEncodedData.arrayOfBytes())
     }
     
+    /*
     func testDecode() {
         
         let string = "TestData 1234 😀"
@@ -64,6 +65,7 @@ class Base64Tests: XCTestCase {
         
         XCTAssert(foundationDecodedString == string)
     }
+    */
     
     // MARK: - Performance Tests
     
