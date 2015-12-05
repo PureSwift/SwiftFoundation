@@ -146,7 +146,16 @@ public extension JSON.Value {
             
         case .String(let string): return NSJSONSerialization.Value.String(string as NSString)
             
-        case .Number(let number): return NSJSONSerialization.Value.Number(number.rawValue as! NSNumber)
+        case .Number(let number):
+            
+            switch number {
+                
+                case let .Integer(value): return NSJSONSerialization.Value.Number(NSNumber(longLong: value))
+                
+                case let .Double(value): return NSJSONSerialization.Value.Number(NSNumber(double: value))
+                
+                case let .Boolean(value): return NSJSONSerialization.Value.Number(NSNumber(bool: value))
+            }
             
         case .Array(let array):
             

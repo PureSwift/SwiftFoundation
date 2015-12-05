@@ -25,16 +25,16 @@ extension String: JSONDecodable {
     }
 }
 
-extension Int: JSONEncodable {
+extension Int64: JSONEncodable {
     
     public func toJSON() -> JSON.Value { return .Number(.Integer(self)) }
 }
 
-extension Int: JSONDecodable {
+extension Int64: JSONDecodable {
     
     public init?(JSONValue: JSON.Value) {
         
-        guard let value = JSONValue.rawValue as? Int else { return nil }
+        guard let value = JSONValue.rawValue as? Int64 else { return nil }
         
         self = value
     }

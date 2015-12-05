@@ -48,7 +48,7 @@ class JSONTests: XCTestCase {
             
             let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
             
-            guard let jsonValue = JSON.Value(string: jsonString)
+            guard let jsonValue = try? JSON.Value(string: jsonString)
                 else { XCTFail("JSON parsing failed"); return }
             
             print("Parsed JSON: \(jsonValue)\n")
@@ -77,7 +77,7 @@ class JSONTests: XCTestCase {
         
         func writeJSON(json: JSON.Value) {
             
-            guard let jsonString = json.toString()
+            guard let jsonString = try? json.toString()
                 else { XCTFail("Could not serialize JSON"); return }
             
             let foundationJSONOutput = try! NSJSONSerialization.dataWithJSONObject(json.toFoundation().rawValue, options: NSJSONWritingOptions())
@@ -166,7 +166,7 @@ class JSONTests: XCTestCase {
         
         measureBlock {
             
-            let _ = jsonValue.toString()!
+            let _ = try! jsonValue.toString()
         }
     }
     
@@ -183,7 +183,7 @@ class JSONTests: XCTestCase {
         
     }
     
-    lazy var performanceJSONString: String = self.performanceJSON.toString()!
+    lazy var performanceJSONString: String = try! self.performanceJSON.toString()
     
     func testParsePerformance() {
         
@@ -191,7 +191,8 @@ class JSONTests: XCTestCase {
         
         measureBlock {
             
-            let _ = JSON.Value(string: jsonString)!
+            do { let _ = try JSON.Value(string: jsonString) }
+            catch { XCTFail("Error: \(error)") }
         }
     }
     
