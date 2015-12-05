@@ -94,7 +94,7 @@ public extension tm {
     
 #elseif os(Linux)
     
-    public typealias POSIXMicroseconds = Int32
+    public typealias POSIXMicroseconds = __suseconds_t
     
     public func modf(value: Double) -> (Double, Double) {
         
