@@ -10,6 +10,7 @@
     import Darwin
 #elseif os(Linux)
     import Glibc
+    import CUUID
 #endif
 
 // MARK: - POSIX UUID System Type Functions

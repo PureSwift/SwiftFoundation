@@ -10,6 +10,7 @@
     import Darwin
 #elseif os(Linux)
     import Glibc
+    import CStatfs
 #endif
 
 public extension stat {
