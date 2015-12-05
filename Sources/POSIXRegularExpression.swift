@@ -16,7 +16,7 @@ public typealias POSIXRegularExpression = regex_t
 
 public extension POSIXRegularExpression {
     
-    public static func compile(pattern: String, options: [RegularExpression.CompileOption]) -> (Int32, POSIXRegularExpression) {
+    public static func compile(pattern: String, options: [RegularExpression.CompileOption]) -> (ErrorCode, POSIXRegularExpression) {
         
         var regularExpression = POSIXRegularExpression()
         
@@ -24,7 +24,7 @@ public extension POSIXRegularExpression {
         
         let errorCode = regcomp(&regularExpression, pattern, flags)
         
-        return (errorCode, regularExpression)
+        return (ErrorCode(errorCode), regularExpression)
     }
     
     public mutating func free() {

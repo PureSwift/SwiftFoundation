@@ -58,4 +58,17 @@ public extension RegularExpression {
     }
 }
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    
+    
+#elseif os(Linux)
+    
+    public let REG_EXTENDED: Int32 = 1
+    
+    public let REG_ICASE: Int32 = (REG_EXTENDED << 1)
+    
+    public let REG_NEWLINE: Int32 = (REG_ICASE << 1)
 
+    public let REG_NOSUB: Int32 = (REG_NEWLINE << 1)
+
+#endif
