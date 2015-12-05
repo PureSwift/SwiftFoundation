@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-/// Type that can be converted to and from Apple's ***Foundation*** equivalent types.
-///
-///  - Note: Not applicable on Linux.
+import Foundation
+
+/// Type that can be converted to and from Apple's ***Foundation*** equivalent types (Not Applicable on Linux).
 public protocol FoundationConvertible { }

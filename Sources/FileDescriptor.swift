@@ -6,6 +6,15 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    import Darwin
+#elseif os(Linux)
+    import Glibc
+    import CStatfs
+#endif
+
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+
 /// POSIX File Descriptor
 public typealias FileDescriptor = CInt
 
@@ -59,4 +68,6 @@ public extension FileDescriptor {
 }
 
 public let O_BINARY: Int32 = 0
+
+#endif
 

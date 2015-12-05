@@ -135,7 +135,7 @@ public struct JSON {
         
         case Boolean(Bool)
         
-        case Integer(Int)
+        case Integer(Int64)
         
         case Double(DoubleValue)
         
@@ -153,7 +153,7 @@ public struct JSON {
         public init?(rawValue: Any) {
             
             if let value = rawValue as? Bool            { self = .Boolean(value) }
-            if let value = rawValue as? Int             { self = .Integer(value) }
+            if let value = rawValue as? Int64           { self = .Integer(value) }
             if let value = rawValue as? DoubleValue     { self = .Double(value)  }
             
             return nil

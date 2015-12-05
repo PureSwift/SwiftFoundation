@@ -92,7 +92,7 @@ final public class RegularExpression: RegularExpressionType {
         
         self.internalExpression = expression
 
-        guard code == 0 else { throw CompileError(rawValue: code)! }
+        guard code == POSIXRegularExpression.ErrorCode(0) else { throw CompileError(rawValue: code)! }
     }
     
     public func match(string: String, options: [RegularExpression.MatchOption] = []) -> RegularExpressionMatch? {

@@ -6,15 +6,15 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    import Darwin
+#elseif os(Linux)
+    import Glibc
+#endif
+
 public typealias POSIXRegularExpression = regex_t
 
 public extension POSIXRegularExpression {
-    
-    public typealias FlagBitmask = Int32
-    
-    public typealias ErrorCode = Int32
-    
-    public typealias Match = regmatch_t
     
     public static func compile(pattern: String, options: [RegularExpression.CompileOption]) -> (ErrorCode, POSIXRegularExpression) {
         
@@ -24,14 +24,13 @@ public extension POSIXRegularExpression {
         
         let errorCode = regcomp(&regularExpression, pattern, flags)
         
-        return (errorCode, regularExpression)
+        return (ErrorCode(errorCode), regularExpression)
     }
     
     public mutating func free() {
         
         regfree(&self)
     }
-    
     
     public func firstMatch(string: String, options: [RegularExpression.MatchOption]) -> RegularExpressionMatch? {
         
@@ -90,3 +89,29 @@ public extension POSIXRegularExpression {
         return match
     }
 }
+
+// MARK: - Cross-Platform Support
+
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    
+    public extension POSIXRegularExpression {
+        
+        public typealias FlagBitmask = Int32
+        
+        public typealias ErrorCode = Int32
+        
+        public typealias Match = regmatch_t
+    }
+    
+#elseif os(Linux)
+    
+    public extension POSIXRegularExpression {
+        
+        public typealias FlagBitmask = Int32
+        
+        public typealias ErrorCode = reg_errcode_t
+        
+        public typealias Match = regmatch_t
+    }
+    
+#endif

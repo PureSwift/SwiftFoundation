@@ -6,11 +6,21 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    import Darwin
+#elseif os(Linux)
+    import Glibc
+#endif
+
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+
 public typealias FileSystemAttributes = statfs
 
 public typealias FileAttributes = stat
 
 /// Class for interacting with the file system.
+///
+/// Only availible on Darwin (```open``` has been marked as unavailible).
 public final class FileManager {
     
     // MARK: - Determining Access to Files
@@ -218,4 +228,5 @@ public final class FileManager {
 
 public let DefaultFileMode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH
 
+#endif
 

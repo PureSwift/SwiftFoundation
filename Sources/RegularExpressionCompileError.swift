@@ -6,10 +6,16 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    import Darwin
+#elseif os(Linux)
+    import Glibc
+#endif
+
 public extension RegularExpression {
     
     // POSIX Regular Expression compilation error
-    public enum CompileError: Int32, ErrorType {
+    public enum CompileError: RawRepresentable, ErrorType {
         
         /// Invalid use  of repetition operators such as using '*' as the first character.
         ///
