@@ -14,7 +14,6 @@
 
 #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
 
-
 public typealias FileSystemAttributes = statfs
 
 public typealias FileAttributes = stat

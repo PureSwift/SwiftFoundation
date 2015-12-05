@@ -13,6 +13,8 @@
     import CStatfs
 #endif
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+
 public extension statfs {
     
     // MARK: - Initialization
@@ -28,5 +30,6 @@ public extension statfs {
         
         self = fileSystemStatus
     }
-    
 }
+
+#endif
