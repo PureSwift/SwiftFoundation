@@ -18,19 +18,11 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 
 ## Dependencies
 - Linux (use distribution's package manager)
-	- json-c
-	- [libb64](http://libb64.sourceforge.net) (Build from source)
-- Darwin (uses [Carthage](https://github.com/Carthage/Carthage))
-	- [json-c](https://github.com/PureSwift/json-c)
-	- [libb64](https://github.com/PureSwift/libb64)
+	- [libb64](http://libb64.sourceforge.net)
 
 ## Compiling on Ubuntu
 
 Install Swift from [here](https://swift.org/download/).
-
-Install the required dependencies with:
-
-```sudo apt-get install libb64-dev libjson-c-dev libjson0-dev```
 
 Try compiling the [example project](https://github.com/PureSwift/SwiftFoundationExample).
 
@@ -52,9 +44,6 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 # License
 
 This program is free software; you can redistribute it and/or modify it under the terms of the MIT License.
-
-- [json-c](https://github.com/json-c/json-c/wiki#license) - MIT License
-- [libb64](http://sourceforge.net/p/libb64/git/ci/master/tree/LICENSE) - Public Domain
 
 # See Also
 
