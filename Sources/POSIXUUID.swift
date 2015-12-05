@@ -6,6 +6,12 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    import Darwin
+#elseif os(Linux)
+    import Glibc
+#endif
+
 // MARK: - POSIX UUID System Type Functions
 
 public typealias POSIXUUIDStringType = uuid_string_t
