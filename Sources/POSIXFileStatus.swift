@@ -13,6 +13,8 @@
     import CStatfs
 #endif
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+
 public extension stat {
     
     // MARK: - Initialization
@@ -122,3 +124,4 @@ public extension mode_t {
     }
 }
 
+#endif
