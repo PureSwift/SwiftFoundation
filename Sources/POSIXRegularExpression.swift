@@ -16,7 +16,7 @@ public typealias POSIXRegularExpression = regex_t
 
 public extension POSIXRegularExpression {
     
-    public static func compile(pattern: String, options: [RegularExpression.CompileOption]) -> (ErrorCode, POSIXRegularExpression) {
+    public static func compile(pattern: String, options: [RegularExpression.CompileOption]) -> (Int32, POSIXRegularExpression) {
         
         var regularExpression = POSIXRegularExpression()
         
@@ -108,7 +108,7 @@ public extension POSIXRegularExpression {
     public extension POSIXRegularExpression {
         
         public typealias FlagBitmask = Int32
-                
+        
         public typealias ErrorCode = reg_errcode_t
         
         public typealias Match = regmatch_t
