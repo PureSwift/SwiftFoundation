@@ -18,4 +18,27 @@ public extension POSIXError {
     static var fromErrorNumber: POSIXError? { return self.init(rawValue: errno) }
 }
 
+#if os(Linux)
+    
+    /// Enumeration describing POSIX error codes.
+    @objc public enum POSIXError: CInt, RawRepresentable {
+        
+        case Value(CInt)
+        
+        public init?(rawValue: CInt) {
+            
+            self = .Value(rawValue)
+        }
+        
+        public var rawValue: CInt {
+            
+            switch self {
+                
+            case let .Value(rawValue): return rawValue
+            }
+        }
+    }
+    
+#endif
+
 
