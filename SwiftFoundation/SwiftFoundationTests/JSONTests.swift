@@ -24,6 +24,21 @@ class JSONTests: XCTestCase {
     }
     
     // MARK: - Functional Tests
+    
+    func testJSONEncodable() {
+        
+        do {
+            
+            let string = "Hey"
+            
+            let json: JSON.Value = string.toJSON()
+            
+            guard let rawValue = json.rawValue as? String
+                else { XCTFail("rawValue should be String"); return }
+            
+            XCTAssert(rawValue == string)
+        }
+    }
 
     func testJSONParse() {
         
@@ -33,8 +48,11 @@ class JSONTests: XCTestCase {
             
             let jsonString = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
             
-            guard let jsonValue = JSON.Value(string: jsonString)
-                else { XCTFail("JSON parsing failed"); return }
+            let jsonValue: JSON.Value
+            
+            do { jsonValue = try JSON.Value(string: jsonString) }
+            
+            catch { print("Error JSON String: \n\(jsonString)"); XCTFail("Error: \(error)"); return }
             
             print("Parsed JSON: \(jsonValue)\n")
         }
@@ -62,7 +80,7 @@ class JSONTests: XCTestCase {
         
         func writeJSON(json: JSON.Value) {
             
-            guard let jsonString = json.toString()
+            guard let jsonString = try? json.toString()
                 else { XCTFail("Could not serialize JSON"); return }
             
             let foundationJSONOutput = try! NSJSONSerialization.dataWithJSONObject(json.toFoundation().rawValue, options: NSJSONWritingOptions())
@@ -74,37 +92,132 @@ class JSONTests: XCTestCase {
             print("JSON Output: \(jsonString)")
         }
         
-        writeJSON(JSON.Value.Object([
-            "Key": JSON.Value.String("Value")
+        writeJSON(.Object([
+            "Key": .String("Value")
             ]))
         
-        writeJSON(JSON.Value.Array([
-            JSON.Value.String("value1"),
-            JSON.Value.String("value2"),
-            JSON.Value.Null,
-            JSON.Value.Number(JSON.Number.Boolean(true)),
-            JSON.Value.Number(JSON.Number.Integer(10)),
-            JSON.Value.Number(JSON.Number.Double(10.10)),
-            JSON.Value.Object(["Key": JSON.Value.String("Value")])
+        writeJSON(.Array([
+            .String("value1"),
+            .String("value2"),
+            .Null,
+            .Number(.Boolean(true)),
+            .Number(.Integer(10)),
+            .Number(.Double(10.10)),
+            .Object(["Key": .String("Value")])
             ]))
+    }
+    
+    func testRawValue() {
+        
+        /*
+        do {
+            
+            let jsonArray = JSON.Value.Array([
+                JSON.Value.String("value1"),
+                JSON.Value.String("value2"),
+                JSON.Value.Number(JSON.Number.Boolean(true)),
+                JSON.Value.Number(JSON.Number.Integer(10)),
+                JSON.Value.Number(JSON.Number.Double(10.10)),
+                JSON.Value.Object(["Key": JSON.Value.String("Value")])
+                ])
+            
+            let rawValue: [AnyObject] = ["value1", "value2", true, 10 as Int, 10.10 as Double, ["Key": "Value"]]
+            
+            let jsonRawValue = jsonArray.rawValue as? [AnyObject]
+            
+            XCTAssert(jsonRawValue! == rawValue)
+        }
+        */
+        
+        do {
+            
+            let jsonObject = JSON.Value.Object(["date": .Number(.Boolean(true))])
+            
+            let rawValue = ["date": true]
+            
+            let jsonRawValue = (jsonObject.rawValue as! [String: Any]) as! [String: Bool]
+            
+            XCTAssert(jsonRawValue == rawValue)
+        }
     }
     
     // MARK: - Performance Tests
     
-    /*
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
+    let performanceJSON: JSON.Value = {
+        
+        var jsonArray = JSON.Array([
+            .String("value1"),
+            .String("value2"),
+            .Null,
+            .Number(.Boolean(true)),
+            .Number(.Integer(10)),
+            .Number(.Double(10.10)),
+            .Object(["Key": .String("Value")])
+            ])
+        
+        for _ in 0...10 {
+            
+            jsonArray += jsonArray
+        }
+        
+        return JSON.Value.Array(jsonArray)
+    }()
+    
+    func testWritingPerformance() {
+        
+        let jsonValue = performanceJSON
+        
+        measureBlock {
+            
+            let _ = try! jsonValue.toString()
         }
     }
-
-    func testFoundationPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
+    
+    func testFoundationWritingPerformance() {
+        
+        let jsonValue = performanceJSON
+        
+        let foundationJSON = jsonValue.toFoundation().rawValue as! NSArray
+        
+        measureBlock {
+            
+            let _ = try! NSJSONSerialization.dataWithJSONObject(foundationJSON, options: NSJSONWritingOptions())
+        }
+        
+    }
+    
+    lazy var performanceJSONString1: String = {
+        
+        let JSON = self.performanceJSON.toFoundation().rawValue
+        
+        let data = try! NSJSONSerialization.dataWithJSONObject(JSON, options: NSJSONWritingOptions(rawValue: 0))
+        
+        let jsonString = String(UTF8Data: data.arrayOfBytes())!
+        
+        return jsonString
+    }()
+    
+    func testParsePerformance() {
+        
+        let jsonString = performanceJSONString1
+        
+        measureBlock {
+            
+            do { let _ = try JSON.Value(string: jsonString) }
+                
+            catch { print("Error JSON String: \n\(jsonString)"); XCTFail("Error: \(error)"); return }
         }
     }
-    */
-
+    
+    func testFoundationParsePerformance() {
+        
+        let jsonString = performanceJSONString1
+        
+        let jsonData = NSData(bytes: jsonString.toUTF8Data())
+        
+        measureBlock {
+            
+            let _ = try! NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions())
+        }
+    }
 }

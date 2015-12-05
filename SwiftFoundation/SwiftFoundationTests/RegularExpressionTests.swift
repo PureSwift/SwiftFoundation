@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import SwiftFoundation
+import SwiftFoundation
 
 class RegularExpressionTests: XCTestCase {
 
@@ -23,7 +23,7 @@ class RegularExpressionTests: XCTestCase {
 
     func testSimpleRegex() {
         
-        let regex = try! RegularExpression(pattern: "Welcome")
+        let regex = try! RegularExpression("Welcome")
         
         let string = "Welcome to RegExr v2.0 by gskinner.com!"
         
@@ -41,7 +41,7 @@ class RegularExpressionTests: XCTestCase {
         
         do {
             
-            let regex = try! RegularExpression(pattern: "a{3}", options: [.ExtendedSyntax])
+            let regex = try! RegularExpression("a{3}", options: [.ExtendedSyntax])
             
             let string = "lorem ipsum aaa"
             
@@ -58,7 +58,7 @@ class RegularExpressionTests: XCTestCase {
         do {
             
             // match 5 letter word
-            let regex = try! RegularExpression(pattern: "[a-z, A-Z]{4}", options: [.ExtendedSyntax])
+            let regex = try! RegularExpression("[a-z, A-Z]{4}", options: [.ExtendedSyntax])
             
             let string = "Bird, Plane, Coleman"
             
@@ -71,6 +71,27 @@ class RegularExpressionTests: XCTestCase {
             
             XCTAssert(matchString == "Bird", matchString)
         }
+    }
+    
+    func testMultipleSubexpressions() {
+        
+        let string = "/abc/xyz"
+        
+        let regex = try! RegularExpression("/([a-z]+)/([a-z]+)", options: [.ExtendedSyntax])
+        
+        guard let match = regex.match(string, options: [])
+            else { XCTFail("Could not find match"); return }
+        
+        let stringRange = NSRange(match.range)
+        
+        let matchString = (string as NSString).substringWithRange(stringRange)
+        
+        // matched whole string
+        XCTAssert(matchString == string)
+        
+        // match subexpressions
+        
+        XCTAssert(match.subexpressionRanges.count == regex.subexpressionsCount, "Subexpressions should be \(regex.subexpressionsCount), is \(match.subexpressionRanges.count)")
     }
 }
 

@@ -20,22 +20,25 @@ class Base64Tests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+    
+    // MARK: - Functional Tests
 
     func testEncode() {
         
         let string = "TestData 1234 $%^&* 😀"
         
-        let inputData = string.dataUsingEncoding(NSUTF8StringEncoding)!
+        let inputData = string.toUTF8Data()
         
-        let encodedData = Base64.encode(inputData.arrayOfBytes())
+        let encodedData = Base64.encode(inputData)
         
         print("Base64 Encoded string: \(NSString(data: NSData(bytes: encodedData), encoding: NSUTF8StringEncoding))")
         
-        let foundationEncodedData = inputData.base64EncodedDataWithOptions(NSDataBase64EncodingOptions())
+        let foundationEncodedData = NSData(bytes: inputData).base64EncodedDataWithOptions(NSDataBase64EncodingOptions())
         
         XCTAssert(encodedData == foundationEncodedData.arrayOfBytes())
     }
     
+    /*
     func testDecode() {
         
         let string = "TestData 1234 😀"
@@ -62,12 +65,74 @@ class Base64Tests: XCTestCase {
         
         XCTAssert(foundationDecodedString == string)
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
+    */
+    
+    // MARK: - Performance Tests
+    
+    func generateEncodeData() -> Data {
+        
+        let pattern = "TestData 1234 $%^&* 😀"
+        
+        var string = pattern
+        
+        for _ in 0...100000 {
+            
+            string = string + pattern
+        }
+        
+        let stringData = string.toUTF8Data()
+        
+        return stringData
+    }
+    
+    func testEncodePerformance() {
+        
+        let data = generateEncodeData()
+        
+        measureBlock {
+            
+            let _ = Base64.encode(data)
         }
     }
-
+    
+    func testFoundationEncodePerformance() {
+        
+        let data = NSData(bytes: generateEncodeData())
+        
+        measureBlock {
+            
+            let _ = data.base64EncodedDataWithOptions(NSDataBase64EncodingOptions())
+        }
+    }
+    
+    func generateDecodeData() -> Data {
+        
+        let data = NSData(bytes: generateEncodeData())
+        
+        let encodedData = data.base64EncodedDataWithOptions(NSDataBase64EncodingOptions())
+        
+        return encodedData.arrayOfBytes()
+    }
+    
+    func testDecodePerformance() {
+        
+        let data = generateDecodeData()
+        
+        measureBlock {
+            
+            let _ = Base64.decode(data)
+        }
+    }
+    
+    func testFoundationDecodePerformance() {
+        
+        let data = NSData(bytes: generateDecodeData())
+        
+        measureBlock {
+            
+            let _ = NSData(base64EncodedData: data, options: NSDataBase64DecodingOptions())
+        }
+    }
 }
+
+

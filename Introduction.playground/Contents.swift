@@ -1,4 +1,6 @@
 //: SwiftFoundation Introduction
+//:
+//: On Xcode, make sure you compile the ```SwiftFoundation OS X``` target first.
 
 import SwiftFoundation
 
@@ -9,7 +11,9 @@ var str = "Hello, SwiftFoundation"
 
 let randomUUID = UUID()
 
-//: SwiftFoundation aims to provide the exact same *interface* and *implementation* as Foundation, but upgraded for Swift and Protocol-Oriented Programming where feasible.
+randomUUID.rawValue
+
+//: SwiftFoundation aims to provide the a similar *interface* and *implementation* as Foundation, but upgraded for Swift and adopting Protocol-Oriented Programming where feasible.
 
 import Foundation
 
