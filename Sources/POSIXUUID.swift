@@ -15,7 +15,12 @@
 
 // MARK: - POSIX UUID System Type Functions
 
-public typealias POSIXUUIDStringType = uuid_string_t
+
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    public typealias POSIXUUIDStringType = uuid_string_t
+#elseif os(Linux)
+    public typealias POSIXUUIDStringType = (Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8)
+#endif
 
 public func POSIXUUIDCreateRandom() -> uuid_t {
     
