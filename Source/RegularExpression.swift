@@ -134,3 +134,14 @@ public struct RegularExpressionMatch {
     }
 }
 
+public extension String {
+    func substring(range: RegularExpressionMatch.Range) -> String? {
+        switch range {
+        case .NotFound:
+            return nil
+        case let .Found(r):
+            let indexRange = Swift.Range(start: utf8.startIndex.advancedBy(r.startIndex), end: utf8.startIndex.advancedBy(r.endIndex))
+            return String(utf8[indexRange])
+        }
+    }
+}
