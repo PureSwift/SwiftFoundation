@@ -713,11 +713,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E30BA241B40F543009B1B49 /* Build configuration list for PBXNativeTarget "SwiftFoundationTests OS X" */;
 			buildPhases = (
-				6E30BA131B40F543009B1B49 /* Sources */,
 				6E30BA141B40F543009B1B49 /* Frameworks */,
-				6E30BA151B40F543009B1B49 /* Resources */,
 				6E783EC71BA96C8C0086115D /* Copy Frameworks */,
 				6E3C122E1C13583400112B11 /* Generate JSON */,
+				6E30BA131B40F543009B1B49 /* Sources */,
+				6E30BA151B40F543009B1B49 /* Resources */,
 			);
 			buildRules = (
 			);
