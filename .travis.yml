@@ -1,7 +1,9 @@
-brew update
-brew install xctool
+language: objective-c
 
-language: swift
+before_install:
+ - brew update
+ - brew install xctool
+
 script:
   - xctool test -workspace SwiftFoundation.xcworkspace -scheme "SwiftFoundation OS X" -sdk macosx ONLY_ACTIVE_ARCH=NO
   - xctool test -workspace SwiftFoundation.xcworkspace -scheme "SwiftFoundation iOS" -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
