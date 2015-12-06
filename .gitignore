@@ -5,3 +5,5 @@ SwiftFoundation/SwiftFoundation.xcodeproj/xcuserdata/*
 Carthage/*
 SwiftFoundation/SwiftFoundationTests/1.json
 .build
+
+Packages/*
