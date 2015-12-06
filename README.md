@@ -1,5 +1,7 @@
 # SwiftFoundation #
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Join the chat at https://gitter.im/PureSwift/SwiftFoundation](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/PureSwift/SwiftFoundation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build Status](https://travis-ci.org/PureSwift/SwiftFoundation.svg?branch=develop)](https://travis-ci.org/PureSwift/SwiftFoundation) 
+
+[![Join the chat at https://gitter.im/PureSwift/SwiftFoundation](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/PureSwift/SwiftFoundation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Cross-Platform, Protocol-Oriented Programming base library to complement the Swift Standard Library.
 
