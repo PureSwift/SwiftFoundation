@@ -24,9 +24,11 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 
 ## Compiling on Ubuntu
 
-Install Swift from [here](https://swift.org/download/).
+1. Install Swift from [here](https://swift.org/download/).
 
-Try compiling the [example project](https://github.com/PureSwift/SwiftFoundationExample).
+2. Install dependencies ```sudo apt-get install libb64-dev uuid-dev```
+
+3. Compile and run the [example project](https://github.com/PureSwift/SwiftFoundationExample).
 
 ## Implemented
 To see what parts of Foundation are implemented, just look at the unit tests. Completed functionality will be fully unit tested. Note that there are some functionality that is written as a protocol only, that will not be included on this list.
