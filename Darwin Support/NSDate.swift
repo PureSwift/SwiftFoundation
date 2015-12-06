@@ -6,6 +6,8 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+
 import Foundation
 
 public extension Date {
@@ -20,4 +22,6 @@ public extension Date {
         return NSDate(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate)
     }
 }
+
+#endif
 

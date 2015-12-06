@@ -35,13 +35,13 @@
 		1A9D97421B7720E400D86F7C /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D97411B7720E400D86F7C /* HTTP.swift */; };
 		1A9D97441B77235900D86F7C /* URLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D97431B77235900D86F7C /* URLProtocol.swift */; };
 		1A9F2A1D1B88619700FC02CF /* JSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1C1B88619700FC02CF /* JSONSerialization.swift */; };
-		1A9F2A1F1B890CEF00FC02CF /* FoundationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1E1B890CEF00FC02CF /* FoundationConvertible.swift */; };
+		1A9F2A1F1B890CEF00FC02CF /* DarwinFoundationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1E1B890CEF00FC02CF /* DarwinFoundationConvertible.swift */; };
 		1A9F2A211B89124800FC02CF /* NSNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A201B89124800FC02CF /* NSNull.swift */; };
 		1A9F2A261B8928EF00FC02CF /* NSJSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A251B8928EF00FC02CF /* NSJSONSerialization.swift */; };
 		1AC4F9BC1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4F9BB1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift */; };
-		1AD2FE231B96CCBF0054F4CB /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2FE221B96CCBF0054F4CB /* HTTPClient.swift */; };
-		1AD2FE241B96CCBF0054F4CB /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2FE221B96CCBF0054F4CB /* HTTPClient.swift */; };
-		1AD2FE251B96CCBF0054F4CB /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2FE221B96CCBF0054F4CB /* HTTPClient.swift */; };
+		1AD2FE231B96CCBF0054F4CB /* DarwinHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2FE221B96CCBF0054F4CB /* DarwinHTTPClient.swift */; };
+		1AD2FE241B96CCBF0054F4CB /* DarwinHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2FE221B96CCBF0054F4CB /* DarwinHTTPClient.swift */; };
+		1AD2FE251B96CCBF0054F4CB /* DarwinHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2FE221B96CCBF0054F4CB /* DarwinHTTPClient.swift */; };
 		1ADA87BB1B6306330055A442 /* POSIXTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4F9BD1B601A8B00CC7355 /* POSIXTimeTests.swift */; };
 		1AE78F181B96774100CDEF17 /* POSIXError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A85C40B1B5FA805002DDADB /* POSIXError.swift */; };
 		1AE78F191B96774100CDEF17 /* POSIXFileStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A85C4031B5F9B4E002DDADB /* POSIXFileStatus.swift */; };
@@ -71,7 +71,7 @@
 		1AE78F381B96774100CDEF17 /* RegularExpressionMatchOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A436ED11B774A850069F5D9 /* RegularExpressionMatchOption.swift */; };
 		1AE78F391B96774100CDEF17 /* NSJSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A251B8928EF00FC02CF /* NSJSONSerialization.swift */; };
 		1AE78F3A1B96774100CDEF17 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA2B1B40F71B009B1B49 /* Date.swift */; };
-		1AE78F3C1B96774100CDEF17 /* FoundationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1E1B890CEF00FC02CF /* FoundationConvertible.swift */; };
+		1AE78F3C1B96774100CDEF17 /* DarwinFoundationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1E1B890CEF00FC02CF /* DarwinFoundationConvertible.swift */; };
 		1AE78F3D1B96774100CDEF17 /* URLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A94D1B5D8F2600827F1B /* URLClient.swift */; };
 		1AE78F3E1B96774100CDEF17 /* ByteValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2F11B47851600C07C25 /* ByteValue.swift */; };
 		1AE78F3F1B96774100CDEF17 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD041B484FE30019AFB2 /* Version.swift */; };
@@ -127,7 +127,7 @@
 		1AE78F901B96774300CDEF17 /* RegularExpressionMatchOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A436ED11B774A850069F5D9 /* RegularExpressionMatchOption.swift */; };
 		1AE78F911B96774300CDEF17 /* NSJSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A251B8928EF00FC02CF /* NSJSONSerialization.swift */; };
 		1AE78F921B96774300CDEF17 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA2B1B40F71B009B1B49 /* Date.swift */; };
-		1AE78F941B96774300CDEF17 /* FoundationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1E1B890CEF00FC02CF /* FoundationConvertible.swift */; };
+		1AE78F941B96774300CDEF17 /* DarwinFoundationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1E1B890CEF00FC02CF /* DarwinFoundationConvertible.swift */; };
 		1AE78F951B96774300CDEF17 /* URLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A94D1B5D8F2600827F1B /* URLClient.swift */; };
 		1AE78F961B96774300CDEF17 /* ByteValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2F11B47851600C07C25 /* ByteValue.swift */; };
 		1AE78F971B96774300CDEF17 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD041B484FE30019AFB2 /* Version.swift */; };
@@ -180,6 +180,8 @@
 		6E10FCC11BB2805D007CB984 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E574ED21B4A3ED500F629B3 /* String.swift */; };
 		6E10FCC21BB2805E007CB984 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E574ED21B4A3ED500F629B3 /* String.swift */; };
 		6E10FCC61BB28144007CB984 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10FCC51BB28144007CB984 /* StringTests.swift */; };
+		6E1697701C13C6CE00264BED /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E16976F1C13C6CE00264BED /* 1.json */; };
+		6E1697711C13C6CE00264BED /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E16976F1C13C6CE00264BED /* 1.json */; };
 		6E16C2BE1B42460B00C07C25 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2BD1B42460A00C07C25 /* HTTPStatusCode.swift */; };
 		6E16C2ED1B44FC4700C07C25 /* RegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2EC1B44FC4700C07C25 /* RegularExpression.swift */; };
 		6E16C2EF1B45095900C07C25 /* UUIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2EE1B45095900C07C25 /* UUIDTests.swift */; };
@@ -209,10 +211,6 @@
 		6E30BA4F1B4142D9009B1B49 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA4E1B4142D9009B1B49 /* FileManager.swift */; };
 		6E30BA531B41D960009B1B49 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA521B41D960009B1B49 /* HTTPMethod.swift */; };
 		6E30BA561B41DB5A009B1B49 /* HTTPVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA551B41DB5A009B1B49 /* HTTPVersion.swift */; };
-		6E3C12261C134B1F00112B11 /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C12241C134B1F00112B11 /* 1.json */; };
-		6E3C12271C134B1F00112B11 /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C12241C134B1F00112B11 /* 1.json */; };
-		6E3C12281C134B1F00112B11 /* generate_json.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C12251C134B1F00112B11 /* generate_json.rb */; };
-		6E3C12291C134B1F00112B11 /* generate_json.rb in Resources */ = {isa = PBXBuildFile; fileRef = 6E3C12251C134B1F00112B11 /* generate_json.rb */; };
 		6E3C122B1C134B8E00112B11 /* JSONCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C122A1C134B8E00112B11 /* JSONCore.swift */; };
 		6E3C122C1C134B8E00112B11 /* JSONCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C122A1C134B8E00112B11 /* JSONCore.swift */; };
 		6E3C122D1C134B8E00112B11 /* JSONCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C122A1C134B8E00112B11 /* JSONCore.swift */; };
@@ -299,13 +297,13 @@
 		1A9D97411B7720E400D86F7C /* HTTP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
 		1A9D97431B77235900D86F7C /* URLProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLProtocol.swift; sourceTree = "<group>"; };
 		1A9F2A1C1B88619700FC02CF /* JSONSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerialization.swift; sourceTree = "<group>"; };
-		1A9F2A1E1B890CEF00FC02CF /* FoundationConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationConvertible.swift; sourceTree = "<group>"; };
+		1A9F2A1E1B890CEF00FC02CF /* DarwinFoundationConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarwinFoundationConvertible.swift; sourceTree = "<group>"; };
 		1A9F2A201B89124800FC02CF /* NSNull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNull.swift; sourceTree = "<group>"; };
-		1A9F2A231B8914B900FC02CF /* FoundationConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoundationConvertible.swift; path = ../Sources/FoundationConvertible.swift; sourceTree = "<group>"; };
+		1A9F2A231B8914B900FC02CF /* LinuxFoundationConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinuxFoundationConvertible.swift; path = ../Sources/LinuxFoundationConvertible.swift; sourceTree = "<group>"; };
 		1A9F2A251B8928EF00FC02CF /* NSJSONSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSJSONSerialization.swift; sourceTree = "<group>"; };
 		1AC4F9BB1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXFileSystemStatus.swift; sourceTree = "<group>"; };
 		1AC4F9BD1B601A8B00CC7355 /* POSIXTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXTimeTests.swift; sourceTree = "<group>"; };
-		1AD2FE221B96CCBF0054F4CB /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		1AD2FE221B96CCBF0054F4CB /* DarwinHTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarwinHTTPClient.swift; sourceTree = "<group>"; };
 		1AE78F6C1B96774100CDEF17 /* SwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AE78FC41B96774300CDEF17 /* SwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AE9AA4C1B8AEE6E008F5C58 /* Integer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Integer.swift; sourceTree = "<group>"; };
@@ -314,6 +312,7 @@
 		6E08F83A1BBE79F800548B1E /* NSURLSessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLSessionTests.swift; sourceTree = "<group>"; };
 		6E08F8571BBE7B8800548B1E /* SwiftFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E10FCC51BB28144007CB984 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
+		6E16976F1C13C6CE00264BED /* 1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 1.json; path = SwiftFoundationTests/1.json; sourceTree = SOURCE_ROOT; };
 		6E16C2BD1B42460A00C07C25 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		6E16C2EC1B44FC4700C07C25 /* RegularExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpression.swift; sourceTree = "<group>"; };
 		6E16C2EE1B45095900C07C25 /* UUIDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUIDTests.swift; sourceTree = "<group>"; };
@@ -326,7 +325,7 @@
 		6E30BA121B40F543009B1B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../SwiftFoundation/SwiftFoundation/Info.plist; sourceTree = "<group>"; };
 		6E30BA171B40F543009B1B49 /* SwiftFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E30BA1C1B40F543009B1B49 /* SwiftFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFoundationTests.swift; sourceTree = "<group>"; };
-		6E30BA1E1B40F543009B1B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E30BA1E1B40F543009B1B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../SwiftFoundation/SwiftFoundationTests/Info.plist; sourceTree = "<group>"; };
 		6E30BA271B40F66C009B1B49 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		6E30BA291B40F713009B1B49 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		6E30BA2B1B40F71B009B1B49 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -346,8 +345,6 @@
 		6E30BA4E1B4142D9009B1B49 /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		6E30BA521B41D960009B1B49 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		6E30BA551B41DB5A009B1B49 /* HTTPVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPVersion.swift; sourceTree = "<group>"; };
-		6E3C12241C134B1F00112B11 /* 1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 1.json; sourceTree = "<group>"; };
-		6E3C12251C134B1F00112B11 /* generate_json.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = generate_json.rb; sourceTree = "<group>"; };
 		6E3C122A1C134B8E00112B11 /* JSONCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCore.swift; sourceTree = "<group>"; };
 		6E574ED21B4A3ED500F629B3 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		6E66A6601B486A4400CB82CD /* RawRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawRepresentable.swift; sourceTree = "<group>"; };
@@ -406,8 +403,8 @@
 			children = (
 				6E30BA121B40F543009B1B49 /* Info.plist */,
 				6E30BA101B40F543009B1B49 /* SwiftFoundation.h */,
-				1A9F2A1E1B890CEF00FC02CF /* FoundationConvertible.swift */,
-				1AD2FE221B96CCBF0054F4CB /* HTTPClient.swift */,
+				1A9F2A1E1B890CEF00FC02CF /* DarwinFoundationConvertible.swift */,
+				1AD2FE221B96CCBF0054F4CB /* DarwinHTTPClient.swift */,
 				6E08F8361BBE74DF00548B1E /* NSURLSession.swift */,
 				1A1B5AB81B61C74A0025FE7C /* NSData.swift */,
 				1A1B5AB91B61C74A0025FE7C /* NSDate.swift */,
@@ -478,7 +475,7 @@
 		1A9F2A221B89146200FC02CF /* Linux Support */ = {
 			isa = PBXGroup;
 			children = (
-				1A9F2A231B8914B900FC02CF /* FoundationConvertible.swift */,
+				1A9F2A231B8914B900FC02CF /* LinuxFoundationConvertible.swift */,
 			);
 			name = "Linux Support";
 			sourceTree = "<group>";
@@ -541,8 +538,7 @@
 		6E30BA1B1B40F543009B1B49 /* SwiftFoundationTests */ = {
 			isa = PBXGroup;
 			children = (
-				6E3C12241C134B1F00112B11 /* 1.json */,
-				6E3C12251C134B1F00112B11 /* generate_json.rb */,
+				6E16976F1C13C6CE00264BED /* 1.json */,
 				6E30BA1C1B40F543009B1B49 /* SwiftFoundationTests.swift */,
 				1A1B5A851B6092780025FE7C /* DataTests.swift */,
 				6E30BA311B4116E6009B1B49 /* DateTests.swift */,
@@ -559,7 +555,8 @@
 				6E08F83A1BBE79F800548B1E /* NSURLSessionTests.swift */,
 				6E30BA1E1B40F543009B1B49 /* Info.plist */,
 			);
-			path = SwiftFoundationTests;
+			name = SwiftFoundationTests;
+			path = ../Tests;
 			sourceTree = "<group>";
 		};
 		6E30BA3D1B413865009B1B49 /* URL */ = {
@@ -790,8 +787,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E3C12291C134B1F00112B11 /* generate_json.rb in Resources */,
-				6E3C12271C134B1F00112B11 /* 1.json in Resources */,
+				6E1697711C13C6CE00264BED /* 1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -806,8 +802,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E3C12281C134B1F00112B11 /* generate_json.rb in Resources */,
-				6E3C12261C134B1F00112B11 /* 1.json in Resources */,
+				6E1697701C13C6CE00264BED /* 1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -854,7 +849,7 @@
 				1AE78F1A1B96774100CDEF17 /* POSIXFileSystemStatus.swift in Sources */,
 				1AE78F1B1B96774100CDEF17 /* RegularExpressionCompileError.swift in Sources */,
 				1AE78F1C1B96774100CDEF17 /* POSIXRegularExpression.swift in Sources */,
-				1AD2FE241B96CCBF0054F4CB /* HTTPClient.swift in Sources */,
+				1AD2FE241B96CCBF0054F4CB /* DarwinHTTPClient.swift in Sources */,
 				1AE78F1D1B96774100CDEF17 /* POSIXUUID.swift in Sources */,
 				1AE78F1E1B96774100CDEF17 /* Base64.swift in Sources */,
 				6E08F8381BBE74DF00548B1E /* NSURLSession.swift in Sources */,
@@ -881,7 +876,7 @@
 				1AE78F381B96774100CDEF17 /* RegularExpressionMatchOption.swift in Sources */,
 				1AE78F391B96774100CDEF17 /* NSJSONSerialization.swift in Sources */,
 				1AE78F3A1B96774100CDEF17 /* Date.swift in Sources */,
-				1AE78F3C1B96774100CDEF17 /* FoundationConvertible.swift in Sources */,
+				1AE78F3C1B96774100CDEF17 /* DarwinFoundationConvertible.swift in Sources */,
 				1AE78F3D1B96774100CDEF17 /* URLClient.swift in Sources */,
 				1AE78F3E1B96774100CDEF17 /* ByteValue.swift in Sources */,
 				1AE78F3F1B96774100CDEF17 /* Version.swift in Sources */,
@@ -922,7 +917,7 @@
 				1AE78F721B96774300CDEF17 /* POSIXFileSystemStatus.swift in Sources */,
 				1AE78F731B96774300CDEF17 /* RegularExpressionCompileError.swift in Sources */,
 				1AE78F741B96774300CDEF17 /* POSIXRegularExpression.swift in Sources */,
-				1AD2FE251B96CCBF0054F4CB /* HTTPClient.swift in Sources */,
+				1AD2FE251B96CCBF0054F4CB /* DarwinHTTPClient.swift in Sources */,
 				1AE78F751B96774300CDEF17 /* POSIXUUID.swift in Sources */,
 				1AE78F761B96774300CDEF17 /* Base64.swift in Sources */,
 				6E08F8391BBE74DF00548B1E /* NSURLSession.swift in Sources */,
@@ -949,7 +944,7 @@
 				1AE78F901B96774300CDEF17 /* RegularExpressionMatchOption.swift in Sources */,
 				1AE78F911B96774300CDEF17 /* NSJSONSerialization.swift in Sources */,
 				1AE78F921B96774300CDEF17 /* Date.swift in Sources */,
-				1AE78F941B96774300CDEF17 /* FoundationConvertible.swift in Sources */,
+				1AE78F941B96774300CDEF17 /* DarwinFoundationConvertible.swift in Sources */,
 				1AE78F951B96774300CDEF17 /* URLClient.swift in Sources */,
 				1AE78F961B96774300CDEF17 /* ByteValue.swift in Sources */,
 				1AE78F971B96774300CDEF17 /* Version.swift in Sources */,
@@ -1011,7 +1006,7 @@
 				1AC4F9BC1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift in Sources */,
 				1A436ED41B774C5C0069F5D9 /* RegularExpressionCompileError.swift in Sources */,
 				1A85C4101B5FAFB1002DDADB /* POSIXRegularExpression.swift in Sources */,
-				1AD2FE231B96CCBF0054F4CB /* HTTPClient.swift in Sources */,
+				1AD2FE231B96CCBF0054F4CB /* DarwinHTTPClient.swift in Sources */,
 				1A85C40E1B5FAC4C002DDADB /* POSIXUUID.swift in Sources */,
 				6E30BA2E1B410176009B1B49 /* Base64.swift in Sources */,
 				6E08F8371BBE74DF00548B1E /* NSURLSession.swift in Sources */,
@@ -1038,7 +1033,7 @@
 				1A436ED21B774A850069F5D9 /* RegularExpressionMatchOption.swift in Sources */,
 				1A9F2A261B8928EF00FC02CF /* NSJSONSerialization.swift in Sources */,
 				6E30BA2C1B40F71B009B1B49 /* Date.swift in Sources */,
-				1A9F2A1F1B890CEF00FC02CF /* FoundationConvertible.swift in Sources */,
+				1A9F2A1F1B890CEF00FC02CF /* DarwinFoundationConvertible.swift in Sources */,
 				1A49A94E1B5D8F2600827F1B /* URLClient.swift in Sources */,
 				6E16C2F21B47851600C07C25 /* ByteValue.swift in Sources */,
 				6E17CD051B484FE40019AFB2 /* Version.swift in Sources */,

@@ -6,6 +6,8 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+
 import Foundation
 
 public extension SwiftFoundation.Null {
@@ -14,3 +16,5 @@ public extension SwiftFoundation.Null {
     
     func toFoundation() -> NSNull { return NSNull() }
 }
+
+#endif

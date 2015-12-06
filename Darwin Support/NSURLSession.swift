@@ -6,6 +6,8 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+
 import Foundation
 
 public extension NSMutableURLRequest {
@@ -32,3 +34,5 @@ public extension NSMutableURLRequest {
         self.HTTPMethod = request.method.rawValue
     }
 }
+
+#endif

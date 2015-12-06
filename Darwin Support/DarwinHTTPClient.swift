@@ -6,6 +6,8 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+
 import Foundation
 
 // Dot notation syntax for class
@@ -91,3 +93,4 @@ public extension HTTP.Client {
     }
 }
 
+#endif

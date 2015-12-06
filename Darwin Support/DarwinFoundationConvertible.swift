@@ -8,6 +8,8 @@
 
 import Foundation
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    
 /// Type that can be converted to and from Apple's ***Foundation*** equivalent types.
 public protocol FoundationConvertible {
     
@@ -19,3 +21,5 @@ public protocol FoundationConvertible {
     /// Converts the type to an equivalent type for use with Apple's **Foundation**.
     func toFoundation() -> FoundationType
 }
+
+#endif
