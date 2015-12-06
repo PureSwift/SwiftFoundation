@@ -414,7 +414,7 @@
 				1A9F2A251B8928EF00FC02CF /* NSJSONSerialization.swift */,
 			);
 			name = "Darwin Support";
-			path = "../Darwin Support";
+			path = ../Sources;
 			sourceTree = "<group>";
 		};
 		1A436ECE1B7748430069F5D9 /* Regular Expression */ = {
