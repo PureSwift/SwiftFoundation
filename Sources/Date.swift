@@ -63,6 +63,12 @@ public struct Date: ByteValue, Equatable, Comparable, CustomStringConvertible, F
         
         timeIntervalSinceReferenceDate = timeInterval - TimeIntervalBetween1970AndReferenceDate
     }
+    
+    /// Creates the date with the specified number of milliseconds since 1 January 1970, GMT. Similar to Javascript.
+    public init(millisecondsSince1970 ms: Long) {
+        
+        timeIntervalSinceReferenceDate = ms/1000 - TimeIntervalBetween1970AndReferenceDate
+    }
 }
 
 // MARK: - Operator Overloading
