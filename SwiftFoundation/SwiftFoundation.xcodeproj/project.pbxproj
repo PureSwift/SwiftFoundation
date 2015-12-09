@@ -22,7 +22,6 @@
 		1A49A94E1B5D8F2600827F1B /* URLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A94D1B5D8F2600827F1B /* URLClient.swift */; };
 		1A49A9541B5DCDAC00827F1B /* URLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A9531B5DCDAC00827F1B /* URLTests.swift */; };
 		1A62790D1B799D4C0007CC95 /* FileDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A62790C1B799D4C0007CC95 /* FileDescriptor.swift */; };
-		1A6279101B79AE8E0007CC95 /* JSONParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A62790F1B79AE8E0007CC95 /* JSONParse.swift */; };
 		1A7965FA1B5B988D00A6E4DA /* FileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7965F91B5B988D00A6E4DA /* FileManagerTests.swift */; };
 		1A7966011B5C413000A6E4DA /* POSIXTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7966001B5C413000A6E4DA /* POSIXTime.swift */; };
 		1A85C4041B5F9B4E002DDADB /* POSIXFileStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A85C4031B5F9B4E002DDADB /* POSIXFileStatus.swift */; };
@@ -36,13 +35,13 @@
 		1A9D97421B7720E400D86F7C /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D97411B7720E400D86F7C /* HTTP.swift */; };
 		1A9D97441B77235900D86F7C /* URLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D97431B77235900D86F7C /* URLProtocol.swift */; };
 		1A9F2A1D1B88619700FC02CF /* JSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1C1B88619700FC02CF /* JSONSerialization.swift */; };
-		1A9F2A1F1B890CEF00FC02CF /* FoundationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1E1B890CEF00FC02CF /* FoundationConvertible.swift */; };
+		1A9F2A1F1B890CEF00FC02CF /* DarwinFoundationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1E1B890CEF00FC02CF /* DarwinFoundationConvertible.swift */; };
 		1A9F2A211B89124800FC02CF /* NSNull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A201B89124800FC02CF /* NSNull.swift */; };
 		1A9F2A261B8928EF00FC02CF /* NSJSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A251B8928EF00FC02CF /* NSJSONSerialization.swift */; };
 		1AC4F9BC1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4F9BB1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift */; };
-		1AD2FE231B96CCBF0054F4CB /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2FE221B96CCBF0054F4CB /* HTTPClient.swift */; };
-		1AD2FE241B96CCBF0054F4CB /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2FE221B96CCBF0054F4CB /* HTTPClient.swift */; };
-		1AD2FE251B96CCBF0054F4CB /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2FE221B96CCBF0054F4CB /* HTTPClient.swift */; };
+		1AD2FE231B96CCBF0054F4CB /* DarwinHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2FE221B96CCBF0054F4CB /* DarwinHTTPClient.swift */; };
+		1AD2FE241B96CCBF0054F4CB /* DarwinHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2FE221B96CCBF0054F4CB /* DarwinHTTPClient.swift */; };
+		1AD2FE251B96CCBF0054F4CB /* DarwinHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD2FE221B96CCBF0054F4CB /* DarwinHTTPClient.swift */; };
 		1ADA87BB1B6306330055A442 /* POSIXTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4F9BD1B601A8B00CC7355 /* POSIXTimeTests.swift */; };
 		1AE78F181B96774100CDEF17 /* POSIXError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A85C40B1B5FA805002DDADB /* POSIXError.swift */; };
 		1AE78F191B96774100CDEF17 /* POSIXFileStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A85C4031B5F9B4E002DDADB /* POSIXFileStatus.swift */; };
@@ -72,12 +71,11 @@
 		1AE78F381B96774100CDEF17 /* RegularExpressionMatchOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A436ED11B774A850069F5D9 /* RegularExpressionMatchOption.swift */; };
 		1AE78F391B96774100CDEF17 /* NSJSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A251B8928EF00FC02CF /* NSJSONSerialization.swift */; };
 		1AE78F3A1B96774100CDEF17 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA2B1B40F71B009B1B49 /* Date.swift */; };
-		1AE78F3C1B96774100CDEF17 /* FoundationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1E1B890CEF00FC02CF /* FoundationConvertible.swift */; };
+		1AE78F3C1B96774100CDEF17 /* DarwinFoundationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1E1B890CEF00FC02CF /* DarwinFoundationConvertible.swift */; };
 		1AE78F3D1B96774100CDEF17 /* URLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A94D1B5D8F2600827F1B /* URLClient.swift */; };
 		1AE78F3E1B96774100CDEF17 /* ByteValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2F11B47851600C07C25 /* ByteValue.swift */; };
 		1AE78F3F1B96774100CDEF17 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD041B484FE30019AFB2 /* Version.swift */; };
 		1AE78F401B96774100CDEF17 /* POSIXTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7966001B5C413000A6E4DA /* POSIXTime.swift */; };
-		1AE78F411B96774100CDEF17 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA351B4133F3009B1B49 /* Task.swift */; };
 		1AE78F431B96774100CDEF17 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA391B413510009B1B49 /* URLRequest.swift */; };
 		1AE78F451B96774100CDEF17 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD061B4850B40019AFB2 /* SemanticVersion.swift */; };
 		1AE78F461B96774100CDEF17 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA291B40F713009B1B49 /* Data.swift */; };
@@ -91,7 +89,6 @@
 		1AE78F531B96774100CDEF17 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA4E1B4142D9009B1B49 /* FileManager.swift */; };
 		1AE78F551B96774100CDEF17 /* BitMaskOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A85C4111B5FC2ED002DDADB /* BitMaskOption.swift */; };
 		1AE78F561B96774100CDEF17 /* Bridgable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A9431B5D3F0200827F1B /* Bridgable.swift */; };
-		1AE78F571B96774100CDEF17 /* JSONParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A62790F1B79AE8E0007CC95 /* JSONParse.swift */; };
 		1AE78F591B96774100CDEF17 /* FileDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A62790C1B799D4C0007CC95 /* FileDescriptor.swift */; };
 		1AE78F5D1B96774100CDEF17 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA4A1B413DF0009B1B49 /* Transformer.swift */; };
 		1AE78F5E1B96774100CDEF17 /* Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5A951B60B4F60025FE7C /* Decimal.swift */; };
@@ -130,12 +127,11 @@
 		1AE78F901B96774300CDEF17 /* RegularExpressionMatchOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A436ED11B774A850069F5D9 /* RegularExpressionMatchOption.swift */; };
 		1AE78F911B96774300CDEF17 /* NSJSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A251B8928EF00FC02CF /* NSJSONSerialization.swift */; };
 		1AE78F921B96774300CDEF17 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA2B1B40F71B009B1B49 /* Date.swift */; };
-		1AE78F941B96774300CDEF17 /* FoundationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1E1B890CEF00FC02CF /* FoundationConvertible.swift */; };
+		1AE78F941B96774300CDEF17 /* DarwinFoundationConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F2A1E1B890CEF00FC02CF /* DarwinFoundationConvertible.swift */; };
 		1AE78F951B96774300CDEF17 /* URLClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A94D1B5D8F2600827F1B /* URLClient.swift */; };
 		1AE78F961B96774300CDEF17 /* ByteValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2F11B47851600C07C25 /* ByteValue.swift */; };
 		1AE78F971B96774300CDEF17 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD041B484FE30019AFB2 /* Version.swift */; };
 		1AE78F981B96774300CDEF17 /* POSIXTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7966001B5C413000A6E4DA /* POSIXTime.swift */; };
-		1AE78F991B96774300CDEF17 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA351B4133F3009B1B49 /* Task.swift */; };
 		1AE78F9B1B96774300CDEF17 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA391B413510009B1B49 /* URLRequest.swift */; };
 		1AE78F9D1B96774300CDEF17 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E17CD061B4850B40019AFB2 /* SemanticVersion.swift */; };
 		1AE78F9E1B96774300CDEF17 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA291B40F713009B1B49 /* Data.swift */; };
@@ -149,7 +145,6 @@
 		1AE78FAB1B96774300CDEF17 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA4E1B4142D9009B1B49 /* FileManager.swift */; };
 		1AE78FAD1B96774300CDEF17 /* BitMaskOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A85C4111B5FC2ED002DDADB /* BitMaskOption.swift */; };
 		1AE78FAE1B96774300CDEF17 /* Bridgable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A49A9431B5D3F0200827F1B /* Bridgable.swift */; };
-		1AE78FAF1B96774300CDEF17 /* JSONParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A62790F1B79AE8E0007CC95 /* JSONParse.swift */; };
 		1AE78FB11B96774300CDEF17 /* FileDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A62790C1B799D4C0007CC95 /* FileDescriptor.swift */; };
 		1AE78FB51B96774300CDEF17 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA4A1B413DF0009B1B49 /* Transformer.swift */; };
 		1AE78FB61B96774300CDEF17 /* Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5A951B60B4F60025FE7C /* Decimal.swift */; };
@@ -180,13 +175,13 @@
 		6E08F84B1BBE7B8800548B1E /* FileManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7965F91B5B988D00A6E4DA /* FileManagerTests.swift */; };
 		6E08F84C1BBE7B8800548B1E /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1B5A851B6092780025FE7C /* DataTests.swift */; };
 		6E08F84D1BBE7B8800548B1E /* NSURLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E08F83A1BBE79F800548B1E /* NSURLSessionTests.swift */; };
-		6E08F85B1BBE7BBE00548B1E /* b64.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6E783EBB1BA96C690086115D /* b64.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6E08F85C1BBE7BBE00548B1E /* JSON.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6E783EBD1BA96C690086115D /* JSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E08F85D1BBE7DE900548B1E /* SwiftFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE78F6C1B96774100CDEF17 /* SwiftFoundation.framework */; };
 		6E10FCC01BB2805C007CB984 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E574ED21B4A3ED500F629B3 /* String.swift */; };
 		6E10FCC11BB2805D007CB984 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E574ED21B4A3ED500F629B3 /* String.swift */; };
 		6E10FCC21BB2805E007CB984 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E574ED21B4A3ED500F629B3 /* String.swift */; };
 		6E10FCC61BB28144007CB984 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10FCC51BB28144007CB984 /* StringTests.swift */; };
+		6E1697701C13C6CE00264BED /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E16976F1C13C6CE00264BED /* 1.json */; };
+		6E1697711C13C6CE00264BED /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E16976F1C13C6CE00264BED /* 1.json */; };
 		6E16C2BE1B42460B00C07C25 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2BD1B42460A00C07C25 /* HTTPStatusCode.swift */; };
 		6E16C2ED1B44FC4700C07C25 /* RegularExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2EC1B44FC4700C07C25 /* RegularExpression.swift */; };
 		6E16C2EF1B45095900C07C25 /* UUIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E16C2EE1B45095900C07C25 /* UUIDTests.swift */; };
@@ -216,9 +211,10 @@
 		6E30BA4F1B4142D9009B1B49 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA4E1B4142D9009B1B49 /* FileManager.swift */; };
 		6E30BA531B41D960009B1B49 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA521B41D960009B1B49 /* HTTPMethod.swift */; };
 		6E30BA561B41DB5A009B1B49 /* HTTPVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E30BA551B41DB5A009B1B49 /* HTTPVersion.swift */; };
+		6E3C122B1C134B8E00112B11 /* JSONCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C122A1C134B8E00112B11 /* JSONCore.swift */; };
+		6E3C122C1C134B8E00112B11 /* JSONCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C122A1C134B8E00112B11 /* JSONCore.swift */; };
+		6E3C122D1C134B8E00112B11 /* JSONCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C122A1C134B8E00112B11 /* JSONCore.swift */; };
 		6E66A6611B486A4400CB82CD /* RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E66A6601B486A4400CB82CD /* RawRepresentable.swift */; };
-		6E783EC81BA96CAF0086115D /* b64.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6E783EC01BA96C690086115D /* b64.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6E783EC91BA96CAF0086115D /* JSON.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6E783EC21BA96C690086115D /* JSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E94F0691BB8B92000C4BE24 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E94F0681BB8B92000C4BE24 /* Formatter.swift */; };
 		6E94F06A1BB8B92000C4BE24 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E94F0681BB8B92000C4BE24 /* Formatter.swift */; };
 		6E94F06B1BB8B92000C4BE24 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E94F0681BB8B92000C4BE24 /* Formatter.swift */; };
@@ -256,8 +252,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6E08F85B1BBE7BBE00548B1E /* b64.framework in Copy Frameworks */,
-				6E08F85C1BBE7BBE00548B1E /* JSON.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,8 +262,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6E783EC81BA96CAF0086115D /* b64.framework in Copy Frameworks */,
-				6E783EC91BA96CAF0086115D /* JSON.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,7 +284,6 @@
 		1A49A94D1B5D8F2600827F1B /* URLClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLClient.swift; sourceTree = "<group>"; };
 		1A49A9531B5DCDAC00827F1B /* URLTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLTests.swift; sourceTree = "<group>"; };
 		1A62790C1B799D4C0007CC95 /* FileDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileDescriptor.swift; sourceTree = "<group>"; };
-		1A62790F1B79AE8E0007CC95 /* JSONParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParse.swift; sourceTree = "<group>"; };
 		1A7965F91B5B988D00A6E4DA /* FileManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerTests.swift; sourceTree = "<group>"; };
 		1A7966001B5C413000A6E4DA /* POSIXTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXTime.swift; sourceTree = "<group>"; };
 		1A85C4031B5F9B4E002DDADB /* POSIXFileStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXFileStatus.swift; sourceTree = "<group>"; };
@@ -306,13 +297,13 @@
 		1A9D97411B7720E400D86F7C /* HTTP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
 		1A9D97431B77235900D86F7C /* URLProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLProtocol.swift; sourceTree = "<group>"; };
 		1A9F2A1C1B88619700FC02CF /* JSONSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerialization.swift; sourceTree = "<group>"; };
-		1A9F2A1E1B890CEF00FC02CF /* FoundationConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationConvertible.swift; sourceTree = "<group>"; };
+		1A9F2A1E1B890CEF00FC02CF /* DarwinFoundationConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarwinFoundationConvertible.swift; sourceTree = "<group>"; };
 		1A9F2A201B89124800FC02CF /* NSNull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNull.swift; sourceTree = "<group>"; };
-		1A9F2A231B8914B900FC02CF /* FoundationConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoundationConvertible.swift; path = "../Linux Support/FoundationConvertible.swift"; sourceTree = "<group>"; };
+		1A9F2A231B8914B900FC02CF /* LinuxFoundationConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinuxFoundationConvertible.swift; path = ../Sources/LinuxFoundationConvertible.swift; sourceTree = "<group>"; };
 		1A9F2A251B8928EF00FC02CF /* NSJSONSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSJSONSerialization.swift; sourceTree = "<group>"; };
 		1AC4F9BB1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXFileSystemStatus.swift; sourceTree = "<group>"; };
 		1AC4F9BD1B601A8B00CC7355 /* POSIXTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POSIXTimeTests.swift; sourceTree = "<group>"; };
-		1AD2FE221B96CCBF0054F4CB /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		1AD2FE221B96CCBF0054F4CB /* DarwinHTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarwinHTTPClient.swift; sourceTree = "<group>"; };
 		1AE78F6C1B96774100CDEF17 /* SwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AE78FC41B96774300CDEF17 /* SwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AE9AA4C1B8AEE6E008F5C58 /* Integer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Integer.swift; sourceTree = "<group>"; };
@@ -321,6 +312,7 @@
 		6E08F83A1BBE79F800548B1E /* NSURLSessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLSessionTests.swift; sourceTree = "<group>"; };
 		6E08F8571BBE7B8800548B1E /* SwiftFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E10FCC51BB28144007CB984 /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
+		6E16976F1C13C6CE00264BED /* 1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 1.json; path = SwiftFoundationTests/1.json; sourceTree = SOURCE_ROOT; };
 		6E16C2BD1B42460A00C07C25 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		6E16C2EC1B44FC4700C07C25 /* RegularExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpression.swift; sourceTree = "<group>"; };
 		6E16C2EE1B45095900C07C25 /* UUIDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUIDTests.swift; sourceTree = "<group>"; };
@@ -333,7 +325,7 @@
 		6E30BA121B40F543009B1B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../SwiftFoundation/SwiftFoundation/Info.plist; sourceTree = "<group>"; };
 		6E30BA171B40F543009B1B49 /* SwiftFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E30BA1C1B40F543009B1B49 /* SwiftFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFoundationTests.swift; sourceTree = "<group>"; };
-		6E30BA1E1B40F543009B1B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E30BA1E1B40F543009B1B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../SwiftFoundation/SwiftFoundationTests/Info.plist; sourceTree = "<group>"; };
 		6E30BA271B40F66C009B1B49 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		6E30BA291B40F713009B1B49 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		6E30BA2B1B40F71B009B1B49 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -353,14 +345,9 @@
 		6E30BA4E1B4142D9009B1B49 /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		6E30BA521B41D960009B1B49 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		6E30BA551B41DB5A009B1B49 /* HTTPVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPVersion.swift; sourceTree = "<group>"; };
+		6E3C122A1C134B8E00112B11 /* JSONCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCore.swift; sourceTree = "<group>"; };
 		6E574ED21B4A3ED500F629B3 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		6E66A6601B486A4400CB82CD /* RawRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawRepresentable.swift; sourceTree = "<group>"; };
-		6E783EBB1BA96C690086115D /* b64.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = b64.framework; sourceTree = "<group>"; };
-		6E783EBD1BA96C690086115D /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
-		6E783EC01BA96C690086115D /* b64.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = b64.framework; sourceTree = "<group>"; };
-		6E783EC21BA96C690086115D /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
-		6E783EC51BA96C690086115D /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
-		6E933E731BACCA0700454193 /* b64.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = b64.framework; sourceTree = "<group>"; };
 		6E94F0681BB8B92000C4BE24 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		6EB4DE3C1B46CF9200C02276 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		6EB4DE3E1B46D08D00C02276 /* ComparatorSortDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComparatorSortDescriptor.swift; sourceTree = "<group>"; };
@@ -416,8 +403,8 @@
 			children = (
 				6E30BA121B40F543009B1B49 /* Info.plist */,
 				6E30BA101B40F543009B1B49 /* SwiftFoundation.h */,
-				1A9F2A1E1B890CEF00FC02CF /* FoundationConvertible.swift */,
-				1AD2FE221B96CCBF0054F4CB /* HTTPClient.swift */,
+				1A9F2A1E1B890CEF00FC02CF /* DarwinFoundationConvertible.swift */,
+				1AD2FE221B96CCBF0054F4CB /* DarwinHTTPClient.swift */,
 				6E08F8361BBE74DF00548B1E /* NSURLSession.swift */,
 				1A1B5AB81B61C74A0025FE7C /* NSData.swift */,
 				1A1B5AB91B61C74A0025FE7C /* NSDate.swift */,
@@ -427,7 +414,7 @@
 				1A9F2A251B8928EF00FC02CF /* NSJSONSerialization.swift */,
 			);
 			name = "Darwin Support";
-			path = "../Darwin Support";
+			path = ../Sources;
 			sourceTree = "<group>";
 		};
 		1A436ECE1B7748430069F5D9 /* Regular Expression */ = {
@@ -454,8 +441,8 @@
 			isa = PBXGroup;
 			children = (
 				6E30BA271B40F66C009B1B49 /* JSON.swift */,
-				1A62790F1B79AE8E0007CC95 /* JSONParse.swift */,
 				1A9F2A1C1B88619700FC02CF /* JSONSerialization.swift */,
+				6E3C122A1C134B8E00112B11 /* JSONCore.swift */,
 				6EF1172D1BED413500376373 /* JSONExtensions.swift */,
 			);
 			name = JSON;
@@ -488,7 +475,7 @@
 		1A9F2A221B89146200FC02CF /* Linux Support */ = {
 			isa = PBXGroup;
 			children = (
-				1A9F2A231B8914B900FC02CF /* FoundationConvertible.swift */,
+				1A9F2A231B8914B900FC02CF /* LinuxFoundationConvertible.swift */,
 			);
 			name = "Linux Support";
 			sourceTree = "<group>";
@@ -496,8 +483,7 @@
 		6E30BA031B40F543009B1B49 = {
 			isa = PBXGroup;
 			children = (
-				6E783EB91BA96C2C0086115D /* Dependencies */,
-				6E30BA0F1B40F543009B1B49 /* Source */,
+				6E30BA0F1B40F543009B1B49 /* Sources */,
 				1A9F2A221B89146200FC02CF /* Linux Support */,
 				1A1B5AB71B61C74A0025FE7C /* Darwin Support */,
 				6E30BA1B1B40F543009B1B49 /* SwiftFoundationTests */,
@@ -517,7 +503,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6E30BA0F1B40F543009B1B49 /* Source */ = {
+		6E30BA0F1B40F543009B1B49 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				6E17CD041B484FE30019AFB2 /* Version.swift */,
@@ -545,13 +531,14 @@
 				6E30BA421B413A8F009B1B49 /* UUID.swift */,
 				6E30BA3D1B413865009B1B49 /* URL */,
 			);
-			name = Source;
-			path = ../Source;
+			name = Sources;
+			path = ../Sources;
 			sourceTree = SOURCE_ROOT;
 		};
 		6E30BA1B1B40F543009B1B49 /* SwiftFoundationTests */ = {
 			isa = PBXGroup;
 			children = (
+				6E16976F1C13C6CE00264BED /* 1.json */,
 				6E30BA1C1B40F543009B1B49 /* SwiftFoundationTests.swift */,
 				1A1B5A851B6092780025FE7C /* DataTests.swift */,
 				6E30BA311B4116E6009B1B49 /* DateTests.swift */,
@@ -568,7 +555,8 @@
 				6E08F83A1BBE79F800548B1E /* NSURLSessionTests.swift */,
 				6E30BA1E1B40F543009B1B49 /* Info.plist */,
 			);
-			path = SwiftFoundationTests;
+			name = SwiftFoundationTests;
+			path = ../Tests;
 			sourceTree = "<group>";
 		};
 		6E30BA3D1B413865009B1B49 /* URL */ = {
@@ -605,46 +593,6 @@
 				1AE9AA4C1B8AEE6E008F5C58 /* Integer.swift */,
 			);
 			name = "Swift Extensions";
-			sourceTree = "<group>";
-		};
-		6E783EB91BA96C2C0086115D /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				6E783EBA1BA96C690086115D /* iOS */,
-				6E783EBF1BA96C690086115D /* Mac */,
-				6E783EC41BA96C690086115D /* watchOS */,
-			);
-			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		6E783EBA1BA96C690086115D /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				6E783EBB1BA96C690086115D /* b64.framework */,
-				6E783EBD1BA96C690086115D /* JSON.framework */,
-			);
-			name = iOS;
-			path = ../Carthage/Build/iOS;
-			sourceTree = "<group>";
-		};
-		6E783EBF1BA96C690086115D /* Mac */ = {
-			isa = PBXGroup;
-			children = (
-				6E783EC01BA96C690086115D /* b64.framework */,
-				6E783EC21BA96C690086115D /* JSON.framework */,
-			);
-			name = Mac;
-			path = ../Carthage/Build/Mac;
-			sourceTree = "<group>";
-		};
-		6E783EC41BA96C690086115D /* watchOS */ = {
-			isa = PBXGroup;
-			children = (
-				6E933E731BACCA0700454193 /* b64.framework */,
-				6E783EC51BA96C690086115D /* JSON.framework */,
-			);
-			name = watchOS;
-			path = ../Carthage/Build/watchOS;
 			sourceTree = "<group>";
 		};
 		6EB4DE3B1B46CDA100C02276 /* Sort Descriptors */ = {
@@ -731,6 +679,7 @@
 				6E08F84E1BBE7B8800548B1E /* Frameworks */,
 				6E08F8501BBE7B8800548B1E /* Resources */,
 				6E08F8511BBE7B8800548B1E /* Copy Frameworks */,
+				6E3C122F1C13584C00112B11 /* Generate JSON */,
 			);
 			buildRules = (
 			);
@@ -764,10 +713,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E30BA241B40F543009B1B49 /* Build configuration list for PBXNativeTarget "SwiftFoundationTests OS X" */;
 			buildPhases = (
-				6E30BA131B40F543009B1B49 /* Sources */,
 				6E30BA141B40F543009B1B49 /* Frameworks */,
-				6E30BA151B40F543009B1B49 /* Resources */,
 				6E783EC71BA96C8C0086115D /* Copy Frameworks */,
+				6E3C122E1C13583400112B11 /* Generate JSON */,
+				6E30BA131B40F543009B1B49 /* Sources */,
+				6E30BA151B40F543009B1B49 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -837,6 +787,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E1697711C13C6CE00264BED /* 1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -851,10 +802,42 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E1697701C13C6CE00264BED /* 1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6E3C122E1C13583400112B11 /* Generate JSON */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate JSON";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ${PROJECT_DIR}/SwiftFoundationTests\nif [ ! -e \"1.json\" ]; then\n/usr/bin/env ruby generate_json.rb\nfi\n";
+		};
+		6E3C122F1C13584C00112B11 /* Generate JSON */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate JSON";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ${PROJECT_DIR}/SwiftFoundationTests\nif [ ! -e \"1.json\" ]; then\n/usr/bin/env ruby generate_json.rb\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1AE78F171B96774100CDEF17 /* Sources */ = {
@@ -866,7 +849,7 @@
 				1AE78F1A1B96774100CDEF17 /* POSIXFileSystemStatus.swift in Sources */,
 				1AE78F1B1B96774100CDEF17 /* RegularExpressionCompileError.swift in Sources */,
 				1AE78F1C1B96774100CDEF17 /* POSIXRegularExpression.swift in Sources */,
-				1AD2FE241B96CCBF0054F4CB /* HTTPClient.swift in Sources */,
+				1AD2FE241B96CCBF0054F4CB /* DarwinHTTPClient.swift in Sources */,
 				1AE78F1D1B96774100CDEF17 /* POSIXUUID.swift in Sources */,
 				1AE78F1E1B96774100CDEF17 /* Base64.swift in Sources */,
 				6E08F8381BBE74DF00548B1E /* NSURLSession.swift in Sources */,
@@ -877,6 +860,7 @@
 				1AE78F231B96774100CDEF17 /* HTTPStatusCode.swift in Sources */,
 				1AE78F251B96774100CDEF17 /* HTTPMethod.swift in Sources */,
 				1AE78F271B96774100CDEF17 /* NSUUID.swift in Sources */,
+				6E3C122C1C134B8E00112B11 /* JSONCore.swift in Sources */,
 				1AE78F281B96774100CDEF17 /* HTTPRequest.swift in Sources */,
 				1AE78F291B96774100CDEF17 /* HTTP.swift in Sources */,
 				1AE78F2A1B96774100CDEF17 /* NSComparisonResult.swift in Sources */,
@@ -892,12 +876,11 @@
 				1AE78F381B96774100CDEF17 /* RegularExpressionMatchOption.swift in Sources */,
 				1AE78F391B96774100CDEF17 /* NSJSONSerialization.swift in Sources */,
 				1AE78F3A1B96774100CDEF17 /* Date.swift in Sources */,
-				1AE78F3C1B96774100CDEF17 /* FoundationConvertible.swift in Sources */,
+				1AE78F3C1B96774100CDEF17 /* DarwinFoundationConvertible.swift in Sources */,
 				1AE78F3D1B96774100CDEF17 /* URLClient.swift in Sources */,
 				1AE78F3E1B96774100CDEF17 /* ByteValue.swift in Sources */,
 				1AE78F3F1B96774100CDEF17 /* Version.swift in Sources */,
 				1AE78F401B96774100CDEF17 /* POSIXTime.swift in Sources */,
-				1AE78F411B96774100CDEF17 /* Task.swift in Sources */,
 				1AE78F431B96774100CDEF17 /* URLRequest.swift in Sources */,
 				1AE78F451B96774100CDEF17 /* SemanticVersion.swift in Sources */,
 				1AE78F461B96774100CDEF17 /* Data.swift in Sources */,
@@ -912,7 +895,6 @@
 				1AE78F531B96774100CDEF17 /* FileManager.swift in Sources */,
 				1AE78F551B96774100CDEF17 /* BitMaskOption.swift in Sources */,
 				1AE78F561B96774100CDEF17 /* Bridgable.swift in Sources */,
-				1AE78F571B96774100CDEF17 /* JSONParse.swift in Sources */,
 				1AE78F591B96774100CDEF17 /* FileDescriptor.swift in Sources */,
 				6EF1172F1BED413500376373 /* JSONExtensions.swift in Sources */,
 				1AE78F5D1B96774100CDEF17 /* Transformer.swift in Sources */,
@@ -935,7 +917,7 @@
 				1AE78F721B96774300CDEF17 /* POSIXFileSystemStatus.swift in Sources */,
 				1AE78F731B96774300CDEF17 /* RegularExpressionCompileError.swift in Sources */,
 				1AE78F741B96774300CDEF17 /* POSIXRegularExpression.swift in Sources */,
-				1AD2FE251B96CCBF0054F4CB /* HTTPClient.swift in Sources */,
+				1AD2FE251B96CCBF0054F4CB /* DarwinHTTPClient.swift in Sources */,
 				1AE78F751B96774300CDEF17 /* POSIXUUID.swift in Sources */,
 				1AE78F761B96774300CDEF17 /* Base64.swift in Sources */,
 				6E08F8391BBE74DF00548B1E /* NSURLSession.swift in Sources */,
@@ -946,6 +928,7 @@
 				1AE78F7B1B96774300CDEF17 /* HTTPStatusCode.swift in Sources */,
 				1AE78F7D1B96774300CDEF17 /* HTTPMethod.swift in Sources */,
 				1AE78F7F1B96774300CDEF17 /* NSUUID.swift in Sources */,
+				6E3C122D1C134B8E00112B11 /* JSONCore.swift in Sources */,
 				1AE78F801B96774300CDEF17 /* HTTPRequest.swift in Sources */,
 				1AE78F811B96774300CDEF17 /* HTTP.swift in Sources */,
 				1AE78F821B96774300CDEF17 /* NSComparisonResult.swift in Sources */,
@@ -961,12 +944,11 @@
 				1AE78F901B96774300CDEF17 /* RegularExpressionMatchOption.swift in Sources */,
 				1AE78F911B96774300CDEF17 /* NSJSONSerialization.swift in Sources */,
 				1AE78F921B96774300CDEF17 /* Date.swift in Sources */,
-				1AE78F941B96774300CDEF17 /* FoundationConvertible.swift in Sources */,
+				1AE78F941B96774300CDEF17 /* DarwinFoundationConvertible.swift in Sources */,
 				1AE78F951B96774300CDEF17 /* URLClient.swift in Sources */,
 				1AE78F961B96774300CDEF17 /* ByteValue.swift in Sources */,
 				1AE78F971B96774300CDEF17 /* Version.swift in Sources */,
 				1AE78F981B96774300CDEF17 /* POSIXTime.swift in Sources */,
-				1AE78F991B96774300CDEF17 /* Task.swift in Sources */,
 				1AE78F9B1B96774300CDEF17 /* URLRequest.swift in Sources */,
 				1AE78F9D1B96774300CDEF17 /* SemanticVersion.swift in Sources */,
 				1AE78F9E1B96774300CDEF17 /* Data.swift in Sources */,
@@ -981,7 +963,6 @@
 				1AE78FAB1B96774300CDEF17 /* FileManager.swift in Sources */,
 				1AE78FAD1B96774300CDEF17 /* BitMaskOption.swift in Sources */,
 				1AE78FAE1B96774300CDEF17 /* Bridgable.swift in Sources */,
-				1AE78FAF1B96774300CDEF17 /* JSONParse.swift in Sources */,
 				1AE78FB11B96774300CDEF17 /* FileDescriptor.swift in Sources */,
 				6EF117301BED413500376373 /* JSONExtensions.swift in Sources */,
 				1AE78FB51B96774300CDEF17 /* Transformer.swift in Sources */,
@@ -1025,7 +1006,7 @@
 				1AC4F9BC1B5FEE8B00CC7355 /* POSIXFileSystemStatus.swift in Sources */,
 				1A436ED41B774C5C0069F5D9 /* RegularExpressionCompileError.swift in Sources */,
 				1A85C4101B5FAFB1002DDADB /* POSIXRegularExpression.swift in Sources */,
-				1AD2FE231B96CCBF0054F4CB /* HTTPClient.swift in Sources */,
+				1AD2FE231B96CCBF0054F4CB /* DarwinHTTPClient.swift in Sources */,
 				1A85C40E1B5FAC4C002DDADB /* POSIXUUID.swift in Sources */,
 				6E30BA2E1B410176009B1B49 /* Base64.swift in Sources */,
 				6E08F8371BBE74DF00548B1E /* NSURLSession.swift in Sources */,
@@ -1036,6 +1017,7 @@
 				6E16C2BE1B42460B00C07C25 /* HTTPStatusCode.swift in Sources */,
 				6E30BA531B41D960009B1B49 /* HTTPMethod.swift in Sources */,
 				1A1B5ABF1B61C74A0025FE7C /* NSUUID.swift in Sources */,
+				6E3C122B1C134B8E00112B11 /* JSONCore.swift in Sources */,
 				6E30BA3C1B413718009B1B49 /* HTTPRequest.swift in Sources */,
 				1A9D97421B7720E400D86F7C /* HTTP.swift in Sources */,
 				1A1B5ABE1B61C74A0025FE7C /* NSComparisonResult.swift in Sources */,
@@ -1051,7 +1033,7 @@
 				1A436ED21B774A850069F5D9 /* RegularExpressionMatchOption.swift in Sources */,
 				1A9F2A261B8928EF00FC02CF /* NSJSONSerialization.swift in Sources */,
 				6E30BA2C1B40F71B009B1B49 /* Date.swift in Sources */,
-				1A9F2A1F1B890CEF00FC02CF /* FoundationConvertible.swift in Sources */,
+				1A9F2A1F1B890CEF00FC02CF /* DarwinFoundationConvertible.swift in Sources */,
 				1A49A94E1B5D8F2600827F1B /* URLClient.swift in Sources */,
 				6E16C2F21B47851600C07C25 /* ByteValue.swift in Sources */,
 				6E17CD051B484FE40019AFB2 /* Version.swift in Sources */,
@@ -1071,7 +1053,6 @@
 				6E30BA4F1B4142D9009B1B49 /* FileManager.swift in Sources */,
 				1A85C4121B5FC2ED002DDADB /* BitMaskOption.swift in Sources */,
 				1A49A9441B5D3F0200827F1B /* Bridgable.swift in Sources */,
-				1A6279101B79AE8E0007CC95 /* JSONParse.swift in Sources */,
 				1A62790D1B799D4C0007CC95 /* FileDescriptor.swift in Sources */,
 				6EF1172E1BED413500376373 /* JSONExtensions.swift in Sources */,
 				6E30BA4B1B413DF0009B1B49 /* Transformer.swift in Sources */,
@@ -1132,7 +1113,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/iOS;
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/SwiftFoundation/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1141,6 +1121,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1154,7 +1135,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/iOS;
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/SwiftFoundation/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1162,6 +1142,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.pureswift.SwiftFoundation;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1174,7 +1155,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/SwiftFoundation/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1195,7 +1175,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/WatchOS;
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/SwiftFoundation/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1336,7 +1315,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = SwiftFoundation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1357,7 +1335,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = $SRCROOT/../Carthage/Build/Mac;
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = SwiftFoundation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1371,6 +1348,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SwiftFoundationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colemancda.SwiftFoundationTests;
@@ -1382,6 +1360,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SwiftFoundationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colemancda.SwiftFoundationTests;
