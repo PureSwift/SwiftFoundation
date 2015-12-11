@@ -40,6 +40,24 @@ extension Int64: JSONDecodable {
     }
 }
 
+extension Int: JSONEncodable {
+    
+    public func toJSON() -> JSON.Value { return .Number(.Integer(Int64(self))) }
+}
+
+extension Int: JSONDecodable {
+    
+    public init?(JSONValue: JSON.Value) {
+        
+        // Can't decode Int from JSON if the stored value is larger than the max value of Int
+        guard let int64Value = JSONValue.rawValue as? Int64,
+            let value = int64Value.toInt()
+            else { return nil }
+        
+        self = value
+    }
+}
+
 extension Double: JSONEncodable {
     
     public func toJSON() -> JSON.Value { return .Number(.Double(self)) }
