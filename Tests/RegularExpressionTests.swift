@@ -93,6 +93,39 @@ class RegularExpressionTests: XCTestCase {
         
         XCTAssert(match.subexpressionRanges.count == regex.subexpressionsCount, "Subexpressions should be \(regex.subexpressionsCount), is \(match.subexpressionRanges.count)")
     }
+    
+    func testEmoji() {
+        
+        let testString = "🙄😒🍺🦄"
+        
+        let beer = "🍺"
+        
+        let pattern = "\\(\(beer)\\)"
+        
+        do {
+            let beerFinder = try RegularExpression(pattern)
+            
+            guard let match = beerFinder.match(testString) else {
+                XCTFail("Could not find 🍺 in \(testString)")
+                return
+            }
+            
+            guard let beerRange = match.subexpressionRanges.first else {
+                XCTFail("Could not find 🍺 capture group despite \(testString) match \(match)")
+                return
+            }
+            
+            guard let capturedString = testString.substring(beerRange) else {
+                XCTFail("Failed to get a substring with range \(beerRange) in \(testString)")
+                return
+            }
+            
+            XCTAssertEqual(beer, capturedString, "Captured substring in \(beerRange) should match \(beer), but instead is \(capturedString)")
+        } catch {
+            
+            XCTFail("Error thrown trying to create RegularExpression from \(pattern): \(error)")
+        }
+    }
 }
 
 
