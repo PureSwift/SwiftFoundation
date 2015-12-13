@@ -489,7 +489,9 @@
 				6E30BA1B1B40F543009B1B49 /* SwiftFoundationTests */,
 				6E30BA0E1B40F543009B1B49 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		6E30BA0E1B40F543009B1B49 /* Products */ = {
 			isa = PBXGroup;
