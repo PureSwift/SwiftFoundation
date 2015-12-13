@@ -140,8 +140,12 @@ public extension String {
         case .NotFound:
             return nil
         case let .Found(r):
-            let indexRange = Swift.Range(start: utf8.startIndex.advancedBy(r.startIndex), end: utf8.startIndex.advancedBy(r.endIndex))
-            return String(utf8[indexRange])
+            return substring(r)
         }
+    }
+    
+    func substring(range: Range<Int>) -> String? {
+        let indexRange = Swift.Range(start: utf8.startIndex.advancedBy(range.startIndex), end: utf8.startIndex.advancedBy(range.endIndex))
+        return String(utf8[indexRange])
     }
 }
