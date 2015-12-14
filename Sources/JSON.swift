@@ -52,81 +52,6 @@ public struct JSON {
             default: return nil
             }
         }
-        
-        // MARK: RawRepresentable
-        
-        public var rawValue: Any {
-            
-            switch self {
-                
-            case .Null: return SwiftFoundation.Null()
-                
-            case .String(let string): return string
-                
-            case .Number(let number): return number.rawValue
-                
-            case .Array(let array): return array.rawValues
-                
-            case .Object(let dictionary):
-                
-                var dictionaryValue = [StringValue: Any](minimumCapacity: dictionary.count)
-                
-                for (key, value) in dictionary {
-                    
-                    dictionaryValue[key] = value.rawValue
-                }
-                
-                return dictionaryValue
-            }
-        }
-        
-        public init?(rawValue: Any) {
-            
-            guard (rawValue as? SwiftFoundation.Null) == nil else {
-                
-                self = .Null
-                return
-            }
-            
-            if let string = rawValue as? Swift.String {
-                
-                self = .String(string)
-                return
-            }
-            
-            if let number = JSON.Number(rawValue: rawValue) {
-                
-                self = .Number(number)
-                return
-            }
-            
-            if let rawArray = rawValue as? [Any], let jsonArray: [JSON.Value] = JSON.Value.fromRawValues(rawArray) {
-                
-                self = .Array(jsonArray)
-                return
-            }
-            
-            if let rawDictionary = rawValue as? [Swift.String: Any] {
-                
-                var jsonObject = [StringValue: JSONValue](minimumCapacity: rawDictionary.count)
-                
-                for (key, rawValue) in rawDictionary {
-                    
-                    guard let jsonValue = JSON.Value(rawValue: rawValue) else { return nil }
-                    
-                    jsonObject[key] = jsonValue
-                }
-                
-                self = .Object(jsonObject)
-                return
-            }
-            
-            return nil
-        }
-        
-        // MARK: - CustomStringConvertible
-        
-        public var description: Swift.String { return "\(rawValue)" }
     }
     
     // MARK: - JSON Number
@@ -135,36 +60,126 @@ public struct JSON {
         
         case Boolean(Bool)
         
-        case Integer(Int64)
+        case Integer(JSON.Integer)
         
         case Double(DoubleValue)
+    }
+    
+    /// JSON integer type. Must be 64-bit to hold large values.
+    public typealias Integer = Int64
+}
+
+// MARK: - RawRepresentable
+
+public extension JSON.Value {
+    
+    var rawValue: Any {
         
-        // MARK: RawRepresentable
-        
-        public var rawValue: Any {
+        switch self {
             
-            switch self {
-            case .Boolean(let value): return value
-            case .Integer(let value): return value
-            case .Double(let value):  return value
+        case .Null: return SwiftFoundation.Null()
+            
+        case .String(let string): return string
+            
+        case .Number(let number): return number.rawValue
+            
+        case .Array(let array): return array.rawValues
+            
+        case .Object(let dictionary):
+            
+            var dictionaryValue = [StringValue: Any](minimumCapacity: dictionary.count)
+            
+            for (key, value) in dictionary {
+                
+                dictionaryValue[key] = value.rawValue
             }
+            
+            return dictionaryValue
+        }
+    }
+    
+    init?(rawValue: Any) {
+        
+        guard (rawValue as? SwiftFoundation.Null) == nil else {
+            
+            self = .Null
+            return
         }
         
-        public init?(rawValue: Any) {
+        if let string = rawValue as? Swift.String {
             
-            if let value = rawValue as? Bool            { self = .Boolean(value) }
-            if let value = rawValue as? Int64           { self = .Integer(value) }
-            if let value = rawValue as? DoubleValue     { self = .Double(value)  }
-            
-            return nil
+            self = .String(string)
+            return
         }
         
-        // MARK: - CustomStringConvertible
-        
-        public var description: String {
+        if let number = JSON.Number(rawValue: rawValue) {
             
-            return "\(rawValue)"
+            self = .Number(number)
+            return
         }
+        
+        if let rawArray = rawValue as? [Any], let jsonArray: [JSON.Value] = JSON.Value.fromRawValues(rawArray) {
+            
+            self = .Array(jsonArray)
+            return
+        }
+        
+        if let rawDictionary = rawValue as? [Swift.String: Any] {
+            
+            var jsonObject = [StringValue: JSONValue](minimumCapacity: rawDictionary.count)
+            
+            for (key, rawValue) in rawDictionary {
+                
+                guard let jsonValue = JSON.Value(rawValue: rawValue) else { return nil }
+                
+                jsonObject[key] = jsonValue
+            }
+            
+            self = .Object(jsonObject)
+            return
+        }
+        
+        return nil
+    }
+}
+
+public extension JSON.Number {
+    
+    public var rawValue: Any {
+        
+        switch self {
+        case .Boolean(let value): return value
+        case .Integer(let value): return value
+        case .Double(let value):  return value
+        }
+    }
+    
+    public init?(rawValue: Any) {
+        
+        if let value = rawValue as? Bool            { self = .Boolean(value) }
+        if let value = rawValue as? JSON.Integer    { self = .Integer(value) }
+        if let value = rawValue as? DoubleValue     { self = .Double(value)  }
+        
+        return nil
+    }
+}
+
+
+// MARK: - CustomStringConvertible
+
+public extension JSON.Value {
+    
+    public var description: Swift.String {
+        
+        return "\(rawValue)"
+    }
+}
+
+public extension JSON.Number {
+    
+    public var description: String {
+        
+        return "\(rawValue)"
     }
 }
 
