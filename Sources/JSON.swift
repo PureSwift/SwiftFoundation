@@ -153,9 +153,9 @@ public extension JSON.Number {
     
     public init?(rawValue: Any) {
         
-        if let value = rawValue as? Bool            { self = .Boolean(value) }
-        if let value = rawValue as? Int             { self = .Integer(value) }
-        if let value = rawValue as? DoubleValue     { self = .Double(value)  }
+        if let value = rawValue as? Bool            { self = .Boolean(value); return }
+        if let value = rawValue as? Int             { self = .Integer(value); return }
+        if let value = rawValue as? DoubleValue     { self = .Double(value); return  }
         
         return nil
     }
