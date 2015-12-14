@@ -160,7 +160,7 @@ internal extension JSONCoreValue {
             
             switch number {
                 
-            case .Integer(let value): self = .JSONNumber(.JSONIntegral(value))
+            case .Integer(let value): self = .JSONNumber(.JSONIntegral(Int64(value)))
             case .Double(let value): self = .JSONNumber(.JSONFractional(value))
             case .Boolean(let value): self = .JSONBool(value)
             }
@@ -181,7 +181,7 @@ internal extension JSONCoreValue {
             
             switch numberValue {
                 
-            case .JSONIntegral(let value): return .Number(.Integer(value))
+            case .JSONIntegral(let value): return .Number(.Integer(Int(value)))
             case .JSONFractional(let value): return .Number(.Double(value))
                 
             }

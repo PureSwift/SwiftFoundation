@@ -152,7 +152,7 @@ public extension JSON.Value {
             
             switch number {
                 
-                case let .Integer(value): return NSJSONSerialization.Value.Number(NSNumber(longLong: value))
+                case let .Integer(value): return NSJSONSerialization.Value.Number(NSNumber(integer: value))
                 
                 case let .Double(value): return NSJSONSerialization.Value.Number(NSNumber(double: value))
                 

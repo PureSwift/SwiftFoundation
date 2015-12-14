@@ -60,13 +60,10 @@ public struct JSON {
         
         case Boolean(Bool)
         
-        case Integer(JSON.Integer)
+        case Integer(Int)
         
         case Double(DoubleValue)
     }
-    
-    /// JSON integer type. Must be 64-bit to hold large values.
-    public typealias Integer = Int64
 }
 
 // MARK: - RawRepresentable
@@ -157,7 +154,7 @@ public extension JSON.Number {
     public init?(rawValue: Any) {
         
         if let value = rawValue as? Bool            { self = .Boolean(value) }
-        if let value = rawValue as? JSON.Integer    { self = .Integer(value) }
+        if let value = rawValue as? Int             { self = .Integer(value) }
         if let value = rawValue as? DoubleValue     { self = .Double(value)  }
         
         return nil
@@ -257,7 +254,4 @@ public typealias FloatValue = Float
 public typealias DoubleValue = Double
 
 public typealias NullValue = Null
-
-public typealias JSONInteger = JSON.Integer
-
 
