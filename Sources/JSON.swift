@@ -258,3 +258,6 @@ public typealias DoubleValue = Double
 
 public typealias NullValue = Null
 
+public typealias JSONInteger = JSON.Integer
+
+
