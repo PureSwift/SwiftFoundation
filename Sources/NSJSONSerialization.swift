@@ -108,7 +108,16 @@ public extension JSON.Value {
             
         case .String(let value): self = JSON.Value.String(value as Swift.String)
             
-        case .Number(let value): self = JSON.Value.Number(JSON.Number(rawValue: value)!)
+        case .Number(let value):
+            
+            if value.isBool {
+                
+                self = JSON.Value.Number(JSON.Number.Boolean(value as Bool))
+            }
+            else {
+                
+                self = JSON.Value.Number(JSON.Number(rawValue: Int(value))!)
+            }
             
         case .Array(let foundationArray):
             
@@ -188,4 +197,26 @@ public extension JSON.Value {
     }
 }
 
+private let trueNumber = NSNumber(bool: true)
+private let falseNumber = NSNumber(bool: false)
+private let trueObjCType = String.fromCString(trueNumber.objCType)
+private let falseObjCType = String.fromCString(falseNumber.objCType)
+
+extension NSNumber {
+    var isBool:Bool {
+        get {
+            let objCType = String.fromCString(self.objCType)
+            if (self.compare(trueNumber) == NSComparisonResult.OrderedSame && objCType == trueObjCType)
+                || (self.compare(falseNumber) == NSComparisonResult.OrderedSame && objCType == falseObjCType){
+                    return true
+            } else {
+                return false
+            }
+        }
+    }
+}
+
 #endif
+
+
+
