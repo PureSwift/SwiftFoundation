@@ -10,7 +10,7 @@
 public typealias UUIDBytes = (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8)
 
 /// A representation of a universally unique identifier (```UUID```).
-public struct UUID: ByteValue, RawRepresentable, CustomStringConvertible, FoundationConvertible {
+public struct UUID: ByteValueType, RawRepresentable, CustomStringConvertible, FoundationConvertible {
     
     // MARK: - Public Properties
     

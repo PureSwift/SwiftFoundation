@@ -1,5 +1,5 @@
 //
-//  ByteValue.swift
+//  ByteValueType.swift
 //  SwiftFoundation
 //
 //  Created by Alsey Coleman Miller on 7/3/15.
@@ -7,10 +7,10 @@
 //
 
 /// Stores a primitive value. Useful for Swift wrappers for C primitives.
-public protocol ByteValue {
+public protocol ByteValueType {
     
-    typealias ByteValueType
+    typealias ByteValue
     
     /// Returns the primitive type */
-    var byteValue: ByteValueType { get }
+    var byteValue: ByteValue { get }
 }

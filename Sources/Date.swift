@@ -13,7 +13,7 @@
 #endif
 
 /// Represents a point in time.
-public struct Date: ByteValue, Equatable, Comparable, CustomStringConvertible, FoundationConvertible {
+public struct Date: ByteValueType, Equatable, Comparable, CustomStringConvertible, FoundationConvertible {
     
     // MARK: - Properties
     
