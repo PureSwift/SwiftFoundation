@@ -11,6 +11,7 @@
 #elseif os(Linux)
     import Glibc
     import SwiftFoundation
+    import CUUID
 #endif
 
 import Foundation

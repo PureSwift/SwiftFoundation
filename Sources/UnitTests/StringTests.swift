@@ -10,6 +10,8 @@ import XCTest
 
 class StringTests: XCTestCase {
     
+    lazy var allTests: [(String, () -> ())] = [("testUTF8Data", self.testUTF8Data)]
+    
     // MARK: - Functional Tests
 
     func testUTF8Data() {

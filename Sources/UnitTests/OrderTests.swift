@@ -11,6 +11,8 @@ import Foundation
 import SwiftFoundation
 
 class OrderTests: XCTestCase {
+    
+    lazy var allTests: [(String, () -> ())] = [("testComparisonResult", self.testComparisonResult)]
 
     func testComparisonResult() {
         

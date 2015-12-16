@@ -11,6 +11,10 @@ import SwiftFoundation
 
 class SortDescriptorTests: XCTestCase {
     
+    lazy var allTests: [(String, () -> ())] =
+        [("testComparableSorting", self.testComparableSorting),
+        ("testComparatorSorting", self.testComparatorSorting)]
+    
     // MARK: - Functional Tests
 
     func testComparableSorting() {

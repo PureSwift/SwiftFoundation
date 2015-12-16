@@ -12,6 +12,11 @@ import SwiftFoundation
 
 class UUIDTests: XCTestCase {
     
+    lazy var allTests: [(String, () -> ())] =
+        [("testCreateRandomUUID", self.testCreateRandomUUID),
+        ("testUUIDString", self.testUUIDString),
+        ("testCreateFromString", self.testCreateFromString)]
+    
     // MARK: - Functional Tests
 
     func testCreateRandomUUID() {

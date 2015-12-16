@@ -8,8 +8,15 @@
 
 import XCTest
 import SwiftFoundation
+import Foundation
 
 class RegularExpressionTests: XCTestCase {
+    
+    lazy var allTests: [(String, () -> ())] =
+        [("testSimpleRegex", self.testSimpleRegex),
+        ("testExtendedRegex", self.testExtendedRegex),
+        ("testMultipleSubexpressions", self.testMultipleSubexpressions),
+        ("testEmoji", self.testEmoji)]
 
     func testSimpleRegex() {
         
@@ -22,7 +29,7 @@ class RegularExpressionTests: XCTestCase {
         
         let stringRange = NSRange(match.range)
         
-        let matchString = (string as NSString).substringWithRange(stringRange)
+        let matchString = NSString(string: string).substringWithRange(stringRange)
         
         XCTAssert(matchString == "Welcome")
     }
@@ -40,7 +47,7 @@ class RegularExpressionTests: XCTestCase {
             
             let stringRange = NSRange(match.range)
             
-            let matchString = (string as NSString).substringWithRange(stringRange)
+            let matchString = NSString(string: string).substringWithRange(stringRange)
             
             XCTAssert(matchString == "aaa")
         }
@@ -57,7 +64,7 @@ class RegularExpressionTests: XCTestCase {
             
             let stringRange = NSRange(match.range)
             
-            let matchString = (string as NSString).substringWithRange(stringRange)
+            let matchString = NSString(string: string).substringWithRange(stringRange)
             
             XCTAssert(matchString == "Bird", matchString)
         }
@@ -74,7 +81,7 @@ class RegularExpressionTests: XCTestCase {
         
         let stringRange = NSRange(match.range)
         
-        let matchString = (string as NSString).substringWithRange(stringRange)
+        let matchString = NSString(string: string).substringWithRange(stringRange)
         
         // matched whole string
         XCTAssert(matchString == string)
