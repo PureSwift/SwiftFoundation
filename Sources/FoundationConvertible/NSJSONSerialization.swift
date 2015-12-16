@@ -6,13 +6,51 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-#if os(Linux)
-    import SwiftFoundation
-#endif
-
 #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
 
 import Foundation
+
+public extension JSON.Value {
+    
+    /// Deserialize JSON from a string.
+    public init?(string: Swift.String) {
+        
+        self.init(data: string.toUTF8Data().toFoundation())
+    }
+    
+    /// Deserialize JSON from data.
+    public init?(data: NSData) {
+        
+        guard let json = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()),
+            let jsonValue = NSJSONSerialization.Value(rawValue: json)
+            else { return nil }
+        
+        self.init(foundation: jsonValue)
+    }
+    
+    /// Serializes the JSON into a string.
+    public func toString() -> Swift.String? {
+        
+        guard let data = self.toData()
+            else { return nil }
+        
+        return Swift.String(UTF8Data: Data(foundation: data))!
+    }
+    
+    /// Serializes the JSON into data.
+    public func toData() -> NSData? {
+        
+        switch self {
+            
+        case .Object(_), .Array(_): break
+            
+        default: return nil
+        }
+        
+        return try! NSJSONSerialization.dataWithJSONObject(self.toFoundation().rawValue, options: NSJSONWritingOptions.PrettyPrinted)
+        
+    }
+}
 
 public extension NSJSONSerialization {
     
@@ -102,9 +140,9 @@ public extension NSJSONSerialization {
     }
 }
 
-public extension JSON.Value {
+extension JSON.Value: FoundationConvertible {
     
-    init(foundation: NSJSONSerialization.Value) {
+    public init(foundation: NSJSONSerialization.Value) {
         
         switch foundation {
             
@@ -151,7 +189,7 @@ public extension JSON.Value {
         }
     }
     
-    func toFoundation() -> NSJSONSerialization.Value {
+    public func toFoundation() -> NSJSONSerialization.Value {
         
         typealias FoundationValue = NSJSONSerialization.Value
         
