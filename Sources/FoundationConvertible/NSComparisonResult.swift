@@ -8,9 +8,9 @@
 
 import Foundation
 
-public extension Order {
+extension Order: FoundationConvertible {
     
-    init(foundation: NSComparisonResult) {
+    public init(foundation: NSComparisonResult) {
         
         switch foundation {
             
@@ -20,7 +20,7 @@ public extension Order {
         }
     }
     
-    func toFoundation() -> NSComparisonResult {
+    public func toFoundation() -> NSComparisonResult {
         
         switch self {
             

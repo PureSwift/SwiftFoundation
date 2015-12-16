@@ -7,7 +7,7 @@
 //
 
 /** An OOP placeholder for ```nil```. */
-public struct Null: CustomStringConvertible, Equatable, FoundationConvertible {
+public struct Null: CustomStringConvertible, Equatable {
     
     public var description: String { return "Null" }
     

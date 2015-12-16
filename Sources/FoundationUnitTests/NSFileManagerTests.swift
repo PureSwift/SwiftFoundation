@@ -134,5 +134,9 @@ class FileManagerTests: XCTestCase {
     }
 }
 
-
+#if os(OSX) || os(iOS)
+    public let TemporaryDirectory = NSTemporaryDirectory()
+#elseif os(Linux)
+    public let TemporaryDirectory = "/tmp/"
+#endif
 

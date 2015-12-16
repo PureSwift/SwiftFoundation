@@ -6,15 +6,11 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
-
 import Foundation
 
-public extension SwiftFoundation.Null {
+extension SwiftFoundation.Null: FoundationConvertible {
     
-    init(foundation: NSNull) { self.init() }
+    public init(foundation: NSNull) { self.init() }
     
-    func toFoundation() -> NSNull { return NSNull() }
+    public func toFoundation() -> NSNull { return NSNull() }
 }
-
-#endif

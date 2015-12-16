@@ -8,14 +8,14 @@
 
 import Foundation
 
-public extension UUID {
+extension UUID: FoundationConvertible {
     
-    init(foundation: NSUUID) {
+    public init(foundation: NSUUID) {
         
         self.init(byteValue: foundation.byteValue)
     }
     
-    func toFoundation() -> NSUUID {
+    public func toFoundation() -> NSUUID {
         
         return NSUUID(byteValue: byteValue)
     }
