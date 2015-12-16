@@ -29,7 +29,7 @@ class RegularExpressionTests: XCTestCase {
         
         let stringRange = NSRange(match.range)
         
-        let matchString = NSString(string: string).substringWithRange(stringRange)
+        let matchString = string.toFoundation().substringWithRange(stringRange)
         
         XCTAssert(matchString == "Welcome")
     }
@@ -47,7 +47,7 @@ class RegularExpressionTests: XCTestCase {
             
             let stringRange = NSRange(match.range)
             
-            let matchString = NSString(string: string).substringWithRange(stringRange)
+            let matchString = string.toFoundation().substringWithRange(stringRange)
             
             XCTAssert(matchString == "aaa")
         }
@@ -64,7 +64,7 @@ class RegularExpressionTests: XCTestCase {
             
             let stringRange = NSRange(match.range)
             
-            let matchString = NSString(string: string).substringWithRange(stringRange)
+            let matchString = string.toFoundation().substringWithRange(stringRange)
             
             XCTAssert(matchString == "Bird", matchString)
         }
@@ -81,7 +81,7 @@ class RegularExpressionTests: XCTestCase {
         
         let stringRange = NSRange(match.range)
         
-        let matchString = NSString(string: string).substringWithRange(stringRange)
+        let matchString = string.toFoundation().substringWithRange(stringRange)
         
         // matched whole string
         XCTAssert(matchString == string)
@@ -125,4 +125,26 @@ class RegularExpressionTests: XCTestCase {
     }
 }
 
+// MARK: - Private
 
+#if os(Linux)
+
+extension String {
+    
+    public init(foundation: NSString) {
+        
+        self.init("\(foundation)")
+    }
+    
+    public func toFoundation() -> NSString {
+        
+        let stringData = self.toUTF8Data()
+        
+        guard let foundationString = NSString(bytes: stringData.byteValue, length: stringData.byteValue.count, encoding: NSUTF8StringEncoding)
+            else { fatalError("Could not convert String to NSString") }
+        
+        return foundationString
+    }
+}
+
+#endif

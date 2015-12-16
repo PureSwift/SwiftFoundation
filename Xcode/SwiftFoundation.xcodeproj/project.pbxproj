@@ -211,6 +211,11 @@
 		6E2C2C241C20F76D00B2C995 /* UUIDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B571C20F6EB00B2C995 /* UUIDTests.swift */; };
 		6E2C2C2C1C21115C00B2C995 /* NSComparisonResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2C2B1C21115C00B2C995 /* NSComparisonResultTests.swift */; };
 		6E2C2C2D1C21115C00B2C995 /* NSComparisonResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2C2B1C21115C00B2C995 /* NSComparisonResultTests.swift */; };
+		6E2C2C2F1C2128C600B2C995 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2C2E1C2128C600B2C995 /* main.swift */; };
+		6E2C2C301C2128C600B2C995 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2C2E1C2128C600B2C995 /* main.swift */; };
+		6E2C2C341C212C5600B2C995 /* NSString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2C311C212C2200B2C995 /* NSString.swift */; };
+		6E2C2C351C212C5600B2C995 /* NSString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2C311C212C2200B2C995 /* NSString.swift */; };
+		6E2C2C361C212C5700B2C995 /* NSString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2C311C212C2200B2C995 /* NSString.swift */; };
 		6E30BA111B40F543009B1B49 /* SwiftFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E30BA101B40F543009B1B49 /* SwiftFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E30BA181B40F543009B1B49 /* SwiftFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E30BA0D1B40F543009B1B49 /* SwiftFoundation.framework */; };
 /* End PBXBuildFile section */
@@ -331,6 +336,8 @@
 		6E2C2B571C20F6EB00B2C995 /* UUIDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDTests.swift; sourceTree = "<group>"; };
 		6E2C2C2A1C21105000B2C995 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
 		6E2C2C2B1C21115C00B2C995 /* NSComparisonResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSComparisonResultTests.swift; sourceTree = "<group>"; };
+		6E2C2C2E1C2128C600B2C995 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6E2C2C311C212C2200B2C995 /* NSString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSString.swift; sourceTree = "<group>"; };
 		6E30BA0D1B40F543009B1B49 /* SwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E30BA101B40F543009B1B49 /* SwiftFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFoundation.h; sourceTree = "<group>"; };
 		6E30BA121B40F543009B1B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -412,6 +419,7 @@
 				6E2C2B131C20F6EB00B2C995 /* NSNull.swift */,
 				6E2C2B141C20F6EB00B2C995 /* NSURLSession.swift */,
 				6E2C2B151C20F6EB00B2C995 /* NSUUID.swift */,
+				6E2C2C311C212C2200B2C995 /* NSString.swift */,
 			);
 			path = FoundationConvertible;
 			sourceTree = "<group>";
@@ -479,6 +487,7 @@
 				6E2C2B551C20F6EB00B2C995 /* SortDescriptorTests.swift */,
 				6E2C2B561C20F6EB00B2C995 /* StringTests.swift */,
 				6E2C2B571C20F6EB00B2C995 /* UUIDTests.swift */,
+				6E2C2C2E1C2128C600B2C995 /* main.swift */,
 			);
 			path = UnitTests;
 			sourceTree = "<group>";
@@ -813,6 +822,7 @@
 				6E2C2BC51C20F76600B2C995 /* HTTPVersion.swift in Sources */,
 				6E2C2BC11C20F76600B2C995 /* HTTPMethod.swift in Sources */,
 				6E2C2BE11C20F76600B2C995 /* UUID.swift in Sources */,
+				6E2C2C351C212C5600B2C995 /* NSString.swift in Sources */,
 				6E2C2BBB1C20F76600B2C995 /* FileDescriptor.swift in Sources */,
 				6E2C2BDA1C20F76600B2C995 /* Task.swift in Sources */,
 				6E2C2BB51C20F76600B2C995 /* ComparatorSortDescriptor.swift in Sources */,
@@ -879,6 +889,7 @@
 				6E2C2B911C20F76600B2C995 /* HTTPVersion.swift in Sources */,
 				6E2C2B8D1C20F76600B2C995 /* HTTPMethod.swift in Sources */,
 				6E2C2BAD1C20F76600B2C995 /* UUID.swift in Sources */,
+				6E2C2C361C212C5700B2C995 /* NSString.swift in Sources */,
 				6E2C2B871C20F76600B2C995 /* FileDescriptor.swift in Sources */,
 				6E2C2BA61C20F76600B2C995 /* Task.swift in Sources */,
 				6E2C2B811C20F76600B2C995 /* ComparatorSortDescriptor.swift in Sources */,
@@ -909,6 +920,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E2C2C181C20F76B00B2C995 /* OrderTests.swift in Sources */,
+				6E2C2C301C2128C600B2C995 /* main.swift in Sources */,
 				6E2C2C1D1C20F76B00B2C995 /* UUIDTests.swift in Sources */,
 				6E2C2C2D1C21115C00B2C995 /* NSComparisonResultTests.swift in Sources */,
 				6E2C2B741C20F75F00B2C995 /* NSFileManagerTests.swift in Sources */,
@@ -964,6 +976,7 @@
 				6E2C2BF91C20F76700B2C995 /* HTTPVersion.swift in Sources */,
 				6E2C2BF51C20F76700B2C995 /* HTTPMethod.swift in Sources */,
 				6E2C2C151C20F76700B2C995 /* UUID.swift in Sources */,
+				6E2C2C341C212C5600B2C995 /* NSString.swift in Sources */,
 				6E2C2BEF1C20F76700B2C995 /* FileDescriptor.swift in Sources */,
 				6E2C2C0E1C20F76700B2C995 /* Task.swift in Sources */,
 				6E2C2BE91C20F76700B2C995 /* ComparatorSortDescriptor.swift in Sources */,
@@ -994,6 +1007,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E2C2C1F1C20F76D00B2C995 /* OrderTests.swift in Sources */,
+				6E2C2C2F1C2128C600B2C995 /* main.swift in Sources */,
 				6E2C2C241C20F76D00B2C995 /* UUIDTests.swift in Sources */,
 				6E2C2C2C1C21115C00B2C995 /* NSComparisonResultTests.swift in Sources */,
 				6E2C2B781C20F76000B2C995 /* NSFileManagerTests.swift in Sources */,
