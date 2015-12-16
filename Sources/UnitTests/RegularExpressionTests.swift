@@ -138,9 +138,7 @@ extension String {
     
     public func toFoundation() -> NSString {
         
-        let stringData = self.toUTF8Data()
-        
-        guard let foundationString = NSString(bytes: stringData.byteValue, length: stringData.byteValue.count, encoding: NSUTF8StringEncoding)
+        guard let foundationString = NSString(bytes: self, length: self.utf8.count, encoding: NSUTF8StringEncoding)
             else { fatalError("Could not convert String to NSString") }
         
         return foundationString
