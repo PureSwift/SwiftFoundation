@@ -7,7 +7,7 @@
 //
 
 #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
-    import Darwin
+    import Darwin.C
 #elseif os(Linux)
     import Glibc
 #endif

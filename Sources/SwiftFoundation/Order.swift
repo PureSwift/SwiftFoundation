@@ -9,9 +9,9 @@
 /// Indicates how items are ordered.
 public enum Order: Int {
     
-    case Ascending      =  1
+    case Ascending      = -1
     case Same           =  0
-    case Descending     = -1
+    case Descending     =  1
 }
 
 // MARK: - Implementation

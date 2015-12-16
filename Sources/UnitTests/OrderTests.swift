@@ -12,33 +12,23 @@ import SwiftFoundation
 
 class OrderTests: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
     func testComparisonResult() {
         
         // number
         
-        XCTAssert(1.compare(2) == Order(foundation: 1.compare(NSNumber(integer: 2))))
+        XCTAssert(1.compare(2) == Order.Ascending)
         
-        XCTAssert(2.compare(1) == Order(foundation: 2.compare(NSNumber(integer: 1))))
+        XCTAssert(2.compare(1) == Order.Descending)
         
-        XCTAssert(1.compare(1) == Order(foundation: 1.compare(NSNumber(integer: 1))))
+        XCTAssert(1.compare(1) == Order.Same)
         
         // string
         
-        XCTAssert("a".compare("b") == Order(foundation: ("a" as NSString).compare("b" as String)))
+        XCTAssert("a".compare("b") == Order.Ascending)
         
-        XCTAssert("b".compare("a") == Order(foundation: ("b" as NSString).compare("a" as String)))
+        XCTAssert("b".compare("a") == Order.Descending)
         
-        XCTAssert("a".compare("a") == Order(foundation: ("a" as NSString).compare("a" as String)))
+        XCTAssert("a".compare("a") == Order.Same)
         
         // dates
         
@@ -46,12 +36,9 @@ class OrderTests: XCTestCase {
         
         let later = now + 0.5
         
-        let foundationNow = NSDate()
-        
-        let foundationLater = foundationNow.dateByAddingTimeInterval(0.5)
-        
-        XCTAssert(now.compare(later) == Order(foundation: foundationNow.compare(foundationLater)))
+        XCTAssert(now.compare(later) == Order.Ascending)
         
         XCTAssert(now < later)
     }
 }
+

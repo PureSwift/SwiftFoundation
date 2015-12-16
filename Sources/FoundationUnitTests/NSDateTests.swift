@@ -6,6 +6,8 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+
 import XCTest
 import Foundation
 import SwiftFoundation
@@ -171,3 +173,5 @@ class DateTests: XCTestCase {
         }
     }
 }
+
+#endif

@@ -6,8 +6,10 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+
 import XCTest
-import SwiftFoundation
+import Foundation
 import SwiftFoundation
 
 class NSUUIDTests: XCTestCase {
@@ -111,3 +113,6 @@ class NSUUIDTests: XCTestCase {
         }
     }
 }
+
+#endif
+

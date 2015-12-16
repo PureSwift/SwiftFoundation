@@ -6,6 +6,10 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(Linux)
+    import SwiftFoundation
+#endif
+
 #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
 
 import Foundation

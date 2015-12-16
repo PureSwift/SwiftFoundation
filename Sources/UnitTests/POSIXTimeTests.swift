@@ -6,20 +6,16 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    import Darwin.C
+#elseif os(Linux)
+    import Glibc
+#endif
+
 import XCTest
 import SwiftFoundation
 
 class POSIXTimeTests: XCTestCase {
-
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
     
     func testGetTimeOfDay() {
                 
@@ -37,15 +33,6 @@ class POSIXTimeTests: XCTestCase {
         let time = timeval(timeInterval: date.timeIntervalSince1970)
         
         XCTAssert(Int(time.timeIntervalValue) == Int(date.timeIntervalSince1970), "TimeVal derived interval: \(time.timeIntervalValue) must equal Date's timeIntervalSince1970 \(date.timeIntervalSince1970)")
-    }
-    
-    func testStaticTimeVal() {
-        
-        //let date = Date()
-        
-        //let time = timeval(timeInterval: 123456.7898)
-        
-        //XCTAssert(Int(time.timeIntervalValue) == Int(date.timeIntervalSince1970), "TimeVal derived interval: \(time.timeIntervalValue) must equal original constant")
     }
 
     func testTimeSpec() {

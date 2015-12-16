@@ -9,8 +9,9 @@
 import XCTest
 import SwiftFoundation
 
-class DateComponentsTest : XCTestCase {
-    func testMakeMyBirthDay() {
+class DateComponentsTest: XCTestCase {
+    
+    func testBuildDate() {
         
         var dateComponents = DateComponents()
         dateComponents.year = 1987
@@ -23,6 +24,5 @@ class DateComponentsTest : XCTestCase {
         print(assertionDate, madeDate)
         
         XCTAssert(assertionDate == madeDate)
-        
     }
 }

@@ -6,6 +6,10 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(Linux)
+    import SwiftFoundation
+#endif
+
 import Foundation
 
 // Dot notation syntax for class

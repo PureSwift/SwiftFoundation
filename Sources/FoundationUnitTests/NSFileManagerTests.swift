@@ -6,7 +6,10 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+
 import XCTest
+import Foundation
 import SwiftFoundation
 
 class FileManagerTests: XCTestCase {
@@ -133,6 +136,8 @@ class FileManagerTests: XCTestCase {
         XCTAssert(data == Data(foundation: readData))
     }
 }
+    
+#endif
 
 #if os(OSX) || os(iOS)
     public let TemporaryDirectory = NSTemporaryDirectory()

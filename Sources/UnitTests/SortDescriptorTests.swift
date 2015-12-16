@@ -10,87 +10,104 @@ import XCTest
 import SwiftFoundation
 
 class SortDescriptorTests: XCTestCase {
-
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
     
     // MARK: - Functional Tests
 
     func testComparableSorting() {
         
-        func verifySort(items: [String], ascending: Bool = true) {
-            
-            let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: ascending))
-            
-            let foundationSortedItems = (items as NSArray).sortedArrayUsingDescriptors([NSSortDescriptor(key: nil, ascending: ascending)])
-            
-            for (index, element) in sortedItems.enumerate() {
-                
-                let foundationElement = foundationSortedItems[index]
-                
-                if foundationElement as! String != element {
-                    
-                    XCTFail("Elements to not match Swift: \(sortedItems) Foundation: \(foundationSortedItems)\n")
-                    
-                    return
-                }
-            }
-        }
-        
         let names = ["coleman", "Coleman", "alsey", "miller", "Z", "A"]
         
-        verifySort(names)
+        do {
+            
+            let items = names
+            
+            let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: true))
+            
+            XCTAssert(["A", "Coleman", "Z", "alsey", "coleman", "miller"] == sortedItems)
+        }
         
-        verifySort(names, ascending: false)
+        do {
+            
+            let items = names
+            
+            let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: false))
+            
+            XCTAssert(["miller", "coleman", "alsey", "Z", "Coleman", "A"] == sortedItems)
+        }
         
         let places = ["Lima, Peru", "Brazil", "Florida", "San Diego", "Hong Kong"]
         
-        verifySort(places)
+        do {
+            
+            let items = places
+            
+            let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: true))
+            
+            XCTAssert(["Brazil", "Florida", "Hong Kong", "Lima, Peru", "San Diego"] == sortedItems)
+        }
         
-        verifySort(places, ascending: false)
+        do {
+            
+            let items = places
+            
+            let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: false))
+            
+            XCTAssert(["San Diego", "Lima, Peru", "Hong Kong", "Florida", "Brazil"] == sortedItems)
+        }
     }
     
     func testComparatorSorting() {
         
-        func verifySort(items: [String], ascending: Bool = true) {
+        let names = ["coleman", "Coleman", "alsey", "miller", "Z", "A"]
+        
+        do {
             
-            let sortedItems = Sort(items, sortDescriptor: ComparatorSortDescriptor(ascending: ascending, comparator: { (first: String, second: String) -> Order in
+            let items = names
+            
+            let sortedItems = Sort(items, sortDescriptor: ComparatorSortDescriptor(ascending: true, comparator: { (first: String, second: String) -> Order in
                 
                 return first.compare(second)
             }))
             
-            let foundationSortedItems = (items as NSArray).sortedArrayUsingDescriptors([NSSortDescriptor(key: nil, ascending: ascending)])
-            
-            for (index, element) in sortedItems.enumerate() {
-                
-                let foundationElement = foundationSortedItems[index]
-                
-                if foundationElement as! String != element {
-                    
-                    XCTFail("Elements to not match\nSwift:\n\(sortedItems)\nFoundation:\n\(foundationSortedItems)\n")
-                    
-                    return
-                }
-            }
+            XCTAssert(["A", "Coleman", "Z", "alsey", "coleman", "miller"] == sortedItems)
         }
         
-        let names = ["coleman", "Coleman", "alsey", "miller", "Z", "A"]
-        
-        verifySort(names)
-        
-        verifySort(names, ascending: false)
+        do {
+            
+            let items = names
+            
+            let sortedItems = Sort(items, sortDescriptor: ComparatorSortDescriptor(ascending: false, comparator: { (first: String, second: String) -> Order in
+                
+                return first.compare(second)
+            }))
+            
+            XCTAssert(["miller", "coleman", "alsey", "Z", "Coleman", "A"] == sortedItems)
+        }
         
         let places = ["Lima, Peru", "Brazil", "Florida", "San Diego", "Hong Kong"]
         
-        verifySort(places)
+        do {
+            
+            let items = places
+            
+            let sortedItems = Sort(items, sortDescriptor: ComparatorSortDescriptor(ascending: true, comparator: { (first: String, second: String) -> Order in
+                
+                return first.compare(second)
+            }))
+            
+            XCTAssert(["Brazil", "Florida", "Hong Kong", "Lima, Peru", "San Diego"] == sortedItems)
+        }
         
-        verifySort(places, ascending: false)
+        do {
+            
+            let items = places
+            
+            let sortedItems = Sort(items, sortDescriptor: ComparatorSortDescriptor(ascending: false, comparator: { (first: String, second: String) -> Order in
+                
+                return first.compare(second)
+            }))
+            
+            XCTAssert(["San Diego", "Lima, Peru", "Hong Kong", "Florida", "Brazil"] == sortedItems)
+        }
     }
 }
