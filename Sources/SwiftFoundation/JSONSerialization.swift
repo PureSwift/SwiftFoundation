@@ -16,7 +16,7 @@ public protocol JSONSerializationType {
     
     static func serialize(array: JSON.Array, options: WritingOptions) -> String
     
-    static func parse(JSONString: String) -> JSON.Value?
+    static func parse(string: String) -> JSON.Value?
 }
 
 public extension JSON.Value {
