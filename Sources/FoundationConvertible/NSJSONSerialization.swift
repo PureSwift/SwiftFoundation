@@ -29,16 +29,16 @@ public extension JSON.Value {
     }
     
     /// Serializes the JSON into a string.
-    public func toString() -> Swift.String? {
+    public func toString(options: NSJSONWritingOptions = NSJSONWritingOptions.PrettyPrinted) -> Swift.String? {
         
-        guard let data = self.toData()
+        guard let data = self.toData(options)
             else { return nil }
         
         return Swift.String(UTF8Data: Data(foundation: data))!
     }
     
     /// Serializes the JSON into data.
-    public func toData() -> NSData? {
+    public func toData(options: NSJSONWritingOptions = NSJSONWritingOptions.PrettyPrinted) -> NSData? {
         
         switch self {
             
@@ -47,8 +47,7 @@ public extension JSON.Value {
         default: return nil
         }
         
-        return try! NSJSONSerialization.dataWithJSONObject(self.toFoundation().rawValue, options: NSJSONWritingOptions.PrettyPrinted)
-        
+        return try! NSJSONSerialization.dataWithJSONObject(self.toFoundation().rawValue, options: options)
     }
 }
 
