@@ -36,11 +36,12 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 
 ## Compiling on Ubuntu
 
-1. Install Swift from [here](https://swift.org/download/).
+```
+sudo apt-get install uuid-dev 
+swift build
+```
 
-2. Install dependencies ```sudo apt-get install libb64-dev uuid-dev```
-
-3. Compile and run the [example project](https://github.com/PureSwift/SwiftFoundationExample).
+You can optionally compile out the [example project](https://github.com/PureSwift/SwiftFoundationExample).
 
 ## Implemented
 To see what parts of Foundation are implemented, just look at the unit tests. Completed functionality will be fully unit tested. Note that there is some functionality that is written as a protocol only, that will not be included on this list.
@@ -54,16 +55,14 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 - [x] Data
 - [x] URL
 - [X] RegularExpression (POSIX, not ICU)
-- [x] JSON
+- [x] JSON (requires importing [JSONC](https://github.com/PureSwift/JSONC) on Linux)
 - [x] Base64
 
 # License
 
 This program is free software; you can redistribute it and/or modify it under the terms of the MIT License.
 
-- [libb64](http://libb64.sourceforge.net/#license) - Public Domain
-
 # See Also
 
-- [SeeURL](https://github.com/PureSwift/SeeURL) - Swift wrapper for cURL
-- [SwiftCF](https://github.com/PureSwift/SwiftCF) - Swift Protocol-Oriented Structs for CoreFoundation
+- [JSONC](https://github.com/PureSwift/JSONC) - Swift wrapper for JSON-C
+- [SwiftFoundationExample](https://github.com/PureSwift/SwiftFoundationExample) - Example SwiftFoundation project
