@@ -30,10 +30,6 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
    - Darwin (OS X, iOS, WatchOS)
    - Linux
 
-## Dependencies
-- Linux (use distribution's package manager)
-	- [libb64](http://libb64.sourceforge.net)
-
 ## Compiling on Ubuntu
 
 ```
