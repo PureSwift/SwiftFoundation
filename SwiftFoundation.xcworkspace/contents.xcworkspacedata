@@ -5,6 +5,6 @@
       location = "group:Introduction.playground">
    </FileRef>
    <FileRef
-      location = "group:SwiftFoundation/SwiftFoundation.xcodeproj">
+      location = "group:Xcode/SwiftFoundation.xcodeproj">
    </FileRef>
 </Workspace>

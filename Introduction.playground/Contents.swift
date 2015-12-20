@@ -25,5 +25,14 @@ let foundationUUID = NSUUID(UUIDString: validRawUUID)!
 
 uuid.rawValue == foundationUUID.UUIDString
 
+1.compare(2)
+
+("a" as NSString).compare("b" as String).rawValue
+
+NSComparisonResult.OrderedAscending.rawValue
+
+NSComparisonResult.OrderedDescending.rawValue
+
+NSComparisonResult.OrderedSame.rawValue
 
 
