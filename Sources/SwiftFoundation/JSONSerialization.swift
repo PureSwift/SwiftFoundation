@@ -9,12 +9,12 @@
 /// JSON Serialization engine type.
 public protocol JSONSerializationType {
     
-    typealias WritingOptions
+    typealias WritingOption
     
     /// Serializes a ```JSON.Object``` to 
-    static func serialize(object: JSON.Object, options: WritingOptions) -> String
+    static func serialize(object: JSON.Object, options: [WritingOption]) -> String
     
-    static func serialize(array: JSON.Array, options: WritingOptions) -> String
+    static func serialize(array: JSON.Array, options: [WritingOption]) -> String
     
     static func parse(string: String) -> JSON.Value?
 }
@@ -31,7 +31,7 @@ public extension JSON.Value {
     }
     
     /// Convenience method for serializing JSON.
-    public func toString<T: JSONSerializationType>(options: T.WritingOptions, _ engine: T.Type) -> Swift.String? {
+    public func toString<T: JSONSerializationType>(options: [T.WritingOption] = [], _ engine: T.Type) -> Swift.String? {
         
         switch self {
             
