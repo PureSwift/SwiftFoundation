@@ -155,9 +155,14 @@ extension JSON.Value: FoundationConvertible {
                 
                 self = JSON.Value.Number(JSON.Number.Boolean(value as Bool))
             }
+                
+            else if Swift.String.fromCString(value.objCType)! == intObjCType {
+                
+                self = JSON.Value.Number(.Integer(Int(value)))
+            }
             else {
                 
-                self = JSON.Value.Number(JSON.Number(rawValue: Int(value))!)
+                self = JSON.Value.Number(.Double(Double(value)))
             }
             
         case .Array(let foundationArray):
@@ -242,6 +247,10 @@ private let trueNumber = NSNumber(bool: true)
 private let falseNumber = NSNumber(bool: false)
 private let trueObjCType = String.fromCString(trueNumber.objCType)
 private let falseObjCType = String.fromCString(falseNumber.objCType)
+
+private let intNumber = NSNumber(integer: 1)
+private let intObjCType = String.fromCString(intNumber.objCType)!
+
 
 extension NSNumber {
     var isBool:Bool {
