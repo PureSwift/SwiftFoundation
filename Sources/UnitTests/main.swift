@@ -19,6 +19,8 @@ import XCTest
         RegularExpressionTests(),
         SortDescriptorTests(),
         StringTests(),
-        UUIDTests()])
+        UUIDTests(),
+        DataTests(),
+        JSONTests()])
 #endif
 

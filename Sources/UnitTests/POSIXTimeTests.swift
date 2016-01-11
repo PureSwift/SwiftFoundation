@@ -15,7 +15,7 @@
 import XCTest
 import SwiftFoundation
 
-class POSIXTimeTests: XCTestCase {
+final class POSIXTimeTests: XCTestCase {
     
     lazy var allTests: [(String, () -> ())] =
         [("testGetTimeOfDay", self.testGetTimeOfDay),
@@ -46,7 +46,15 @@ class POSIXTimeTests: XCTestCase {
         
         let time = timespec(timeInterval: date.timeIntervalSince1970)
         
-        XCTAssert(time.timeIntervalValue == date.timeIntervalSince1970)
+        #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+        
+            XCTAssert(time.timeIntervalValue == date.timeIntervalSince1970, "timespec: \(time.timeIntervalValue) == Date: \(date)")
+        
+        #elseif os(Linux)
+            
+            // do nothing for now
+            
+        #endif
     }
 
 }

@@ -1,7 +1,8 @@
 # SwiftFoundation #
 [![Swift](https://img.shields.io/badge/swift-2.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Platforms](https://img.shields.io/badge/platform-osx%20%7C%20ios%20%7C%20watchos%20%7C%20tvos%20%7C%20linux-lightgrey.svg)](https://developer.apple.com/swift/)
-[![License](https://img.shields.io/github/release/pureswift/swiftfoundation.svg)](https://tldrlegal.com/license/mit-license)
+[![Release](https://img.shields.io/github/release/pureswift/swiftfoundation.svg)](https://github.com/PureSwift/SwiftFoundation/releases)
+[![License](https://img.shields.io/badge/license-MIT-71787A.svg)](https://tldrlegal.com/license/mit-license)
 [![Build Status](https://travis-ci.org/PureSwift/SwiftFoundation.svg?branch=develop)](https://travis-ci.org/PureSwift/SwiftFoundation)
 [![Join the chat at https://gitter.im/PureSwift/SwiftFoundation](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/PureSwift/SwiftFoundation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -30,17 +31,13 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
    - Darwin (OS X, iOS, WatchOS)
    - Linux
 
-## Dependencies
-- Linux (use distribution's package manager)
-	- [libb64](http://libb64.sourceforge.net)
-
 ## Compiling on Ubuntu
 
-1. Install Swift from [here](https://swift.org/download/).
-
-2. Install dependencies ```sudo apt-get install libb64-dev uuid-dev```
-
-3. Compile and run the [example project](https://github.com/PureSwift/SwiftFoundationExample).
+```
+sudo apt-get install uuid-dev libjson-c-dev
+swift build
+.build/debug/UnitTests
+```
 
 ## Implemented
 To see what parts of Foundation are implemented, just look at the unit tests. Completed functionality will be fully unit tested. Note that there is some functionality that is written as a protocol only, that will not be included on this list.
@@ -60,10 +57,3 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 # License
 
 This program is free software; you can redistribute it and/or modify it under the terms of the MIT License.
-
-- [libb64](http://libb64.sourceforge.net/#license) - Public Domain
-
-# See Also
-
-- [SeeURL](https://github.com/PureSwift/SeeURL) - Swift wrapper for cURL
-- [SwiftCF](https://github.com/PureSwift/SwiftCF) - Swift Protocol-Oriented Structs for CoreFoundation

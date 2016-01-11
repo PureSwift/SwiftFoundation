@@ -9,7 +9,7 @@
 import XCTest
 import SwiftFoundation
 
-class SortDescriptorTests: XCTestCase {
+final class SortDescriptorTests: XCTestCase {
     
     lazy var allTests: [(String, () -> ())] =
         [("testComparableSorting", self.testComparableSorting),
@@ -27,7 +27,9 @@ class SortDescriptorTests: XCTestCase {
             
             let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: true))
             
-            XCTAssert(["A", "Coleman", "Z", "alsey", "coleman", "miller"] == sortedItems)
+            let expected = items.sort()
+            
+            XCTAssert(expected == sortedItems, "Ascending: \(expected) == \(sortedItems)")
         }
         
         do {
@@ -36,7 +38,9 @@ class SortDescriptorTests: XCTestCase {
             
             let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: false))
             
-            XCTAssert(["miller", "coleman", "alsey", "Z", "Coleman", "A"] == sortedItems)
+            let expected = Array(items.sort().reverse())
+            
+            XCTAssert(expected == sortedItems, "Descending: \(expected) == \(sortedItems)")
         }
         
         let places = ["Lima, Peru", "Brazil", "Florida", "San Diego", "Hong Kong"]
@@ -47,7 +51,9 @@ class SortDescriptorTests: XCTestCase {
             
             let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: true))
             
-            XCTAssert(["Brazil", "Florida", "Hong Kong", "Lima, Peru", "San Diego"] == sortedItems)
+            let expected = items.sort()
+            
+            XCTAssert(expected == sortedItems, "\(expected) == \(sortedItems)")
         }
         
         do {
@@ -56,7 +62,9 @@ class SortDescriptorTests: XCTestCase {
             
             let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: false))
             
-            XCTAssert(["San Diego", "Lima, Peru", "Hong Kong", "Florida", "Brazil"] == sortedItems)
+            let expected = Array(items.sort().reverse())
+            
+            XCTAssert(expected == sortedItems, "\(expected) == \(sortedItems)")
         }
     }
     
@@ -73,7 +81,9 @@ class SortDescriptorTests: XCTestCase {
                 return first.compare(second)
             }))
             
-            XCTAssert(["A", "Coleman", "Z", "alsey", "coleman", "miller"] == sortedItems)
+            let expected = items.sort()
+            
+            XCTAssert(expected == sortedItems, "\(expected) == \(sortedItems)")
         }
         
         do {
@@ -85,7 +95,9 @@ class SortDescriptorTests: XCTestCase {
                 return first.compare(second)
             }))
             
-            XCTAssert(["miller", "coleman", "alsey", "Z", "Coleman", "A"] == sortedItems)
+            let expected = Array(items.sort().reverse())
+            
+            XCTAssert(expected == sortedItems, "\(expected) == \(sortedItems)")
         }
         
         let places = ["Lima, Peru", "Brazil", "Florida", "San Diego", "Hong Kong"]

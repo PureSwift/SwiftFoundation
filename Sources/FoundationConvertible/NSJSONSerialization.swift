@@ -10,47 +10,6 @@
 
 import Foundation
 
-public extension JSON.Value {
-    
-    /// Deserialize JSON from a string.
-    public init?(string: Swift.String) {
-        
-        self.init(data: string.toUTF8Data().toFoundation())
-    }
-    
-    /// Deserialize JSON from data.
-    public init?(data: NSData) {
-        
-        guard let json = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()),
-            let jsonValue = NSJSONSerialization.Value(rawValue: json)
-            else { return nil }
-        
-        self.init(foundation: jsonValue)
-    }
-    
-    /// Serializes the JSON into a string.
-    public func toString(options: NSJSONWritingOptions = NSJSONWritingOptions.PrettyPrinted) -> Swift.String? {
-        
-        guard let data = self.toData(options)
-            else { return nil }
-        
-        return Swift.String(UTF8Data: Data(foundation: data))!
-    }
-    
-    /// Serializes the JSON into data.
-    public func toData(options: NSJSONWritingOptions = NSJSONWritingOptions.PrettyPrinted) -> NSData? {
-        
-        switch self {
-            
-        case .Object(_), .Array(_): break
-            
-        default: return nil
-        }
-        
-        return try! NSJSONSerialization.dataWithJSONObject(self.toFoundation().rawValue, options: options)
-    }
-}
-
 public extension NSJSONSerialization {
     
     public enum Value: RawRepresentable {
@@ -155,9 +114,14 @@ extension JSON.Value: FoundationConvertible {
                 
                 self = JSON.Value.Number(JSON.Number.Boolean(value as Bool))
             }
+                
+            else if Swift.String.fromCString(value.objCType)! == intObjCType {
+                
+                self = JSON.Value.Number(.Integer(Int(value)))
+            }
             else {
                 
-                self = JSON.Value.Number(JSON.Number(rawValue: Int(value))!)
+                self = JSON.Value.Number(.Double(Double(value)))
             }
             
         case .Array(let foundationArray):
@@ -242,6 +206,10 @@ private let trueNumber = NSNumber(bool: true)
 private let falseNumber = NSNumber(bool: false)
 private let trueObjCType = String.fromCString(trueNumber.objCType)
 private let falseObjCType = String.fromCString(falseNumber.objCType)
+
+private let intNumber = NSNumber(integer: 1)
+private let intObjCType = String.fromCString(intNumber.objCType)!
+
 
 extension NSNumber {
     var isBool:Bool {

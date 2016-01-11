@@ -9,7 +9,7 @@
 import XCTest
 import SwiftFoundation
 
-class DateComponentsTest: XCTestCase {
+final class DateComponentsTest: XCTestCase {
     
     lazy var allTests: [(String, () -> ())] = [("testBuildDate", self.testBuildDate)]
     

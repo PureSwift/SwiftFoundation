@@ -10,7 +10,7 @@ import XCTest
 import SwiftFoundation
 import Foundation
 
-class RegularExpressionTests: XCTestCase {
+final class RegularExpressionTests: XCTestCase {
     
     lazy var allTests: [(String, () -> ())] =
         [("testSimpleRegex", self.testSimpleRegex),
