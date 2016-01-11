@@ -17,5 +17,5 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then mkdir swift ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then curl https://swift.org/builds/ubuntu1404/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu14.04.tar.gz -s | tar xz -C swift &> /dev/null ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export PATH=$(pwd)/swift/$SWIFT_VERSION-ubuntu14.04/usr/bin:"${PATH}" ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; swift build ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift build ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then .build/debug/UnitTests ; fi
