@@ -29,7 +29,7 @@ final class UUIDTests: XCTestCase {
     
     func testUUIDString() {
         
-        let stringValue = "5bfeb194-68c4-48e8-8f43-3c586364cb6f".uppercaseString
+        let stringValue = "5BFEB194-68C4-48E8-8F43-3C586364CB6F"
         
         guard let uuid = UUID(rawValue: stringValue)
             else { XCTFail("Could not create UUID from " + stringValue); return }
@@ -39,7 +39,7 @@ final class UUIDTests: XCTestCase {
     
     func testCreateFromString() {
         
-        let stringValue = "5bfeb194-68c4-48e8-8f43-3c586364cb6f".uppercaseString
+        let stringValue = "5BFEB194-68C4-48E8-8F43-3C586364CB6F"
         
         XCTAssert((UUID(rawValue: stringValue) != nil), "Could not create UUID with string \"\(stringValue)\"")
         
