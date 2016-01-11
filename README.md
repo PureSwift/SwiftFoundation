@@ -2,6 +2,7 @@
 [![Swift](https://img.shields.io/badge/swift-2.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Platforms](https://img.shields.io/badge/platform-osx%20%7C%20ios%20%7C%20watchos%20%7C%20tvos%20%7C%20linux-lightgrey.svg)](https://developer.apple.com/swift/)
 [![License](https://img.shields.io/github/release/pureswift/swiftfoundation.svg)](https://tldrlegal.com/license/mit-license)
+[![Release](https://img.shields.io/github/release/pureswift/swiftfoundation.svg)](https://github.com/PureSwift/SwiftFoundation/releases)
 [![Build Status](https://travis-ci.org/PureSwift/SwiftFoundation.svg?branch=develop)](https://travis-ci.org/PureSwift/SwiftFoundation)
 [![Join the chat at https://gitter.im/PureSwift/SwiftFoundation](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/PureSwift/SwiftFoundation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
