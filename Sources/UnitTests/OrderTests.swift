@@ -10,7 +10,7 @@ import XCTest
 import Foundation
 import SwiftFoundation
 
-class OrderTests: XCTestCase {
+final class OrderTests: XCTestCase {
     
     lazy var allTests: [(String, () -> ())] = [("testComparisonResult", self.testComparisonResult)]
 

@@ -8,7 +8,7 @@
 
 import XCTest
 
-class StringTests: XCTestCase {
+final class StringTests: XCTestCase {
     
     lazy var allTests: [(String, () -> ())] = [("testUTF8Data", self.testUTF8Data)]
     

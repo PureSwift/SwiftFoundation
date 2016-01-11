@@ -9,7 +9,7 @@
 import XCTest
 import SwiftFoundation
 
-class SortDescriptorTests: XCTestCase {
+final class SortDescriptorTests: XCTestCase {
     
     lazy var allTests: [(String, () -> ())] =
         [("testComparableSorting", self.testComparableSorting),

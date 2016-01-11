@@ -10,7 +10,7 @@ import XCTest
 import SwiftFoundation
 import SwiftFoundation
 
-class UUIDTests: XCTestCase {
+final class UUIDTests: XCTestCase {
     
     lazy var allTests: [(String, () -> ())] =
         [("testCreateRandomUUID", self.testCreateRandomUUID),

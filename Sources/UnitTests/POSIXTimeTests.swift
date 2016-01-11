@@ -15,7 +15,7 @@
 import XCTest
 import SwiftFoundation
 
-class POSIXTimeTests: XCTestCase {
+final class POSIXTimeTests: XCTestCase {
     
     lazy var allTests: [(String, () -> ())] =
         [("testGetTimeOfDay", self.testGetTimeOfDay),
