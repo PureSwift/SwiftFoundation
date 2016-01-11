@@ -20,6 +20,7 @@ import XCTest
         SortDescriptorTests(),
         StringTests(),
         UUIDTests(),
-        DataTests()])
+        DataTests(),
+        JSONTests()])
 #endif
 

@@ -25,8 +25,8 @@ final class DataTests: XCTestCase {
         
         defer { dataPointer.dealloc(dataLength) }
         
-        memset(&testData.byteValue, 0, dataLength)
-        
+        memcpy(&testData.byteValue, dataPointer, dataLength)
+                
         let data = Data.fromBytePointer(dataPointer, length: dataLength)
         
         XCTAssert(data == testData, "\(data) == \(testData)")
