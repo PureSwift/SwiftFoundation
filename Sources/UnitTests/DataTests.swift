@@ -22,7 +22,7 @@ final class DataTests: XCTestCase {
         
         let dataLength = testData.byteValue.count
         
-        let dataPointer = UnsafeMutablePointer<Void>.alloc(dataLength)
+        let dataPointer = UnsafeMutablePointer<Byte>.alloc(dataLength)
         
         defer { dataPointer.dealloc(dataLength) }
         
