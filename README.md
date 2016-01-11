@@ -1,8 +1,8 @@
 # SwiftFoundation #
 [![Swift](https://img.shields.io/badge/swift-2.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Platforms](https://img.shields.io/badge/platform-osx%20%7C%20ios%20%7C%20watchos%20%7C%20tvos%20%7C%20linux-lightgrey.svg)](https://developer.apple.com/swift/)
-[![License](https://img.shields.io/github/release/pureswift/swiftfoundation.svg)](https://tldrlegal.com/license/mit-license)
 [![Release](https://img.shields.io/github/release/pureswift/swiftfoundation.svg)](https://github.com/PureSwift/SwiftFoundation/releases)
+[![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)](https://tldrlegal.com/license/mit-license)
 [![Build Status](https://travis-ci.org/PureSwift/SwiftFoundation.svg?branch=develop)](https://travis-ci.org/PureSwift/SwiftFoundation)
 [![Join the chat at https://gitter.im/PureSwift/SwiftFoundation](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/PureSwift/SwiftFoundation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -36,9 +36,8 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 ```
 sudo apt-get install uuid-dev 
 swift build
+.build/debug/UnitTests
 ```
-
-You can optionally compile out the [example project](https://github.com/PureSwift/SwiftFoundationExample).
 
 ## Implemented
 To see what parts of Foundation are implemented, just look at the unit tests. Completed functionality will be fully unit tested. Note that there is some functionality that is written as a protocol only, that will not be included on this list.
@@ -52,14 +51,9 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 - [x] Data
 - [x] URL
 - [X] RegularExpression (POSIX, not ICU)
-- [x] JSON (requires importing [JSONC](https://github.com/PureSwift/JSONC) on Linux)
+- [x] JSON
 - [x] Base64
 
 # License
 
 This program is free software; you can redistribute it and/or modify it under the terms of the MIT License.
-
-# See Also
-
-- [JSONC](https://github.com/PureSwift/JSONC) - Swift wrapper for JSON-C
-- [SwiftFoundationExample](https://github.com/PureSwift/SwiftFoundationExample) - Example SwiftFoundation project
