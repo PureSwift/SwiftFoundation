@@ -19,6 +19,7 @@ import XCTest
         RegularExpressionTests(),
         SortDescriptorTests(),
         StringTests(),
-        UUIDTests()])
+        UUIDTests(),
+        DataTests()])
 #endif
 
