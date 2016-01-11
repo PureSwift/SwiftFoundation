@@ -11,8 +11,7 @@ import SwiftFoundation
 
 final class DataTests: XCTestCase {
     
-    lazy var allTests: [(String, () -> ())] =
-    [("testFromBytePointer", self.testFromBytePointer)]
+    lazy var allTests: [(String, () -> ())] = [("testFromBytePointer", self.testFromBytePointer)]
 
     func testFromBytePointer() {
         
