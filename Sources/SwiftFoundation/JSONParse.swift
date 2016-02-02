@@ -61,7 +61,15 @@ private extension JSON.Value {
             
             let value = json_object_get_int64(jsonObject)
             
-            self = .Number(.Integer(Int(value)))
+            // Handle integer overflow
+            if value < Int.max {
+                
+                self = .Number(.Integer(Int.max))
+            }
+            else {
+                
+                self = .Number(.Integer(Int(value)))
+            }
             
         case json_type_double:
             
