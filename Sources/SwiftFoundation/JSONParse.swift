@@ -45,7 +45,7 @@ private extension JSON.Value {
             
             let stringPointer = json_object_get_string(jsonObject)
             
-            let string = Swift.String.fromCString(stringPointer)!
+            let string = Swift.String.fromCString(stringPointer) ?? ""
             
             self = JSON.Value.String(string)
             
