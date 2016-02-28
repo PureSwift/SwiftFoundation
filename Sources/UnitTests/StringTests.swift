@@ -10,7 +10,7 @@ import XCTest
 
 final class StringTests: XCTestCase {
     
-    lazy var allTests: [(String, () -> ())] = [("testUTF8Data", self.testUTF8Data)]
+    lazy var allTests: [(String, () throws -> ())] = [("testUTF8Data", self.testUTF8Data)]
     
     // MARK: - Functional Tests
 

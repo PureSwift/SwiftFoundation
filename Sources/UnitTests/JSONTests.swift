@@ -11,7 +11,7 @@ import SwiftFoundation
 
 final class JSONTests: XCTestCase {
     
-    lazy var allTests: [(String, () -> ())] = [
+    lazy var allTests: [(String, () throws -> ())] = [
         
         ("testJSONEncodable", self.testJSONEncodable),
         ("testJSONParse", self.testJSONParse),
