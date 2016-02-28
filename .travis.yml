@@ -15,7 +15,7 @@ install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then mkdir $SWIFT_DIR ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then curl https://swift.org/builds/ubuntu1404/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu14.04.tar.gz -s | tar xz -C $SWIFT_DIR &> /dev/null ; fi
 env:
-  - SWIFT_VERSION=swift-DEVELOPMENT-SNAPSHOT-2016-02-25-a-ubuntu14.04
+  - SWIFT_VERSION=swift-DEVELOPMENT-SNAPSHOT-2016-02-25-a
 script:
   - uname
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xctool test -workspace SwiftFoundation.xcworkspace -scheme "SwiftFoundation OS X" -sdk macosx ONLY_ACTIVE_ARCH=NO ; fi
