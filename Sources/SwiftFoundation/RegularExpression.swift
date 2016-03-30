@@ -1,4 +1,4 @@
-//
+﻿//
 //  RegularExpression.swift
 //  SwiftFoundation
 //
@@ -11,9 +11,9 @@
 /** Regular expression interface. */
 public protocol RegularExpressionType: RawRepresentable, CustomStringConvertible {
     
-    typealias CompileOptions
+    associatedtype CompileOptions
     
-    typealias MatchOptions
+    associatedtype MatchOptions
     
     var pattern: String { get }
     

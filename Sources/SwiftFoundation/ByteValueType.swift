@@ -1,4 +1,4 @@
-//
+﻿//
 //  ByteValueType.swift
 //  SwiftFoundation
 //
@@ -11,7 +11,7 @@
 /// Useful for Swift wrappers for C primitives.
 public protocol ByteValueType {
     
-    typealias ByteValue
+    associatedtype ByteValue
     
     /// Returns the primitive type. 
     var byteValue: ByteValue { get }
