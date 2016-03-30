@@ -83,7 +83,7 @@ private extension JSON.Value {
             
             let arrayLength = json_object_array_length(jsonObject)
             
-            for (var i: Int32 = 0; i < arrayLength; i++) {
+            for i in 0 ..< arrayLength {
                 
                 let jsonValuePointer = json_object_array_get_idx(jsonObject, i)
                 

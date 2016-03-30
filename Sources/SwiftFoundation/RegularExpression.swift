@@ -123,7 +123,7 @@ public struct RegularExpressionMatch {
     
     public init() {
         
-        self.range = Swift.Range<Int>(start: 0, end: 0)
+        self.range = 0 ..< 0
         self.subexpressionRanges = []
     }
     
@@ -145,7 +145,7 @@ public extension String {
     }
     
     func substring(range: Range<Int>) -> String? {
-        let indexRange = Swift.Range(start: utf8.startIndex.advancedBy(range.startIndex), end: utf8.startIndex.advancedBy(range.endIndex))
+        let indexRange = utf8.startIndex.advancedBy(range.startIndex) ..< utf8.startIndex.advancedBy(range.endIndex)
         return String(utf8[indexRange])
     }
 }
