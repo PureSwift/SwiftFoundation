@@ -23,7 +23,7 @@ public protocol Copying: class {
 /// Only classes that define an “immutable vs. mutable” distinction should adopt this protocol. Classes that don’t define such a distinction should adopt ```Copying``` instead.
 public protocol MutableCopying: class, Copying {
     
-    typealias MutableType
+    associatedtype MutableType
     
     /// Creates a mutable copy of the reciever.
     var mutableCopy: MutableType { get }
