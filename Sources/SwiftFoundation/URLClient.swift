@@ -7,10 +7,10 @@
 //
 
 public protocol URLClient {
-	
-	associatedtype Request: URLRequest
-	
-	associatedtype Response: URLResponse
-	
-	func sendRequest(request: Request) throws -> Response
+    
+    associatedtype Request: URLRequest
+    
+    associatedtype Response: URLResponse
+    
+    func sendRequest(request: Request) throws -> Response
 }
