@@ -1,4 +1,4 @@
-//
+﻿//
 //  Transformer.swift
 //  SwiftFoundation
 //
@@ -8,16 +8,16 @@
 
 /// Used to convert values from one representation to another. Doesn't fail.
 public protocol TransformerType {
-    
-    typealias OriginalValue
-    
-    typealias TransformedValue
-    
-    func transformedValue(value: OriginalValue) -> TransformedValue
+	
+	associatedtype OriginalValue
+	
+	associatedtype TransformedValue
+	
+	func transformedValue(value: OriginalValue) -> TransformedValue
 }
 
 /// Transformer that allows reverse transformation.
 public protocol ReverseTransformerType: TransformerType {
-    
-    func reverseTransformedValue(value: TransformedValue) -> OriginalValue
+	
+	func reverseTransformedValue(value: TransformedValue) -> OriginalValue
 }

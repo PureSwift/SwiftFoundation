@@ -1,4 +1,4 @@
-//
+﻿//
 //  URLClient.swift
 //  SwiftFoundation
 //
@@ -7,10 +7,10 @@
 //
 
 public protocol URLClient {
-    
-    typealias Request: URLRequest
-    
-    typealias Response: URLResponse
-    
-    func sendRequest(request: Request) throws -> Response
+	
+	associatedtype Request: URLRequest
+	
+	associatedtype Response: URLResponse
+	
+	func sendRequest(request: Request) throws -> Response
 }
