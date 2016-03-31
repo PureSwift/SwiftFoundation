@@ -21,6 +21,7 @@ import XCTest
         StringTests(),
         UUIDTests(),
         DataTests(),
-        JSONTests()])
+        JSONTests(),
+        RangeTests()])
 #endif
 
