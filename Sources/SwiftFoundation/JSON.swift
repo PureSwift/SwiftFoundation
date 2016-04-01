@@ -233,7 +233,7 @@ public protocol JSONDecodable {
 /// Type can be converted from JSON according to parameters.
 public protocol JSONParametrizedDecodable {
     
-    typealias JSONDecodingParameters
+    associatedtype JSONDecodingParameters
     
     /// Decodes the reciever from JSON according to the specified parameters.
     init?(JSONValue: JSON.Value, parameters: JSONDecodingParameters)

@@ -62,7 +62,7 @@ public extension POSIXRegularExpression {
         do {
             let expressionMatch = matches[0]
             
-            match.range = Swift.Range(start: Int(expressionMatch.rm_so), end: Int(expressionMatch.rm_eo))
+            match.range = Int(expressionMatch.rm_so) ..< Int(expressionMatch.rm_eo)
         }
         
         let subexpressionsCount = re_nsub // REMOVE
@@ -80,7 +80,7 @@ public extension POSIXRegularExpression {
                     continue
                 }
                 
-                let range = Swift.Range(start: Int(subexpressionMatch.rm_so), end: Int(subexpressionMatch.rm_eo))
+                let range = Int(subexpressionMatch.rm_so) ..< Int(subexpressionMatch.rm_eo)
                 
                 match.subexpressionRanges.append(RegularExpressionMatch.Range.Found(range))
             }

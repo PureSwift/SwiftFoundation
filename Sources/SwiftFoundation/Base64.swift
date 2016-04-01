@@ -34,7 +34,9 @@ public struct Base64 {
         var i = 0
         let count = bytes.count
         
-        for ; i+3 <= count; i += 3 {
+        // for ; i+3 <= count; i += 3
+        while i+3 <= count {
+            
             let one = bytes[i] >> 2
             let two = ((bytes[i] & 0b11) << 4) | ((bytes[i+1] & 0b11110000) >> 4)
             let three = ((bytes[i+1] & 0b00001111) << 2) | ((bytes[i+2] & 0b11000000) >> 6)
@@ -44,6 +46,8 @@ public struct Base64 {
             encoded.append(table[Int(two)])
             encoded.append(table[Int(three)])
             encoded.append(table[Int(four)])
+            
+            i += 3
         }
         
         if i+2 == count {

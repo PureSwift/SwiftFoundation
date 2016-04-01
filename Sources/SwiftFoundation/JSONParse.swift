@@ -45,7 +45,7 @@ private extension JSON.Value {
             
             let stringPointer = json_object_get_string(jsonObject)
             
-            let string = Swift.String.fromCString(stringPointer)!
+            let string = Swift.String.fromCString(stringPointer) ?? ""
             
             self = JSON.Value.String(string)
             
@@ -61,7 +61,15 @@ private extension JSON.Value {
             
             let value = json_object_get_int64(jsonObject)
             
-            self = .Number(.Integer(Int(value)))
+            // Handle integer overflow
+            if value > Int64(Int.max) {
+                
+                self = .Number(.Integer(Int.max))
+            }
+            else {
+                
+                self = .Number(.Integer(Int(value)))
+            }
             
         case json_type_double:
             
@@ -75,7 +83,7 @@ private extension JSON.Value {
             
             let arrayLength = json_object_array_length(jsonObject)
             
-            for (var i: Int32 = 0; i < arrayLength; i++) {
+            for i in 0 ..< arrayLength {
                 
                 let jsonValuePointer = json_object_array_get_idx(jsonObject, i)
                 

@@ -1,4 +1,4 @@
-//
+﻿//
 //  SortDescriptor.swift
 //  SwiftFoundation
 //
@@ -11,7 +11,7 @@
 /** Describes a basis for ordering types. */
 public protocol SortDescriptorType {
     
-    typealias SortedType
+    associatedtype SortedType
     
     var ascending: Bool { get }
     

@@ -1,4 +1,4 @@
-//
+﻿//
 //  Formatter.swift
 //  SwiftFoundation
 //
@@ -9,7 +9,7 @@
 /// Defines the interface for supporting conversion between strings and other types of values.
 public protocol FormatterType {
     
-    typealias Value
+    associatedtype Value
     
     /// Primary method for converting an object to a string through formatting. Object will be converted to string according to the formatter's implementation and init parameters. */
     func stringFromValue(value: Value) -> String
