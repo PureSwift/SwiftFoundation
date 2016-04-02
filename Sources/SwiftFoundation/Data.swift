@@ -55,6 +55,17 @@ public func == (lhs: Data, rhs: Data) -> Bool {
     return memcmp(&bytes1, &bytes2, lhs.byteValue.count) == 0
 }
 
+// MARK: - Protocol
+
+/// Protocol for converting types to and from data.
+public protocol DataConvertible {
+    
+    /// Attempt to inialize from `Data`.
+    init?(data: Data)
+    
+    /// Convert to data. 
+    func toData() -> Data
+}
 
 
     
