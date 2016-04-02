@@ -239,6 +239,9 @@
 		6E957C4F1C43B3A5003F3C51 /* JSON.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6E957C451C43B397003F3C51 /* JSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E957C571C442E3E003F3C51 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E957C561C442E3E003F3C51 /* JSONTests.swift */; };
 		6E957C581C442E3E003F3C51 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E957C561C442E3E003F3C51 /* JSONTests.swift */; };
+		6EE84DD91CAF659800A40C4D /* Endianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE84DD81CAF659800A40C4D /* Endianness.swift */; };
+		6EE84DDA1CAF659800A40C4D /* Endianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE84DD81CAF659800A40C4D /* Endianness.swift */; };
+		6EE84DDB1CAF659800A40C4D /* Endianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE84DD81CAF659800A40C4D /* Endianness.swift */; };
 		6EFF9A1B1CAD0C6B00917CB3 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFF9A1A1CAD0C6B00917CB3 /* Range.swift */; };
 		6EFF9A1D1CAD108400917CB3 /* RangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFF9A1C1CAD108400917CB3 /* RangeTests.swift */; };
 		6EFF9A1E1CAD108400917CB3 /* RangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFF9A1C1CAD108400917CB3 /* RangeTests.swift */; };
@@ -377,6 +380,7 @@
 		6E957C451C43B397003F3C51 /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
 		6E957C471C43B397003F3C51 /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
 		6E957C561C442E3E003F3C51 /* JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
+		6EE84DD81CAF659800A40C4D /* Endianness.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endianness.swift; sourceTree = "<group>"; };
 		6EFF9A1A1CAD0C6B00917CB3 /* Range.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
 		6EFF9A1C1CAD108400917CB3 /* RangeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -492,6 +496,7 @@
 				6E2C2B251C20F6EB00B2C995 /* Date.swift */,
 				6E2C2B261C20F6EB00B2C995 /* DateComponents.swift */,
 				6E2C2B271C20F6EB00B2C995 /* Decimal.swift */,
+				6EE84DD81CAF659800A40C4D /* Endianness.swift */,
 				6E2C2B281C20F6EB00B2C995 /* FileDescriptor.swift */,
 				6E2C2B291C20F6EB00B2C995 /* FileManager.swift */,
 				6E2C2B2A1C20F6EB00B2C995 /* FilePermission.swift */,
@@ -913,6 +918,7 @@
 				6E2C2BBD1C20F76600B2C995 /* FilePermission.swift in Sources */,
 				6E2C2BD31C20F76600B2C995 /* RegularExpression.swift in Sources */,
 				6E957C2C1C43AA55003F3C51 /* JSONSerialization.swift in Sources */,
+				6EE84DDA1CAF659800A40C4D /* Endianness.swift in Sources */,
 				6E2C2BCB1C20F76600B2C995 /* POSIXError.swift in Sources */,
 				6E2C2BD01C20F76600B2C995 /* POSIXUUID.swift in Sources */,
 				6E2C2B671C20F6F600B2C995 /* NSNull.swift in Sources */,
@@ -983,6 +989,7 @@
 				6E2C2B891C20F76600B2C995 /* FilePermission.swift in Sources */,
 				6E2C2B9F1C20F76600B2C995 /* RegularExpression.swift in Sources */,
 				6E957C2D1C43AA55003F3C51 /* JSONSerialization.swift in Sources */,
+				6EE84DDB1CAF659800A40C4D /* Endianness.swift in Sources */,
 				6E2C2B971C20F76600B2C995 /* POSIXError.swift in Sources */,
 				6E2C2B9C1C20F76600B2C995 /* POSIXUUID.swift in Sources */,
 				6E2C2B5E1C20F6F500B2C995 /* NSNull.swift in Sources */,
@@ -1087,6 +1094,7 @@
 				6E957C2E1C43AA55003F3C51 /* JSONWritingOption.swift in Sources */,
 				6E2C2BEC1C20F76700B2C995 /* Date.swift in Sources */,
 				6E2C2BFB1C20F76700B2C995 /* JSON.swift in Sources */,
+				6EE84DD91CAF659800A40C4D /* Endianness.swift in Sources */,
 				6E2C2BE31C20F76700B2C995 /* Base64.swift in Sources */,
 				6E2C2B6E1C20F6F700B2C995 /* NSDate.swift in Sources */,
 				6E2C2C0C1C20F76700B2C995 /* SortDescriptor.swift in Sources */,
