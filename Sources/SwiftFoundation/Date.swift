@@ -18,14 +18,14 @@ public struct Date: Equatable, Comparable, CustomStringConvertible {
     // MARK: - Properties
     
     /// The time interval between the date and the reference date (1 January 2001, GMT).
-    public var timeIntervalSinceReferenceDate: TimeInterval
+    public var sinceReferenceDate: TimeInterval
     
     /// The time interval between the current date and 1 January 1970, GMT.
-    public var timeIntervalSince1970: TimeInterval {
+    public var since1970: TimeInterval {
         
-        get { return timeIntervalSinceReferenceDate + TimeIntervalBetween1970AndReferenceDate }
+        get { return sinceReferenceDate + TimeIntervalBetween1970AndReferenceDate }
         
-        set { timeIntervalSinceReferenceDate = timeIntervalSince1970 - TimeIntervalBetween1970AndReferenceDate }
+        set { sinceReferenceDate = since1970 - TimeIntervalBetween1970AndReferenceDate }
     }
     
     /// Returns the difference between two dates.
@@ -36,7 +36,7 @@ public struct Date: Equatable, Comparable, CustomStringConvertible {
     
     public var description: String {
         
-        return "\(timeIntervalSinceReferenceDate)"
+        return "\(sinceReferenceDate)"
     }
     
     // MARK: - Initialization
@@ -44,19 +44,19 @@ public struct Date: Equatable, Comparable, CustomStringConvertible {
     /// Creates the date with the current time.
     public init() {
         
-        timeIntervalSinceReferenceDate = TimeIntervalSinceReferenceDate()
+        sinceReferenceDate = TimeIntervalSinceReferenceDate()
     }
     
     /// Creates the date with the specified time interval since the reference date (1 January 2001, GMT).
-    public init(timeIntervalSinceReferenceDate timeInterval: TimeInterval) {
+    public init(sinceReferenceDate timeInterval: TimeInterval) {
         
-        timeIntervalSinceReferenceDate = timeInterval
+        sinceReferenceDate = timeInterval
     }
     
     /// Creates the date with the specified time interval since 1 January 1970, GMT.
-    public init(timeIntervalSince1970 timeInterval: TimeInterval) {
+    public init(since1970 timeInterval: TimeInterval) {
         
-        timeIntervalSinceReferenceDate = timeInterval - TimeIntervalBetween1970AndReferenceDate
+        sinceReferenceDate = timeInterval - TimeIntervalBetween1970AndReferenceDate
     }
 }
 
@@ -64,50 +64,50 @@ public struct Date: Equatable, Comparable, CustomStringConvertible {
 
 public func == (lhs: Date, rhs: Date) -> Bool {
     
-    return lhs.timeIntervalSinceReferenceDate == rhs.timeIntervalSinceReferenceDate
+    return lhs.sinceReferenceDate == rhs.sinceReferenceDate
 }
 
 public func < (lhs: Date, rhs: Date) -> Bool {
     
-    return lhs.timeIntervalSinceReferenceDate < rhs.timeIntervalSinceReferenceDate
+    return lhs.sinceReferenceDate < rhs.sinceReferenceDate
 }
 
 public func <= (lhs: Date, rhs: Date) -> Bool {
     
-    return lhs.timeIntervalSinceReferenceDate <= rhs.timeIntervalSinceReferenceDate
+    return lhs.sinceReferenceDate <= rhs.sinceReferenceDate
 }
 
 public func >= (lhs: Date, rhs: Date) -> Bool {
     
-    return lhs.timeIntervalSinceReferenceDate >= rhs.timeIntervalSinceReferenceDate
+    return lhs.sinceReferenceDate >= rhs.sinceReferenceDate
 }
 
 public func > (lhs: Date, rhs: Date) -> Bool {
     
-    return lhs.timeIntervalSinceReferenceDate > rhs.timeIntervalSinceReferenceDate
+    return lhs.sinceReferenceDate > rhs.sinceReferenceDate
 }
 
 public func - (lhs: Date, rhs: Date) -> TimeInterval {
     
-    return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+    return lhs.sinceReferenceDate - rhs.sinceReferenceDate
 }
 
 public func + (lhs: Date, rhs: TimeInterval) -> Date {
     
-    return Date(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate + rhs)
+    return Date(sinceReferenceDate: lhs.sinceReferenceDate + rhs)
 }
 
-public func += (inout lhs: Date, rhs: TimeInterval) {
+public func += (lhs: inout Date, rhs: TimeInterval) {
     
     lhs = lhs + rhs
 }
 
 public func - (lhs: Date, rhs: TimeInterval) -> Date {
     
-    return Date(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate - rhs)
+    return Date(sinceReferenceDate: lhs.sinceReferenceDate - rhs)
 }
 
-public func -= (inout lhs: Date, rhs: TimeInterval) {
+public func -= (lhs: inout Date, rhs: TimeInterval) {
     
     lhs = lhs - rhs
 }

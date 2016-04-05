@@ -22,9 +22,9 @@ public protocol SortDescriptorType {
 // MARK: - Functions
 
 /** Returns a sorted array of the collection as specified by the sort descriptor. */
-public func Sort<T: CollectionType, S: SortDescriptorType where S.SortedType == T.Generator.Element>(collection: T, sortDescriptor: S) -> [T.Generator.Element] {
+public func Sort<T: Collection, S: SortDescriptorType where S.SortedType == T.Iterator.Element>(collection: T, sortDescriptor: S) -> [T.Iterator.Element] {
     
-    return collection.sort { (first: T.Generator.Element, second: T.Generator.Element) -> Bool in
+    return collection.sorted { (first: T.Iterator.Element, second: T.Iterator.Element) -> Bool in
         
         let order = sortDescriptor.sort(first, second: second)
         
@@ -47,9 +47,9 @@ public func Sort<T: CollectionType, S: SortDescriptorType where S.SortedType == 
 
 /*
 /** Returns a sorted array if the collection sorted as specified by a given array of sort descriptors. */
-public func Sort<T: CollectionType, S: SortDescriptor where S.SortedType == T.Generator.Element>(collection: T, sortDescriptors: [S]) -> [T.Generator.Element] {
+public func Sort<T: CollectionType, S: SortDescriptor where S.SortedType == T.Iterator.Element>(collection: T, sortDescriptors: [S]) -> [T.Iterator.Element] {
     
-    var sortedArray = collection.map { (element: T.Generator.Element) -> T in }
+    var sortedArray = collection.map { (element: T.Iterator.Element) -> T in }
     
     for sortDescriptor in sortDescriptors {
         

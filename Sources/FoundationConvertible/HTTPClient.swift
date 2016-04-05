@@ -16,7 +16,7 @@ public extension HTTP {
     /// Loads HTTP requests
     public final class Client: URLClient {
         
-        public init(session: NSURLSession = NSURLSession.sharedSession()) {
+        public init(session: NSURLSession = NSURLSession.shared()) {
             
             self.session = session
         }
@@ -31,7 +31,7 @@ public extension HTTP {
             return try sendRequest(request, dataTask: &dataTask)
         }
         
-        public func sendRequest(request: HTTP.Request, inout dataTask: NSURLSessionDataTask?) throws -> HTTP.Response {
+        public func sendRequest(request: HTTP.Request, dataTask: inout NSURLSessionDataTask?) throws -> HTTP.Response {
             
             // build request... 
             
@@ -48,7 +48,7 @@ public extension HTTP {
             
             var urlResponse: NSHTTPURLResponse?
             
-            dataTask = self.session.dataTaskWithRequest(urlRequest) { (data: NSData?, response: NSURLResponse?, responseError: NSError?) -> Void in
+            dataTask = self.session.dataTask(with: urlRequest) { (data: NSData?, response: NSURLResponse?, responseError: NSError?) -> () in
                 
                 responseData = data
                 
@@ -57,6 +57,7 @@ public extension HTTP {
                 error = responseError
                 
                 dispatch_semaphore_signal(semaphore);
+                
             }
             
             dataTask!.resume()
@@ -86,7 +87,7 @@ public extension HTTP {
 
 public extension HTTP.Client {
     
-    public enum Error: ErrorType {
+    public enum Error: ErrorProtocol {
         
         /// The provided request was malformed.
         case BadRequest

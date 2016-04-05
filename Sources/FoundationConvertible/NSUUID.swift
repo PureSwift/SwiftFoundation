@@ -39,10 +39,10 @@ public extension NSUUID {
             
             let bufferType = UnsafeMutablePointer<UInt8>.self
             
-            return unsafeBitCast(valuePointer, bufferType)
+            return unsafeBitCast(valuePointer, to: bufferType)
         })
         
-        self.init(UUIDBytes: buffer)
+        self.init(uuidBytes: buffer)
     }
     
     var byteValue: uuid_t {
@@ -53,9 +53,9 @@ public extension NSUUID {
             
             let bufferType = UnsafeMutablePointer<UInt8>.self
             
-            let buffer = unsafeBitCast(valuePointer, bufferType)
+            let buffer = unsafeBitCast(valuePointer, to: bufferType)
             
-            self.getUUIDBytes(buffer)
+            self.getBytes(buffer)
         })
         
         return uuid
@@ -63,12 +63,12 @@ public extension NSUUID {
     
     var rawValue: String {
         
-        return UUIDString
+        return uuidString
     }
     
     convenience init?(rawValue: String) {
         
-        self.init(UUIDString: rawValue)
+        self.init(uuidString: rawValue)
     }
 }
 

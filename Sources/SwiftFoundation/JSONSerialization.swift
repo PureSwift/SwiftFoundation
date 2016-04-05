@@ -36,7 +36,7 @@ public extension JSON.Value {
         
         let stringPointer = json_object_to_json_string_ext(jsonObject, writingFlags)
         
-        let string = Swift.String.fromCString(stringPointer)!
+        let string = Swift.String(validatingUTF8: stringPointer)!
         
         return string
     }
@@ -46,7 +46,7 @@ public extension JSON.Value {
 
 private extension JSON.Value {
     
-    func toJSONObject() -> COpaquePointer {
+    func toJSONObject() -> OpaquePointer {
         
         switch self {
             
@@ -73,7 +73,7 @@ private extension JSON.Value {
             
             let jsonArray = json_object_new_array()
             
-            for (index, value) in arrayValue.enumerate() {
+            for (index, value) in arrayValue.enumerated() {
                 
                 let jsonValue = value.toJSONObject()
                 

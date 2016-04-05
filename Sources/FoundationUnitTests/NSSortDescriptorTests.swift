@@ -32,9 +32,9 @@ class NSSortDescriptorTests: XCTestCase {
             
             let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: ascending))
             
-            let foundationSortedItems = (items as NSArray).sortedArrayUsingDescriptors([NSSortDescriptor(key: nil, ascending: ascending)])
+            let foundationSortedItems = (items as NSArray).sortedArray(using: [NSSortDescriptor(key: nil, ascending: ascending)])
             
-            for (index, element) in sortedItems.enumerate() {
+            for (index, element) in sortedItems.enumerated() {
                 
                 let foundationElement = foundationSortedItems[index]
                 
@@ -69,9 +69,9 @@ class NSSortDescriptorTests: XCTestCase {
                 return first.compare(second)
             }))
             
-            let foundationSortedItems = (items as NSArray).sortedArrayUsingDescriptors([NSSortDescriptor(key: nil, ascending: ascending)])
+            let foundationSortedItems = (items as NSArray).sortedArray(using: [NSSortDescriptor(key: nil, ascending: ascending)])
             
-            for (index, element) in sortedItems.enumerate() {
+            for (index, element) in sortedItems.enumerated() {
                 
                 let foundationElement = foundationSortedItems[index]
                 

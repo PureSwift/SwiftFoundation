@@ -12,12 +12,7 @@ let package = Package(
             name: "UnitTests",
             dependencies: [.Target(name: "SwiftFoundation")]),
         Target(
-            name: "FoundationUnitTests",
-            dependencies: [.Target(name: "SwiftFoundation")]),
-        Target(
-            name: "FoundationConvertible",
-            dependencies: [.Target(name: "SwiftFoundation")]),
-        Target(
             name: "SwiftFoundation")
-    ]
+    ],
+    exclude: ["Xcode", "Carthage", "Sources/FoundationConvertible", "Sources/FoundationUnitTests"]
 )

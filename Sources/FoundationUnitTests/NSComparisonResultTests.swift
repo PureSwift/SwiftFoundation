@@ -23,7 +23,7 @@ class NSComparisonResultTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-
+    
     func testComparisonResult() {
         
         // number
@@ -50,7 +50,7 @@ class NSComparisonResultTests: XCTestCase {
         
         let foundationNow = NSDate()
         
-        let foundationLater = foundationNow.dateByAddingTimeInterval(0.5)
+        let foundationLater = foundationNow.addingTimeInterval(0.5)
         
         XCTAssert(now.compare(later) == Order(foundation: foundationNow.compare(foundationLater)))
         

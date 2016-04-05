@@ -12,7 +12,7 @@ import SwiftFoundation
 
 final class OrderTests: XCTestCase {
     
-    lazy var allTests: [(String, () throws -> ())] = [("testComparisonResult", self.testComparisonResult)]
+    static let allTests: [(String, OrderTests -> () throws -> Void)] = [("testComparisonResult", testComparisonResult)]
 
     func testComparisonResult() {
         

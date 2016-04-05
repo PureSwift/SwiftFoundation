@@ -17,10 +17,10 @@ import SwiftFoundation
 
 final class POSIXTimeTests: XCTestCase {
     
-    lazy var allTests: [(String, () throws -> ())] =
-        [("testGetTimeOfDay", self.testGetTimeOfDay),
-        ("testTimeVal", self.testTimeVal),
-        ("testTimeSpec", self.testTimeSpec)]
+    static let allTests: [(String, POSIXTimeTests -> () throws -> Void)] =
+        [("testGetTimeOfDay", testGetTimeOfDay),
+        ("testTimeVal", testTimeVal),
+        ("testTimeSpec", testTimeSpec)]
     
     func testGetTimeOfDay() {
                 
@@ -35,20 +35,20 @@ final class POSIXTimeTests: XCTestCase {
         
         let date = Date()
         
-        let time = timeval(timeInterval: date.timeIntervalSince1970)
+        let time = timeval(timeInterval: date.since1970)
         
-        XCTAssert(Int(time.timeIntervalValue) == Int(date.timeIntervalSince1970), "TimeVal derived interval: \(time.timeIntervalValue) must equal Date's timeIntervalSince1970 \(date.timeIntervalSince1970)")
+        XCTAssert(Int(time.timeIntervalValue) == Int(date.since1970), "TimeVal derived interval: \(time.timeIntervalValue) must equal Date's timeIntervalSince1970 \(date.since1970)")
     }
     
     func testTimeSpec() {
         
         let date = Date()
         
-        let time = timespec(timeInterval: date.timeIntervalSince1970)
+        let time = timespec(timeInterval: date.since1970)
         
         #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
         
-            XCTAssert(time.timeIntervalValue == date.timeIntervalSince1970, "timespec: \(time.timeIntervalValue) == Date: \(date)")
+            XCTAssert(time.timeIntervalValue == date.since1970, "timespec: \(time.timeIntervalValue) == Date: \(date)")
         
         #elseif os(Linux)
             

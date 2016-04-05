@@ -17,6 +17,6 @@ public extension UInt8 {
             string = "0" + string
         }
         
-        return string.uppercaseString
+        return string.uppercased()
     }
 }

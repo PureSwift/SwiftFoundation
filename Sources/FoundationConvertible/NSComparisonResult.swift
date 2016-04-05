@@ -18,9 +18,9 @@ extension Order: FoundationConvertible {
         
         switch foundation {
             
-        case .OrderedAscending:     self = .Ascending
-        case .OrderedDescending:    self = .Descending
-        case .OrderedSame:          self = .Same
+        case .orderedAscending:     self = .Ascending
+        case .orderedDescending:    self = .Descending
+        case .orderedSame:          self = .Same
         }
     }
     
@@ -28,9 +28,9 @@ extension Order: FoundationConvertible {
         
         switch self {
             
-        case .Ascending:     return .OrderedAscending
-        case .Descending:    return .OrderedDescending
-        case .Same:          return .OrderedSame
+        case .Ascending:     return .orderedAscending
+        case .Descending:    return .orderedDescending
+        case .Same:          return .orderedSame
         }
     }
 }
