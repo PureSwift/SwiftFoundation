@@ -39,8 +39,8 @@ public extension stat {
     /// Other routines, like ```mmap```, may or may not update ```st_atime```.
     var lastAccessDate: Date {
         
-        get { return Date(timeIntervalSince1970: st_atimespec.timeIntervalValue) }
-        set { st_atimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
+        get { return Date(since1970: st_atimespec.timeIntervalValue) }
+        set { st_atimespec = timespec(timeInterval: lastDataModificationDate.since1970) }
     }
     
     /// Date of last data modification. Date of ```st_mtimespec``` or ```st_mtime```.
@@ -50,8 +50,8 @@ public extension stat {
     /// The ```st_mtime``` field is not changed for changes in owner, group, hard link count, or mode.
     var lastDataModificationDate: Date {
         
-        get { return Date(timeIntervalSince1970: st_mtimespec.timeIntervalValue) }
-        set { st_mtimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
+        get { return Date(since1970: st_mtimespec.timeIntervalValue) }
+        set { st_mtimespec = timespec(timeInterval: lastDataModificationDate.since1970) }
     }
     
     /// Date of last status change. Date of ```st_ctimespec``` or ```st_ctime```.
@@ -59,15 +59,15 @@ public extension stat {
     /// The field ```st_ctime``` is changed by writing or by setting inode information (i.e., owner, group, link count, mode, etc.).
     var lastStatusChangeDate: Date {
         
-        get { return Date(timeIntervalSince1970: st_ctimespec.timeIntervalValue) }
-        set { st_ctimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
+        get { return Date(since1970: st_ctimespec.timeIntervalValue) }
+        set { st_ctimespec = timespec(timeInterval: lastDataModificationDate.since1970) }
     }
     
     /// Date file was created. Date of ```st_birthtimespec``` or ```st_birthtime```.
     var creationDate: Date {
         
-        get { return Date(timeIntervalSince1970: st_birthtimespec.timeIntervalValue) }
-        set { st_birthtimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
+        get { return Date(since1970: st_birthtimespec.timeIntervalValue) }
+        set { st_birthtimespec = timespec(timeInterval: lastDataModificationDate.since1970) }
     }
     
     var fileSize: Int {

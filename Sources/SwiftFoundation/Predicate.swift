@@ -17,9 +17,9 @@ public protocol Predicate {
 
 public extension Collection {
     
-    func filter(predicate: Predicate) -> [Self.Generator.Element] {
+    func filter(predicate: Predicate) -> [Self.Iterator.Element] {
         
-        return self.filter({ (element: Self.Generator.Element) -> Bool in
+        return self.filter({ (element: Self.Iterator.Element) -> Bool in
             
             return predicate.evaluate(element)
         })
@@ -27,11 +27,11 @@ public extension Collection {
 }
 
 /*
-public extension SequenceType {
+public extension Sequence {
     
     public func contains(predicate: Predicate -> Bool) -> Bool {
         
-        return self.contains({ (element: Self.Generator.Element) -> Bool in
+        return self.contains({ (element: Self.Iterator.Element) -> Bool in
             
             return predicate.evaluate(element)
         })

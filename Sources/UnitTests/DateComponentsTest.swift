@@ -20,7 +20,7 @@ final class DateComponentsTest: XCTestCase {
         dateComponents.month = 10
         dateComponents.dayOfMonth = 10
         
-        let assertionDate = Date(timeIntervalSince1970: 560822400)
+        let assertionDate = Date(since1970: 560822400)
         let madeDate = dateComponents.date
         
         print(assertionDate, madeDate)

@@ -14,9 +14,7 @@ public extension String {
         
         var string = ""
         
-        fatalError()
-        /*
-        var generator = data.byteValue.generate()
+        var generator = data.byteValue.makeIterator()
         
         var encoding = UTF8()
                 
@@ -41,7 +39,7 @@ public extension String {
             
         } while true
         
-        return nil*/
+        return nil
     }
     
     func toUTF8Data() -> Data {

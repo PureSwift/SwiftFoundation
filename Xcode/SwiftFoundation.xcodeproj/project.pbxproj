@@ -12,9 +12,6 @@
 		6E04074E1CB3E07500BE3A79 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E04074D1CB3E07500BE3A79 /* Thread.swift */; };
 		6E04074F1CB3E2E400BE3A79 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E04074D1CB3E07500BE3A79 /* Thread.swift */; };
 		6E0407501CB3E2E500BE3A79 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E04074D1CB3E07500BE3A79 /* Thread.swift */; };
-		6E0407521CB3EE1C00BE3A79 /* BackwardsCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0407511CB3EE1C00BE3A79 /* BackwardsCompatibility.swift */; };
-		6E0407531CB3EE1C00BE3A79 /* BackwardsCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0407511CB3EE1C00BE3A79 /* BackwardsCompatibility.swift */; };
-		6E0407541CB3EE1C00BE3A79 /* BackwardsCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0407511CB3EE1C00BE3A79 /* BackwardsCompatibility.swift */; };
 		6E041D3D1CB404CD004E080B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B461C20F6EB00B2C995 /* String.swift */; };
 		6E08F85D1BBE7DE900548B1E /* SwiftFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE78F6C1B96774100CDEF17 /* SwiftFoundation.framework */; };
 		6E1ACD4B1C435822005775FD /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1ACD4A1C435822005775FD /* DataTests.swift */; };
@@ -303,7 +300,6 @@
 		1AE78F6C1B96774100CDEF17 /* SwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AE78FC41B96774300CDEF17 /* SwiftFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E04074D1CB3E07500BE3A79 /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
-		6E0407511CB3EE1C00BE3A79 /* BackwardsCompatibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackwardsCompatibility.swift; sourceTree = "<group>"; };
 		6E08F8571BBE7B8800548B1E /* SwiftFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E1ACD4A1C435822005775FD /* DataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
 		6E2C2B0D1C20F6EB00B2C995 /* FoundationConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationConvertible.swift; sourceTree = "<group>"; };
@@ -587,7 +583,6 @@
 				6E2C2B461C20F6EB00B2C995 /* String.swift */,
 				6E2C2B331C20F6EB00B2C995 /* Integer.swift */,
 				6EFF9A1A1CAD0C6B00917CB3 /* Range.swift */,
-				6E0407511CB3EE1C00BE3A79 /* BackwardsCompatibility.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -898,7 +893,6 @@
 				6E04074F1CB3E2E400BE3A79 /* Thread.swift in Sources */,
 				6E2C2BD21C20F76600B2C995 /* RawRepresentable.swift in Sources */,
 				6E2C2BD91C20F76600B2C995 /* String.swift in Sources */,
-				6E0407531CB3EE1C00BE3A79 /* BackwardsCompatibility.swift in Sources */,
 				6E2C2BCE1C20F76600B2C995 /* POSIXRegularExpression.swift in Sources */,
 				6E2C2BE01C20F76600B2C995 /* URLResponse.swift in Sources */,
 				6E2C2BC61C20F76600B2C995 /* Integer.swift in Sources */,
@@ -972,7 +966,6 @@
 				6E0407501CB3E2E500BE3A79 /* Thread.swift in Sources */,
 				6E2C2B9E1C20F76600B2C995 /* RawRepresentable.swift in Sources */,
 				6E2C2BA51C20F76600B2C995 /* String.swift in Sources */,
-				6E0407541CB3EE1C00BE3A79 /* BackwardsCompatibility.swift in Sources */,
 				6E2C2B9A1C20F76600B2C995 /* POSIXRegularExpression.swift in Sources */,
 				6E2C2BAC1C20F76600B2C995 /* URLResponse.swift in Sources */,
 				6E2C2B921C20F76600B2C995 /* Integer.swift in Sources */,
@@ -1089,7 +1082,6 @@
 				6E2C2C031C20F76700B2C995 /* POSIXTime.swift in Sources */,
 				6E2C2B6D1C20F6F700B2C995 /* NSData.swift in Sources */,
 				6E2C2B6A1C20F6F700B2C995 /* FoundationConvertible.swift in Sources */,
-				6E0407521CB3EE1C00BE3A79 /* BackwardsCompatibility.swift in Sources */,
 				6E2C2BF31C20F76700B2C995 /* Formatter.swift in Sources */,
 				6E2C2C121C20F76700B2C995 /* URLProtocol.swift in Sources */,
 				6E2C2BFC1C20F76700B2C995 /* JSONExtensions.swift in Sources */,

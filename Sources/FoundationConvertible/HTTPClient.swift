@@ -16,15 +16,10 @@ public extension HTTP {
     /// Loads HTTP requests
     public final class Client: URLClient {
         
-        #if swift(>=3.0)
         public init(session: NSURLSession = NSURLSession.shared()) {
+            
             self.session = session
         }
-        #else
-        public init(session: NSURLSession = NSURLSession.sharedSession()) {
-            self.session = session
-        }
-        #endif
         
         /// The backing ```NSURLSession```.
         public let session: NSURLSession
@@ -36,7 +31,7 @@ public extension HTTP {
             return try sendRequest(request, dataTask: &dataTask)
         }
         
-        public func sendRequest(request: HTTP.Request, inout dataTask: NSURLSessionDataTask?) throws -> HTTP.Response {
+        public func sendRequest(request: HTTP.Request, dataTask: inout NSURLSessionDataTask?) throws -> HTTP.Response {
             
             // build request... 
             
@@ -53,8 +48,6 @@ public extension HTTP {
             
             var urlResponse: NSHTTPURLResponse?
             
-            #if swift(>=3.0)
-                
             dataTask = self.session.dataTask(with: urlRequest) { (data: NSData?, response: NSURLResponse?, responseError: NSError?) -> () in
                 
                 responseData = data
@@ -66,22 +59,6 @@ public extension HTTP {
                 dispatch_semaphore_signal(semaphore);
                 
             }
-                
-            #else
-                
-            dataTask = self.session.dataTaskWithRequest(urlRequest) { (data: NSData?, response: NSURLResponse?, responseError: NSError?) -> () in
-                
-                responseData = data
-                
-                urlResponse = response as? NSHTTPURLResponse
-                
-                error = responseError
-                
-                dispatch_semaphore_signal(semaphore);
-                
-            }
-            
-            #endif
             
             dataTask!.resume()
             

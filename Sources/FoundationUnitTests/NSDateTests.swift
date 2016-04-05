@@ -24,7 +24,7 @@ class DateTests: XCTestCase {
         
         let timeIntervalSinceReferenceDate = NSDate.timeIntervalSinceReferenceDate()
         
-        date = Date(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate)
+        date = Date(sinceReferenceDate: timeIntervalSinceReferenceDate)
         
         foundationDate = NSDate(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate)
     }
@@ -44,12 +44,12 @@ class DateTests: XCTestCase {
         
         let timeIntervalSinceReferenceDate = NSDate.timeIntervalSinceReferenceDate()
         
-        let date = Date(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate)
+        let date = Date(sinceReferenceDate: timeIntervalSinceReferenceDate)
         
         let FoundationDate = NSDate(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate)
         
-        XCTAssert(date.timeIntervalSinceReferenceDate == FoundationDate.timeIntervalSinceReferenceDate,
-            "Date's internal values must be equal. (\(date.timeIntervalSinceReferenceDate) != \(FoundationDate.timeIntervalSinceReferenceDate))")
+        XCTAssert(date.sinceReferenceDate == FoundationDate.timeIntervalSinceReferenceDate,
+            "Date's internal values must be equal. (\(date.sinceReferenceDate) != \(FoundationDate.timeIntervalSinceReferenceDate))")
     }
     
     func testTimeIntervalSinceReferenceDateSecondsPrecision() {
@@ -76,13 +76,13 @@ class DateTests: XCTestCase {
         
         let time2 = NSDate.timeIntervalSinceReferenceDate()
         
-        let date2 = Date(timeIntervalSinceReferenceDate: time2)
+        let date2 = Date(sinceReferenceDate: time2)
         
         let foundationDate2 = NSDate(timeIntervalSinceReferenceDate: time2)
         
         let intervalSinceDate = date.timeIntervalSinceDate(date2)
         
-        let foundationIntervalSinceDate = foundationDate.timeIntervalSinceDate(foundationDate2)
+        let foundationIntervalSinceDate = foundationDate.timeInterval(since: foundationDate2)
         
         XCTAssert(intervalSinceDate == foundationIntervalSinceDate)
     }
@@ -91,7 +91,7 @@ class DateTests: XCTestCase {
         
         let date = Date()
         
-        let date2 = Date(timeIntervalSinceReferenceDate: date.timeIntervalSinceReferenceDate)
+        let date2 = Date(sinceReferenceDate: date.sinceReferenceDate)
         
         let foundationDate = NSDate()
         
@@ -111,27 +111,27 @@ class DateTests: XCTestCase {
         
         let date = Date()
         
-        let foundationDate = NSDate(timeIntervalSinceReferenceDate: date.timeIntervalSinceReferenceDate)
+        let foundationDate = NSDate(timeIntervalSinceReferenceDate: date.sinceReferenceDate)
         
-        XCTAssert(date.timeIntervalSince1970 == foundationDate.timeIntervalSince1970)
+        XCTAssert(date.since1970 == foundationDate.timeIntervalSince1970)
     }
     
     func testCreateWithTimeIntervalSince1970() {
         
         let date = Date()
         
-        XCTAssert(Date(timeIntervalSince1970: date.timeIntervalSince1970) == date, "Date should be the same as original")
+        XCTAssert(Date(since1970: date.since1970) == date, "Date should be the same as original")
     }
     
     func testSetWithTimeIntervalSince1970() {
         
         var date = Date()
         
-        let foundationDate = NSDate(timeIntervalSinceReferenceDate: date.timeIntervalSinceReferenceDate)
+        let foundationDate = NSDate(timeIntervalSinceReferenceDate: date.sinceReferenceDate)
         
-        date.timeIntervalSince1970 = foundationDate.timeIntervalSince1970
+        date.since1970 = foundationDate.timeIntervalSince1970
         
-        XCTAssert(date.timeIntervalSinceReferenceDate == foundationDate.timeIntervalSinceReferenceDate)
+        XCTAssert(date.sinceReferenceDate == foundationDate.timeIntervalSinceReferenceDate)
     }
     
     /*
@@ -153,7 +153,7 @@ class DateTests: XCTestCase {
     
     func testCreationPerformance() {
         
-        self.measureBlock() {
+        self.measure {
             
             for _ in 0...1000000 {
                 
@@ -164,7 +164,7 @@ class DateTests: XCTestCase {
     
     func testFoundationCreationPerformance() {
         
-        self.measureBlock() {
+        self.measure {
             
             for _ in 0...1000000 {
                 
