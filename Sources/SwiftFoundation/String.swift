@@ -14,6 +14,8 @@ public extension String {
         
         var string = ""
         
+        fatalError()
+        /*
         var generator = data.byteValue.generate()
         
         var encoding = UTF8()
@@ -22,24 +24,24 @@ public extension String {
         
             switch encoding.decode(&generator) {
                 
-            case .Result (let scalar):
+            case let .scalarValue(scalar):
                 
                 string.append(scalar)
                 
-            case .EmptyInput:
+            case .emptyInput:
                 
                 self = string
                 
                 return
                 
-            case .Error:
+            case .error:
                 
                 return nil
             }
             
         } while true
         
-        return nil
+        return nil*/
     }
     
     func toUTF8Data() -> Data {

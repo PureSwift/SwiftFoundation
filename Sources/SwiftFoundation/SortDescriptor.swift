@@ -22,7 +22,7 @@ public protocol SortDescriptorType {
 // MARK: - Functions
 
 /** Returns a sorted array of the collection as specified by the sort descriptor. */
-public func Sort<T: CollectionType, S: SortDescriptorType where S.SortedType == T.Generator.Element>(collection: T, sortDescriptor: S) -> [T.Generator.Element] {
+public func Sort<T: Collection, S: SortDescriptorType where S.SortedType == T.Generator.Element>(collection: T, sortDescriptor: S) -> [T.Generator.Element] {
     
     return collection.sort { (first: T.Generator.Element, second: T.Generator.Element) -> Bool in
         

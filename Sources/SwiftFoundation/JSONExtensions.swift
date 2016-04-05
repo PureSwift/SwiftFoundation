@@ -74,7 +74,7 @@ extension Bool: JSONDecodable {
 
 // MARK: Encodable
 
-public extension CollectionType where Generator.Element: JSONEncodable {
+public extension Collection where Iterator.Element: JSONEncodable {
     
     func toJSON() -> JSON.Value {
         

@@ -115,7 +115,7 @@ extension JSON.Value: FoundationConvertible {
                 self = JSON.Value.Number(JSON.Number.Boolean(value as Bool))
             }
                 
-            else if Swift.String.fromCString(value.objCType)! == intObjCType {
+            else if Swift.String(validatingUTF8: value.objCType)! == intObjCType {
                 
                 self = JSON.Value.Number(.Integer(Int(value)))
             }
@@ -204,19 +204,19 @@ extension JSON.Value: FoundationConvertible {
 
 private let trueNumber = NSNumber(bool: true)
 private let falseNumber = NSNumber(bool: false)
-private let trueObjCType = String.fromCString(trueNumber.objCType)
-private let falseObjCType = String.fromCString(falseNumber.objCType)
+private let trueObjCType = String(validatingUTF8: trueNumber.objCType)
+private let falseObjCType = String(validatingUTF8: falseNumber.objCType)
 
 private let intNumber = NSNumber(integer: 1)
-private let intObjCType = String.fromCString(intNumber.objCType)!
+private let intObjCType = String(validatingUTF8: intNumber.objCType)!
 
 
 extension NSNumber {
     var isBool:Bool {
         get {
-            let objCType = String.fromCString(self.objCType)
-            if (self.compare(trueNumber) == NSComparisonResult.OrderedSame && objCType == trueObjCType)
-                || (self.compare(falseNumber) == NSComparisonResult.OrderedSame && objCType == falseObjCType){
+            let objCType = String(validatingUTF8: self.objCType)
+            if (self.compare(trueNumber) == NSComparisonResult.orderedSame && objCType == trueObjCType)
+                || (self.compare(falseNumber) == NSComparisonResult.orderedSame && objCType == falseObjCType){
                     return true
             } else {
                 return false

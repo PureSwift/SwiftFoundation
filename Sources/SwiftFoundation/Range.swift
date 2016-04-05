@@ -6,7 +6,7 @@
 //  Copyright © 2016 PureSwift. All rights reserved.
 //
 
-public extension Range where Element: IntegerType {
+public extension Range where Element: Integer {
     
     func isSubset(other: Range) -> Bool {
         

@@ -25,7 +25,11 @@ public final class Thread {
         
         let holder = Unmanaged.passRetained(Closure(closure: closure))
         
-        let pointer = UnsafeMutablePointer<Void>(holder.toOpaque())
+        #if swift(>=3.0)
+            let pointer = UnsafeMutablePointer<Void>(OpaquePointer(bitPattern: holder))
+        #else
+            let pointer = UnsafeMutablePointer<Void>(holder.toOpaque())
+        #endif
         
         #if os(Linux)
             var internalThread: pthread_t = 0
@@ -69,7 +73,7 @@ public final class Thread {
 
 private func ThreadPrivateMain(arg: UnsafeMutablePointer<Void>) -> UnsafeMutablePointer<Void> {
     
-    let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(COpaquePointer(arg))
+    let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(OpaquePointer(arg))
     
     unmanaged.takeUnretainedValue().closure()
     

@@ -88,7 +88,7 @@ public struct URL: CustomStringConvertible {
             
             stringValue += "?"
             
-            for (index, queryItem) in query.enumerate() {
+            for (index, queryItem) in query.enumerated() {
                 
                 let (name, value) = queryItem
                 
@@ -148,7 +148,7 @@ public struct URL: CustomStringConvertible {
             
             var stringValue = ""
             
-            for (index, queryItem) in query.enumerate() {
+            for (index, queryItem) in query.enumerated() {
                 
                 let (name, value) = queryItem
                 

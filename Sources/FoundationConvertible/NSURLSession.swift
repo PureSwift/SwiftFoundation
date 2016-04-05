@@ -24,18 +24,18 @@ public extension NSMutableURLRequest {
         
         guard let url = NSURL(string: request.URL) else { return nil }
         
-        self.URL = url
+        self.url = url
         
         self.timeoutInterval = request.timeoutInterval
         
         if let data = request.body {
             
-            self.HTTPBody = data.toFoundation()
+            self.httpBody = data.toFoundation()
         }
         
         self.allHTTPHeaderFields = request.headers
         
-        self.HTTPMethod = request.method.rawValue
+        self.httpMethod = request.method.rawValue
     }
 }
 

@@ -15,7 +15,7 @@ public protocol Predicate {
     func evaluate<T>(object: T) -> Bool
 }
 
-public extension CollectionType {
+public extension Collection {
     
     func filter(predicate: Predicate) -> [Self.Generator.Element] {
         

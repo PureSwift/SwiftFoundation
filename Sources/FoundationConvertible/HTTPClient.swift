@@ -16,10 +16,15 @@ public extension HTTP {
     /// Loads HTTP requests
     public final class Client: URLClient {
         
-        public init(session: NSURLSession = NSURLSession.sharedSession()) {
-            
+        #if swift(>=3.0)
+        public init(session: NSURLSession = NSURLSession.shared()) {
             self.session = session
         }
+        #else
+        public init(session: NSURLSession = NSURLSession.sharedSession()) {
+            self.session = session
+        }
+        #endif
         
         /// The backing ```NSURLSession```.
         public let session: NSURLSession
@@ -48,7 +53,9 @@ public extension HTTP {
             
             var urlResponse: NSHTTPURLResponse?
             
-            dataTask = self.session.dataTaskWithRequest(urlRequest) { (data: NSData?, response: NSURLResponse?, responseError: NSError?) -> Void in
+            #if swift(>=3.0)
+                
+            dataTask = self.session.dataTask(with: urlRequest) { (data: NSData?, response: NSURLResponse?, responseError: NSError?) -> () in
                 
                 responseData = data
                 
@@ -57,7 +64,24 @@ public extension HTTP {
                 error = responseError
                 
                 dispatch_semaphore_signal(semaphore);
+                
             }
+                
+            #else
+                
+            dataTask = self.session.dataTaskWithRequest(urlRequest) { (data: NSData?, response: NSURLResponse?, responseError: NSError?) -> () in
+                
+                responseData = data
+                
+                urlResponse = response as? NSHTTPURLResponse
+                
+                error = responseError
+                
+                dispatch_semaphore_signal(semaphore);
+                
+            }
+            
+            #endif
             
             dataTask!.resume()
             
@@ -86,7 +110,7 @@ public extension HTTP {
 
 public extension HTTP.Client {
     
-    public enum Error: ErrorType {
+    public enum Error: ErrorProtocol {
         
         /// The provided request was malformed.
         case BadRequest

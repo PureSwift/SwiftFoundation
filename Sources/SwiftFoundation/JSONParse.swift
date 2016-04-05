@@ -16,9 +16,9 @@ public extension JSON.Value {
     
     public init?(string: Swift.String) {
         
-        let tokenerError = UnsafeMutablePointer<json_tokener_error>.alloc(1)
+        let tokenerError = UnsafeMutablePointer<json_tokener_error>.init(allocatingCapacity: 1)
         
-        defer { tokenerError.dealloc(1) }
+        defer { tokenerError.deallocateCapacity(1) }
         
         let jsonObject = json_tokener_parse_verbose(string, tokenerError)
         
@@ -27,14 +27,18 @@ public extension JSON.Value {
         // could not parse
         guard tokenerError != nil else { return nil }
         
+        #if swift(>=3.0)
+        self = self.dynamicType.init(jsonObject: jsonObject)
+        #else
         self.init(jsonObject: jsonObject)
+        #endif
     }
 }
 
 private extension JSON.Value {
     
     /// Create a JSON value from a ```json_object``` pointer created by the **json-c** library.
-    init(jsonObject: COpaquePointer) {
+    init(jsonObject: OpaquePointer) {
         let type = json_object_get_type(jsonObject)
         
         switch type {
@@ -45,7 +49,7 @@ private extension JSON.Value {
             
             let stringPointer = json_object_get_string(jsonObject)
             
-            let string = Swift.String.fromCString(stringPointer) ?? ""
+            let string = Swift.String(validatingUTF8: stringPointer) ?? ""
             
             self = JSON.Value.String(string)
             
@@ -100,21 +104,21 @@ private extension JSON.Value {
             
             var jsonDictionary = [StringValue: JSONValue]()
             
-            var entry = hashTable.memory.head
+            var entry = hashTable.pointee.head
             
             while entry != nil {
             
-                let keyPointer = entry.memory.k
+                let keyPointer = entry.pointee.k
                 
-                let valuePointer = entry.memory.v
+                let valuePointer = entry.pointee.v
                 
-                let key = Swift.String.fromCString(unsafeBitCast(keyPointer, UnsafeMutablePointer<CChar>.self))!
+                let key = Swift.String.init(validatingUTF8: unsafeBitCast(keyPointer, to: UnsafeMutablePointer<CChar>.self))!
                 
-                let value = json_object_get(unsafeBitCast(valuePointer, COpaquePointer.self))
+                let value = json_object_get(unsafeBitCast(valuePointer, to: OpaquePointer.self))
                 
                 jsonDictionary[key] = JSON.Value(jsonObject: value)
                 
-                entry = entry.memory.next
+                entry = entry.pointee.next
             }
             
             self = .Object(jsonDictionary)

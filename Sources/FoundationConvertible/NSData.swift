@@ -21,7 +21,7 @@ extension Data: FoundationConvertible {
         
         let count = foundation.length / sizeof(UInt8)
         
-        var bytesArray = [UInt8](count: count, repeatedValue: 0)
+        var bytesArray = [UInt8] (repeating: 0, count: count)
         
         foundation.getBytes(&bytesArray, length:count * sizeof(UInt8))
         
