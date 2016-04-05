@@ -15,7 +15,8 @@ final class UUIDTests: XCTestCase {
     lazy var allTests: [(String, () throws -> ())] =
         [("testCreateRandomUUID", self.testCreateRandomUUID),
         ("testUUIDString", self.testUUIDString),
-        ("testCreateFromString", self.testCreateFromString)]
+        ("testCreateFromString", self.testCreateFromString),
+        ("testBytes", self.testBytes)]
     
     // MARK: - Functional Tests
 
@@ -44,5 +45,17 @@ final class UUIDTests: XCTestCase {
         XCTAssert((UUID(rawValue: stringValue) != nil), "Could not create UUID with string \"\(stringValue)\"")
         
         XCTAssert((UUID(rawValue: "BadInput") == nil), "UUID should not be created")
+    }
+    
+    func testBytes() {
+        
+        let expectedData = Data(byteValue: [91, 254, 177, 148, 104, 196, 72, 232, 143, 67, 60, 88, 99, 100, 203, 111])
+        
+        let stringValue = "5BFEB194-68C4-48E8-8F43-3C586364CB6F"
+        
+        guard let uuid = UUID(rawValue: stringValue)
+            else { XCTFail("Could not create UUID from " + stringValue); return }
+        
+        XCTAssert(uuid.toData() == expectedData, "Unexpected UUID data \(uuid.toData().byteValue)")
     }
 }
