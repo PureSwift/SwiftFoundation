@@ -145,7 +145,7 @@ public extension String {
     }
     
     func substring(range: Range<Int>) -> String? {
-        let indexRange = utf8.startIndex.advancedBy(range.startIndex) ..< utf8.startIndex.advancedBy(range.endIndex)
+        let indexRange = utf8.startIndex.advanced(by: range.startIndex) ..< utf8.startIndex.advanced(by: range.endIndex)
         return String(utf8[indexRange])
     }
 }

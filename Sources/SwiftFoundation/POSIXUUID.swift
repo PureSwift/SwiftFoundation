@@ -29,7 +29,7 @@ public func POSIXUUIDCreateRandom() -> uuid_t {
         
         let bufferType = UnsafeMutablePointer<UInt8>.self
         
-        let buffer = unsafeBitCast(valuePointer, bufferType)
+        let buffer = unsafeBitCast(valuePointer, to: bufferType)
         
         uuid_generate(buffer)
     })
@@ -52,11 +52,11 @@ public func POSIXUUIDConvertToUUIDString(uuid: uuid_t) -> POSIXUUIDStringType {
     
     withUnsafeMutablePointers(&uuidCopy, &uuidString) { (uuidPointer: UnsafeMutablePointer<uuid_t>, uuidStringPointer: UnsafeMutablePointer<POSIXUUIDStringType>) -> Void in
         
-        let stringBuffer = unsafeBitCast(uuidStringPointer, UnsafeMutablePointer<Int8>.self)
+        let stringBuffer = unsafeBitCast(uuidStringPointer, to: UnsafeMutablePointer<Int8>.self)
         
-        let uuidBuffer = unsafeBitCast(uuidPointer, UnsafeMutablePointer<UInt8>.self)
+        let uuidBuffer = unsafeBitCast(uuidPointer, to: UnsafeMutablePointer<UInt8>.self)
         
-        uuid_unparse(unsafeBitCast(uuidBuffer, UnsafePointer<UInt8>.self), stringBuffer)
+        uuid_unparse(unsafeBitCast(uuidBuffer, to: UnsafePointer<UInt8>.self), stringBuffer)
     }
     
     return uuidString
@@ -70,21 +70,21 @@ public func POSIXUUIDStringConvertToString(uuidString: POSIXUUIDStringType) -> S
         
         let bufferType = UnsafeMutablePointer<CChar>.self
         
-        let buffer = unsafeBitCast(valuePointer, bufferType)
+        let buffer = unsafeBitCast(valuePointer, to: bufferType)
         
-        return String.fromCString(unsafeBitCast(buffer, UnsafePointer<CChar>.self))!
+        return String(validatingUTF8: unsafeBitCast(buffer, to: UnsafePointer<CChar>.self))!
     })
 }
 
 public func POSIXUUIDConvertStringToUUID(string: String) -> uuid_t? {
     
-    let uuidPointer = UnsafeMutablePointer<uuid_t>.alloc(1)
-    defer { uuidPointer.dealloc(1) }
+    let uuidPointer = UnsafeMutablePointer<uuid_t>(allocatingCapacity: 1)
+    defer { uuidPointer.deallocateCapacity(1) }
     
-    guard uuid_parse(string, unsafeBitCast(uuidPointer, UnsafeMutablePointer<UInt8>.self)) != -1 else {
+    guard uuid_parse(string, unsafeBitCast(uuidPointer, to: UnsafeMutablePointer<UInt8>.self)) != -1 else {
         
         return nil
     }
     
-    return uuidPointer.memory
+    return uuidPointer.pointee
 }

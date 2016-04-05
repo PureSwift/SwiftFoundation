@@ -46,11 +46,11 @@ public struct DateComponents {
     }
     
     public init(fromDate date: Date) {
-        self.init(timeInterval: date.timeIntervalSince1970)
+        self.init(timeInterval: date.since1970)
     }
     
     public var date: Date {
-        return Date(timeIntervalSince1970: timeInterval)
+        return Date(since1970: timeInterval)
     }
     
     public mutating func setValue(value: Int32, forComponent component: Component) {

@@ -25,9 +25,9 @@ final class DataTests: XCTestCase {
         
         let dataLength = testData.byteValue.count
         
-        let dataPointer = UnsafeMutablePointer<Byte>.alloc(dataLength)
+        let dataPointer = UnsafeMutablePointer<Byte>(allocatingCapacity: dataLength)
         
-        defer { dataPointer.dealloc(dataLength) }
+        defer { dataPointer.deallocateCapacity(dataLength) }
         
         memcpy(&testData.byteValue, dataPointer, dataLength)
                 

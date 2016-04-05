@@ -42,7 +42,7 @@ class NSUUIDTests: XCTestCase {
         
         let uuid = UUID(byteValue: foundationUUID.byteValue)
         
-        XCTAssert(foundationUUID.UUIDString == uuid.rawValue)
+        XCTAssert(foundationUUID.uuidString == uuid.rawValue)
     }
     
     func testUUIDValidBytes() {
@@ -51,12 +51,12 @@ class NSUUIDTests: XCTestCase {
         
         let foundationUUID = NSUUID(byteValue: uuid.byteValue)
         
-        XCTAssert(uuid.rawValue == foundationUUID.UUIDString)
+        XCTAssert(uuid.rawValue == foundationUUID.uuidString)
     }
     
     func testCreateFromString() {
         
-        let stringValue = NSUUID().UUIDString
+        let stringValue = NSUUID().uuidString
         
         XCTAssert((UUID(rawValue: stringValue) != nil), "Could not create UUID with string \"\(stringValue)\"")
         
@@ -67,7 +67,7 @@ class NSUUIDTests: XCTestCase {
     
     func testCreationPerformance() {
         
-        self.measureBlock() {
+        self.measure {
             
             for _ in 0...1000000 {
                 
@@ -78,7 +78,7 @@ class NSUUIDTests: XCTestCase {
     
     func testFoundationCreationPerformance() {
         
-        self.measureBlock() {
+        self.measure {
             
             for _ in 0...1000000 {
                 
@@ -91,7 +91,7 @@ class NSUUIDTests: XCTestCase {
         
         let uuid = UUID()
         
-        self.measureBlock { () -> Void in
+        self.measure {
             
             for _ in 0...10000 {
                 
@@ -104,11 +104,11 @@ class NSUUIDTests: XCTestCase {
         
         let uuid = NSUUID()
         
-        self.measureBlock { () -> Void in
+        self.measure {
             
             for _ in 0...10000 {
                 
-                _ = uuid.UUIDString
+                _ = uuid.uuidString
             }
         }
     }

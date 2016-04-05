@@ -29,7 +29,7 @@ final class RegularExpressionTests: XCTestCase {
         
         let stringRange = NSRange(match.range)
         
-        let matchString = string.toFoundation().substringWithRange(stringRange)
+        let matchString = string.toFoundation().substring(with: stringRange)
         
         XCTAssert(matchString == "Welcome")
     }
@@ -47,7 +47,7 @@ final class RegularExpressionTests: XCTestCase {
             
             let stringRange = NSRange(match.range)
             
-            let matchString = string.toFoundation().substringWithRange(stringRange)
+            let matchString = string.toFoundation().substring(with: stringRange)
             
             XCTAssert(matchString == "aaa")
         }
@@ -64,7 +64,7 @@ final class RegularExpressionTests: XCTestCase {
             
             let stringRange = NSRange(match.range)
             
-            let matchString = string.toFoundation().substringWithRange(stringRange)
+            let matchString = string.toFoundation().substring(with: stringRange)
             
             XCTAssert(matchString == "Bird", matchString)
         }
@@ -81,7 +81,7 @@ final class RegularExpressionTests: XCTestCase {
         
         let stringRange = NSRange(match.range)
         
-        let matchString = string.toFoundation().substringWithRange(stringRange)
+        let matchString = string.toFoundation().substring(with: stringRange)
         
         // matched whole string
         XCTAssert(matchString == string)

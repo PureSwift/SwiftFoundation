@@ -73,13 +73,13 @@ public final class FileManager {
         
         let stringBufferSize = Int(PATH_MAX)
         
-        let path = UnsafeMutablePointer<CChar>.alloc(stringBufferSize)
+        let path = UnsafeMutablePointer<CChar>(allocatingCapacity: stringBufferSize)
         
-        defer { path.dealloc(stringBufferSize) }
+        defer { path.deallocateCapacity(stringBufferSize) }
         
         getcwd(path, stringBufferSize - 1)
         
-        return String.fromCString(path)!
+        return String(validatingUTF8: path)!
     }
     
     // MARK: - Creating and Deleting Items
@@ -187,9 +187,9 @@ public final class FileManager {
         
         assert(fileSize <= SSIZE_MAX, "File size (\(fileSize)) is larger than the max number of bytes allowed (\(SSIZE_MAX))")
         
-        let memoryPointer = UnsafeMutablePointer<Byte>.alloc(fileSize)
+        let memoryPointer = UnsafeMutablePointer<Byte>(allocatingCapacity: fileSize)
         
-        defer { memoryPointer.dealloc(fileSize) }
+        defer { memoryPointer.deallocateCapacity(fileSize) }
         
         let readBytes = read(file, memoryPointer, fileSize)
         

@@ -26,10 +26,10 @@ public extension RawRepresentable {
     }
 }
 
-public extension SequenceType where Self.Generator.Element: RawRepresentable {
+public extension Sequence where Self.Iterator.Element: RawRepresentable {
 
     /// Convertes a sequence of `RawRepresentable` to its raw values.
-    var rawValues: [Self.Generator.Element.RawValue] {
+    var rawValues: [Self.Iterator.Element.RawValue] {
         return self.map { $0.rawValue }
     }
 

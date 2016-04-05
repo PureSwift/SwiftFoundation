@@ -32,9 +32,9 @@ public extension Data {
     /// - Precondition: The pointer  points to a type exactly a byte long.
     static func fromBytePointer<T: Any>(pointer: UnsafePointer<T>, length: Int) -> Data {
         
-        assert(sizeof(pointer.memory.dynamicType) == sizeof(Byte.self), "Cannot create array of bytes from pointer to \(pointer.memory.dynamicType) because the type is larger than a single byte.")
+        assert(sizeof(pointer.pointee.dynamicType) == sizeof(Byte.self), "Cannot create array of bytes from pointer to \(pointer.pointee.dynamicType) because the type is larger than a single byte.")
         
-        var buffer: [UInt8] = [UInt8](count: length, repeatedValue: 0)
+        var buffer: [UInt8] = [UInt8](repeating: 0, count: length)
         
         memcpy(&buffer, pointer, length)
         
@@ -55,6 +55,17 @@ public func == (lhs: Data, rhs: Data) -> Bool {
     return memcmp(&bytes1, &bytes2, lhs.byteValue.count) == 0
 }
 
+// MARK: - Protocol
+
+/// Protocol for converting types to and from data.
+public protocol DataConvertible {
+    
+    /// Attempt to inialize from `Data`.
+    init?(data: Data)
+    
+    /// Convert to data. 
+    func toData() -> Data
+}
 
 
     

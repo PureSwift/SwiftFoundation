@@ -16,12 +16,12 @@ extension Date: FoundationConvertible {
     
     public init(foundation: NSDate) {
         
-        self.init(timeIntervalSinceReferenceDate: foundation.timeIntervalSinceReferenceDate)
+        self.init(sinceReferenceDate: foundation.timeIntervalSinceReferenceDate)
     }
     
     public func toFoundation() -> NSDate {
         
-        return NSDate(timeIntervalSinceReferenceDate: timeIntervalSinceReferenceDate)
+        return NSDate(timeIntervalSinceReferenceDate: sinceReferenceDate)
     }
 }
 

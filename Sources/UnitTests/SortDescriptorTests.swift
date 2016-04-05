@@ -27,7 +27,7 @@ final class SortDescriptorTests: XCTestCase {
             
             let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: true))
             
-            let expected = items.sort()
+            let expected = items.sorted()
             
             XCTAssert(expected == sortedItems, "Ascending: \(expected) == \(sortedItems)")
         }
@@ -38,7 +38,7 @@ final class SortDescriptorTests: XCTestCase {
             
             let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: false))
             
-            let expected = Array(items.sort().reverse())
+            let expected = Array(items.sorted().reversed())
             
             XCTAssert(expected == sortedItems, "Descending: \(expected) == \(sortedItems)")
         }
@@ -51,7 +51,7 @@ final class SortDescriptorTests: XCTestCase {
             
             let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: true))
             
-            let expected = items.sort()
+            let expected = items.sorted()
             
             XCTAssert(expected == sortedItems, "\(expected) == \(sortedItems)")
         }
@@ -62,7 +62,7 @@ final class SortDescriptorTests: XCTestCase {
             
             let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: false))
             
-            let expected = Array(items.sort().reverse())
+            let expected = Array(items.sorted().reversed())
             
             XCTAssert(expected == sortedItems, "\(expected) == \(sortedItems)")
         }
@@ -81,7 +81,7 @@ final class SortDescriptorTests: XCTestCase {
                 return first.compare(second)
             }))
             
-            let expected = items.sort()
+            let expected = items.sorted()
             
             XCTAssert(expected == sortedItems, "\(expected) == \(sortedItems)")
         }
@@ -95,7 +95,7 @@ final class SortDescriptorTests: XCTestCase {
                 return first.compare(second)
             }))
             
-            let expected = Array(items.sort().reverse())
+            let expected = Array(items.sorted().reversed())
             
             XCTAssert(expected == sortedItems, "\(expected) == \(sortedItems)")
         }
