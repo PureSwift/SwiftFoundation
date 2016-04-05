@@ -17,11 +17,7 @@ public final class Thread {
     
     // MARK: - Private Properties
     
-    #if os(Linux)
-    private var internalThread: pthread_t = 0
-    #else
-    private var internalThread: pthread_t = nil
-    #endif
+    private let internalThread: pthread_t
     
     // MARK: - Intialization
     
@@ -35,8 +31,16 @@ public final class Thread {
             let pointer = UnsafeMutablePointer<Void>(holder.toOpaque())
         #endif
         
+        #if os(Linux)
+            var internalThread: pthread_t = 0
+        #else
+            var internalThread: pthread_t = nil
+        #endif
+        
         guard pthread_create(&internalThread, nil, ThreadPrivateMain, pointer) == 0
             else { throw POSIXError.fromErrorNumber! }
+        
+        self.internalThread = internalThread
         
         pthread_detach(internalThread)
     }
