@@ -11,9 +11,9 @@ import SwiftFoundation
 
 final class SortDescriptorTests: XCTestCase {
     
-    lazy var allTests: [(String, () throws -> ())] =
-        [("testComparableSorting", self.testComparableSorting),
-        ("testComparatorSorting", self.testComparatorSorting)]
+    static let allTests: [(String, SortDescriptorTests -> () throws -> Void)] =
+        [("testComparableSorting", testComparableSorting),
+        ("testComparatorSorting", testComparatorSorting)]
     
     // MARK: - Functional Tests
 

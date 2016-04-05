@@ -540,6 +540,7 @@
 		6E2C2B501C20F6EB00B2C995 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				6E2C2C2E1C2128C600B2C995 /* main.swift */,
 				6E2C2B511C20F6EB00B2C995 /* DateComponentsTest.swift */,
 				6E2C2B521C20F6EB00B2C995 /* OrderTests.swift */,
 				6E2C2B531C20F6EB00B2C995 /* POSIXTimeTests.swift */,
@@ -550,7 +551,6 @@
 				6E1ACD4A1C435822005775FD /* DataTests.swift */,
 				6E957C561C442E3E003F3C51 /* JSONTests.swift */,
 				6EFF9A1C1CAD108400917CB3 /* RangeTests.swift */,
-				6E2C2C2E1C2128C600B2C995 /* main.swift */,
 			);
 			path = UnitTests;
 			sourceTree = "<group>";

@@ -17,10 +17,10 @@ import SwiftFoundation
 
 final class POSIXTimeTests: XCTestCase {
     
-    lazy var allTests: [(String, () throws -> ())] =
-        [("testGetTimeOfDay", self.testGetTimeOfDay),
-        ("testTimeVal", self.testTimeVal),
-        ("testTimeSpec", self.testTimeSpec)]
+    static let allTests: [(String, POSIXTimeTests -> () throws -> Void)] =
+        [("testGetTimeOfDay", testGetTimeOfDay),
+        ("testTimeVal", testTimeVal),
+        ("testTimeSpec", testTimeSpec)]
     
     func testGetTimeOfDay() {
                 

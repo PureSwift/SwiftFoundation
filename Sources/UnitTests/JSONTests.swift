@@ -11,11 +11,11 @@ import SwiftFoundation
 
 final class JSONTests: XCTestCase {
     
-    lazy var allTests: [(String, () throws -> ())] = [
+    static let allTests: [(String, JSONTests -> () throws -> Void)] = [
         
-        ("testJSONEncodable", self.testJSONEncodable),
-        ("testJSONParse", self.testJSONParse),
-        ("testJSONWriting", self.testJSONWriting)
+        ("testJSONEncodable", testJSONEncodable),
+        ("testJSONParse", testJSONParse),
+        ("testJSONWriting", testJSONWriting)
     ]
         
     func testJSONEncodable() {

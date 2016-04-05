@@ -11,7 +11,7 @@ import SwiftFoundation
 
 final class DateComponentsTest: XCTestCase {
     
-    lazy var allTests: [(String, () throws -> ())] = [("testBuildDate", self.testBuildDate)]
+    static let allTests: [(String, DateComponentsTest -> () throws -> Void)] = [("testBuildDate", testBuildDate)]
     
     func testBuildDate() {
         
