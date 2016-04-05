@@ -42,17 +42,18 @@ swift build
 ## Implemented
 To see what parts of Foundation are implemented, just look at the unit tests. Completed functionality will be fully unit tested. Note that there is some functionality that is written as a protocol only, that will not be included on this list.
 
+- [x] Base64
+- [x] Data
 - [x] Date
+- [x] FileManager
+- [x] JSON
 - [x] Null
 - [x] Order (equivalent to ```NSComparisonResult```)
-- [x] SortDescriptor
-- [x] UUID
-- [x] FileManager
-- [x] Data
-- [x] URL
 - [X] RegularExpression (POSIX, not ICU)
-- [x] JSON
-- [x] Base64
+- [x] SortDescriptor
+- [x] Thread
+- [x] URL
+- [x] UUID
 
 # License
 
