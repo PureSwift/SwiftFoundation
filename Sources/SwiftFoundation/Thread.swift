@@ -21,7 +21,7 @@ public final class Thread {
     
     // MARK: - Intialization
     
-    public init(closure: () -> Void) throws {
+    public init(_ closure: () -> ()) throws {
         
         let holder = Unmanaged.passRetained(Closure(closure: closure))
         
@@ -66,6 +66,8 @@ public final class Thread {
             else { throw POSIXError(rawValue: errorCode)! }
     }
 }
+
+// MARK: - Private
 
 private func ThreadPrivateMain(arg: UnsafeMutablePointer<Void>) -> UnsafeMutablePointer<Void> {
     

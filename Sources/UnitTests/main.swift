@@ -25,4 +25,6 @@ XCTMain([testCase(DateComponentsTest.allTests),
          testCase(UUIDTests.allTests),
          testCase(DataTests.allTests),
          testCase(JSONTests.allTests),
-         testCase(RangeTests.allTests)])
+         testCase(RangeTests.allTests),
+         testCase(AtomicTests.allTests)
+    ])

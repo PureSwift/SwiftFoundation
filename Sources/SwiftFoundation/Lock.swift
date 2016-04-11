@@ -70,21 +70,24 @@ public final class Lock: Locking {
         }
     }
     
+    @inline(__always)
     public func lock() {
         
         let errorCode = pthread_mutex_lock(&internalMutex)
         
-        guard errorCode == 0 else { fatalError("Could not lock mutex. \(POSIXError(rawValue: errorCode)!)") }
+        assert(errorCode == 0, "Could not lock mutex. \(POSIXError(rawValue: errorCode)!)")
     }
     
+    @inline(__always)
     public func unlock() {
         
         let errorCode = pthread_mutex_unlock(&internalMutex)
         
-        guard errorCode == 0 else { fatalError("Could not unlock mutex. \(POSIXError(rawValue: errorCode)!)") }
+        assert(errorCode == 0, "Could not unlock mutex. \(POSIXError(rawValue: errorCode)!)")
     }
     
-    /// Try to acquire lock and return immediately. 
+    /// Try to acquire lock and return immediately.
+    @inline(__always)
     public func tryLock() -> Bool {
         
         return pthread_mutex_trylock(&internalMutex) == 0
