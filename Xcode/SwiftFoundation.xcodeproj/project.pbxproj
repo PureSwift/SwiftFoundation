@@ -223,6 +223,9 @@
 		6E2C2C361C212C5700B2C995 /* NSString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2C311C212C2200B2C995 /* NSString.swift */; };
 		6E30BA111B40F543009B1B49 /* SwiftFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E30BA101B40F543009B1B49 /* SwiftFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E30BA181B40F543009B1B49 /* SwiftFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E30BA0D1B40F543009B1B49 /* SwiftFoundation.framework */; };
+		6E82FD721CBA06C10049CD1B /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E82FD711CBA06C10049CD1B /* Lock.swift */; };
+		6E82FD731CBA06C10049CD1B /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E82FD711CBA06C10049CD1B /* Lock.swift */; };
+		6E82FD741CBA06C10049CD1B /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E82FD711CBA06C10049CD1B /* Lock.swift */; };
 		6E957C261C43A7C8003F3C51 /* JSONParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E957C251C43A7C8003F3C51 /* JSONParse.swift */; };
 		6E957C271C43A7C8003F3C51 /* JSONParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E957C251C43A7C8003F3C51 /* JSONParse.swift */; };
 		6E957C281C43A7C8003F3C51 /* JSONParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E957C251C43A7C8003F3C51 /* JSONParse.swift */; };
@@ -381,6 +384,7 @@
 		6E30BA121B40F543009B1B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E30BA171B40F543009B1B49 /* SwiftFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E30BA1E1B40F543009B1B49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E82FD711CBA06C10049CD1B /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		6E957C251C43A7C8003F3C51 /* JSONParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParse.swift; sourceTree = "<group>"; };
 		6E957C291C43AA55003F3C51 /* JSONSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerialization.swift; sourceTree = "<group>"; };
 		6E957C2A1C43AA55003F3C51 /* JSONWritingOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONWritingOption.swift; sourceTree = "<group>"; };
@@ -517,6 +521,7 @@
 				6E957C291C43AA55003F3C51 /* JSONSerialization.swift */,
 				6E957C2A1C43AA55003F3C51 /* JSONWritingOption.swift */,
 				6E2C2B351C20F6EB00B2C995 /* JSONExtensions.swift */,
+				6E82FD711CBA06C10049CD1B /* Lock.swift */,
 				6E2C2B361C20F6EB00B2C995 /* Null.swift */,
 				6E2C2B371C20F6EB00B2C995 /* Order.swift */,
 				6E2C2B3E1C20F6EB00B2C995 /* Predicate.swift */,
@@ -880,6 +885,7 @@
 				6E2C2BCC1C20F76600B2C995 /* POSIXFileStatus.swift in Sources */,
 				6E957C271C43A7C8003F3C51 /* JSONParse.swift in Sources */,
 				6E2C2BC01C20F76600B2C995 /* HTTP.swift in Sources */,
+				6E82FD731CBA06C10049CD1B /* Lock.swift in Sources */,
 				6E2C2B621C20F6F600B2C995 /* HTTPClient.swift in Sources */,
 				6E2C2B661C20F6F600B2C995 /* NSJSONSerialization.swift in Sources */,
 				6E2C2BBE1C20F76600B2C995 /* FileType.swift in Sources */,
@@ -953,6 +959,7 @@
 				6E2C2B981C20F76600B2C995 /* POSIXFileStatus.swift in Sources */,
 				6E957C281C43A7C8003F3C51 /* JSONParse.swift in Sources */,
 				6E2C2B8C1C20F76600B2C995 /* HTTP.swift in Sources */,
+				6E82FD741CBA06C10049CD1B /* Lock.swift in Sources */,
 				6E2C2B591C20F6F500B2C995 /* HTTPClient.swift in Sources */,
 				6E2C2B5D1C20F6F500B2C995 /* NSJSONSerialization.swift in Sources */,
 				6E2C2B8A1C20F76600B2C995 /* FileType.swift in Sources */,
@@ -1073,6 +1080,7 @@
 				6E2C2BFD1C20F76700B2C995 /* Null.swift in Sources */,
 				6E04074E1CB3E07500BE3A79 /* Thread.swift in Sources */,
 				6E2C2BE41C20F76700B2C995 /* BitMaskOption.swift in Sources */,
+				6E82FD721CBA06C10049CD1B /* Lock.swift in Sources */,
 				6E2C2C091C20F76700B2C995 /* RegularExpressionCompileOption.swift in Sources */,
 				6E2C2BF71C20F76700B2C995 /* HTTPResponse.swift in Sources */,
 				6E2C2C161C20F76700B2C995 /* Version.swift in Sources */,
