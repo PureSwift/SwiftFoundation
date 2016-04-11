@@ -13,72 +13,46 @@ public struct Atomic<Value> {
     
     public var value: Value {
         
-        get { return storage.value }
+        get {
+            
+            let value: Value
+            
+            lock.lock()
+            value = internalValue
+            lock.unlock()
+            
+            return value
+        }
         
         mutating set {
             
             ensureUnique()
-            storage.value = newValue
+            
+            lock.lock()
+            internalValue = newValue
+            lock.unlock()
         }
     }
     
     // MARK: - Private Properties
     
-    private var storage: AtomicStorage<Value>
+    private var internalValue: Value
+    
+    private var lock = Lock()
     
     // MARK: - Initialization
     
     public init(_ value: Value) {
         
-        self.storage = AtomicStorage(value)
+        self.internalValue = value
     }
     
     // MARK: - Private Methods
     
     private mutating func ensureUnique() {
         
-        if !isUniquelyReferencedNonObjC(&storage) {
-            storage = storage.copy
+        if !isUniquelyReferencedNonObjC(&lock) {
+            lock = Lock()
         }
-    }
-}
-
-/// Internal Storage for `Atomic`.
-private final class AtomicStorage<Value> {
-    
-    /// Actual storage for property
-    var _value: Value
-    
-    var value: Value {
-        
-        get {
-            
-            let value: Value
-            
-            lock.lock()
-            value = _value
-            lock.unlock()
-            
-            return value
-        }
-        
-        set {
-            
-            lock.lock()
-            _value = newValue
-            lock.unlock()
-        }
-    }
-    
-    let lock = Lock()
-    
-    init(_ value: Value) {
-        
-        _value = value
-    }
-    
-    var copy: AtomicStorage {
-        
-        return AtomicStorage(_value)
     }
 }
