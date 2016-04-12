@@ -6,6 +6,12 @@
 //  Copyright © 2016 PureSwift. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    import Darwin.C
+#elseif os(Linux)
+    import Glibc
+#endif
+
 import XCTest
 import SwiftFoundation
 
