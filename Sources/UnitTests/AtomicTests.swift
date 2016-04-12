@@ -23,56 +23,24 @@ final class AtomicTests: XCTestCase {
         
         var atomic = Atomic(0)
         
-        var thread2Finished = false
-        
-        var thread3Finished = false
-        
         // main thread
-        for _ in 0 ..< 10 {
+        for i in 0 ..< 10 {
             
-            atomic.value += 1
-            
-            print("\(atomic.value) (Thread 1)")
-        }
-        
-        // thread 2
-        let _ = try! Thread {
-            
-            for _ in 0 ..< 10 {
+            let _ = try! Thread {
+                
+                let oldValue = atomic.value
                 
                 atomic.value += 1
                 
-                print("\(atomic.value) (Thread 2)")
+                print("\(oldValue) -> \(atomic.value) (Thread \(i))")
             }
-            
-            print("Finished thread 2")
-            
-            thread2Finished = true
         }
         
-        // thread 3
-        let _ = try! Thread {
-            
-            for _ in 0 ..< 10 {
-                
-                atomic.value += 1
-                
-                print("\(atomic.value) (Thread 3)")
-            }
-            
-            print("Finished thread 3")
-            
-            thread3Finished = true
-        }
-        
-        let finalValue = 30
+        let finalValue = 10
         
         print("Waiting for threads to finish")
         
-        while thread2Finished == false || thread3Finished == false {
-            
-            sleep(1)
-        }
+        sleep(1)
         
         XCTAssert(atomic.value == finalValue, "Value is \(atomic.value), should be \(finalValue)")
         
