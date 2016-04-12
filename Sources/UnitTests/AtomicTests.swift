@@ -27,6 +27,14 @@ final class AtomicTests: XCTestCase {
         
         var thread3Finished = false
         
+        // main thread
+        for _ in 0 ..< 10 {
+            
+            atomic.value += 1
+            
+            print("\(atomic.value) (Thread 1)")
+        }
+        
         // thread 2
         let _ = try! Thread {
             
@@ -55,14 +63,6 @@ final class AtomicTests: XCTestCase {
             print("Finished thread 3")
             
             thread3Finished = true
-        }
-        
-        // main thread
-        for _ in 0 ..< 10 {
-            
-            atomic.value += 1
-            
-            print("\(atomic.value) (Thread 1)")
         }
         
         let finalValue = 30
