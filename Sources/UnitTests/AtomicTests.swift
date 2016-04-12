@@ -65,7 +65,7 @@ final class AtomicTests: XCTestCase {
             print("\(atomic.value) (Thread 1)")
         }
         
-        let finalValue = 28
+        let finalValue = 30
         
         print("Waiting for threads to finish")
         
