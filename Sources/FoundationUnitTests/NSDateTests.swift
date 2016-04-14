@@ -80,9 +80,9 @@ class DateTests: XCTestCase {
         
         let foundationDate2 = NSDate(timeIntervalSinceReferenceDate: time2)
         
-        let intervalSinceDate = date.timeIntervalSinceDate(date2)
+        let intervalSinceDate = date.timeIntervalSince(date: date2)
         
-        let foundationIntervalSinceDate = foundationDate.timeInterval(since: foundationDate2)
+        let foundationIntervalSinceDate = foundationDate.timeIntervalSince(foundationDate2)
         
         XCTAssert(intervalSinceDate == foundationIntervalSinceDate)
     }

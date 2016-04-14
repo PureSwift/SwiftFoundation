@@ -8,7 +8,7 @@
 
 public extension Range where Element: Integer {
     
-    func isSubset(other: Range) -> Bool {
+    func isSubset(_ other: Range) -> Bool {
         
         return self.startIndex >= other.startIndex
             && self.startIndex <= other.endIndex

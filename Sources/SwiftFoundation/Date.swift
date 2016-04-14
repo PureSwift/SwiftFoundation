@@ -29,7 +29,7 @@ public struct Date: Equatable, Comparable, CustomStringConvertible {
     }
     
     /// Returns the difference between two dates.
-    public func timeIntervalSinceDate(date: Date) -> TimeInterval {
+    public func timeIntervalSince(date: Date) -> TimeInterval {
         
         return self - date
     }

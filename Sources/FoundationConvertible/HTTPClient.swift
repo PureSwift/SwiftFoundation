@@ -24,14 +24,14 @@ public extension HTTP {
         /// The backing ```NSURLSession```.
         public let session: NSURLSession
         
-        public func sendRequest(request: HTTP.Request) throws -> HTTP.Response {
+        public func send(request: HTTP.Request) throws -> HTTP.Response {
             
             var dataTask: NSURLSessionDataTask?
             
-            return try sendRequest(request, dataTask: &dataTask)
+            return try send(request: request, dataTask: &dataTask)
         }
         
-        public func sendRequest(request: HTTP.Request, dataTask: inout NSURLSessionDataTask?) throws -> HTTP.Response {
+        public func send(request: HTTP.Request, dataTask: inout NSURLSessionDataTask?) throws -> HTTP.Response {
             
             // build request... 
             

@@ -115,7 +115,7 @@ public extension JSON.Value {
             return
         }
         
-        if let rawArray = rawValue as? [Any], let jsonArray: [JSON.Value] = JSON.Value.fromRawValues(rawArray) {
+        if let rawArray = rawValue as? [Any], let jsonArray: [JSON.Value] = JSON.Value.from(rawValues: rawArray) {
             
             self = .Array(jsonArray)
             return

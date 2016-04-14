@@ -28,11 +28,11 @@ class NSComparisonResultTests: XCTestCase {
         
         // number
         
-        XCTAssert(1.compare(2) == Order(foundation: 1.compare(NSNumber(integer: 2))))
+        XCTAssert((1 as Int).compare(2) == Order(foundation: 1.compare(NSNumber(value: 2))))
         
-        XCTAssert(2.compare(1) == Order(foundation: 2.compare(NSNumber(integer: 1))))
+        XCTAssert((2 as Int).compare(1) == Order(foundation: 2.compare(NSNumber(value: 1))))
         
-        XCTAssert(1.compare(1) == Order(foundation: 1.compare(NSNumber(integer: 1))))
+        XCTAssert((1 as Int).compare(1) == Order(foundation: 1.compare(NSNumber(value: 1))))
         
         // string
         

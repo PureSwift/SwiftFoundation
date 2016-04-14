@@ -16,7 +16,7 @@ public extension JSON.Value {
     
     public init?(string: Swift.String) {
         
-        let tokenerError = UnsafeMutablePointer<json_tokener_error>.init(allocatingCapacity: 1)
+        let tokenerError: UnsafeMutablePointer<json_tokener_error>! = UnsafeMutablePointer<json_tokener_error>(allocatingCapacity: 1)
         
         defer { tokenerError.deallocateCapacity(1) }
         
@@ -34,7 +34,8 @@ public extension JSON.Value {
 private extension JSON.Value {
     
     /// Create a JSON value from a ```json_object``` pointer created by the **json-c** library.
-    init(jsonObject: OpaquePointer) {
+    init(jsonObject: OpaquePointer?) {
+        
         let type = json_object_get_type(jsonObject)
         
         switch type {

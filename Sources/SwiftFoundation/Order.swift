@@ -9,9 +9,9 @@
 /// Indicates how items are ordered.
 public enum Order: Int {
     
-    case Ascending      = -1
-    case Same           =  0
-    case Descending     =  1
+    case ascending      = -1
+    case same           =  0
+    case descending     =  1
 }
 
 // MARK: - Implementation
@@ -19,19 +19,19 @@ public enum Order: Int {
 public extension Comparable {
     
     /** Compares the reciever with another and returns their order. */
-    func compare(other: Self) -> Order {
+    func compare(_ other: Self) -> Order {
         
         if self < other {
             
-            return .Ascending
+            return .ascending
         }
         
         if self > other {
             
-            return .Descending
+            return .descending
         }
         
-        return .Same
+        return .same
     }
 }
 

@@ -16,7 +16,7 @@ public typealias POSIXRegularExpression = regex_t
 
 public extension POSIXRegularExpression {
     
-    public static func compile(pattern: String, options: [RegularExpression.CompileOption]) -> (ErrorCode, POSIXRegularExpression) {
+    public static func compile(_ pattern: String, options: [RegularExpression.CompileOption]) -> (ErrorCode, POSIXRegularExpression) {
         
         var regularExpression = POSIXRegularExpression()
         
@@ -32,7 +32,7 @@ public extension POSIXRegularExpression {
         regfree(&self)
     }
     
-    public func firstMatch(string: String, options: [RegularExpression.MatchOption]) -> RegularExpressionMatch? {
+    public func firstMatch(_ string: String, options: [RegularExpression.MatchOption]) -> RegularExpressionMatch? {
         
         // we are sure that that this method does not mutate the regular expression, so we make a copy
         var expression = self

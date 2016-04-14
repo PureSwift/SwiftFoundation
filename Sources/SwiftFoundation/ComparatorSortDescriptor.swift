@@ -7,7 +7,7 @@
 //
 
 /** Sorts according to a given closure. */
-public struct ComparatorSortDescriptor<T>: SortDescriptorType {
+public struct ComparatorSortDescriptor<T>: SortDescriptor {
     
     public typealias Comparator = (T, T) -> Order
     

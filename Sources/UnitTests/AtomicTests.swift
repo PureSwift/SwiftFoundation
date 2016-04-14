@@ -22,9 +22,7 @@ final class AtomicTests: XCTestCase {
     func testAtomic() {
         
         var atomic = Atomic(0)
-        
-        var wait = true
-        
+                
         // main thread
         for i in 0 ..< 10 {
             

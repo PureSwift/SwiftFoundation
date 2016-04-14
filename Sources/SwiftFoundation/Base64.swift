@@ -28,7 +28,7 @@ public struct Base64 {
         
         var encoded : [UInt8] = []
         
-        let table = Base64.tableForAlphabet(alphabet)
+        let table = Base64.table(for: alphabet)
         let padding = table[64]
         
         var i = 0
@@ -103,7 +103,7 @@ public extension Base64 {
 private extension Base64 {
     
     /// Get the encoding table for the alphabet.
-    static func tableForAlphabet(alphabet : Alphabet) -> [UInt8] {
+    static func table(for alphabet: Alphabet) -> [UInt8] {
         switch alphabet {
         case .Standard:
             return StandardAlphabet

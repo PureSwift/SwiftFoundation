@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Foundation
 import SwiftFoundation
 
 final class OrderTests: XCTestCase {
@@ -18,19 +17,19 @@ final class OrderTests: XCTestCase {
         
         // number
         
-        XCTAssert(1.compare(2) == Order.Ascending)
+        XCTAssert((1 as Int).compare(2) == .ascending)
         
-        XCTAssert(2.compare(1) == Order.Descending)
+        XCTAssert((2 as Int).compare(1) == .descending)
         
-        XCTAssert(1.compare(1) == Order.Same)
+        XCTAssert((1 as Int).compare(1) == .same)
         
         // string
         
-        XCTAssert("a".compare("b") == Order.Ascending)
+        XCTAssert("a".compare("b") == .ascending)
         
-        XCTAssert("b".compare("a") == Order.Descending)
+        XCTAssert("b".compare("a") == .descending)
         
-        XCTAssert("a".compare("a") == Order.Same)
+        XCTAssert("a".compare("a") == .same)
         
         // dates
         
@@ -38,7 +37,7 @@ final class OrderTests: XCTestCase {
         
         let later = now + 0.5
         
-        XCTAssert(now.compare(later) == Order.Ascending)
+        XCTAssert(now.compare(later) == .ascending)
         
         XCTAssert(now < later)
     }

@@ -12,7 +12,7 @@ public protocol Predicate {
     
     /// Returns a Boolean value that indicates whether a given object matches the conditions specified by the predicate.
     ///
-    func evaluate<T>(object: T) -> Bool
+    func evaluate<T>(_ object: T) -> Bool
 }
 
 public extension Collection {

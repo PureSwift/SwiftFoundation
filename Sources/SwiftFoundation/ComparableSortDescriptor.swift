@@ -7,7 +7,7 @@
 //
 
 /** Sorts ```Comparable``` types. */
-public struct ComparableSortDescriptor<T: Comparable>: SortDescriptorType {
+public struct ComparableSortDescriptor<T: Comparable>: SortDescriptor {
         
     public var ascending: Bool
     

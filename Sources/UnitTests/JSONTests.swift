@@ -35,7 +35,7 @@ final class JSONTests: XCTestCase {
 
     func testJSONParse() {
         
-        func parseJSON(jsonValue: JSON.Value, _ jsonString: String) {
+        func parseJSON(_ jsonValue: JSON.Value, _ jsonString: String) {
             
             #if os(OSX) || os(iOS)
                 
@@ -81,7 +81,7 @@ final class JSONTests: XCTestCase {
     
     func testJSONWriting() {
         
-        func writeJSON(json: JSON.Value, _ expectedJSONString: String) {
+        func writeJSON(_ json: JSON.Value, _ expectedJSONString: String) {
             
             guard let jsonString = json.toString()
                 else { XCTFail("Could not serialize JSON"); return }

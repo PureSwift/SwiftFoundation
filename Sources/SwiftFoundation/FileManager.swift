@@ -26,13 +26,13 @@ public final class FileManager {
     // MARK: - Determining Access to Files
     
     /// Determines whether a file descriptor exists at the specified path. Can be regular file, directory, socket, etc.
-    public static func itemExists(path: String) -> Bool {
+    public static func itemExists(at path: String) -> Bool {
         
         return (stat(path, nil) == 0)
     }
     
     /// Determines whether a file exists at the specified path.
-    public static func fileExists(path: String) -> Bool {
+    public static func fileExists(at path: String) -> Bool {
         
         var inodeInfo = stat()
         
@@ -46,7 +46,7 @@ public final class FileManager {
     }
     
     /// Determines whether a directory exists at the specified path.
-    public static func directoryExists(path: String) -> Bool {
+    public static func directoryExists(at path: String) -> Bool {
         
         var inodeInfo = stat()
         
@@ -62,7 +62,7 @@ public final class FileManager {
     // MARK: - Managing the Current Directory
     
     /// Attempts to change the current directory
-    public static func changeCurrentDirectory(newCurrentDirectory: String) throws {
+    public static func changeCurrentDirectory(_ newCurrentDirectory: String) throws {
         
         guard chdir(newCurrentDirectory) == 0
             else { throw POSIXError.fromErrorNumber! }
@@ -84,7 +84,7 @@ public final class FileManager {
     
     // MARK: - Creating and Deleting Items
     
-    public static func createFile(path: String, contents data: Data? = nil, attributes: FileAttributes = FileAttributes()) throws {
+    public static func createFile(at path: String, contents data: Data? = nil, attributes: FileAttributes = FileAttributes()) throws {
         
         // get file descriptor for path (open file)
         let file = open(path, O_CREAT, DefaultFileMode)
@@ -97,16 +97,16 @@ public final class FileManager {
         // write data
         if let data = data {
             
-            try self.setContents(path, data: data)
+            try self.set(contents: data, at: path)
         }
         
         // TODO: set attributes
         
     }
     
-    public static func createDirectory(path: String, withIntermediateDirectories createIntermediates: Bool = false, attributes: FileAttributes = FileAttributes()) throws {
+    public static func createDirectory(at path: String, createIntermediateDirectories: Bool = false, attributes: FileAttributes = FileAttributes()) throws {
         
-        if createIntermediates {
+        if createIntermediateDirectories {
             
             fatalError("Create Intermediate Directories Not Implemented")
         }
@@ -121,48 +121,48 @@ public final class FileManager {
     
     // MARK: - Creating Symbolic and Hard Links
     
-    public static func createSymbolicLink(path: String, withDestinationPath destinationPath: String) throws {
+    public static func createSymbolicLink(at path: String, to destinationPath: String) throws {
         
         fatalError()
     }
     
-    public static func linkItem(path: String, toPath destinationPath: String) throws {
+    public static func linkItem(at path: String, to destinationPath: String) throws {
         
         fatalError()
     }
     
-    public static func destinationOfSymbolicLink(path: String) throws -> String {
+    public static func destinationOfSymbolicLink(at path: String) throws -> String {
         
         fatalError()
     }
     
     // MARK: - Moving and Copying Items
     
-    public static func copyItem(sourcePath: String, toPath destinationPath: String) throws {
+    public static func copy(_ sourcePath: String, to destinationPath: String) throws {
         
         fatalError()
     }
     
-    public static func moveItem(sourcePath: String, toPath destinationPath: String) throws {
+    public static func move(_ sourcePath: String, to destinationPath: String) throws {
         
         fatalError()
     }
     
     // MARK: - Getting and Setting Attributes
     
-    public static func attributesOfItem(path: String) throws -> FileAttributes {
+    public static func attributes(at path: String) throws -> FileAttributes {
         
         return try FileAttributes(path: path)
     }
     
-    public static func setAttributes(attributes: FileAttributes, ofItemAtPath path: String) throws {
+    public static func set(attributes: FileAttributes, at path: String) throws {
         
         // let originalAttributes = try self.attributesOfItem(atPath: path)
         
         fatalError("Not Implemented")
     }
     
-    public static func attributesOfFileSystem(forPath path: String) throws -> FileSystemAttributes {
+    public static func fileSystemAttributes(at path: String) throws -> FileSystemAttributes {
         
         return try FileSystemAttributes(path: path)
     }
@@ -170,7 +170,7 @@ public final class FileManager {
     // MARK: - Getting and Comparing File Contents
     
     /// Reads the contents of a file.
-    public static func contents(path: String) throws -> Data {
+    public static func contents(at path: String) throws -> Data {
         
         // get file descriptor for path (open file)
         let file = open(path, O_RDONLY)
@@ -197,13 +197,13 @@ public final class FileManager {
         
         //guard readBytes == fileSize else { fatalError() }
         
-        let data = Data.fromBytePointer(memoryPointer, length: readBytes)
+        let data = Data.from(pointer: memoryPointer, length: readBytes)
         
         return data
     }
     
     /// Sets the contents of an existing file.
-    public static func setContents(path: String, data: Data) throws {
+    public static func set(contents data: Data, at path: String) throws {
         
         // get file descriptor for path (open file)
         let file = open(path, O_WRONLY)

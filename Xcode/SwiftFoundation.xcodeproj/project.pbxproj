@@ -533,7 +533,6 @@
 				6E2C2B361C20F6EB00B2C995 /* Null.swift */,
 				6E2C2B371C20F6EB00B2C995 /* Order.swift */,
 				6E2C2B3E1C20F6EB00B2C995 /* Predicate.swift */,
-				6E2C2B3F1C20F6EB00B2C995 /* RawRepresentable.swift */,
 				6E2C2B401C20F6EB00B2C995 /* RegularExpression.swift */,
 				6E2C2B411C20F6EB00B2C995 /* RegularExpressionCompileError.swift */,
 				6E2C2B421C20F6EB00B2C995 /* RegularExpressionCompileOption.swift */,
@@ -594,6 +593,7 @@
 		6E2C2C271C20FB0600B2C995 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
+				6E2C2B3F1C20F6EB00B2C995 /* RawRepresentable.swift */,
 				6E2C2B461C20F6EB00B2C995 /* String.swift */,
 				6E2C2B331C20F6EB00B2C995 /* Integer.swift */,
 				6EFF9A1A1CAD0C6B00917CB3 /* Range.swift */,

@@ -8,54 +8,35 @@
 
 // MARK: - Protocol
 
-/** Describes a basis for ordering types. */
-public protocol SortDescriptorType {
+/// Describes a basis for ordering types.
+public protocol SortDescriptor {
     
-    associatedtype SortedType
+    associatedtype Sorted
     
     var ascending: Bool { get }
     
     /** Compares two types and gets their order. */
-    func sort(first: SortedType, second: SortedType) -> Order
+    func sort(first: Sorted, second: Sorted) -> Order
 }
 
-// MARK: - Functions
-
-/** Returns a sorted array of the collection as specified by the sort descriptor. */
-public func Sort<T: Collection, S: SortDescriptorType where S.SortedType == T.Iterator.Element>(collection: T, sortDescriptor: S) -> [T.Iterator.Element] {
+public extension Collection {
     
-    return collection.sorted { (first: T.Iterator.Element, second: T.Iterator.Element) -> Bool in
+    /// Returns a sorted array of the collection as specified by the sort descriptor.
+    func sorted<S: SortDescriptor where S.Sorted == Iterator.Element>(_ sortDescriptor: S) -> [Iterator.Element] {
         
-        let order = sortDescriptor.sort(first, second: second)
-        
-        let first: Bool = {
+        return self.sorted { (first: Iterator.Element, second: Iterator.Element) -> Bool in
+            
+            let order = sortDescriptor.sort(first: first, second: second)
             
             switch order {
                 
-            case .Ascending: return sortDescriptor.ascending
+            case .ascending: return sortDescriptor.ascending
                 
-            case .Descending: return !sortDescriptor.ascending
+            case .descending: return !sortDescriptor.ascending
                 
-            case .Same: return true
+            case .same: return true
                 
             }
-        }()
-        
-        return first
+        }
     }
 }
-
-/*
-/** Returns a sorted array if the collection sorted as specified by a given array of sort descriptors. */
-public func Sort<T: CollectionType, S: SortDescriptor where S.SortedType == T.Iterator.Element>(collection: T, sortDescriptors: [S]) -> [T.Iterator.Element] {
-    
-    var sortedArray = collection.map { (element: T.Iterator.Element) -> T in }
-    
-    for sortDescriptor in sortDescriptors {
-        
-        sortedArray = Sort(sortDescriptor, collection: sortedArray)
-    }
-    
-    return sortedArray
-}
-*/

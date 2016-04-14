@@ -44,7 +44,7 @@ public extension NSJSONSerialization {
                 return
             }
             
-            if let rawArray = rawValue as? [AnyObject], let jsonArray: [NSJSONSerialization.Value] = NSJSONSerialization.Value.fromRawValues(rawArray) {
+            if let rawArray = rawValue as? [AnyObject], let jsonArray: [NSJSONSerialization.Value] = NSJSONSerialization.Value.from(rawValues: rawArray) {
                 
                 self = .Array(jsonArray)
                 return
@@ -166,11 +166,11 @@ extension JSON.Value: FoundationConvertible {
             
             switch number {
                 
-                case let .Integer(value): return NSJSONSerialization.Value.Number(NSNumber(integer: value))
+                case let .Integer(value): return NSJSONSerialization.Value.Number(NSNumber(value: value))
                 
-                case let .Double(value): return NSJSONSerialization.Value.Number(NSNumber(double: value))
+                case let .Double(value): return NSJSONSerialization.Value.Number(NSNumber(value: value))
                 
-                case let .Boolean(value): return NSJSONSerialization.Value.Number(NSNumber(bool: value))
+                case let .Boolean(value): return NSJSONSerialization.Value.Number(NSNumber(value: value))
             }
             
         case .Array(let array):
@@ -202,12 +202,12 @@ extension JSON.Value: FoundationConvertible {
     }
 }
 
-private let trueNumber = NSNumber(bool: true)
-private let falseNumber = NSNumber(bool: false)
+private let trueNumber: NSNumber = true
+private let falseNumber: NSNumber = false
 private let trueObjCType = String(validatingUTF8: trueNumber.objCType)
 private let falseObjCType = String(validatingUTF8: falseNumber.objCType)
 
-private let intNumber = NSNumber(integer: 1)
+private let intNumber: NSNumber = Int(1)
 private let intObjCType = String(validatingUTF8: intNumber.objCType)!
 
 

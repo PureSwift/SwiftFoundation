@@ -29,14 +29,18 @@ public final class Thread {
         
         #if os(Linux)
             var internalThread: pthread_t = 0
-        #else
-            var internalThread: pthread_t = nil
+        #elseif os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+            var internalThread: pthread_t? = nil
         #endif
         
         guard pthread_create(&internalThread, nil, ThreadPrivateMain, pointer) == 0
             else { throw POSIXError.fromErrorNumber! }
         
-        self.internalThread = internalThread
+        #if os(Linux)
+            self.internalThread = internalThread
+        #elseif os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+            self.internalThread = internalThread!
+        #endif
         
         pthread_detach(internalThread)
     }
@@ -69,7 +73,7 @@ public final class Thread {
 
 // MARK: - Private
 
-private func ThreadPrivateMain(arg: UnsafeMutablePointer<Void>) -> UnsafeMutablePointer<Void> {
+private func ThreadPrivateMain(arg: UnsafeMutablePointer<Void>!) -> UnsafeMutablePointer<Void>! {
     
     let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(OpaquePointer(arg))
     

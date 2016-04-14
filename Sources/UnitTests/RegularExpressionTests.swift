@@ -128,7 +128,7 @@ final class RegularExpressionTests: XCTestCase {
                 return
             }
             
-            guard let capturedString = testString.substring(beerRange) else {
+            guard let capturedString = testString.substring(range: beerRange) else {
                 XCTFail("Failed to get a substring with range \(beerRange) in \(testString)")
                 return
             }

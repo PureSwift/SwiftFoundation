@@ -37,21 +37,21 @@ class FileManagerTests: XCTestCase {
         
         XCTAssert(NSFileManager.defaultManager().createFile(atPath: path, contents: NSData(), attributes: nil))
         
-        XCTAssert(FileManager.fileExists(path))
+        XCTAssert(FileManager.fileExists(at: path))
         
-        XCTAssert(!FileManager.directoryExists(path))
+        XCTAssert(!FileManager.directoryExists(at: path))
     }
     
     func testDirectoryExists() {
         
-        let path = try! NSFileManager.defaultManager().url(for: NSSearchPathDirectory.userDirectory, in: NSSearchPathDomainMask.allDomainsMask, appropriateFor: nil, create: false).path!
+        let path = try! NSFileManager.defaultManager().urlForDirectory( NSSearchPathDirectory.userDirectory, in: NSSearchPathDomainMask.allDomainsMask, appropriateFor: nil, create: false).path!
         
         assert(NSFileManager.defaultManager().fileExists(atPath: path, isDirectory: nil),
             "Setting non existent directory as test parameter")
         
-        XCTAssert(FileManager.directoryExists(path))
+        XCTAssert(FileManager.directoryExists(at: path))
         
-        XCTAssert(!FileManager.fileExists(path))
+        XCTAssert(!FileManager.fileExists(at: path))
     }
     
     func testReadFile() {
@@ -72,7 +72,7 @@ class FileManagerTests: XCTestCase {
         
         var readData: Data
         
-        do { readData = try FileManager.contents(path) }
+        do { readData = try FileManager.contents(at: path) }
         
         catch { XCTFail("\(error)"); return }
         
@@ -95,7 +95,7 @@ class FileManagerTests: XCTestCase {
         XCTAssert(NSFileManager.defaultManager().createFile(atPath: path, contents: NSData(), attributes: nil))
         
         // write file
-        do { try FileManager.setContents(path, data: data) }
+        do { try FileManager.set(contents: data, at: path) }
         
         catch { XCTFail("\(error)"); return }
         
@@ -103,7 +103,7 @@ class FileManagerTests: XCTestCase {
         
         var readData: Data
         
-        do { readData = try FileManager.contents(path) }
+        do { readData = try FileManager.contents(at: path) }
             
         catch { XCTFail("\(error)"); return }
         
@@ -120,7 +120,7 @@ class FileManagerTests: XCTestCase {
         
         // create file 
         
-        do { try FileManager.createFile(path, contents: data) }
+        do { try FileManager.createFile(at: path, contents: data) }
         
         catch { XCTFail("\(error)"); return }
         

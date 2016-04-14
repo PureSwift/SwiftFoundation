@@ -24,7 +24,7 @@ public protocol RegularExpressionType: RawRepresentable, CustomStringConvertible
     init(_ pattern: String, options: CompileOptions) throws
     
     /// Finds the first match in the string
-    func match(string: String, options: MatchOptions) -> RegularExpressionMatch?
+    func match(_ string: String, options: MatchOptions) -> RegularExpressionMatch?
 }
 
 // MARK: - Protocol Implementation
@@ -95,7 +95,7 @@ final public class RegularExpression: RegularExpressionType {
         guard code == POSIXRegularExpression.ErrorCode(0) else { throw CompileError(rawValue: code)! }
     }
     
-    public func match(string: String, options: [RegularExpression.MatchOption] = []) -> RegularExpressionMatch? {
+    public func match(_ string: String, options: [RegularExpression.MatchOption] = []) -> RegularExpressionMatch? {
         
         guard let match = internalExpression.firstMatch(string, options: options) else { return nil }
         
@@ -140,7 +140,7 @@ public extension String {
         case .NotFound:
             return nil
         case let .Found(r):
-            return substring(r)
+            return substring(range: r)
         }
     }
     

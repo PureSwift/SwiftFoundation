@@ -25,7 +25,7 @@ final class SortDescriptorTests: XCTestCase {
             
             let items = names
             
-            let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: true))
+            let sortedItems = items.sorted(ComparableSortDescriptor(ascending: true))
             
             let expected = items.sorted()
             
@@ -36,7 +36,7 @@ final class SortDescriptorTests: XCTestCase {
             
             let items = names
             
-            let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: false))
+            let sortedItems = items.sorted(ComparableSortDescriptor(ascending: false))
             
             let expected = Array(items.sorted().reversed())
             
@@ -49,7 +49,7 @@ final class SortDescriptorTests: XCTestCase {
             
             let items = places
             
-            let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: true))
+            let sortedItems = items.sorted(ComparableSortDescriptor(ascending: true))
             
             let expected = items.sorted()
             
@@ -60,7 +60,7 @@ final class SortDescriptorTests: XCTestCase {
             
             let items = places
             
-            let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: false))
+            let sortedItems = items.sorted(ComparableSortDescriptor(ascending: false))
             
             let expected = Array(items.sorted().reversed())
             
@@ -76,7 +76,7 @@ final class SortDescriptorTests: XCTestCase {
             
             let items = names
             
-            let sortedItems = Sort(items, sortDescriptor: ComparatorSortDescriptor(ascending: true, comparator: { (first: String, second: String) -> Order in
+            let sortedItems = items.sorted(ComparatorSortDescriptor(ascending: true, comparator: { (first: String, second: String) -> Order in
                 
                 return first.compare(second)
             }))
@@ -90,7 +90,7 @@ final class SortDescriptorTests: XCTestCase {
             
             let items = names
             
-            let sortedItems = Sort(items, sortDescriptor: ComparatorSortDescriptor(ascending: false, comparator: { (first: String, second: String) -> Order in
+            let sortedItems = items.sorted(ComparatorSortDescriptor(ascending: false, comparator: { (first: String, second: String) -> Order in
                 
                 return first.compare(second)
             }))
@@ -106,7 +106,7 @@ final class SortDescriptorTests: XCTestCase {
             
             let items = places
             
-            let sortedItems = Sort(items, sortDescriptor: ComparatorSortDescriptor(ascending: true, comparator: { (first: String, second: String) -> Order in
+            let sortedItems = items.sorted(ComparatorSortDescriptor(ascending: true, comparator: { (first: String, second: String) -> Order in
                 
                 return first.compare(second)
             }))
@@ -118,7 +118,7 @@ final class SortDescriptorTests: XCTestCase {
             
             let items = places
             
-            let sortedItems = Sort(items, sortDescriptor: ComparatorSortDescriptor(ascending: false, comparator: { (first: String, second: String) -> Order in
+            let sortedItems = items.sorted(ComparatorSortDescriptor(ascending: false, comparator: { (first: String, second: String) -> Order in
                 
                 return first.compare(second)
             }))

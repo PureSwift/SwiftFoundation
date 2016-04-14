@@ -16,12 +16,12 @@
 // MARK: - POSIX UUID System Type Functions
 
 #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
-    public typealias POSIXUUIDStringType = uuid_string_t
+    internal typealias POSIXUUIDStringType = uuid_string_t
 #elseif os(Linux)
-    public typealias POSIXUUIDStringType = (Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8)
+    internal typealias POSIXUUIDStringType = (Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8)
 #endif
 
-public func POSIXUUIDCreateRandom() -> uuid_t {
+internal func POSIXUUIDCreateRandom() -> uuid_t {
     
     var uuid = uuid_t(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
     
@@ -37,14 +37,14 @@ public func POSIXUUIDCreateRandom() -> uuid_t {
     return uuid
 }
 
-public func POSIXUUIDConvertToString(uuid: uuid_t) -> String {
+internal func POSIXUUIDConvertToString(_ uuid: uuid_t) -> String {
     
     let uuidString = POSIXUUIDConvertToUUIDString(uuid)
     
     return POSIXUUIDStringConvertToString(uuidString)
 }
 
-public func POSIXUUIDConvertToUUIDString(uuid: uuid_t) -> POSIXUUIDStringType {
+internal func POSIXUUIDConvertToUUIDString(_ uuid: uuid_t) -> POSIXUUIDStringType {
     
     var uuidCopy = uuid
     
@@ -62,7 +62,7 @@ public func POSIXUUIDConvertToUUIDString(uuid: uuid_t) -> POSIXUUIDStringType {
     return uuidString
 }
 
-public func POSIXUUIDStringConvertToString(uuidString: POSIXUUIDStringType) -> String {
+internal func POSIXUUIDStringConvertToString(_ uuidString: POSIXUUIDStringType) -> String {
     
     var uuidStringCopy = uuidString
     
@@ -76,7 +76,7 @@ public func POSIXUUIDStringConvertToString(uuidString: POSIXUUIDStringType) -> S
     })
 }
 
-public func POSIXUUIDConvertStringToUUID(string: String) -> uuid_t? {
+internal func POSIXUUIDConvertStringToUUID(_ string: String) -> uuid_t? {
     
     let uuidPointer = UnsafeMutablePointer<uuid_t>(allocatingCapacity: 1)
     defer { uuidPointer.deallocateCapacity(1) }

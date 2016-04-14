@@ -28,9 +28,9 @@ class NSSortDescriptorTests: XCTestCase {
 
     func testComparableSorting() {
         
-        func verifySort(items: [String], ascending: Bool = true) {
+        func verifySort(_ items: [String], ascending: Bool = true) {
             
-            let sortedItems = Sort(items, sortDescriptor: ComparableSortDescriptor(ascending: ascending))
+            let sortedItems = items.sorted(ComparableSortDescriptor(ascending: ascending))
             
             let foundationSortedItems = (items as NSArray).sortedArray(using: [NSSortDescriptor(key: nil, ascending: ascending)])
             
@@ -62,9 +62,9 @@ class NSSortDescriptorTests: XCTestCase {
     
     func testComparatorSorting() {
         
-        func verifySort(items: [String], ascending: Bool = true) {
+        func verifySort(_ items: [String], ascending: Bool = true) {
             
-            let sortedItems = Sort(items, sortDescriptor: ComparatorSortDescriptor(ascending: ascending, comparator: { (first: String, second: String) -> Order in
+            let sortedItems = items.sorted(ComparatorSortDescriptor(ascending: ascending, comparator: { (first: String, second: String) -> Order in
                 
                 return first.compare(second)
             }))

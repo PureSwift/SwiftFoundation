@@ -46,7 +46,7 @@ public extension JSON.Value {
 
 private extension JSON.Value {
     
-    func toJSONObject() -> OpaquePointer {
+    func toJSONObject() -> OpaquePointer? {
         
         switch self {
             

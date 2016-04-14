@@ -12,5 +12,5 @@ public protocol URLClient {
     
     associatedtype Response: URLResponse
     
-    func sendRequest(request: Request) throws -> Response
+    func send(request: Request) throws -> Response
 }

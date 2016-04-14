@@ -30,7 +30,7 @@ public extension Data {
     /// Initializes ```Data``` from an unsafe byte pointer. 
     ///
     /// - Precondition: The pointer  points to a type exactly a byte long.
-    static func fromBytePointer<T: Any>(pointer: UnsafePointer<T>, length: Int) -> Data {
+    static func from<T: Any>(pointer: UnsafePointer<T>, length: Int) -> Data {
         
         assert(sizeof(pointer.pointee.dynamicType) == sizeof(Byte.self), "Cannot create array of bytes from pointer to \(pointer.pointee.dynamicType) because the type is larger than a single byte.")
         
