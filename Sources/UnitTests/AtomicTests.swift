@@ -23,6 +23,8 @@ final class AtomicTests: XCTestCase {
         
         var atomic = Atomic(0)
         
+        var wait = true
+        
         // main thread
         for i in 0 ..< 10 {
             
@@ -40,7 +42,10 @@ final class AtomicTests: XCTestCase {
         
         print("Waiting for threads to finish")
         
-        sleep(1)
+        while atomic.value != finalValue {
+            
+           sleep(1)
+        }
         
         XCTAssert(atomic.value == finalValue, "Value is \(atomic.value), should be \(finalValue)")
         
