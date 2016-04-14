@@ -20,6 +20,6 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xctool build -workspace SwiftFoundation.xcworkspace -scheme "SwiftFoundation iOS" -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO ; fi
   
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export PATH=$(pwd)/tests/$SWIFT_VERSION-ubuntu14.04/usr/bin:"${PATH}" ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift build -c release ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift build release ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then .build/release/UnitTests ; fi
   
