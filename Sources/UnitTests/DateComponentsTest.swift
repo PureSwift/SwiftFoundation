@@ -11,7 +11,7 @@ import SwiftFoundation
 
 final class DateComponentsTest: XCTestCase {
     
-    static let allTests: [(String, DateComponentsTest -> () throws -> Void)] = [("testBuildDate", testBuildDate)]
+    static let allTests: [(String, DateComponentsTest -> () throws -> Void)] = [("testBuildDate", testBuildDate), ("testValueForComponent", testValueForComponent)]
     
     func testBuildDate() {
         
@@ -26,5 +26,14 @@ final class DateComponentsTest: XCTestCase {
         print(assertionDate, madeDate)
         
         XCTAssert(assertionDate == madeDate)
+    }
+    
+    func testValueForComponent() {
+        
+        let dateComponents = DateComponents(since1970: 560822400)
+        
+        XCTAssert(dateComponents[.year] == 1987)
+        XCTAssert(dateComponents[.month] == 10)
+        XCTAssert(dateComponents[.dayOfMonth] == 10)
     }
 }
