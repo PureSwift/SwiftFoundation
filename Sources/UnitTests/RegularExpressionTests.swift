@@ -27,7 +27,7 @@ final class RegularExpressionTests: XCTestCase {
         guard let match = regex.match(string, options: [])
             else { XCTFail("Could not find match"); return }
         
-        let stringRange = NSRange(match.range)
+        let stringRange = NSRange(Range(match.range))
         
         #if os(Linux)
             let matchString = NSString(string: string).substringWithRange(stringRange)
@@ -49,7 +49,7 @@ final class RegularExpressionTests: XCTestCase {
             guard let match = regex.match(string, options: [])
                 else { XCTFail("Could not find match"); return }
             
-            let stringRange = NSRange(match.range)
+            let stringRange = NSRange(Range(match.range))
             
             #if os(Linux)
                 let matchString = NSString(string: string).substringWithRange(stringRange)
@@ -70,7 +70,7 @@ final class RegularExpressionTests: XCTestCase {
             guard let match = regex.match(string, options: [])
                 else { XCTFail("Could not find match"); return }
             
-            let stringRange = NSRange(match.range)
+            let stringRange = NSRange(Range(match.range))
             
             #if os(Linux)
                 let matchString = NSString(string: string).substringWithRange(stringRange)
@@ -91,7 +91,7 @@ final class RegularExpressionTests: XCTestCase {
         guard let match = regex.match(string, options: [])
             else { XCTFail("Could not find match"); return }
         
-        let stringRange = NSRange(match.range)
+        let stringRange = NSRange(Range(match.range))
         
         #if os(Linux)
             let matchString = NSString(string: string).substringWithRange(stringRange)
