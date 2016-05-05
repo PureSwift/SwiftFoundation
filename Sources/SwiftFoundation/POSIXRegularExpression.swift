@@ -82,7 +82,7 @@ public extension POSIXRegularExpression {
                 
                 let range = Int(subexpressionMatch.rm_so) ..< Int(subexpressionMatch.rm_eo)
                 
-                match.subexpressionRanges.append(RegularExpressionMatch.Range.Found(range))
+                match.subexpressionRanges.append(RegularExpressionMatch.Range.Found(Range(range)))
             }
         }
         

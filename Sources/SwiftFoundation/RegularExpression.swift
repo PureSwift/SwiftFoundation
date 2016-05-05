@@ -1,4 +1,4 @@
-﻿//
+//
 //  RegularExpression.swift
 //  SwiftFoundation
 //
@@ -135,6 +135,7 @@ public struct RegularExpressionMatch {
 }
 
 public extension String {
+    
     func substring(range: RegularExpressionMatch.Range) -> String? {
         switch range {
         case .NotFound:
@@ -142,10 +143,5 @@ public extension String {
         case let .Found(r):
             return substring(range: r)
         }
-    }
-    
-    func substring(range: Range<Int>) -> String? {
-        let indexRange = utf8.startIndex.advanced(by: range.startIndex) ..< utf8.startIndex.advanced(by: range.endIndex)
-        return String(utf8[indexRange])
     }
 }

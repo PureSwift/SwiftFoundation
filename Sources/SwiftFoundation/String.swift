@@ -46,4 +46,9 @@ public extension String {
         
         return Data(byteValue: [] + utf8)
     }
+    
+    func substring(range: Range<Int>) -> String? {
+        let indexRange = utf8.index(utf8.startIndex, offsetBy: range.lowerBound) ..< utf8.index(utf8.startIndex, offsetBy: range.upperBound)
+        return String(utf8[indexRange])
+    }
 }

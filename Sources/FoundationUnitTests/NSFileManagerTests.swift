@@ -26,7 +26,7 @@ class FileManagerTests: XCTestCase {
 
     func testGetCurrentDirectory() {
         
-        XCTAssert(FileManager.currentDirectory == NSFileManager.defaultManager().currentDirectoryPath)
+        XCTAssert(FileManager.currentDirectory == NSFileManager.default().currentDirectoryPath)
     }
     
     func testFileExists() {
@@ -35,7 +35,7 @@ class FileManagerTests: XCTestCase {
         
         let path = NSTemporaryDirectory() + "/" + fileName
         
-        XCTAssert(NSFileManager.defaultManager().createFile(atPath: path, contents: NSData(), attributes: nil))
+        XCTAssert(NSFileManager.default().createFile(atPath: path, contents: NSData(), attributes: nil))
         
         XCTAssert(FileManager.fileExists(at: path))
         
@@ -44,9 +44,9 @@ class FileManagerTests: XCTestCase {
     
     func testDirectoryExists() {
         
-        let path = try! NSFileManager.defaultManager().urlForDirectory( NSSearchPathDirectory.userDirectory, in: NSSearchPathDomainMask.allDomainsMask, appropriateFor: nil, create: false).path!
+        let path = try! NSFileManager.default().urlForDirectory( NSSearchPathDirectory.userDirectory, in: NSSearchPathDomainMask.allDomainsMask, appropriateFor: nil, create: false).path!
         
-        assert(NSFileManager.defaultManager().fileExists(atPath: path, isDirectory: nil),
+        assert(NSFileManager.default().fileExists(atPath: path, isDirectory: nil),
             "Setting non existent directory as test parameter")
         
         XCTAssert(FileManager.directoryExists(at: path))
@@ -66,7 +66,7 @@ class FileManagerTests: XCTestCase {
         
         let path = NSTemporaryDirectory() + "/" + fileName + ".txt"
         
-        XCTAssert(NSFileManager.defaultManager().createFile(atPath: path, contents: data.toFoundation(), attributes: nil))
+        XCTAssert(NSFileManager.default().createFile(atPath: path, contents: data.toFoundation(), attributes: nil))
         
         // read file
         
@@ -92,7 +92,7 @@ class FileManagerTests: XCTestCase {
         let path = NSTemporaryDirectory() + fileName + ".txt"
         
         // create empty file
-        XCTAssert(NSFileManager.defaultManager().createFile(atPath: path, contents: NSData(), attributes: nil))
+        XCTAssert(NSFileManager.default().createFile(atPath: path, contents: NSData(), attributes: nil))
         
         // write file
         do { try FileManager.set(contents: data, at: path) }
@@ -126,9 +126,9 @@ class FileManagerTests: XCTestCase {
         
         // read data
         
-        XCTAssert(NSFileManager.defaultManager().fileExists(atPath: path))
+        XCTAssert(NSFileManager.default().fileExists(atPath: path))
         
-        NSFileManager.defaultManager()
+        NSFileManager.default()
         
         guard let readData = NSData(contentsOfFile: path)
             else { XCTFail("Could not read data"); return }

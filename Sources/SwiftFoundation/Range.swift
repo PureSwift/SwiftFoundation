@@ -6,13 +6,13 @@
 //  Copyright © 2016 PureSwift. All rights reserved.
 //
 
-public extension Range where Element: Integer {
+public extension Range where Bound: Integer {
     
     func isSubset(_ other: Range) -> Bool {
         
-        return self.startIndex >= other.startIndex
-            && self.startIndex <= other.endIndex
-            && self.endIndex >= other.startIndex
-            && self.endIndex <= other.endIndex
+        return self.lowerBound >= other.lowerBound
+            && self.lowerBound <= other.upperBound
+            && self.upperBound >= other.lowerBound
+            && self.upperBound <= other.upperBound
     }
 }
