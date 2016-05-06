@@ -27,13 +27,9 @@ final class RegularExpressionTests: XCTestCase {
         guard let match = regex.match(string, options: [])
             else { XCTFail("Could not find match"); return }
         
-        let stringRange = NSRange(Range(match.range))
+        let stringRange = NSRange(match.range)
         
-        #if os(Linux)
-            let matchString = NSString(string: string).substringWithRange(stringRange)
-        #else
-            let matchString = NSString(string: string).substring(with: stringRange)
-        #endif
+        let matchString = NSString(string: string).substring(with: stringRange)
         
         XCTAssert(matchString == "Welcome")
     }
@@ -49,13 +45,9 @@ final class RegularExpressionTests: XCTestCase {
             guard let match = regex.match(string, options: [])
                 else { XCTFail("Could not find match"); return }
             
-            let stringRange = NSRange(Range(match.range))
+            let stringRange = NSRange(match.range)
             
-            #if os(Linux)
-                let matchString = NSString(string: string).substringWithRange(stringRange)
-            #else
-                let matchString = NSString(string: string).substring(with: stringRange)
-            #endif
+            let matchString = NSString(string: string).substring(with: stringRange)
             
             XCTAssert(matchString == "aaa")
         }
@@ -70,13 +62,9 @@ final class RegularExpressionTests: XCTestCase {
             guard let match = regex.match(string, options: [])
                 else { XCTFail("Could not find match"); return }
             
-            let stringRange = NSRange(Range(match.range))
+            let stringRange = NSRange(match.range)
             
-            #if os(Linux)
-                let matchString = NSString(string: string).substringWithRange(stringRange)
-            #else
-                let matchString = NSString(string: string).substring(with: stringRange)
-            #endif
+            let matchString = NSString(string: string).substring(with: stringRange)
             
             XCTAssert(matchString == "Bird", matchString)
         }
@@ -91,13 +79,9 @@ final class RegularExpressionTests: XCTestCase {
         guard let match = regex.match(string, options: [])
             else { XCTFail("Could not find match"); return }
         
-        let stringRange = NSRange(Range(match.range))
+        let stringRange = NSRange(match.range)
         
-        #if os(Linux)
-            let matchString = NSString(string: string).substringWithRange(stringRange)
-        #else
-            let matchString = NSString(string: string).substring(with: stringRange)
-        #endif
+        let matchString = NSString(string: string).substring(with: stringRange)
         
         // matched whole string
         XCTAssert(matchString == string)
@@ -140,3 +124,15 @@ final class RegularExpressionTests: XCTestCase {
         }
     }
 }
+
+#if os(Linux)
+
+extension NSRange {
+    
+    init(_ range: Range<Int>) {
+        
+        self = NSRange(CountableRange(range))
+    }
+}
+
+#endif
