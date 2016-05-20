@@ -10,7 +10,7 @@ import XCTest
 
 final class StringTests: XCTestCase {
     
-    static let allTests: [(String, StringTests -> () throws -> Void)] = [("testUTF8Data", testUTF8Data)]
+    static let allTests: [(String, (StringTests) -> () throws -> Void)] = [("testUTF8Data", testUTF8Data)]
     
     // MARK: - Functional Tests
 

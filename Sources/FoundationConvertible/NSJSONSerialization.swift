@@ -80,7 +80,7 @@ public extension NSJSONSerialization {
                 
             case .Number(let number): return number
                 
-            case .Array(let array): return array.rawValues
+            case .Array(let array): return array.rawValues as NSArray
                 
             case .Dictionary(let dictionary):
                 
@@ -91,7 +91,7 @@ public extension NSJSONSerialization {
                     dictionaryValue[key] = value.rawValue
                 }
                 
-                return dictionaryValue
+                return dictionaryValue as NSDictionary
             }
             
         }
@@ -207,7 +207,7 @@ private let falseNumber: NSNumber = false
 private let trueObjCType = String(validatingUTF8: trueNumber.objCType)
 private let falseObjCType = String(validatingUTF8: falseNumber.objCType)
 
-private let intNumber: NSNumber = Int(1)
+private let intNumber: NSNumber = NSNumber(value: Int(1))
 private let intObjCType = String(validatingUTF8: intNumber.objCType)!
 
 

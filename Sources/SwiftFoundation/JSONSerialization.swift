@@ -34,7 +34,7 @@ public extension JSON.Value {
         
         let writingFlags = options.optionsBitmask()
         
-        let stringPointer = json_object_to_json_string_ext(jsonObject, writingFlags)
+        let stringPointer = json_object_to_json_string_ext(jsonObject, writingFlags)!
         
         let string = Swift.String(validatingUTF8: stringPointer)!
         

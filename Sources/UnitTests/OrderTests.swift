@@ -11,7 +11,7 @@ import SwiftFoundation
 
 final class OrderTests: XCTestCase {
     
-    static let allTests: [(String, OrderTests -> () throws -> Void)] = [("testComparisonResult", testComparisonResult)]
+    static let allTests: [(String, (OrderTests) -> () throws -> Void)] = [("testComparisonResult", testComparisonResult)]
 
     func testComparisonResult() {
         

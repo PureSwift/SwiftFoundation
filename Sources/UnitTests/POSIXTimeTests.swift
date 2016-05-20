@@ -17,7 +17,7 @@ import SwiftFoundation
 
 final class POSIXTimeTests: XCTestCase {
     
-    static let allTests: [(String, POSIXTimeTests -> () throws -> Void)] =
+    static let allTests: [(String, (POSIXTimeTests) -> () throws -> Void)] =
         [("testGetTimeOfDay", testGetTimeOfDay),
         ("testTimeVal", testTimeVal),
         ("testTimeSpec", testTimeSpec)]

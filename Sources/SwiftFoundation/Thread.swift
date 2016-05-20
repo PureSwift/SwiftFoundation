@@ -73,9 +73,9 @@ public final class Thread {
 
 // MARK: - Private
 
-private func ThreadPrivateMain(arg: UnsafeMutablePointer<Void>!) -> UnsafeMutablePointer<Void>! {
+private func ThreadPrivateMain(arg: UnsafeMutablePointer<Void>?) -> UnsafeMutablePointer<Void>? {
     
-    let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(OpaquePointer(arg))
+    let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(OpaquePointer(arg!))
     
     unmanaged.takeUnretainedValue().closure()
     

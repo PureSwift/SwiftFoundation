@@ -44,7 +44,7 @@ private extension JSON.Value {
             
         case json_type_string:
             
-            let stringPointer = json_object_get_string(jsonObject)
+            let stringPointer = json_object_get_string(jsonObject)!
             
             let string = Swift.String(validatingUTF8: stringPointer) ?? ""
             
@@ -97,7 +97,7 @@ private extension JSON.Value {
             
         case json_type_object:
             
-            let hashTable = json_object_get_object(jsonObject)
+            let hashTable = json_object_get_object(jsonObject)!
             
             var jsonDictionary = [StringValue: JSONValue]()
             

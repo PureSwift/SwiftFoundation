@@ -11,7 +11,7 @@ import SwiftFoundation
 
 final class RangeTests: XCTestCase {
     
-    static let allTests: [(String, RangeTests -> () throws -> Void)] = [ ("testSubset", testSubset) ]
+    static let allTests: [(String, (RangeTests) -> () throws -> Void)] = [ ("testSubset", testSubset) ]
 
     func testSubset() {
         

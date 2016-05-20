@@ -11,7 +11,7 @@ import SwiftFoundation
 
 final class JSONTests: XCTestCase {
     
-    static let allTests: [(String, JSONTests -> () throws -> Void)] = [
+    static let allTests: [(String, (JSONTests) -> () throws -> Void)] = [
         
         ("testJSONEncodable", testJSONEncodable),
         ("testJSONParse", testJSONParse),
@@ -90,11 +90,11 @@ final class JSONTests: XCTestCase {
             
                 let foundationJSONOutput = try! NSJSONSerialization.data(withJSONObject: json.toFoundation().rawValue, options: NSJSONWritingOptions(rawValue: 0))
             
-                let foundationJSONOutputString = NSString(data: foundationJSONOutput, encoding: NSUTF8StringEncoding)
+                let foundationJSONOutputString = NSString(data: foundationJSONOutput, encoding: NSUTF8StringEncoding)!
                 
-                XCTAssert(jsonString == foundationJSONOutputString, "Must match Foundation output. \(jsonString) == \(foundationJSONOutputString)")
+                XCTAssert(jsonString == foundationJSONOutputString as String, "Must match Foundation output. \(jsonString) == \(foundationJSONOutputString)")
                 
-                XCTAssert(jsonString == foundationJSONOutputString, "Expected JSON string must match Foundation output. \(expectedJSONString) == \(foundationJSONOutputString)")
+                XCTAssert(jsonString == foundationJSONOutputString as String, "Expected JSON string must match Foundation output. \(expectedJSONString) == \(foundationJSONOutputString)")
             #endif
             
             XCTAssert(jsonString == expectedJSONString, "Does not match expected output. \(jsonString) == \(expectedJSONString)")

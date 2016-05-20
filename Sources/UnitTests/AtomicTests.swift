@@ -17,7 +17,7 @@ import SwiftFoundation
 
 final class AtomicTests: XCTestCase {
     
-    static let allTests: [(String, AtomicTests -> () throws -> Void)] = [("testAtomic", testAtomic)]
+    static let allTests: [(String, (AtomicTests) -> () throws -> Void)] = [("testAtomic", testAtomic)]
 
     func testAtomic() {
         

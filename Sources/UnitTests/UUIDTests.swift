@@ -12,7 +12,7 @@ import SwiftFoundation
 
 final class UUIDTests: XCTestCase {
     
-    static let allTests: [(String, UUIDTests -> () throws -> Void)] =
+    static let allTests: [(String, (UUIDTests) -> () throws -> Void)] =
         [("testCreateRandomUUID", testCreateRandomUUID),
         ("testUUIDString", testUUIDString),
         ("testCreateFromString", testCreateFromString),

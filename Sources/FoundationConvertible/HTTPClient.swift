@@ -40,7 +40,7 @@ public extension HTTP {
             
             // execute request
             
-            let semaphore = dispatch_semaphore_create(0);
+            let semaphore = dispatch_semaphore_create(0)!;
             
             var error: NSError?
             

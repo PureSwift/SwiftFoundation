@@ -12,7 +12,7 @@ import Foundation
 
 final class RegularExpressionTests: XCTestCase {
     
-    static let allTests: [(String, RegularExpressionTests -> () throws -> Void)] =
+    static let allTests: [(String, (RegularExpressionTests) -> () throws -> Void)] =
         [("testSimpleRegex", testSimpleRegex),
         ("testExtendedRegex", testExtendedRegex),
         ("testMultipleSubexpressions", testMultipleSubexpressions),

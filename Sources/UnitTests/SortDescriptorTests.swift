@@ -11,7 +11,7 @@ import SwiftFoundation
 
 final class SortDescriptorTests: XCTestCase {
     
-    static let allTests: [(String, SortDescriptorTests -> () throws -> Void)] =
+    static let allTests: [(String, (SortDescriptorTests) -> () throws -> Void)] =
         [("testComparableSorting", testComparableSorting),
         ("testComparatorSorting", testComparatorSorting)]
     

@@ -80,7 +80,9 @@ public extension tm {
         
         var seconds = UTCSecondsSince1970
         
-        let timePointer = gmtime(&seconds)
+        let timePointer = gmtime(&seconds)!
+        
+        defer { free(timePointer) }
         
         self = timePointer.pointee
     }
