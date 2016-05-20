@@ -80,9 +80,10 @@ public extension tm {
         
         var seconds = UTCSecondsSince1970
         
+        // don't free!
+        // The return value points to a statically allocated struct which might be overwritten by subsequent calls to any of the date and time functions.
+        // http://linux.die.net/man/3/gmtime
         let timePointer = gmtime(&seconds)!
-        
-        defer { free(timePointer) }
         
         self = timePointer.pointee
     }
