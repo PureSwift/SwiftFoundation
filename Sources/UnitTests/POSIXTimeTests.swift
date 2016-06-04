@@ -23,12 +23,17 @@ final class POSIXTimeTests: XCTestCase {
         ("testTimeSpec", testTimeSpec)]
     
     func testGetTimeOfDay() {
-                
-        do { try timeval.timeOfDay() }
+        
+        var time = timeval()
+        
+        do { time = try timeval.timeOfDay() }
+            
         catch {
             
             XCTFail("Error getting time: \(error)")
         }
+        
+        print("Current time: \(time)")
     }
 
     func testTimeVal() {
