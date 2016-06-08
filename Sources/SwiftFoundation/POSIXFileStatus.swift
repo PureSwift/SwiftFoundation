@@ -13,8 +13,6 @@
     import CStatfs
 #endif
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
-
 public extension stat {
     
     // MARK: - Initialization
@@ -32,6 +30,8 @@ public extension stat {
     }
     
     // MARK: - Properties
+    
+    #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
     
     /// Date of last access. Date of ```st_atimespec``` or ```st_atime```.
     ///
@@ -69,6 +69,8 @@ public extension stat {
         get { return Date(since1970: st_birthtimespec.timeIntervalValue) }
         set { st_birthtimespec = timespec(timeInterval: lastDataModificationDate.since1970) }
     }
+    
+    #endif
     
     var fileSize: Int {
         
@@ -123,5 +125,3 @@ public extension mode_t {
         }
     }
 }
-
-#endif

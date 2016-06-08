@@ -10,25 +10,27 @@
     import Darwin.C
 #elseif os(Linux)
     import Glibc
+    import CStatfs
 #endif
-
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
 
 public typealias FileSystemAttributes = statfs
 
 public typealias FileAttributes = stat
 
-/// Class for interacting with the file system.
-///
-/// Only availible on Darwin (```open``` has been marked as unavailible).
-public final class FileManager {
+/// Type for interacting with the file system.
+public struct FileManager {
     
     // MARK: - Determining Access to Files
     
     /// Determines whether a file descriptor exists at the specified path. Can be regular file, directory, socket, etc.
     public static func itemExists(at path: String) -> Bool {
         
-        return (stat(path, nil) == 0)
+        var inodeInfo = stat()
+        
+        guard stat(path, &inodeInfo) == 0
+            else { return false }
+        
+        return true
     }
     
     /// Determines whether a file exists at the specified path.
@@ -185,7 +187,11 @@ public final class FileManager {
         
         let fileSize = attributes.fileSize
         
+        #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+        
         assert(fileSize <= SSIZE_MAX, "File size (\(fileSize)) is larger than the max number of bytes allowed (\(SSIZE_MAX))")
+            
+        #endif
         
         let memoryPointer = UnsafeMutablePointer<Byte>(allocatingCapacity: fileSize)
         
@@ -221,5 +227,4 @@ public final class FileManager {
 
 public let DefaultFileMode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH
 
-#endif
 
