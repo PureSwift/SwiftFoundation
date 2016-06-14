@@ -105,9 +105,9 @@ private extension JSON.Value {
             
             while entry != nil {
             
-                let keyPointer = entry.pointee.k
+                let keyPointer = entry!.pointee.k
                 
-                let valuePointer = entry.pointee.v
+                let valuePointer = entry!.pointee.v
                 
                 let key = Swift.String.init(validatingUTF8: unsafeBitCast(keyPointer, to: UnsafeMutablePointer<CChar>.self))!
                 
@@ -115,7 +115,7 @@ private extension JSON.Value {
                 
                 jsonDictionary[key] = JSON.Value(jsonObject: value)
                 
-                entry = entry.pointee.next
+                entry = entry!.pointee.next
             }
             
             self = .Object(jsonDictionary)
