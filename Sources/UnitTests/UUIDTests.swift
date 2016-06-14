@@ -23,7 +23,7 @@ final class UUIDTests: XCTestCase {
     func testCreateRandomUUID() {
         
         // try to create without crashing
-        let uuid = UUID()
+        let uuid = SwiftFoundation.UUID()
         
         print(uuid)
     }

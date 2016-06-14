@@ -32,7 +32,7 @@ class NSUUIDTests: XCTestCase {
         
         do {
             
-            _ = UUID()
+            let _ = SwiftFoundation.UUID()
         }
     }
     
@@ -47,7 +47,7 @@ class NSUUIDTests: XCTestCase {
     
     func testUUIDValidBytes() {
         
-        let uuid = UUID()
+        let uuid = SwiftFoundation.UUID()
         
         let foundationUUID = NSUUID(byteValue: uuid.byteValue)
         
@@ -71,7 +71,7 @@ class NSUUIDTests: XCTestCase {
             
             for _ in 0...1000000 {
                 
-                _ = UUID()
+                _ = Foundation.UUID()
             }
         }
     }
@@ -89,7 +89,7 @@ class NSUUIDTests: XCTestCase {
     
     func testStringPerformance() {
         
-        let uuid = UUID()
+        let uuid = SwiftFoundation.UUID()
         
         self.measure {
             

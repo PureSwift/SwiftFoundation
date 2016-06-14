@@ -23,7 +23,7 @@ extension String: FoundationConvertible {
         
         let stringData = self.toUTF8Data()
         
-        guard let foundationString = NSString(bytes: stringData.byteValue, length: stringData.byteValue.count, encoding: NSUTF8StringEncoding)
+        guard let foundationString = NSString(bytes: stringData.byteValue, length: stringData.byteValue.count, encoding: String.Encoding.utf8.rawValue)
             else { fatalError("Could not convert String to NSString") }
         
         return foundationString

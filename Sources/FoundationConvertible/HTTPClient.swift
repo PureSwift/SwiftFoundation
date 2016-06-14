@@ -16,55 +16,54 @@ public extension HTTP {
     /// Loads HTTP requests
     public final class Client: URLClient {
         
-        public init(session: NSURLSession = NSURLSession.shared()) {
+        public init(session: URLSession = URLSession.shared()) {
             
             self.session = session
         }
         
         /// The backing ```NSURLSession```.
-        public let session: NSURLSession
+        public let session: URLSession
         
         public func send(request: HTTP.Request) throws -> HTTP.Response {
             
-            var dataTask: NSURLSessionDataTask?
+            var dataTask: URLSessionDataTask?
             
             return try send(request: request, dataTask: &dataTask)
         }
         
-        public func send(request: HTTP.Request, dataTask: inout NSURLSessionDataTask?) throws -> HTTP.Response {
+        public func send(request: HTTP.Request, dataTask: inout URLSessionDataTask?) throws -> HTTP.Response {
             
             // build request... 
             
-            guard let urlRequest = NSMutableURLRequest(request: request)
+            guard let urlRequest = Foundation.URLRequest(request: request)
                 else { throw Error.BadRequest }
             
             // execute request
             
-            let semaphore = dispatch_semaphore_create(0)!;
+            let semaphore = DispatchSemaphore(value: 0);
             
             var error: NSError?
             
             var responseData: NSData?
             
-            var urlResponse: NSHTTPURLResponse?
+            var urlResponse: HTTPURLResponse?
             
-            dataTask = self.session.dataTask(with: urlRequest) { (data: NSData?, response: NSURLResponse?, responseError: NSError?) -> () in
+            dataTask = self.session.dataTask(with: urlRequest) { (data: Foundation.Data?, response: Foundation.URLResponse?, responseError: NSError?) -> () in
                 
                 responseData = data
                 
-                urlResponse = response as? NSHTTPURLResponse
+                urlResponse = response as? Foundation.HTTPURLResponse
                 
                 error = responseError
                 
-                dispatch_semaphore_signal(semaphore);
-                
+                semaphore.signal()
             }
             
             dataTask!.resume()
             
             // wait for task to finish
             
-            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+            let _ = semaphore.wait(timeout: DispatchTime.distantFuture);
             
             guard urlResponse != nil else { throw error! }
             

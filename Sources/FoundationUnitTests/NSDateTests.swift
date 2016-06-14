@@ -12,9 +12,9 @@ import XCTest
 import Foundation
 import SwiftFoundation
 
-class DateTests: XCTestCase {
+final class DateTests: XCTestCase {
     
-    var date: Date!
+    var date: SwiftFoundation.Date!
     
     var foundationDate: NSDate!
 
@@ -82,14 +82,14 @@ class DateTests: XCTestCase {
         
         let intervalSinceDate = date.timeIntervalSince(date: date2)
         
-        let foundationIntervalSinceDate = foundationDate.timeIntervalSince(foundationDate2)
+        let foundationIntervalSinceDate = foundationDate.timeIntervalSince(foundationDate2 as Foundation.Date)
         
         XCTAssert(intervalSinceDate == foundationIntervalSinceDate)
     }
     
     func testEquality() {
         
-        let date = Date()
+        let date = SwiftFoundation.Date()
         
         let date2 = Date(sinceReferenceDate: date.sinceReferenceDate)
         
@@ -109,7 +109,7 @@ class DateTests: XCTestCase {
     
     func testGetTimeIntervalSince1970() {
         
-        let date = Date()
+        let date = SwiftFoundation.Date()
         
         let foundationDate = NSDate(timeIntervalSinceReferenceDate: date.sinceReferenceDate)
         
@@ -118,14 +118,14 @@ class DateTests: XCTestCase {
     
     func testCreateWithTimeIntervalSince1970() {
         
-        let date = Date()
+        let date = SwiftFoundation.Date()
         
         XCTAssert(Date(since1970: date.since1970) == date, "Date should be the same as original")
     }
     
     func testSetWithTimeIntervalSince1970() {
         
-        var date = Date()
+        var date = SwiftFoundation.Date()
         
         let foundationDate = NSDate(timeIntervalSinceReferenceDate: date.sinceReferenceDate)
         
@@ -157,7 +157,7 @@ class DateTests: XCTestCase {
             
             for _ in 0...1000000 {
                 
-                _ = Date.init()
+                _ = SwiftFoundation.Date.init()
             }
         }
     }
@@ -168,7 +168,7 @@ class DateTests: XCTestCase {
             
             for _ in 0...1000000 {
                 
-                _ = NSDate.init()
+                _ = Foundation.Date()
             }
         }
     }

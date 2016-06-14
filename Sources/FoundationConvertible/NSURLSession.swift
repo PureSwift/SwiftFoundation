@@ -14,23 +14,19 @@
 
 import Foundation
 
-public extension NSMutableURLRequest {
+public extension Foundation.URLRequest {
     
-    convenience init?(request: HTTP.Request) {
-        
-        self.init()
-        
-        guard request.version == HTTP.Version(1, 1) else { return nil }
+    init?(request: HTTP.Request) {
         
         guard let url = NSURL(string: request.URL) else { return nil }
+                
+        guard request.version == HTTP.Version(1, 1) else { return nil }
         
-        self.url = url
-        
-        self.timeoutInterval = request.timeoutInterval
+        self.init(url: url as Foundation.URL, timeoutInterval: request.timeoutInterval)
         
         if let data = request.body {
             
-            self.httpBody = data.toFoundation()
+            self.httpBody = data.toFoundation() as Foundation.Data
         }
         
         self.allHTTPHeaderFields = request.headers

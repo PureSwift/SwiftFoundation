@@ -477,12 +477,12 @@
 			children = (
 				6E2C2B0D1C20F6EB00B2C995 /* FoundationConvertible.swift */,
 				6E2C2B0E1C20F6EB00B2C995 /* HTTPClient.swift */,
+				6E2C2B141C20F6EB00B2C995 /* NSURLSession.swift */,
 				6E2C2B0F1C20F6EB00B2C995 /* NSComparisonResult.swift */,
 				6E2C2B101C20F6EB00B2C995 /* NSData.swift */,
 				6E2C2B111C20F6EB00B2C995 /* NSDate.swift */,
 				6E2C2B121C20F6EB00B2C995 /* NSJSONSerialization.swift */,
 				6E2C2B131C20F6EB00B2C995 /* NSNull.swift */,
-				6E2C2B141C20F6EB00B2C995 /* NSURLSession.swift */,
 				6E2C2B151C20F6EB00B2C995 /* NSUUID.swift */,
 				6E2C2C311C212C2200B2C995 /* NSString.swift */,
 			);
@@ -816,7 +816,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = PureSwift;
 				TargetAttributes = {
 					6E30BA0C1B40F543009B1B49 = {
@@ -1267,8 +1267,8 @@
 		6E08F8551BBE7B8800548B1E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SwiftFoundationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colemancda.SwiftFoundationTests;
@@ -1280,8 +1280,8 @@
 		6E08F8561BBE7B8800548B1E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SwiftFoundationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colemancda.SwiftFoundationTests;

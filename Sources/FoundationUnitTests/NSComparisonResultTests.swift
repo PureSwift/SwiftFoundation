@@ -44,7 +44,7 @@ class NSComparisonResultTests: XCTestCase {
         
         // dates
         
-        let now = Date()
+        let now = SwiftFoundation.Date()
         
         let later = now + 0.5
         
@@ -52,7 +52,7 @@ class NSComparisonResultTests: XCTestCase {
         
         let foundationLater = foundationNow.addingTimeInterval(0.5)
         
-        XCTAssert(now.compare(later) == Order(foundation: foundationNow.compare(foundationLater)))
+        XCTAssert(now.compare(later) == Order(foundation: foundationNow.compare(foundationLater as Foundation.Date)))
         
         XCTAssert(now < later)
     }

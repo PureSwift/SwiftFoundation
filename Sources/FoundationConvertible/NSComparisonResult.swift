@@ -14,7 +14,7 @@ import Foundation
 
 extension Order: FoundationConvertible {
     
-    public init(foundation: NSComparisonResult) {
+    public init(foundation: Foundation.ComparisonResult) {
         
         switch foundation {
             
@@ -24,7 +24,7 @@ extension Order: FoundationConvertible {
         }
     }
     
-    public func toFoundation() -> NSComparisonResult {
+    public func toFoundation() -> Foundation.ComparisonResult {
         
         switch self {
             

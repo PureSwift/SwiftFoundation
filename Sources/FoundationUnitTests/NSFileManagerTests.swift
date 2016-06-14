@@ -26,16 +26,16 @@ class FileManagerTests: XCTestCase {
 
     func testGetCurrentDirectory() {
         
-        XCTAssert(FileManager.currentDirectory == NSFileManager.default().currentDirectoryPath)
+        XCTAssert(FileManager.currentDirectory == Foundation.FileManager.default().currentDirectoryPath)
     }
     
     func testFileExists() {
         
-        let fileName = "SwiftFoundationTestFileExists-\(UUID())"
+        let fileName = "SwiftFoundationTestFileExists-\(SwiftFoundation.UUID())"
         
         let path = NSTemporaryDirectory() + "/" + fileName
         
-        XCTAssert(NSFileManager.default().createFile(atPath: path, contents: NSData(), attributes: nil))
+        XCTAssert(Foundation.FileManager.default().createFile(atPath: path, contents: Foundation.Data(), attributes: nil))
         
         XCTAssert(FileManager.fileExists(at: path))
         
@@ -44,9 +44,9 @@ class FileManagerTests: XCTestCase {
     
     func testDirectoryExists() {
         
-        let path = try! NSFileManager.default().urlForDirectory( NSSearchPathDirectory.userDirectory, in: NSSearchPathDomainMask.allDomainsMask, appropriateFor: nil, create: false).path!
+        let path = try! Foundation.FileManager.default().urlForDirectory(.userDirectory, in: .allDomainsMask, appropriateFor: nil, create: false).path!
         
-        assert(NSFileManager.default().fileExists(atPath: path, isDirectory: nil),
+        assert(Foundation.FileManager.default().fileExists(atPath: path, isDirectory: nil),
             "Setting non existent directory as test parameter")
         
         XCTAssert(FileManager.directoryExists(at: path))
@@ -60,19 +60,19 @@ class FileManagerTests: XCTestCase {
         
         let bytes: [Byte] = "Test File: testReadFile 📱".utf8.map { (codeUnit) -> Byte in return codeUnit }
         
-        let data = Data(byteValue: bytes)
+        let data = SwiftFoundation.Data(byteValue: bytes)
         
-        let fileName = "SwiftFoundationTestReadFile-\(UUID())"
+        let fileName = "SwiftFoundationTestReadFile-\(SwiftFoundation.UUID())"
         
         let path = NSTemporaryDirectory() + "/" + fileName + ".txt"
         
-        XCTAssert(NSFileManager.default().createFile(atPath: path, contents: data.toFoundation(), attributes: nil))
+        XCTAssert(Foundation.FileManager.default().createFile(atPath: path, contents: data.toFoundation() as Foundation.Data, attributes: nil))
         
         // read file
         
-        var readData: Data
+        var readData: SwiftFoundation.Data
         
-        do { readData = try FileManager.contents(at: path) }
+        do { readData = try SwiftFoundation.FileManager.contents(at: path) }
         
         catch { XCTFail("\(error)"); return }
         
@@ -87,21 +87,21 @@ class FileManagerTests: XCTestCase {
         
         let data = Data(byteValue: bytes)
         
-        let fileName = "SwiftFoundationTestWriteFile-\(UUID())"
+        let fileName = "SwiftFoundationTestWriteFile-\(SwiftFoundation.UUID())"
         
         let path = NSTemporaryDirectory() + fileName + ".txt"
         
         // create empty file
-        XCTAssert(NSFileManager.default().createFile(atPath: path, contents: NSData(), attributes: nil))
+        XCTAssert(Foundation.FileManager.default().createFile(atPath: path, contents: Foundation.Data(), attributes: nil))
         
         // write file
-        do { try FileManager.set(contents: data, at: path) }
+        do { try SwiftFoundation.FileManager.set(contents: data, at: path) }
         
         catch { XCTFail("\(error)"); return }
         
         // read file
         
-        var readData: Data
+        var readData: SwiftFoundation.Data
         
         do { readData = try FileManager.contents(at: path) }
             
@@ -114,7 +114,7 @@ class FileManagerTests: XCTestCase {
         
         let data = "Test File: testCreateFile 📱".toUTF8Data()
         
-        let fileName = "SwiftFoundationTestCreateFile-\(UUID())"
+        let fileName = "SwiftFoundationTestCreateFile-\(SwiftFoundation.UUID())"
         
         let path = NSTemporaryDirectory() + fileName + ".txt"
         
@@ -126,11 +126,11 @@ class FileManagerTests: XCTestCase {
         
         // read data
         
-        XCTAssert(NSFileManager.default().fileExists(atPath: path))
+        XCTAssert(Foundation.FileManager.default().fileExists(atPath: path))
         
-        NSFileManager.default()
+        Foundation.FileManager.default()
         
-        guard let readData = NSData(contentsOfFile: path)
+        guard let readData = try? Foundation.Data(contentsOf: Foundation.URL(string: path)!)
             else { XCTFail("Could not read data"); return }
         
         XCTAssert(data == Data(foundation: readData))

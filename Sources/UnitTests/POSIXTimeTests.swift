@@ -38,7 +38,7 @@ final class POSIXTimeTests: XCTestCase {
 
     func testTimeVal() {
         
-        let date = Date()
+        let date = SwiftFoundation.Date()
         
         let time = timeval(timeInterval: date.since1970)
         
@@ -47,7 +47,7 @@ final class POSIXTimeTests: XCTestCase {
     
     func testTimeSpec() {
         
-        let date = Date()
+        let date = SwiftFoundation.Date()
         
         let time = timespec(timeInterval: date.since1970)
         

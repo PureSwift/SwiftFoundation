@@ -32,7 +32,7 @@ class NSSortDescriptorTests: XCTestCase {
             
             let sortedItems = items.sorted(ComparableSortDescriptor(ascending: ascending))
             
-            let foundationSortedItems = (items as NSArray).sortedArray(using: [NSSortDescriptor(key: nil, ascending: ascending)])
+            let foundationSortedItems = (items as NSArray).sortedArray(using: [SortDescriptor(key: nil, ascending: ascending)])
             
             for (index, element) in sortedItems.enumerated() {
                 
@@ -69,7 +69,7 @@ class NSSortDescriptorTests: XCTestCase {
                 return first.compare(second)
             }))
             
-            let foundationSortedItems = (items as NSArray).sortedArray(using: [NSSortDescriptor(key: nil, ascending: ascending)])
+            let foundationSortedItems = (items as NSArray).sortedArray(using: [SortDescriptor(key: nil, ascending: ascending)])
             
             for (index, element) in sortedItems.enumerated() {
                 

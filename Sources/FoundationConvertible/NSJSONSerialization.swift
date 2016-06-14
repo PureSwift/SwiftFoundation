@@ -10,7 +10,7 @@
 
 import Foundation
 
-public extension NSJSONSerialization {
+public extension Foundation.JSONSerialization {
     
     public enum Value: RawRepresentable {
         
@@ -44,7 +44,7 @@ public extension NSJSONSerialization {
                 return
             }
             
-            if let rawArray = rawValue as? [AnyObject], let jsonArray: [NSJSONSerialization.Value] = NSJSONSerialization.Value.from(rawValues: rawArray) {
+            if let rawArray = rawValue as? [AnyObject], let jsonArray: [NSJSONSerialization.Value] = JSONSerialization.Value.from(rawValues: rawArray) {
                 
                 self = .Array(jsonArray)
                 return
@@ -58,7 +58,7 @@ public extension NSJSONSerialization {
                 
                 for (key, rawValue) in rawDictionary {
                     
-                    guard let jsonValue = NSJSONSerialization.Value(rawValue: rawValue) else { return nil }
+                    guard let jsonValue = JSONSerialization.Value(rawValue: rawValue) else { return nil }
                     
                     jsonObject[key] = jsonValue
                 }
@@ -158,19 +158,19 @@ extension JSON.Value: FoundationConvertible {
         
         switch self {
             
-        case .Null: return NSJSONSerialization.Value.Null
+        case .Null: return JSONSerialization.Value.Null
             
-        case .String(let string): return NSJSONSerialization.Value.String(string as NSString)
+        case .String(let string): return JSONSerialization.Value.String(string as NSString)
             
         case .Number(let number):
             
             switch number {
                 
-                case let .Integer(value): return NSJSONSerialization.Value.Number(NSNumber(value: value))
+                case let .Integer(value): return JSONSerialization.Value.Number(NSNumber(value: value))
                 
-                case let .Double(value): return NSJSONSerialization.Value.Number(NSNumber(value: value))
+                case let .Double(value): return JSONSerialization.Value.Number(NSNumber(value: value))
                 
-                case let .Boolean(value): return NSJSONSerialization.Value.Number(NSNumber(value: value))
+                case let .Boolean(value): return JSONSerialization.Value.Number(NSNumber(value: value))
             }
             
         case .Array(let array):
@@ -215,8 +215,8 @@ extension NSNumber {
     var isBool:Bool {
         get {
             let objCType = String(validatingUTF8: self.objCType)
-            if (self.compare(trueNumber) == NSComparisonResult.orderedSame && objCType == trueObjCType)
-                || (self.compare(falseNumber) == NSComparisonResult.orderedSame && objCType == falseObjCType){
+            if (self.compare(trueNumber) == Foundation.ComparisonResult.orderedSame && objCType == trueObjCType)
+                || (self.compare(falseNumber) == Foundation.ComparisonResult.orderedSame && objCType == falseObjCType){
                     return true
             } else {
                 return false

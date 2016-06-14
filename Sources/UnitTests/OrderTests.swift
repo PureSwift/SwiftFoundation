@@ -33,7 +33,7 @@ final class OrderTests: XCTestCase {
         
         // dates
         
-        let now = Date()
+        let now = SwiftFoundation.Date()
         
         let later = now + 0.5
         

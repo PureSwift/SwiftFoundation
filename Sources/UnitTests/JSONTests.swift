@@ -42,7 +42,7 @@ final class JSONTests: XCTestCase {
                 // validate JSON string on Darwin
                 do {
                     
-                    try NSJSONSerialization.jsonObject(with: jsonString.toUTF8Data().toFoundation(), options: NSJSONReadingOptions(rawValue: 0))
+                    try JSONSerialization.jsonObject(with: jsonString.toUTF8Data().toFoundation() as Foundation.Data, options: JSONSerialization.ReadingOptions(rawValue: 0))
                 }
                 catch { XCTFail("Invalid JSON String"); return }
                 
@@ -88,9 +88,9 @@ final class JSONTests: XCTestCase {
             
             #if os(OSX) || os(iOS)
             
-                let foundationJSONOutput = try! NSJSONSerialization.data(withJSONObject: json.toFoundation().rawValue, options: NSJSONWritingOptions(rawValue: 0))
+                let foundationJSONOutput = try! JSONSerialization.data(withJSONObject: json.toFoundation().rawValue, options: JSONSerialization.WritingOptions(rawValue: 0))
             
-                let foundationJSONOutputString = NSString(data: foundationJSONOutput, encoding: NSUTF8StringEncoding)!
+                let foundationJSONOutputString = NSString(data: foundationJSONOutput, encoding: String.Encoding.utf8.rawValue)!
                 
                 XCTAssert(jsonString == foundationJSONOutputString as String, "Must match Foundation output. \(jsonString) == \(foundationJSONOutputString)")
                 
