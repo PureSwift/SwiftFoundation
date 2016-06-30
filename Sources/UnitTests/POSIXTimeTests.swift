@@ -38,22 +38,22 @@ final class POSIXTimeTests: XCTestCase {
 
     func testTimeVal() {
         
-        let date = SwiftFoundation.Date()
+        let date = Date()
         
-        let time = timeval(timeInterval: date.since1970)
+        let time = timeval(timeInterval: date.timeIntervalSince1970)
         
-        XCTAssert(Int(time.timeIntervalValue) == Int(date.since1970), "TimeVal derived interval: \(time.timeIntervalValue) must equal Date's timeIntervalSince1970 \(date.since1970)")
+        XCTAssert(Int(time.timeInterval) == Int(date.timeIntervalSince1970), "TimeVal derived interval: \(time.timeInterval) must equal Date's timeIntervalSince1970 \(date.timeIntervalSince1970)")
     }
     
     func testTimeSpec() {
         
-        let date = SwiftFoundation.Date()
+        let date = Date()
         
-        let time = timespec(timeInterval: date.since1970)
+        let time = timespec(timeInterval: date.timeIntervalSince1970)
         
         #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
         
-            XCTAssert(time.timeIntervalValue == date.since1970, "timespec: \(time.timeIntervalValue) == Date: \(date)")
+            XCTAssert(time.timeInterval == date.timeIntervalSince1970, "timespec: \(time.timeInterval) == Date: \(date)")
         
         #elseif os(Linux)
             

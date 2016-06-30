@@ -20,7 +20,7 @@ final class DateComponentsTest: XCTestCase {
         dateComponents.month = 10
         dateComponents.dayOfMonth = 10
         
-        let assertionDate = Date(since1970: 560822400)
+        let assertionDate = SwiftFoundation.Date(timeIntervalSince1970: TimeInterval(560822400))
         let madeDate = dateComponents.date
         
         print(assertionDate, madeDate)
@@ -30,7 +30,7 @@ final class DateComponentsTest: XCTestCase {
     
     func testValueForComponent() {
         
-        let dateComponents = DateComponents(since1970: 560822400)
+        let dateComponents = DateComponents(timeIntervalSince1970: 560822400)
         
         XCTAssert(dateComponents[.year] == 1987)
         XCTAssert(dateComponents[.month] == 10)

@@ -8,6 +8,7 @@
 
 #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
     import Darwin.C
+    import Foundation
 #elseif os(Linux)
     import Glibc
 #endif
@@ -35,7 +36,7 @@ public struct DateComponents {
     public var dayOfYear: Int32 = 1
     
     /// Intializes from a time interval interval between the current date and 1 January 1970, GMT.
-    public init(since1970 timeinterval: TimeInterval) {
+    public init(timeIntervalSince1970 timeinterval: TimeInterval) {
         
         self.init(brokenDown: tm(UTCSecondsSince1970: timeval(timeInterval: timeinterval).tv_sec ))
     }
@@ -47,11 +48,12 @@ public struct DateComponents {
     /// Initializes from a `Date`.
     public init(date: Date) {
         
-        self.init(since1970: date.since1970)
+        self.init(timeIntervalSince1970: date.timeIntervalSince1970)
     }
     
     public var date: Date {
-        return Date(since1970: timeInterval)
+        
+        return Date(timeIntervalSince1970: timeInterval)
     }
     
     /// Get the value for the specified component.

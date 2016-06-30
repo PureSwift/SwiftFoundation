@@ -23,15 +23,9 @@ final class DataTests: XCTestCase {
         
         var testData = string.toUTF8Data()
         
-        let dataLength = testData.byteValue.count
+        XCTAssert(testData.isEmpty == false, "Could not create test data")
         
-        let dataPointer = UnsafeMutablePointer<Byte>(allocatingCapacity: dataLength)
-        
-        defer { dataPointer.deallocateCapacity(dataLength) }
-        
-        memcpy(&testData.byteValue, dataPointer, dataLength)
-                
-        let data = Data.from(pointer: dataPointer, length: dataLength)
+        let data = testData.bytes.withUnsafeBufferPointer{ Data(bytes: $0.baseAddress!, count: testData.count) }
         
         XCTAssert(data == testData, "\(data) == \(testData)")
     }

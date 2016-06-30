@@ -37,17 +37,6 @@ final class JSONTests: XCTestCase {
         
         func parseJSON(_ jsonValue: JSON.Value, _ jsonString: String) {
             
-            #if os(OSX) || os(iOS)
-                
-                // validate JSON string on Darwin
-                do {
-                    
-                    try JSONSerialization.jsonObject(with: jsonString.toUTF8Data().toFoundation() as Foundation.Data, options: JSONSerialization.ReadingOptions(rawValue: 0))
-                }
-                catch { XCTFail("Invalid JSON String"); return }
-                
-            #endif
-            
             guard let parsedJSONValue = JSON.Value(string: jsonString)
                 else { XCTFail("JSON parsing failed"); return }
             
@@ -85,17 +74,6 @@ final class JSONTests: XCTestCase {
             
             guard let jsonString = json.toString()
                 else { XCTFail("Could not serialize JSON"); return }
-            
-            #if os(OSX) || os(iOS)
-            
-                let foundationJSONOutput = try! JSONSerialization.data(withJSONObject: json.toFoundation().rawValue, options: JSONSerialization.WritingOptions(rawValue: 0))
-            
-                let foundationJSONOutputString = NSString(data: foundationJSONOutput, encoding: String.Encoding.utf8.rawValue)!
-                
-                XCTAssert(jsonString == foundationJSONOutputString as String, "Must match Foundation output. \(jsonString) == \(foundationJSONOutputString)")
-                
-                XCTAssert(jsonString == foundationJSONOutputString as String, "Expected JSON string must match Foundation output. \(expectedJSONString) == \(foundationJSONOutputString)")
-            #endif
             
             XCTAssert(jsonString == expectedJSONString, "Does not match expected output. \(jsonString) == \(expectedJSONString)")
             

@@ -133,8 +133,16 @@
     
     public typealias UUID = Foundation.UUID
     
+    extension Foundation.UUID {
+        
+        public static var length: Int { return 16 }
+        public static var stringLength: Int { return 36 }
+        public static var unformattedStringLength: Int { return 32 }
+    }
+    
     extension Foundation.UUID: ByteValue {
         
+        @inline(__always)
         public init(bytes: uuid_t) {
             
             self.init(uuid: bytes)
@@ -142,9 +150,25 @@
         
         public var bytes: uuid_t {
             
+            @inline(__always)
             get { return uuid }
             
+            @inline(__always)
             set { self = Foundation.UUID(uuid: newValue) }
+        }
+    }
+    
+    extension Foundation.UUID: RawRepresentable {
+        
+        @inline(__always)
+        public init?(rawValue uuidString: String) {
+            
+            self.init(uuidString: uuidString)
+        }
+        
+        public var rawValue: String {
+            
+            return uuidString
         }
     }
     

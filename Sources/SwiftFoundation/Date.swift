@@ -8,6 +8,7 @@
 
 #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
     import Darwin.C
+    import struct Foundation.Date
 #elseif os(Linux)
     import Glibc
 #endif
@@ -147,6 +148,43 @@
         }
     }
     
+    // MARK: - Operators
+    
+    public func == (lhs: Date, rhs: Date) -> Bool {
+        
+        return lhs.timeIntervalSinceReferenceDate == rhs.timeIntervalSinceReferenceDate
+    }
+    
+    public func < (lhs: Date, rhs: Date) -> Bool {
+        
+        return lhs.timeIntervalSinceReferenceDate < rhs.timeIntervalSinceReferenceDate
+    }
+    
+    public func - (lhs: Date, rhs: Date) -> TimeInterval {
+        
+        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+    }
+    
+    public func + (lhs: Date, rhs: TimeInterval) -> Date {
+        
+        return Date(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate + rhs)
+    }
+    
+    public func - (lhs: Date, rhs: TimeInterval) -> Date {
+        
+        return Date(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate - rhs)
+    }
+    
+    public func += (lhs: inout Date, rhs: TimeInterval) {
+        
+        lhs = lhs + rhs
+    }
+    
+    public func -= (lhs: inout Date, rhs: TimeInterval) {
+        
+        lhs = lhs - rhs
+    }
+    
     // MARK: - Supporting Types
     
     /// Time interval difference between two dates, in seconds.
@@ -154,39 +192,15 @@
 
 #endif
 
-// MARK: - Operators
+// MARK: - Darwin
 
-public func == (lhs: Date, rhs: Date) -> Bool {
+#if (os(OSX) || os(iOS) || os(watchOS) || os(tvOS)) && !XcodeLinux
     
-    return lhs.timeIntervalSinceReferenceDate == rhs.timeIntervalSinceReferenceDate
-}
-
-public func < (lhs: Date, rhs: Date) -> Bool {
+    public typealias Date = Foundation.Date
     
-    return lhs.timeIntervalSinceReferenceDate < rhs.timeIntervalSinceReferenceDate
-}
-
-public func - (lhs: Date, rhs: Date) -> TimeInterval {
+    public func - (lhs: Date, rhs: Date) -> TimeInterval {
+        
+        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+    }
     
-    return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
-}
-
-public func + (lhs: Date, rhs: TimeInterval) -> Date {
-    
-    return Date(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate + rhs)
-}
-
-public func - (lhs: Date, rhs: TimeInterval) -> Date {
-    
-    return Date(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate - rhs)
-}
-
-public func += (lhs: inout Date, rhs: TimeInterval) {
-    
-    lhs = lhs + rhs
-}
-
-public func -= (lhs: inout Date, rhs: TimeInterval) {
-    
-    lhs = lhs - rhs
-}
+#endif

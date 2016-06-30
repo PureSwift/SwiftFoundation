@@ -14,5 +14,5 @@ let package = Package(
         Target(
             name: "SwiftFoundation")
     ],
-    exclude: ["Xcode", "Carthage", "Sources/FoundationConvertible", "Sources/FoundationUnitTests"]
+    exclude: ["Xcode", "Carthage"]
 )

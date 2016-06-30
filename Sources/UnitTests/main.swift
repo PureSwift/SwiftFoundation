@@ -17,14 +17,11 @@ import XCTest
 #endif
 
 XCTMain([testCase(DateComponentsTest.allTests),
-         testCase(OrderTests.allTests),
          testCase(POSIXTimeTests.allTests),
          testCase(RegularExpressionTests.allTests),
-         testCase(SortDescriptorTests.allTests),
          testCase(StringTests.allTests),
          testCase(UUIDTests.allTests),
          testCase(DataTests.allTests),
          testCase(JSONTests.allTests),
-         testCase(RangeTests.allTests),
-         testCase(AtomicTests.allTests)
+         testCase(RangeTests.allTests)
     ])
