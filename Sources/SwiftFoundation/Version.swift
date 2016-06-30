@@ -6,5 +6,5 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-/** The semantic versioning of the SwiftFoundation library. */
-public let SwiftFoundationVersion = SemanticVersion(mayor: 0, minor: 1, patch: 0)
+/// The semantic versioning of the SwiftFoundation library.
+public let SwiftFoundationVersion = SemanticVersion(major: 2, minor: 0, patch: 0)

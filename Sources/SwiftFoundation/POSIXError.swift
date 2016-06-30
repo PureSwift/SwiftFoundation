@@ -15,7 +15,7 @@
 public extension POSIXError {
     
     /// Creates error from C ```errno```.
-    static var fromErrorNumber: POSIXError? { return self.init(rawValue: errno) }
+    static var fromErrno: POSIXError? { return self.init(rawValue: errno) }
 }
 
 #if os(Linux)
@@ -26,6 +26,9 @@ public extension POSIXError {
         case Value(CInt)
         
         public init?(rawValue: CInt) {
+            
+            guard rawValue != 0
+                else { return nil }
             
             self = .Value(rawValue)
         }

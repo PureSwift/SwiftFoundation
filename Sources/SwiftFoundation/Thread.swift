@@ -34,7 +34,7 @@ public final class Thread {
         #endif
         
         guard pthread_create(&internalThread, nil, ThreadPrivateMain, pointer) == 0
-            else { throw POSIXError.fromErrorNumber! }
+            else { throw POSIXError.fromErrno! }
         
         #if os(Linux)
             self.internalThread = internalThread

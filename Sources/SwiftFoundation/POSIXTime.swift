@@ -18,10 +18,8 @@ public extension timeval {
         
         var timeStamp = timeval()
         
-        guard gettimeofday(&timeStamp, nil) == 0 else {
-            
-            throw POSIXError.fromErrorNumber!
-        }
+        guard gettimeofday(&timeStamp, nil) == 0
+            else { throw POSIXError.fromErrno! }
         
         return timeStamp
     }
@@ -37,7 +35,7 @@ public extension timeval {
         self.init(tv_sec: Int(integerValue), tv_usec: POSIXMicroseconds(microseconds))
     }
     
-    var timeIntervalValue: TimeInterval {
+    var timeInterval: TimeInterval {
         
         let secondsSince1970 = TimeInterval(self.tv_sec)
         
@@ -62,7 +60,7 @@ public extension timespec {
         self.init(tv_sec: Int(integerValue), tv_nsec: Int(nanoseconds))
     }
     
-    var timeIntervalValue: TimeInterval {
+    var timeInterval: TimeInterval {
         
         let secondsSince1970 = TimeInterval(self.tv_sec)
         

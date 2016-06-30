@@ -190,9 +190,9 @@
     
 #endif
 
-// MARK: - Darwin Support
+// MARK: - Darwin
 
-#if (os(OSX) || os(iOS) || os(watchOS) || os(tvOS))
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
     
     extension Foundation.Data: ByteValue {
         

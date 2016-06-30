@@ -23,7 +23,7 @@ public extension statfs {
         
         guard statfs(path, &fileSystemStatus) == 0 else {
             
-            throw POSIXError.fromErrorNumber!
+            throw POSIXError.fromErrno!
         }
         
         self = fileSystemStatus

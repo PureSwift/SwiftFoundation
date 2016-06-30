@@ -67,7 +67,7 @@ public struct FileManager {
     public static func changeCurrentDirectory(_ newCurrentDirectory: String) throws {
         
         guard chdir(newCurrentDirectory) == 0
-            else { throw POSIXError.fromErrorNumber! }
+            else { throw POSIXError.fromErrno! }
     }
     
     /// Gets the current directory
@@ -91,7 +91,7 @@ public struct FileManager {
         // get file descriptor for path (open file)
         let file = open(path, O_CREAT, DefaultFileMode)
         
-        guard file != -1 else { throw POSIXError.fromErrorNumber! }
+        guard file != -1 else { throw POSIXError.fromErrno! }
         
         // close file
         defer { guard close(file) != -1 else { fatalError("Could not close file: \(path)") } }
@@ -113,12 +113,12 @@ public struct FileManager {
             fatalError("Create Intermediate Directories Not Implemented")
         }
         
-        guard mkdir(path, attributes.st_mode) == 0 else { throw POSIXError.fromErrorNumber! }
+        guard mkdir(path, attributes.st_mode) == 0 else { throw POSIXError.fromErrno! }
     }
     
     public static func removeItem(path: String) throws {
         
-        guard remove(path) == 0 else { throw POSIXError.fromErrorNumber! }
+        guard remove(path) == 0 else { throw POSIXError.fromErrno! }
     }
     
     // MARK: - Creating Symbolic and Hard Links
@@ -177,7 +177,7 @@ public struct FileManager {
         // get file descriptor for path (open file)
         let file = open(path, O_RDONLY)
         
-        guard file != -1 else { throw POSIXError.fromErrorNumber! }
+        guard file != -1 else { throw POSIXError.fromErrno! }
         
         // close file
         defer { guard close(file) != -1 else { fatalError("Could not close file: \(path)") } }
@@ -199,7 +199,7 @@ public struct FileManager {
         
         let readBytes = read(file, memoryPointer, fileSize)
         
-        guard readBytes != -1 else { throw POSIXError.fromErrorNumber! }
+        guard readBytes != -1 else { throw POSIXError.fromErrno! }
         
         //guard readBytes == fileSize else { fatalError() }
         
@@ -214,14 +214,14 @@ public struct FileManager {
         // get file descriptor for path (open file)
         let file = open(path, O_WRONLY)
         
-        guard file != -1 else { throw POSIXError.fromErrorNumber! }
+        guard file != -1 else { throw POSIXError.fromErrno! }
         
         // close file
         defer { guard close(file) != -1 else { fatalError("Could not close file: \(path)") } }
         
         let writtenBytes = write(file, data.bytes, data.count)
         
-        guard writtenBytes != -1 else { throw POSIXError.fromErrorNumber! }
+        guard writtenBytes != -1 else { throw POSIXError.fromErrno! }
     }
 }
 

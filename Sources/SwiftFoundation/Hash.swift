@@ -6,6 +6,7 @@
 //  Copyright © 2016 PureSwift. All rights reserved.
 //
 
+/// Function for hashing data. 
 public func Hash(_ data: Data) -> Int {
     
     // more expensive than casting but that's not safe for large values.

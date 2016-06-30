@@ -23,7 +23,7 @@ public extension stat {
         
         guard stat(path, &fileStatus) == 0 else {
             
-            throw POSIXError.fromErrorNumber!
+            throw POSIXError.fromErrno!
         }
         
         self = fileStatus
