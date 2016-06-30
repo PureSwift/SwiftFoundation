@@ -22,7 +22,6 @@
 		6E2C2B831C20F76600B2C995 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B241C20F6EB00B2C995 /* Data.swift */; };
 		6E2C2B841C20F76600B2C995 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B251C20F6EB00B2C995 /* Date.swift */; };
 		6E2C2B851C20F76600B2C995 /* DateComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B261C20F6EB00B2C995 /* DateComponents.swift */; };
-		6E2C2B861C20F76600B2C995 /* Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B271C20F6EB00B2C995 /* Decimal.swift */; };
 		6E2C2B871C20F76600B2C995 /* FileDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B281C20F6EB00B2C995 /* FileDescriptor.swift */; };
 		6E2C2B881C20F76600B2C995 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B291C20F6EB00B2C995 /* FileManager.swift */; };
 		6E2C2B891C20F76600B2C995 /* FilePermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B2A1C20F6EB00B2C995 /* FilePermission.swift */; };
@@ -54,7 +53,6 @@
 		6E2C2BB71C20F76600B2C995 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B241C20F6EB00B2C995 /* Data.swift */; };
 		6E2C2BB81C20F76600B2C995 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B251C20F6EB00B2C995 /* Date.swift */; };
 		6E2C2BB91C20F76600B2C995 /* DateComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B261C20F6EB00B2C995 /* DateComponents.swift */; };
-		6E2C2BBA1C20F76600B2C995 /* Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B271C20F6EB00B2C995 /* Decimal.swift */; };
 		6E2C2BBB1C20F76600B2C995 /* FileDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B281C20F6EB00B2C995 /* FileDescriptor.swift */; };
 		6E2C2BBC1C20F76600B2C995 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B291C20F6EB00B2C995 /* FileManager.swift */; };
 		6E2C2BBD1C20F76600B2C995 /* FilePermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B2A1C20F6EB00B2C995 /* FilePermission.swift */; };
@@ -86,7 +84,6 @@
 		6E2C2BEB1C20F76700B2C995 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B241C20F6EB00B2C995 /* Data.swift */; };
 		6E2C2BEC1C20F76700B2C995 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B251C20F6EB00B2C995 /* Date.swift */; };
 		6E2C2BED1C20F76700B2C995 /* DateComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B261C20F6EB00B2C995 /* DateComponents.swift */; };
-		6E2C2BEE1C20F76700B2C995 /* Decimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B271C20F6EB00B2C995 /* Decimal.swift */; };
 		6E2C2BEF1C20F76700B2C995 /* FileDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B281C20F6EB00B2C995 /* FileDescriptor.swift */; };
 		6E2C2BF01C20F76700B2C995 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B291C20F6EB00B2C995 /* FileManager.swift */; };
 		6E2C2BF11C20F76700B2C995 /* FilePermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B2A1C20F6EB00B2C995 /* FilePermission.swift */; };
@@ -217,7 +214,6 @@
 		6E2C2B241C20F6EB00B2C995 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		6E2C2B251C20F6EB00B2C995 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		6E2C2B261C20F6EB00B2C995 /* DateComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateComponents.swift; sourceTree = "<group>"; };
-		6E2C2B271C20F6EB00B2C995 /* Decimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decimal.swift; sourceTree = "<group>"; };
 		6E2C2B281C20F6EB00B2C995 /* FileDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDescriptor.swift; sourceTree = "<group>"; };
 		6E2C2B291C20F6EB00B2C995 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		6E2C2B2A1C20F6EB00B2C995 /* FilePermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePermission.swift; sourceTree = "<group>"; };
@@ -347,7 +343,6 @@
 				6E2C2B241C20F6EB00B2C995 /* Data.swift */,
 				6E2C2B251C20F6EB00B2C995 /* Date.swift */,
 				6E2C2B261C20F6EB00B2C995 /* DateComponents.swift */,
-				6E2C2B271C20F6EB00B2C995 /* Decimal.swift */,
 				6EE84DD81CAF659800A40C4D /* Endianness.swift */,
 				6E2C2B281C20F6EB00B2C995 /* FileDescriptor.swift */,
 				6E2C2B291C20F6EB00B2C995 /* FileManager.swift */,
@@ -704,7 +699,6 @@
 				6E2C2BD91C20F76600B2C995 /* String.swift in Sources */,
 				6E2C2BCE1C20F76600B2C995 /* POSIXRegularExpression.swift in Sources */,
 				6E2C2BC61C20F76600B2C995 /* Integer.swift in Sources */,
-				6E2C2BBA1C20F76600B2C995 /* Decimal.swift in Sources */,
 				6E2C2BC91C20F76600B2C995 /* Null.swift in Sources */,
 				6E2C2BB01C20F76600B2C995 /* BitMaskOption.swift in Sources */,
 				6E2C2BD51C20F76600B2C995 /* RegularExpressionCompileOption.swift in Sources */,
@@ -751,7 +745,6 @@
 				6E2C2BA51C20F76600B2C995 /* String.swift in Sources */,
 				6E2C2B9A1C20F76600B2C995 /* POSIXRegularExpression.swift in Sources */,
 				6E2C2B921C20F76600B2C995 /* Integer.swift in Sources */,
-				6E2C2B861C20F76600B2C995 /* Decimal.swift in Sources */,
 				6E2C2B951C20F76600B2C995 /* Null.swift in Sources */,
 				6E2C2B7C1C20F76600B2C995 /* BitMaskOption.swift in Sources */,
 				6E2C2BA11C20F76600B2C995 /* RegularExpressionCompileOption.swift in Sources */,
@@ -818,7 +811,6 @@
 				6E2C2BFA1C20F76700B2C995 /* Integer.swift in Sources */,
 				6E8474CD1D24FCFE009CA7DB /* ComparisonResult.swift in Sources */,
 				6EFF9A1B1CAD0C6B00917CB3 /* Range.swift in Sources */,
-				6E2C2BEE1C20F76700B2C995 /* Decimal.swift in Sources */,
 				6E2C2BFD1C20F76700B2C995 /* Null.swift in Sources */,
 				6E04074E1CB3E07500BE3A79 /* Thread.swift in Sources */,
 				6E2C2BE41C20F76700B2C995 /* BitMaskOption.swift in Sources */,

@@ -24,9 +24,4 @@ final class StringTests: XCTestCase {
         
         XCTAssert(string == decodedString, "\(string) == \(decodedString)")
     }
-    
-    // MARK: - Performance Tests
-    
-    
-
 }
