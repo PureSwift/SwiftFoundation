@@ -2,7 +2,7 @@ language: generic
 osx_image: xcode8
 os:
   - linux
-	- osx
+  - osx
 sudo: required
 dist: trusty
 before_install:
