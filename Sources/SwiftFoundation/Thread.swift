@@ -28,21 +28,28 @@ public final class Thread {
         let pointer = UnsafeMutablePointer<Void>(OpaquePointer(bitPattern: holder))
         
         #if os(Linux)
+            
             var internalThread: pthread_t = 0
-        #elseif os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
-            var internalThread: pthread_t? = nil
-        #endif
-        
-        guard pthread_create(&internalThread, nil, ThreadPrivateMain, pointer) == 0
-            else { throw POSIXError.fromErrno! }
-        
-        #if os(Linux)
+            
+            guard pthread_create(&internalThread, nil, ThreadPrivateMainLinux, pointer) == 0
+                else { throw POSIXError.fromErrno! }
+            
             self.internalThread = internalThread
+            
+            pthread_detach(internalThread)
+            
         #elseif os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+            
+            var internalThread: pthread_t? = nil
+            
+            guard pthread_create(&internalThread, nil, ThreadPrivateMainDarwin, pointer) == 0
+                else { throw POSIXError.fromErrno! }
+            
             self.internalThread = internalThread!
+            
+            pthread_detach(internalThread!)
+            
         #endif
-        
-        pthread_detach(internalThread!)
     }
     
     // MARK: - Class Methods
@@ -73,16 +80,35 @@ public final class Thread {
 
 // MARK: - Private
 
-private func ThreadPrivateMain(arg: UnsafeMutablePointer<Void>) -> UnsafeMutablePointer<Void>? {
+#if os(Linux) || XcodeLinux
     
-    let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(OpaquePointer(arg))
+    private func ThreadPrivateMainLinux(arg: UnsafeMutablePointer<Void>?) -> UnsafeMutablePointer<Void>? {
+        
+        let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(OpaquePointer(arg!))
+        
+        unmanaged.takeUnretainedValue().closure()
+        
+        unmanaged.release()
+        
+        return nil
+    }
     
-    unmanaged.takeUnretainedValue().closure()
+#endif
+
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
     
-    unmanaged.release()
+    private func ThreadPrivateMainDarwin(arg: UnsafeMutablePointer<Void>) -> UnsafeMutablePointer<Void>? {
+        
+        let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(OpaquePointer(arg))
+        
+        unmanaged.takeUnretainedValue().closure()
+        
+        unmanaged.release()
+        
+        return nil
+    }
     
-    return nil
-}
+#endif
 
 private extension Thread {
     
