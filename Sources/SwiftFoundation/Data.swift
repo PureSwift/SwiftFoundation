@@ -12,50 +12,224 @@
     import Glibc
 #endif
 
-/// Encapsulates data.
-public struct Data: ByteValueType, Equatable {
+// MARK: - Linux
+
+#if os(Linux) || XcodeLinux
     
-    public var byteValue: [Byte]
-    
-    public init(byteValue: [Byte] = []) {
+    /// Encapsulates data.
+    public struct Data: ByteValue, Equatable, Hashable, CustomStringConvertible, RandomAccessCollection, MutableCollection {
         
-        self.byteValue = byteValue
+        public typealias Index = Int
+        public typealias Indices = DefaultRandomAccessIndices<Data>
+        
+        // MARK: - Properties
+        
+        public var bytes: [Byte]
+        
+        // MARK: - Initialization
+        
+        /// Initialize a `Data` with the contents of an Array.
+        ///
+        /// - parameter bytes: An array of bytes to copy.
+        @inline(__always)
+        public init(bytes: [Byte] = []) {
+            
+            self.bytes = bytes
+        }
+        
+        /// Initialize a `Data` with the contents of an Array.
+        ///
+        /// - parameter bytes: An array of bytes to copy.
+        @inline(__always)
+        public init(bytes: ArraySlice<UInt8>) {
+            
+            self.bytes = Array(bytes)
+        }
+        
+        /// Initialize a `Data` with the specified size.
+        ///
+        /// - parameter capacity: The size of the data.
+        @inline(__always)
+        public init?(count: Int) {
+            
+            // Never fails on Linux
+            self.bytes = Array(repeating: 0, count: count)
+        }
+        
+        /// Initialize a `Data` with copied memory content.
+        ///
+        /// - parameter bytes: A pointer to the memory. It will be copied.
+        /// - parameter count: The number of bytes to copy.
+        @inline(__always)
+        public init(bytes pointer: UnsafePointer<Void>, count: Int) {
+            
+            self.bytes = [UInt8](repeating: 0, count: count)
+            
+            memcpy(&bytes, pointer, count)
+        }
+        
+        /// Initialize a `Data` with copied memory content.
+        ///
+        /// - parameter buffer: A buffer pointer to copy. The size is calculated from `SourceType` and `buffer.count`.
+        public init<SourceType>(buffer: UnsafeBufferPointer<SourceType>) {
+            
+            guard let pointer = buffer.baseAddress
+                else { self.init(); return }
+            
+            self.init(bytes: pointer, count: sizeof(SourceType) * buffer.count)
+        }
+        
+        // MARK: - Accessors
+        
+        public var hashValue: Int {
+            
+            /// Only hash first 80 bytes
+            let hashBytes = bytes.prefix(80)
+            
+            return Hash(Data(bytes: hashBytes))
+        }
+        
+        public var description: String {
+            
+            let hexString = bytes.map({ $0.toHexadecimal() }).reduce("", combine: { $0.0 + $0.1 })
+            
+            return "<" + hexString + ">"
+        }
+        
+        // MARK: - Methods
+        
+        /// Append data to the data.
+        ///
+        /// - parameter data: The data to append to this data.
+        @inline(__always)
+        public mutating func append(_ other: Data) {
+            
+            self.bytes += other.bytes
+        }
+        
+        /// Return a new copy of the data in a specified range.
+        ///
+        /// - parameter range: The range to copy.
+        @inline(__always)
+        public func subdata(in range: Range<Index>) -> Data {
+            
+            return Data(bytes: bytes[range])
+        }
+        
+        // MARK: - Index and Subscript
+        
+        /// Sets or returns the byte at the specified index.
+        
+        public subscript(index: Index) -> Byte {
+            
+            @inline(__always)
+            get { return bytes[index] }
+            
+            @inline(__always)
+            set { bytes[index] = newValue }
+        }
+        
+        public subscript(bounds: Range<Int>) -> MutableRandomAccessSlice<Data> {
+            
+            @inline(__always)
+            get { return MutableRandomAccessSlice(base: self, bounds: bounds) }
+            
+            @inline(__always)
+            set { bytes.replaceSubrange(bounds, with: newValue) }
+        }
+        
+        /// The start `Index` in the data.
+        public var startIndex: Index {
+            
+            return 0
+        }
+        
+        /// The end `Index` into the data.
+        ///
+        /// This is the "one-past-the-end" position, and will always be equal to the `count`.
+        public var endIndex: Index {
+            return count
+        }
+        
+        public func index(before i: Index) -> Index {
+            return i - 1
+        }
+        
+        public func index(after i: Index) -> Index {
+            return i + 1
+        }
+        
+        /// An iterator over the contents of the data.
+        ///
+        /// The iterator will increment byte-by-byte.
+        public func makeIterator() -> Data.Iterator {
+            
+            return IndexingIterator(_elements: self)
+        }
     }
-}
+    
+    // MARK: - Equatable
+    
+    public func == (lhs: Data, rhs: Data) -> Bool {
+        
+        guard lhs.bytes.count == rhs.bytes.count else { return false }
+        
+        var bytes1 = lhs.bytes
+        
+        var bytes2 = rhs.bytes
+        
+        return memcmp(&bytes1, &bytes2, lhs.bytes.count) == 0
+    }
+
+    // MARK: - Operators
+    
+    public func + (lhs: Data, rhs: Data) -> Data {
+                
+        return Data(bytes: lhs.bytes + rhs.bytes)
+    }
+    
+#endif
+
+// MARK: - Darwin Support
+
+#if (os(OSX) || os(iOS) || os(watchOS) || os(tvOS))
+    
+    extension Foundation.Data: ByteValue {
+        
+        public typealias ByteValue = [Byte]
+        
+        public var bytes: [Byte] {
+            
+            get {
+                
+                return withUnsafeBytes({ (pointer: UnsafePointer<Byte>) in
+                    
+                    var bytes = [UInt8](repeating: 0, count: count)
+                    
+                    memcpy(&bytes, pointer, count)
+                    
+                    return bytes
+                })
+            }
+            
+            set { self = Foundation.Data(bytes: newValue) }
+        }
+    }
+    
+    public func + (lhs: Foundation.Data, rhs: Foundation.Data) -> Foundation.Data {
+        
+        var copy = lhs
+        
+        copy.append(rhs)
+        
+        return copy
+    }
+    
+#endif
+
+// MARK: - Supporting Types
 
 public typealias Byte = UInt8
-
-public extension Data {
-    
-    /// Initializes ```Data``` from an unsafe byte pointer. 
-    ///
-    /// - Precondition: The pointer  points to a type exactly a byte long.
-    static func from<T: Any>(pointer: UnsafePointer<T>, length: Int) -> Data {
-        
-        assert(sizeof(pointer.pointee.dynamicType) == sizeof(Byte.self), "Cannot create array of bytes from pointer to \(pointer.pointee.dynamicType) because the type is larger than a single byte.")
-        
-        var buffer: [UInt8] = [UInt8](repeating: 0, count: length)
-        
-        memcpy(&buffer, pointer, length)
-        
-        return Data(byteValue: buffer)
-    }
-}
-
-// MARK: - Equatable
-
-public func == (lhs: Data, rhs: Data) -> Bool {
-    
-    guard lhs.byteValue.count == rhs.byteValue.count else { return false }
-    
-    var bytes1 = lhs.byteValue
-    
-    var bytes2 = rhs.byteValue
-    
-    return memcmp(&bytes1, &bytes2, lhs.byteValue.count) == 0
-}
-
-// MARK: - Protocol
 
 /// Protocol for converting types to and from data.
 public protocol DataConvertible {
@@ -66,6 +240,3 @@ public protocol DataConvertible {
     /// Convert to data. 
     func toData() -> Data
 }
-
-
-    

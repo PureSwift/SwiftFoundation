@@ -14,7 +14,7 @@ public extension String {
         
         var string = ""
         
-        var generator = data.byteValue.makeIterator()
+        var generator = data.bytes.makeIterator()
         
         var encoding = UTF8()
                 
@@ -44,7 +44,7 @@ public extension String {
     
     func toUTF8Data() -> Data {
         
-        return Data(byteValue: [] + utf8)
+        return Data(bytes: [] + utf8)
     }
     
     func substring(range: Range<Int>) -> String? {

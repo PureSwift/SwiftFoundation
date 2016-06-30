@@ -7,12 +7,12 @@
 //
 
 /// A representation of a universally unique identifier (```UUID```).
-public struct UUID: ByteValueType, RawRepresentable, CustomStringConvertible {
+public struct UUID: ByteValue, Equatable, Hashable, RawRepresentable, CustomStringConvertible {
     
     /// Raw byte type for UUID
     public typealias ByteValue = (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8)
     
-    // MARK: - Public Properties
+    // MARK: - Properties
     
     public var byteValue: ByteValue
     

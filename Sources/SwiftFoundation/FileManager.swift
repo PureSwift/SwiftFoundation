@@ -203,7 +203,7 @@ public struct FileManager {
         
         //guard readBytes == fileSize else { fatalError() }
         
-        let data = Data.from(pointer: memoryPointer, length: readBytes)
+        let data = Data(bytes: memoryPointer, count: readBytes)
         
         return data
     }
@@ -219,7 +219,7 @@ public struct FileManager {
         // close file
         defer { guard close(file) != -1 else { fatalError("Could not close file: \(path)") } }
         
-        let writtenBytes = write(file, data.byteValue, data.byteValue.count)
+        let writtenBytes = write(file, data.bytes, data.count)
         
         guard writtenBytes != -1 else { throw POSIXError.fromErrorNumber! }
     }

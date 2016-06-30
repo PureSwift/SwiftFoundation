@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-/// Bit mask that represents various options
+/// Bit mask that represents various options.
 public protocol BitMaskOption: RawRepresentable {
     
     static func bitmask(options: [Self]) -> Self.RawValue

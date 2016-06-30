@@ -24,7 +24,7 @@ public struct Base64 {
      */
     public static func encode(data: Data, alphabet: Alphabet = .Standard) -> Data {
         
-        let bytes = data.byteValue
+        let bytes = data.bytes
         
         var encoded : [UInt8] = []
         
@@ -78,7 +78,7 @@ public struct Base64 {
             assert(i == count)
         }
         
-        return Data(byteValue: encoded)
+        return Data(bytes: encoded)
     }
 }
 
