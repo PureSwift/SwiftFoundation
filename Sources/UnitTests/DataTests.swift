@@ -21,7 +21,7 @@ final class DataTests: XCTestCase {
         
         let string = "TestData"
         
-        var testData = string.toUTF8Data()
+        let testData = string.toUTF8Data()
         
         XCTAssert(testData.isEmpty == false, "Could not create test data")
         
