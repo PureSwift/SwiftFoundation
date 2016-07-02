@@ -80,11 +80,11 @@ public final class Thread {
 
 // MARK: - Private
 
-#if os(Linux) || XcodeLinux
+#if os(Linux)
     
     private func ThreadPrivateMainLinux(arg: UnsafeMutablePointer<Void>?) -> UnsafeMutablePointer<Void>? {
         
-        let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(OpaquePointer(arg!))
+        let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(arg!)
         
         unmanaged.takeUnretainedValue().closure()
         
