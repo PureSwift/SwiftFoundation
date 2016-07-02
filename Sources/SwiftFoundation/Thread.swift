@@ -25,9 +25,9 @@ public final class Thread {
         
         let holder = Unmanaged.passRetained(Closure(closure: closure))
         
-        let pointer = UnsafeMutablePointer<Void>(OpaquePointer(bitPattern: holder))
-        
         #if os(Linux)
+            
+            let pointer = UnsafeMutablePointer<Void>(holder.toOpaque())
             
             var internalThread: pthread_t = 0
             
@@ -39,6 +39,8 @@ public final class Thread {
             pthread_detach(internalThread)
             
         #elseif os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+            
+            let pointer = UnsafeMutablePointer<Void>(OpaquePointer(bitPattern: holder))
             
             var internalThread: pthread_t? = nil
             
