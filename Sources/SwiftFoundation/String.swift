@@ -14,12 +14,12 @@ public extension String {
         
         var string = ""
         
-        var generator = data.bytes.makeIterator()
+        var generator = data.makeIterator()
         
         var encoding = UTF8()
-                
-        repeat {
         
+        repeat {
+            
             switch encoding.decode(&generator) {
                 
             case let .scalarValue(scalar):
@@ -44,7 +44,7 @@ public extension String {
     
     func toUTF8Data() -> Data {
         
-        return Data(bytes: [] + utf8)
+        return Data(bytes: Array(utf8))
     }
     
     func substring(range: Range<Int>) -> String? {
