@@ -147,6 +147,11 @@
             set { _bytes.replaceSubrange(bounds, with: newValue) }
         }
         
+        public var count: Int {
+            
+            return _bytes.count
+        }
+        
         /// The start `Index` in the data.
         public var startIndex: Index {
             

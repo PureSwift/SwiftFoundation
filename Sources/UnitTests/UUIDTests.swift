@@ -49,7 +49,7 @@ final class UUIDTests: XCTestCase {
     
     func testBytes() {
                 
-        let expectedData = Data(bytes: [91, 254, 177, 148, 104, 196, 72, 232, 143, 67, 60, 88, 99, 100, 203, 111] as [Byte])
+        let expectedData = SwiftFoundation.Data(bytes: [91, 254, 177, 148, 104, 196, 72, 232, 143, 67, 60, 88, 99, 100, 203, 111] as [Byte])
         
         let stringValue = "5BFEB194-68C4-48E8-8F43-3C586364CB6F"
         

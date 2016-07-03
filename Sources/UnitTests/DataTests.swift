@@ -31,7 +31,7 @@ final class DataTests: XCTestCase {
         
         memcpy(dataPointer, testData.bytes, testData.count)
         
-        let data = Data(bytes: dataPointer, count: testData.count)
+        let data = SwiftFoundation.Data(bytes: dataPointer, count: testData.count)
         
         XCTAssert(data == testData, "\(data) == \(testData)")
     }

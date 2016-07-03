@@ -135,9 +135,6 @@
 		6E957C2B1C43AA55003F3C51 /* JSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E957C291C43AA55003F3C51 /* JSONSerialization.swift */; };
 		6E957C2C1C43AA55003F3C51 /* JSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E957C291C43AA55003F3C51 /* JSONSerialization.swift */; };
 		6E957C2D1C43AA55003F3C51 /* JSONSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E957C291C43AA55003F3C51 /* JSONSerialization.swift */; };
-		6E957C2E1C43AA55003F3C51 /* JSONWritingOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E957C2A1C43AA55003F3C51 /* JSONWritingOption.swift */; };
-		6E957C2F1C43AA55003F3C51 /* JSONWritingOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E957C2A1C43AA55003F3C51 /* JSONWritingOption.swift */; };
-		6E957C301C43AA55003F3C51 /* JSONWritingOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E957C2A1C43AA55003F3C51 /* JSONWritingOption.swift */; };
 		6E957C481C43B397003F3C51 /* JSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E957C451C43B397003F3C51 /* JSON.framework */; };
 		6E957C491C43B397003F3C51 /* JSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E957C451C43B397003F3C51 /* JSON.framework */; };
 		6E957C4A1C43B397003F3C51 /* JSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E957C451C43B397003F3C51 /* JSON.framework */; };
@@ -256,7 +253,6 @@
 		6E8474CC1D24FCFE009CA7DB /* ComparisonResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComparisonResult.swift; sourceTree = "<group>"; };
 		6E957C251C43A7C8003F3C51 /* JSONParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParse.swift; sourceTree = "<group>"; };
 		6E957C291C43AA55003F3C51 /* JSONSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSerialization.swift; sourceTree = "<group>"; };
-		6E957C2A1C43AA55003F3C51 /* JSONWritingOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONWritingOption.swift; sourceTree = "<group>"; };
 		6E957C451C43B397003F3C51 /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
 		6E957C471C43B397003F3C51 /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSON.framework; sourceTree = "<group>"; };
 		6E957C561C442E3E003F3C51 /* JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
@@ -356,7 +352,6 @@
 				6E2C2B351C20F6EB00B2C995 /* JSONExtensions.swift */,
 				6E957C251C43A7C8003F3C51 /* JSONParse.swift */,
 				6E957C291C43AA55003F3C51 /* JSONSerialization.swift */,
-				6E957C2A1C43AA55003F3C51 /* JSONWritingOption.swift */,
 				6E82FD711CBA06C10049CD1B /* Lock.swift */,
 				6E2C2B361C20F6EB00B2C995 /* Null.swift */,
 				6E2C2B401C20F6EB00B2C995 /* RegularExpression.swift */,
@@ -720,7 +715,6 @@
 				6E957C2C1C43AA55003F3C51 /* JSONSerialization.swift in Sources */,
 				6EE84DDA1CAF659800A40C4D /* Endianness.swift in Sources */,
 				6E2C2BCB1C20F76600B2C995 /* POSIXError.swift in Sources */,
-				6E957C2F1C43AA55003F3C51 /* JSONWritingOption.swift in Sources */,
 				6E2C2BB81C20F76600B2C995 /* Date.swift in Sources */,
 				6E2C2BC71C20F76600B2C995 /* JSON.swift in Sources */,
 				6E2C2BAF1C20F76600B2C995 /* Base64.swift in Sources */,
@@ -766,7 +760,6 @@
 				6E957C2D1C43AA55003F3C51 /* JSONSerialization.swift in Sources */,
 				6EE84DDB1CAF659800A40C4D /* Endianness.swift in Sources */,
 				6E2C2B971C20F76600B2C995 /* POSIXError.swift in Sources */,
-				6E957C301C43AA55003F3C51 /* JSONWritingOption.swift in Sources */,
 				6E2C2B841C20F76600B2C995 /* Date.swift in Sources */,
 				6E2C2B931C20F76600B2C995 /* JSON.swift in Sources */,
 				6E2C2B7B1C20F76600B2C995 /* Base64.swift in Sources */,
@@ -830,7 +823,6 @@
 				6E2C2C071C20F76700B2C995 /* RegularExpression.swift in Sources */,
 				6E957C2B1C43AA55003F3C51 /* JSONSerialization.swift in Sources */,
 				6E2C2BFF1C20F76700B2C995 /* POSIXError.swift in Sources */,
-				6E957C2E1C43AA55003F3C51 /* JSONWritingOption.swift in Sources */,
 				6E2C2BEC1C20F76700B2C995 /* Date.swift in Sources */,
 				6E2C2BFB1C20F76700B2C995 /* JSON.swift in Sources */,
 				6EE84DD91CAF659800A40C4D /* Endianness.swift in Sources */,
