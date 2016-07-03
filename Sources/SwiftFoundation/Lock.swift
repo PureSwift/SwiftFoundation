@@ -18,7 +18,7 @@ public protocol Locking {
     func unlock()
 }
 
-public class Lock: Locking {
+public final class Lock: Locking {
     
     private var mutex = UnsafeMutablePointer<pthread_mutex_t>(allocatingCapacity: 1)
     
@@ -48,17 +48,17 @@ public class Lock: Locking {
 }
 
 extension Lock {
-    internal func synchronized<T>(_ closure: @noescape () -> T) -> T {
+    private func synchronized<T>(_ closure: @noescape () -> T) -> T {
         self.lock()
         defer { self.unlock() }
         return closure()
     }
 }
 
-public class NSConditionLock : NSObject, Locking {
-    internal var _cond = Condition()
-    internal var _value: Int
-    internal var _thread: pthread_t?
+public final class ConditionLock : NSObject, Locking {
+    private var _cond = Condition()
+    private var _value: Int
+    private var _thread: pthread_t?
     
     public convenience override init() {
         self.init(condition: 0)
@@ -132,11 +132,11 @@ public class NSConditionLock : NSObject, Locking {
     public var name: String?
 }
 
-public class RecursiveLock: NSObject, Locking {
-    internal var mutex = UnsafeMutablePointer<pthread_mutex_t>(allocatingCapacity: 1)
+public final class RecursiveLock: Locking {
+    private var mutex = UnsafeMutablePointer<pthread_mutex_t>(allocatingCapacity: 1)
     
-    public override init() {
-        super.init()
+    public init() {
+        
         var attrib = pthread_mutexattr_t()
         withUnsafeMutablePointer(&attrib) { attrs in
             pthread_mutexattr_settype(attrs, Int32(PTHREAD_MUTEX_RECURSIVE))
@@ -165,11 +165,11 @@ public class RecursiveLock: NSObject, Locking {
     public var name: String?
 }
 
-public class Condition: NSObject, Locking {
-    internal var mutex = UnsafeMutablePointer<pthread_mutex_t>(allocatingCapacity: 1)
-    internal var cond = UnsafeMutablePointer<pthread_cond_t>(allocatingCapacity: 1)
+public final class Condition: Locking {
+    private var mutex = UnsafeMutablePointer<pthread_mutex_t>(allocatingCapacity: 1)
+    private var cond = UnsafeMutablePointer<pthread_cond_t>(allocatingCapacity: 1)
     
-    public override init() {
+    public init() {
         pthread_mutex_init(mutex, nil)
         pthread_cond_init(cond, nil)
     }
