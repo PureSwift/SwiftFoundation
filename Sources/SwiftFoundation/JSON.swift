@@ -14,59 +14,81 @@ public struct JSON {
     public typealias Object = [String: JSON.Value]
     
     /// JSON value type.
-    /// Guarenteed to be valid JSON if root value is array or object.
+    ///
+    /// - Note: Guarenteed to be valid JSON if root value is array or object.
     public enum Value: RawRepresentable, Equatable, CustomStringConvertible {
         
-        case Null
+        /// JSON value is a null placeholder.
+        case null
         
-        /// JSON value is a String Value
-        case String(StringValue)
+        /// JSON value is an array of other JSON values.
+        case array(SwiftFoundation.JSON.Array)
         
-        /// JSON value is a Number Value (specific subtypes)
-        case Number(JSON.Number)
+        /// JSON value a JSON object.
+        case object(SwiftFoundation.JSON.Object)
         
-        /// JSON value is an Array of other JSON values
-        case Array(JSONArray)
+        /// JSON value is a `String`.
+        case string(Swift.String)
         
-        /// JSON value a JSON object
-        case Object(JSONObject)
+        /// JSON value is a `Bool`.
+        case boolean(Bool)
         
-        // MARK: - Extract Values
+        /// JSON value is a `Int`.
+        case integer(Int)
         
-        public var arrayValue: JSON.Array? {
-            
-            switch self {
-                
-            case let .Array(value): return value
-                
-            default: return nil
-            }
-        }
-        
-        public var objectValue: JSON.Object? {
-            
-            switch self {
-                
-            case let .Object(value): return value
-                
-            default: return nil
-            }
-        }
-    }
-    
-    // MARK: - JSON Number
-    
-    public enum Number: RawRepresentable, Equatable, CustomStringConvertible {
-        
-        case Boolean(Bool)
-        
-        case Integer(Int)
-        
-        case Double(DoubleValue)
+        /// JSON value is a `Double`.
+        case double(Swift.Double)
     }
 }
 
-// MARK: - RawRepresentable
+// MARK: Extract Values
+
+public extension JSON.Value {
+    
+    public var arrayValue: JSON.Array? {
+        
+        guard case let .array(value) = self else { return nil }
+        
+        return value
+    }
+    
+    public var objectValue: JSON.Object? {
+        
+        guard case let .object(value) = self else { return nil }
+        
+        return value
+    }
+    
+    public var stringValue: String? {
+        
+        guard case let .string(value) = self else { return nil }
+        
+        return value
+    }
+    
+    public var booleanValue: Bool? {
+        
+        guard case let .boolean(value) = self else { return nil }
+        
+        return value
+    }
+    
+    public var integerValue: Int? {
+        
+        guard case let .integer(value) = self else { return nil }
+        
+        return value
+    }
+    
+    public var doubleValue: Double? {
+        
+        guard case let .double(value) = self else { return nil }
+        
+        return value
+    }
+}
+
+// MARK: RawRepresentable
 
 public extension JSON.Value {
     
@@ -74,65 +96,83 @@ public extension JSON.Value {
         
         switch self {
             
-        case .Null: return SwiftFoundation.Null()
+        case .null: return SwiftFoundation.Null()
             
-        case .String(let string): return string
+        case .string(let value): return value
             
-        case .Number(let number): return number.rawValue
+        case .integer(let value): return value
             
-        case .Array(let array): return array.rawValues
+        case .boolean(let value): return value
             
-        case .Object(let dictionary):
+        case .double(let value): return value
             
-            var dictionaryValue = [StringValue: Any](minimumCapacity: dictionary.count)
+        case .array(let array): return array.rawValues
+            
+        case .object(let dictionary):
+            
+            var dictionaryValue = [String: Any](minimumCapacity: dictionary.count)
             
             for (key, value) in dictionary {
                 
                 dictionaryValue[key] = value.rawValue
             }
             
-            return dictionaryValue
+            return dictionary
         }
     }
     
     init?(rawValue: Any) {
         
-        guard (rawValue as? SwiftFoundation.Null) == nil else {
+        guard rawValue is SwiftFoundation.Null == false else {
             
-            self = .Null
+            self = .null
             return
         }
         
         if let string = rawValue as? Swift.String {
             
-            self = .String(string)
+            self = .string(string)
             return
         }
         
-        if let number = JSON.Number(rawValue: rawValue) {
+        if let integer = rawValue as? Int {
             
-            self = .Number(number)
+            self = .integer(integer)
             return
         }
         
-        if let rawArray = rawValue as? [Any], let jsonArray: [JSON.Value] = JSON.Value.from(rawValues: rawArray) {
+        if let boolean = rawValue as? Bool {
             
-            self = .Array(jsonArray)
+            self = .boolean(boolean)
+            return
+        }
+        
+        if let double = rawValue as? Double {
+            
+            self = .double(double)
+            return
+        }
+        
+        if let rawArray = rawValue as? [Any],
+            let jsonArray: [JSON.Value] = JSON.Value.from(rawValues: rawArray) {
+            
+            self = .array(jsonArray)
             return
         }
         
         if let rawDictionary = rawValue as? [Swift.String: Any] {
             
-            var jsonObject = [StringValue: JSONValue](minimumCapacity: rawDictionary.count)
+            var jsonObject: [Swift.String: JSON.Value] = Dictionary(minimumCapacity: rawDictionary.count)
             
             for (key, rawValue) in rawDictionary {
                 
-                guard let jsonValue = JSON.Value(rawValue: rawValue) else { return nil }
+                guard let jsonValue = JSON.Value(rawValue: rawValue)
+                    else { return nil }
                 
                 jsonObject[key] = jsonValue
             }
             
-            self = .Object(jsonObject)
+            self = .object(jsonObject)
             return
         }
         
@@ -140,39 +180,10 @@ public extension JSON.Value {
     }
 }
 
-public extension JSON.Number {
-    
-    public var rawValue: Any {
-        
-        switch self {
-        case .Boolean(let value): return value
-        case .Integer(let value): return value
-        case .Double(let value):  return value
-        }
-    }
-    
-    public init?(rawValue: Any) {
-        
-        if let value = rawValue as? Bool            { self = .Boolean(value); return }
-        if let value = rawValue as? Int             { self = .Integer(value); return }
-        if let value = rawValue as? DoubleValue     { self = .Double(value); return  }
-        
-        return nil
-    }
-}
 
-
-// MARK: - CustomStringConvertible
+// MARK: CustomStringConvertible
 
 public extension JSON.Value {
-    
-    public var description: Swift.String {
-        
-        return "\(rawValue)"
-    }
-}
-
-public extension JSON.Number {
     
     public var description: String {
         
@@ -186,72 +197,20 @@ public func ==(lhs: JSON.Value, rhs: JSON.Value) -> Bool {
     
     switch (lhs, rhs) {
         
-    case (.Null, .Null): return true
+    case (.null, .null): return true
         
-    case let (.String(leftValue), .String(rightValue)): return leftValue == rightValue
+    case let (.string(leftValue), .string(rightValue)): return leftValue == rightValue
         
-    case let (.Number(leftValue), .Number(rightValue)): return leftValue == rightValue
+    case let (.boolean(leftValue), .boolean(rightValue)): return leftValue == rightValue
         
-    case let (.Array(leftValue), .Array(rightValue)): return leftValue == rightValue
+    case let (.integer(leftValue), .integer(rightValue)): return leftValue == rightValue
         
-    case let (.Object(leftValue), .Object(rightValue)): return leftValue == rightValue
+    case let (.double(leftValue), .double(rightValue)): return leftValue == rightValue
         
-    default: return false
-    }
-}
-
-public func ==(lhs: JSON.Number, rhs: JSON.Number) -> Bool {
-    
-    switch (lhs, rhs) {
+    case let (.array(leftValue), .array(rightValue)): return leftValue == rightValue
         
-    case let (.Boolean(leftValue), .Boolean(rightValue)): return leftValue == rightValue
-        
-    case let (.Integer(leftValue), .Integer(rightValue)): return leftValue == rightValue
-        
-    case let (.Double(leftValue), .Double(rightValue)): return leftValue == rightValue
+    case let (.object(leftValue), .object(rightValue)): return leftValue == rightValue
         
     default: return false
     }
 }
-
-// MARK: - Protocol
-
-/// Type can be converted to JSON.
-public protocol JSONEncodable {
-    
-    /// Encodes the reciever into JSON.
-    func toJSON() -> JSON.Value
-}
-
-/// Type can be converted from JSON.
-public protocol JSONDecodable {
-    
-    /// Decodes the reciever from JSON.
-    init?(JSONValue: JSON.Value)
-}
-
-/// Type can be converted from JSON according to parameters.
-public protocol JSONParametrizedDecodable {
-    
-    associatedtype JSONDecodingParameters
-    
-    /// Decodes the reciever from JSON according to the specified parameters.
-    init?(JSONValue: JSON.Value, parameters: JSONDecodingParameters)
-}
-
-// Typealiases due to compiler error
-
-public typealias JSONValue = JSON.Value
-
-public typealias JSONArray = [JSONValue]
-
-public typealias JSONObject = [String: JSONValue]
-
-public typealias StringValue = String
-
-public typealias FloatValue = Float
-
-public typealias DoubleValue = Double
-
-public typealias NullValue = Null
-

@@ -23,7 +23,7 @@ public extension JSON.Value {
         
         switch self {
             
-        case .Array(_), .Object(_): break
+        case .array(_), .object(_): break
             
         default: return nil
         }
@@ -50,26 +50,21 @@ private extension JSON.Value {
         
         switch self {
             
-        case .Null: return nil
+        case .null: return nil
             
-        case .String(let value): return json_object_new_string(value)
+        case .string(let value): return json_object_new_string(value)
             
-        case .Number(let number):
+        case .boolean(let value):
             
-            switch number {
-                
-            case .Boolean(let value):
-                
-                let jsonBool: Int32 = { if value { return Int32(1) } else { return Int32(0) } }()
-                
-                return json_object_new_boolean(jsonBool)
-                
-            case .Integer(let value): return json_object_new_int64(Int64(value))
-                
-            case .Double(let value): return json_object_new_double(value)
-            }
+            let jsonBool: Int32 = { if value { return Int32(1) } else { return Int32(0) } }()
             
-        case .Array(let arrayValue):
+            return json_object_new_boolean(jsonBool)
+            
+        case .integer(let value): return json_object_new_int64(Int64(value))
+            
+        case .double(let value): return json_object_new_double(value)
+            
+        case .array(let arrayValue):
             
             let jsonArray = json_object_new_array()
             
@@ -82,7 +77,7 @@ private extension JSON.Value {
             
             return jsonArray
             
-        case .Object(let dictionaryValue):
+        case .object(let dictionaryValue):
             
             let jsonObject = json_object_new_object()
             

@@ -40,7 +40,7 @@ private extension JSON.Value {
         
         switch type {
             
-        case json_type_null: self = .Null
+        case json_type_null: self = .null
             
         case json_type_string:
             
@@ -48,7 +48,7 @@ private extension JSON.Value {
             
             let string = Swift.String(validatingUTF8: stringPointer) ?? ""
             
-            self = JSON.Value.String(string)
+            self = JSON.Value.string(string)
             
         case json_type_boolean:
             
@@ -56,7 +56,7 @@ private extension JSON.Value {
             
             let boolean: Bool = { if value == 0 { return false } else { return true } }()
             
-            self = .Number(.Boolean(boolean))
+            self = .boolean(boolean)
             
         case json_type_int:
             
@@ -65,24 +65,26 @@ private extension JSON.Value {
             // Handle integer overflow
             if value > Int64(Int.max) {
                 
-                self = .Number(.Integer(Int.max))
+                self = .integer(Int.max)
             }
             else {
                 
-                self = .Number(.Integer(Int(value)))
+                self = .integer(Int(value))
             }
             
         case json_type_double:
             
             let value = json_object_get_double(jsonObject)
             
-            self = .Number(.Double(value))
+            self = .double(value)
             
         case json_type_array:
             
-            var array = [JSONValue]()
-            
             let arrayLength = json_object_array_length(jsonObject)
+            
+            var array = ContiguousArray<JSON.Value>()
+            
+            array.reserveCapacity(Int(arrayLength))
             
             for i in 0 ..< arrayLength {
                 
@@ -93,13 +95,13 @@ private extension JSON.Value {
                 array.append(jsonValue)
             }
             
-            self = .Array(array)
+            self = .array(Array(array))
             
         case json_type_object:
             
             let hashTable = json_object_get_object(jsonObject)!
             
-            var jsonDictionary = [StringValue: JSONValue]()
+            var jsonDictionary: [String: JSON.Value] = [:]
             
             var entry = hashTable.pointee.head
             
@@ -118,7 +120,7 @@ private extension JSON.Value {
                 entry = entry!.pointee.next
             }
             
-            self = .Object(jsonDictionary)
+            self = .object(jsonDictionary)
             
         default: fatalError("Unhandled case: \(type.rawValue)")
         }
