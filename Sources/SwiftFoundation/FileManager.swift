@@ -10,29 +10,31 @@
     import Darwin.C
 #elseif os(Linux)
     import Glibc
+    import CStatfs
 #endif
-
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
 
 public typealias FileSystemAttributes = statfs
 
 public typealias FileAttributes = stat
 
-/// Class for interacting with the file system.
-///
-/// Only availible on Darwin (```open``` has been marked as unavailible).
-public final class FileManager {
+/// Type for interacting with the file system.
+public struct FileManager {
     
     // MARK: - Determining Access to Files
     
     /// Determines whether a file descriptor exists at the specified path. Can be regular file, directory, socket, etc.
-    public static func itemExists(path: String) -> Bool {
+    public static func itemExists(at path: String) -> Bool {
         
-        return (stat(path, nil) == 0)
+        var inodeInfo = stat()
+        
+        guard stat(path, &inodeInfo) == 0
+            else { return false }
+        
+        return true
     }
     
     /// Determines whether a file exists at the specified path.
-    public static func fileExists(path: String) -> Bool {
+    public static func fileExists(at path: String) -> Bool {
         
         var inodeInfo = stat()
         
@@ -46,7 +48,7 @@ public final class FileManager {
     }
     
     /// Determines whether a directory exists at the specified path.
-    public static func directoryExists(path: String) -> Bool {
+    public static func directoryExists(at path: String) -> Bool {
         
         var inodeInfo = stat()
         
@@ -62,10 +64,10 @@ public final class FileManager {
     // MARK: - Managing the Current Directory
     
     /// Attempts to change the current directory
-    public static func changeCurrentDirectory(newCurrentDirectory: String) throws {
+    public static func changeCurrentDirectory(_ newCurrentDirectory: String) throws {
         
         guard chdir(newCurrentDirectory) == 0
-            else { throw POSIXError.fromErrorNumber! }
+            else { throw POSIXError.fromErrno! }
     }
     
     /// Gets the current directory
@@ -73,23 +75,23 @@ public final class FileManager {
         
         let stringBufferSize = Int(PATH_MAX)
         
-        let path = UnsafeMutablePointer<CChar>.alloc(stringBufferSize)
+        let path = UnsafeMutablePointer<CChar>(allocatingCapacity: stringBufferSize)
         
-        defer { path.dealloc(stringBufferSize) }
+        defer { path.deallocateCapacity(stringBufferSize) }
         
         getcwd(path, stringBufferSize - 1)
         
-        return String.fromCString(path)!
+        return String(validatingUTF8: path)!
     }
     
     // MARK: - Creating and Deleting Items
     
-    public static func createFile(path: String, contents data: Data? = nil, attributes: FileAttributes = FileAttributes()) throws {
+    public static func createFile(at path: String, contents data: Data? = nil, attributes: FileAttributes = FileAttributes()) throws {
         
         // get file descriptor for path (open file)
         let file = open(path, O_CREAT, DefaultFileMode)
         
-        guard file != -1 else { throw POSIXError.fromErrorNumber! }
+        guard file != -1 else { throw POSIXError.fromErrno! }
         
         // close file
         defer { guard close(file) != -1 else { fatalError("Could not close file: \(path)") } }
@@ -97,72 +99,72 @@ public final class FileManager {
         // write data
         if let data = data {
             
-            try self.setContents(path, data: data)
+            try self.set(contents: data, at: path)
         }
         
         // TODO: set attributes
         
     }
     
-    public static func createDirectory(path: String, withIntermediateDirectories createIntermediates: Bool = false, attributes: FileAttributes = FileAttributes()) throws {
+    public static func createDirectory(at path: String, createIntermediateDirectories: Bool = false, attributes: FileAttributes = FileAttributes()) throws {
         
-        if createIntermediates {
+        if createIntermediateDirectories {
             
             fatalError("Create Intermediate Directories Not Implemented")
         }
         
-        guard mkdir(path, attributes.st_mode) == 0 else { throw POSIXError.fromErrorNumber! }
+        guard mkdir(path, attributes.st_mode) == 0 else { throw POSIXError.fromErrno! }
     }
     
     public static func removeItem(path: String) throws {
         
-        guard remove(path) == 0 else { throw POSIXError.fromErrorNumber! }
+        guard remove(path) == 0 else { throw POSIXError.fromErrno! }
     }
     
     // MARK: - Creating Symbolic and Hard Links
     
-    public static func createSymbolicLink(path: String, withDestinationPath destinationPath: String) throws {
+    public static func createSymbolicLink(at path: String, to destinationPath: String) throws {
         
         fatalError()
     }
     
-    public static func linkItem(path: String, toPath destinationPath: String) throws {
+    public static func linkItem(at path: String, to destinationPath: String) throws {
         
         fatalError()
     }
     
-    public static func destinationOfSymbolicLink(path: String) throws -> String {
+    public static func destinationOfSymbolicLink(at path: String) throws -> String {
         
         fatalError()
     }
     
     // MARK: - Moving and Copying Items
     
-    public static func copyItem(sourcePath: String, toPath destinationPath: String) throws {
+    public static func copy(_ sourcePath: String, to destinationPath: String) throws {
         
         fatalError()
     }
     
-    public static func moveItem(sourcePath: String, toPath destinationPath: String) throws {
+    public static func move(_ sourcePath: String, to destinationPath: String) throws {
         
         fatalError()
     }
     
     // MARK: - Getting and Setting Attributes
     
-    public static func attributesOfItem(path: String) throws -> FileAttributes {
+    public static func attributes(at path: String) throws -> FileAttributes {
         
         return try FileAttributes(path: path)
     }
     
-    public static func setAttributes(attributes: FileAttributes, ofItemAtPath path: String) throws {
+    public static func set(attributes: FileAttributes, at path: String) throws {
         
         // let originalAttributes = try self.attributesOfItem(atPath: path)
         
         fatalError("Not Implemented")
     }
     
-    public static func attributesOfFileSystem(forPath path: String) throws -> FileSystemAttributes {
+    public static func fileSystemAttributes(at path: String) throws -> FileSystemAttributes {
         
         return try FileSystemAttributes(path: path)
     }
@@ -170,12 +172,12 @@ public final class FileManager {
     // MARK: - Getting and Comparing File Contents
     
     /// Reads the contents of a file.
-    public static func contents(path: String) throws -> Data {
+    public static func contents(at path: String) throws -> Data {
         
         // get file descriptor for path (open file)
         let file = open(path, O_RDONLY)
         
-        guard file != -1 else { throw POSIXError.fromErrorNumber! }
+        guard file != -1 else { throw POSIXError.fromErrno! }
         
         // close file
         defer { guard close(file) != -1 else { fatalError("Could not close file: \(path)") } }
@@ -185,41 +187,44 @@ public final class FileManager {
         
         let fileSize = attributes.fileSize
         
+        #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+        
         assert(fileSize <= SSIZE_MAX, "File size (\(fileSize)) is larger than the max number of bytes allowed (\(SSIZE_MAX))")
+            
+        #endif
         
-        let memoryPointer = UnsafeMutablePointer<Byte>.alloc(fileSize)
+        let memoryPointer = UnsafeMutablePointer<Byte>(allocatingCapacity: fileSize)
         
-        defer { memoryPointer.dealloc(fileSize) }
+        defer { memoryPointer.deallocateCapacity(fileSize) }
         
         let readBytes = read(file, memoryPointer, fileSize)
         
-        guard readBytes != -1 else { throw POSIXError.fromErrorNumber! }
+        guard readBytes != -1 else { throw POSIXError.fromErrno! }
         
         //guard readBytes == fileSize else { fatalError() }
         
-        let data = Data.fromBytePointer(memoryPointer, length: readBytes)
+        let data = Data(bytes: memoryPointer, count: readBytes)
         
         return data
     }
     
     /// Sets the contents of an existing file.
-    public static func setContents(path: String, data: Data) throws {
+    public static func set(contents data: Data, at path: String) throws {
         
         // get file descriptor for path (open file)
         let file = open(path, O_WRONLY)
         
-        guard file != -1 else { throw POSIXError.fromErrorNumber! }
+        guard file != -1 else { throw POSIXError.fromErrno! }
         
         // close file
         defer { guard close(file) != -1 else { fatalError("Could not close file: \(path)") } }
         
-        let writtenBytes = write(file, data.byteValue, data.byteValue.count)
+        let writtenBytes = write(file, data.bytes, data.count)
         
-        guard writtenBytes != -1 else { throw POSIXError.fromErrorNumber! }
+        guard writtenBytes != -1 else { throw POSIXError.fromErrno! }
     }
 }
 
 public let DefaultFileMode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH
 
-#endif
 

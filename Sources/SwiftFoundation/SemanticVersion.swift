@@ -6,32 +6,28 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-// MARK: - Protocol
+// MARK: - Implementation
 
-public protocol SemanticVersionType: RawRepresentable, CustomStringConvertible {
+public struct SemanticVersion: Equatable, RawRepresentable, CustomStringConvertible {
     
-    var mayor: UInt { get }
+    // MARK: - Properties
     
-    var minor: UInt { get }
+    public var major: UInt
     
-    var patch: UInt { get }
-}
-
-// MARK: - Protocol Implementation
-
-public extension SemanticVersionType {
+    public var minor: UInt
     
-    var rawValue: String {
+    public var patch: UInt
+    
+    // MARK: - Initialization
+    
+    public init(major: UInt, minor: UInt, patch: UInt) {
         
-        return "\(mayor).\(minor).\(patch)"
+        self.major = major
+        self.minor = minor
+        self.patch = patch
     }
     
-    var description: String {
-        
-        return rawValue
-    }
-    
-    init?(rawValue: String) {
+    public init?(rawValue: String) {
         
         // TODO: Implement RawRespresentable Initializer
         
@@ -39,24 +35,25 @@ public extension SemanticVersionType {
         
         return nil
     }
+    
+    // MARK: - Accessors
+    
+    public var rawValue: String {
+        
+        return "\(major).\(minor).\(patch)"
+    }
+    
+    public var description: String {
+        
+        return rawValue
+    }
 }
 
-// MARK: - Implementation
+// MARK: - Equatable
 
-public struct SemanticVersion: SemanticVersionType {
+public func == (lhs: SemanticVersion, rhs: SemanticVersion) -> Bool {
     
-    // MARK: - Properties
-    
-    public let mayor: UInt
-    
-    public let minor: UInt
-    
-    public let patch: UInt
-    
-    public init(mayor: UInt, minor: UInt, patch: UInt) {
-        
-        self.mayor = mayor
-        self.minor = minor
-        self.patch = patch
-    }
+    return lhs.major == rhs.major
+        && lhs.minor == rhs.minor
+        && lhs.patch == rhs.patch
 }

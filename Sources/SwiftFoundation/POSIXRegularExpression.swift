@@ -16,7 +16,7 @@ public typealias POSIXRegularExpression = regex_t
 
 public extension POSIXRegularExpression {
     
-    public static func compile(pattern: String, options: [RegularExpression.CompileOption]) -> (ErrorCode, POSIXRegularExpression) {
+    public static func compile(_ pattern: String, options: [RegularExpression.CompileOption]) -> (ErrorCode, POSIXRegularExpression) {
         
         var regularExpression = POSIXRegularExpression()
         
@@ -32,15 +32,15 @@ public extension POSIXRegularExpression {
         regfree(&self)
     }
     
-    public func firstMatch(string: String, options: [RegularExpression.MatchOption]) -> RegularExpressionMatch? {
+    public func firstMatch(_ string: String, options: [RegularExpression.MatchOption]) -> RegularExpressionMatch? {
         
         // we are sure that that this method does not mutate the regular expression, so we make a copy
         var expression = self
         
         let numberOfMatches = re_nsub + 1 // first match is the expression itself, later matches are subexpressions
         
-        let matchesPointer = UnsafeMutablePointer<Match>.alloc(numberOfMatches)
-        defer { matchesPointer.destroy(numberOfMatches) }
+        let matchesPointer = UnsafeMutablePointer<Match>.init(allocatingCapacity: numberOfMatches)
+        defer { matchesPointer.deinitialize(count: numberOfMatches) }
         
         let flags = options.optionsBitmask()
         
@@ -82,7 +82,7 @@ public extension POSIXRegularExpression {
                 
                 let range = Int(subexpressionMatch.rm_so) ..< Int(subexpressionMatch.rm_eo)
                 
-                match.subexpressionRanges.append(RegularExpressionMatch.Range.Found(range))
+                match.subexpressionRanges.append(RegularExpressionMatch.Range.Found(Range(range)))
             }
         }
         

@@ -17,38 +17,43 @@ import SwiftFoundation
 
 final class POSIXTimeTests: XCTestCase {
     
-    lazy var allTests: [(String, () throws -> ())] =
-        [("testGetTimeOfDay", self.testGetTimeOfDay),
-        ("testTimeVal", self.testTimeVal),
-        ("testTimeSpec", self.testTimeSpec)]
+    static let allTests: [(String, (POSIXTimeTests) -> () throws -> Void)] =
+        [("testGetTimeOfDay", testGetTimeOfDay),
+        ("testTimeVal", testTimeVal),
+        ("testTimeSpec", testTimeSpec)]
     
     func testGetTimeOfDay() {
-                
-        do { try timeval.timeOfDay() }
+        
+        var time = timeval()
+        
+        do { time = try timeval.timeOfDay() }
+            
         catch {
             
             XCTFail("Error getting time: \(error)")
         }
+        
+        print("Current time: \(time)")
     }
 
     func testTimeVal() {
         
-        let date = Date()
+        let date = SwiftFoundation.Date()
         
         let time = timeval(timeInterval: date.timeIntervalSince1970)
         
-        XCTAssert(Int(time.timeIntervalValue) == Int(date.timeIntervalSince1970), "TimeVal derived interval: \(time.timeIntervalValue) must equal Date's timeIntervalSince1970 \(date.timeIntervalSince1970)")
+        XCTAssert(Int(time.timeInterval) == Int(date.timeIntervalSince1970), "TimeVal derived interval: \(time.timeInterval) must equal Date's timeIntervalSince1970 \(date.timeIntervalSince1970)")
     }
     
     func testTimeSpec() {
         
-        let date = Date()
+        let date = SwiftFoundation.Date()
         
         let time = timespec(timeInterval: date.timeIntervalSince1970)
         
         #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
         
-            XCTAssert(time.timeIntervalValue == date.timeIntervalSince1970, "timespec: \(time.timeIntervalValue) == Date: \(date)")
+            XCTAssert(time.timeInterval == date.timeIntervalSince1970, "timespec: \(time.timeInterval) == Date: \(date)")
         
         #elseif os(Linux)
             

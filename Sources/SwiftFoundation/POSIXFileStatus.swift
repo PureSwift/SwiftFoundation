@@ -13,8 +13,6 @@
     import CStatfs
 #endif
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
-
 public extension stat {
     
     // MARK: - Initialization
@@ -25,7 +23,7 @@ public extension stat {
         
         guard stat(path, &fileStatus) == 0 else {
             
-            throw POSIXError.fromErrorNumber!
+            throw POSIXError.fromErrno!
         }
         
         self = fileStatus
@@ -33,13 +31,15 @@ public extension stat {
     
     // MARK: - Properties
     
+    #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    
     /// Date of last access. Date of ```st_atimespec``` or ```st_atime```.
     ///
     /// The field ```st_atime``` is changed by file accesses, for example, by ```execve```, ```mknod```, ```pipe```, ```utime```, and ```read``` (of more than zero bytes).
     /// Other routines, like ```mmap```, may or may not update ```st_atime```.
     var lastAccessDate: Date {
         
-        get { return Date(timeIntervalSince1970: st_atimespec.timeIntervalValue) }
+        get { return Date(timeIntervalSince1970: st_atimespec.timeInterval) }
         set { st_atimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
     }
     
@@ -50,7 +50,7 @@ public extension stat {
     /// The ```st_mtime``` field is not changed for changes in owner, group, hard link count, or mode.
     var lastDataModificationDate: Date {
         
-        get { return Date(timeIntervalSince1970: st_mtimespec.timeIntervalValue) }
+        get { return Date(timeIntervalSince1970: st_mtimespec.timeInterval) }
         set { st_mtimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
     }
     
@@ -59,16 +59,18 @@ public extension stat {
     /// The field ```st_ctime``` is changed by writing or by setting inode information (i.e., owner, group, link count, mode, etc.).
     var lastStatusChangeDate: Date {
         
-        get { return Date(timeIntervalSince1970: st_ctimespec.timeIntervalValue) }
+        get { return Date(timeIntervalSince1970: st_ctimespec.timeInterval) }
         set { st_ctimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
     }
     
     /// Date file was created. Date of ```st_birthtimespec``` or ```st_birthtime```.
     var creationDate: Date {
         
-        get { return Date(timeIntervalSince1970: st_birthtimespec.timeIntervalValue) }
+        get { return Date(timeIntervalSince1970: st_birthtimespec.timeInterval) }
         set { st_birthtimespec = timespec(timeInterval: lastDataModificationDate.timeIntervalSince1970) }
     }
+    
+    #endif
     
     var fileSize: Int {
         
@@ -123,5 +125,3 @@ public extension mode_t {
         }
     }
 }
-
-#endif

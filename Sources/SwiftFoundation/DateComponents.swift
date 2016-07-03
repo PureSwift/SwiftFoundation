@@ -8,20 +8,22 @@
 
 #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
     import Darwin.C
+    import Foundation
 #elseif os(Linux)
     import Glibc
 #endif
 
 public struct DateComponents {
+    
     public enum Component {
-        case Second
-        case Minute
-        case Hour
-        case DayOfMonth
-        case Month
-        case Year
-        case Weekday
-        case DayOfYear
+        case second
+        case minute
+        case hour
+        case dayOfMonth
+        case month
+        case year
+        case weekday
+        case dayOfYear
     }
     
     public var second: Int32 = 0
@@ -33,73 +35,80 @@ public struct DateComponents {
     public var weekday: Int32
     public var dayOfYear: Int32 = 1
     
-    public init(timeInterval: TimeInterval) {
-        self.init(
-            brokenDown: tm(
-                UTCSecondsSince1970: timeval(timeInterval: timeInterval).tv_sec
-            )
-        )
+    /// Intializes from a time interval interval between the current date and 1 January 1970, GMT.
+    public init(timeIntervalSince1970 timeinterval: TimeInterval) {
+        
+        self.init(brokenDown: tm(UTCSecondsSince1970: timeval(timeInterval: timeinterval).tv_sec ))
     }
     
     public init() {
         weekday = 0
     }
     
-    public init(fromDate date: Date) {
-        self.init(timeInterval: date.timeIntervalSince1970)
+    /// Initializes from a `Date`.
+    public init(date: Date) {
+        
+        self.init(timeIntervalSince1970: date.timeIntervalSince1970)
     }
     
     public var date: Date {
+        
         return Date(timeIntervalSince1970: timeInterval)
     }
     
-    public mutating func setValue(value: Int32, forComponent component: Component) {
-        switch component {
-        case .Second:
-            second = value
-            break
-        case .Minute:
-            minute = value
-            break
-        case .Hour:
-            hour = value
-            break
-        case .DayOfMonth:
-            dayOfMonth = value
-            break
-        case .Month:
-            month = value
-            break
-        case .Year:
-            year = value
-            break
-        case .Weekday:
-            weekday = value
-            break
-        case .DayOfYear:
-            dayOfYear = value
-            break
+    /// Get the value for the specified component.
+    public subscript(component: Component) -> Int32 {
+        
+        get {
+            
+            switch component {
+            case .second:
+                return second
+            case .minute:
+                return minute
+            case .hour:
+                return hour
+            case .dayOfMonth:
+                return dayOfMonth
+            case .month:
+                return month
+            case .year:
+                return year
+            case .weekday:
+                return weekday
+            case .dayOfYear:
+                return dayOfYear
+            }
         }
-    }
-    
-    public func valueForComponent(component: Component) -> Int32 {
-        switch component {
-        case .Second:
-            return second
-        case .Minute:
-            return minute
-        case .Hour:
-            return hour
-        case .DayOfMonth:
-            return dayOfMonth
-        case .Month:
-            return month
-        case .Year:
-            return year
-        case .Weekday:
-            return weekday
-        case .DayOfYear:
-            return dayOfYear
+        
+        set {
+            
+            switch component {
+            case .second:
+                second = newValue
+                break
+            case .minute:
+                minute = newValue
+                break
+            case .hour:
+                hour = newValue
+                break
+            case .dayOfMonth:
+                dayOfMonth = newValue
+                break
+            case .month:
+                month = newValue
+                break
+            case .year:
+                year = newValue
+                break
+            case .weekday:
+                weekday = newValue
+                break
+            case .dayOfYear:
+                dayOfYear = newValue
+                break
+            }
         }
     }
     

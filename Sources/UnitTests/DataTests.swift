@@ -15,23 +15,23 @@ import SwiftFoundation
 
 final class DataTests: XCTestCase {
     
-    lazy var allTests: [(String, () throws -> ())] = [("testFromBytePointer", self.testFromBytePointer)]
-
+    static let allTests: [(String, (DataTests) -> () throws -> Void)] = [("testFromBytePointer", testFromBytePointer)]
+    
     func testFromBytePointer() {
         
         let string = "TestData"
         
-        var testData = string.toUTF8Data()
+        let testData = string.toUTF8Data()
         
-        let dataLength = testData.byteValue.count
+        XCTAssert(testData.isEmpty == false, "Could not create test data")
         
-        let dataPointer = UnsafeMutablePointer<Byte>.alloc(dataLength)
+        let dataPointer = UnsafeMutablePointer<Byte>(allocatingCapacity: testData.count)
         
-        defer { dataPointer.dealloc(dataLength) }
+        defer { dataPointer.deallocateCapacity(testData.count) }
         
-        memcpy(&testData.byteValue, dataPointer, dataLength)
-                
-        let data = Data.fromBytePointer(dataPointer, length: dataLength)
+        memcpy(dataPointer, testData.bytes, testData.count)
+        
+        let data = SwiftFoundation.Data(bytes: dataPointer, count: testData.count)
         
         XCTAssert(data == testData, "\(data) == \(testData)")
     }

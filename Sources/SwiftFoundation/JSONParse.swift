@@ -16,9 +16,9 @@ public extension JSON.Value {
     
     public init?(string: Swift.String) {
         
-        let tokenerError = UnsafeMutablePointer<json_tokener_error>.alloc(1)
+        let tokenerError: UnsafeMutablePointer<json_tokener_error>! = UnsafeMutablePointer<json_tokener_error>(allocatingCapacity: 1)
         
-        defer { tokenerError.dealloc(1) }
+        defer { tokenerError.deallocateCapacity(1) }
         
         let jsonObject = json_tokener_parse_verbose(string, tokenerError)
         
@@ -27,27 +27,28 @@ public extension JSON.Value {
         // could not parse
         guard tokenerError != nil else { return nil }
         
-        self.init(jsonObject: jsonObject)
+        self = self.dynamicType.init(jsonObject: jsonObject)
     }
 }
 
 private extension JSON.Value {
     
     /// Create a JSON value from a ```json_object``` pointer created by the **json-c** library.
-    init(jsonObject: COpaquePointer) {
+    init(jsonObject: OpaquePointer?) {
+        
         let type = json_object_get_type(jsonObject)
         
         switch type {
             
-        case json_type_null: self = .Null
+        case json_type_null: self = .null
             
         case json_type_string:
             
-            let stringPointer = json_object_get_string(jsonObject)
+            let stringPointer = json_object_get_string(jsonObject)!
             
-            let string = Swift.String.fromCString(stringPointer) ?? ""
+            let string = Swift.String(validatingUTF8: stringPointer) ?? ""
             
-            self = JSON.Value.String(string)
+            self = JSON.Value.string(string)
             
         case json_type_boolean:
             
@@ -55,7 +56,7 @@ private extension JSON.Value {
             
             let boolean: Bool = { if value == 0 { return false } else { return true } }()
             
-            self = .Number(.Boolean(boolean))
+            self = .boolean(boolean)
             
         case json_type_int:
             
@@ -64,24 +65,26 @@ private extension JSON.Value {
             // Handle integer overflow
             if value > Int64(Int.max) {
                 
-                self = .Number(.Integer(Int.max))
+                self = .integer(Int.max)
             }
             else {
                 
-                self = .Number(.Integer(Int(value)))
+                self = .integer(Int(value))
             }
             
         case json_type_double:
             
             let value = json_object_get_double(jsonObject)
             
-            self = .Number(.Double(value))
+            self = .double(value)
             
         case json_type_array:
             
-            var array = [JSONValue]()
-            
             let arrayLength = json_object_array_length(jsonObject)
+            
+            var array = ContiguousArray<JSON.Value>()
+            
+            array.reserveCapacity(Int(arrayLength))
             
             for i in 0 ..< arrayLength {
                 
@@ -92,32 +95,32 @@ private extension JSON.Value {
                 array.append(jsonValue)
             }
             
-            self = .Array(array)
+            self = .array(Array(array))
             
         case json_type_object:
             
-            let hashTable = json_object_get_object(jsonObject)
+            let hashTable = json_object_get_object(jsonObject)!
             
-            var jsonDictionary = [StringValue: JSONValue]()
+            var jsonDictionary: [String: JSON.Value] = [:]
             
-            var entry = hashTable.memory.head
+            var entry = hashTable.pointee.head
             
             while entry != nil {
             
-                let keyPointer = entry.memory.k
+                let keyPointer = entry!.pointee.k
                 
-                let valuePointer = entry.memory.v
+                let valuePointer = entry!.pointee.v
                 
-                let key = Swift.String.fromCString(unsafeBitCast(keyPointer, UnsafeMutablePointer<CChar>.self))!
+                let key = Swift.String.init(validatingUTF8: unsafeBitCast(keyPointer, to: UnsafeMutablePointer<CChar>.self))!
                 
-                let value = json_object_get(unsafeBitCast(valuePointer, COpaquePointer.self))
+                let value = json_object_get(unsafeBitCast(valuePointer, to: OpaquePointer.self))
                 
                 jsonDictionary[key] = JSON.Value(jsonObject: value)
                 
-                entry = entry.memory.next
+                entry = entry!.pointee.next
             }
             
-            self = .Object(jsonDictionary)
+            self = .object(jsonDictionary)
             
         default: fatalError("Unhandled case: \(type.rawValue)")
         }

@@ -5,254 +5,275 @@
 //  Created by Alsey Coleman Miller on 6/28/15.
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
-// Encoding algorithm from https://github.com/drichardson/SwiftyBase64
 
-/// [Base64](https://en.wikipedia.org/wiki/Base64) encoding.
-public struct Base64 {
-    
-    // MARK: - Encoding
-    
-    /**
-     Use the Base64 algorithm as decribed by RFC 4648 section 4 to
-     encode the input bytes. The alphabet specifies the translation
-     table to use. RFC 4648 defines two such alphabets:
-     - Standard (section 4)
-     - URL and Filename Safe (section 5)
-     - parameter bytes: Bytes to encode.
-     - parameter alphabet: The Base64 alphabet to encode with.
-     - returns: Base64 encoded ASCII bytes.
-     */
-    public static func encode(data: Data, alphabet: Alphabet = .Standard) -> Data {
+#if os(Linux) || XcodeLinux
+
+    public extension Data {
         
-        let bytes = data.byteValue
-        
-        var encoded : [UInt8] = []
-        
-        let table = Base64.tableForAlphabet(alphabet)
-        let padding = table[64]
-        
-        var i = 0
-        let count = bytes.count
-        
-        // for ; i+3 <= count; i += 3
-        while i+3 <= count {
+        public struct Base64EncodingOptions : OptionSet {
+            public let rawValue : UInt
+            public init(rawValue: UInt) { self.rawValue = rawValue }
             
-            let one = bytes[i] >> 2
-            let two = ((bytes[i] & 0b11) << 4) | ((bytes[i+1] & 0b11110000) >> 4)
-            let three = ((bytes[i+1] & 0b00001111) << 2) | ((bytes[i+2] & 0b11000000) >> 6)
-            let four = bytes[i+2] & 0b00111111
-            
-            encoded.append(table[Int(one)])
-            encoded.append(table[Int(two)])
-            encoded.append(table[Int(three)])
-            encoded.append(table[Int(four)])
-            
-            i += 3
+            public static let encoding64CharacterLineLength = Base64EncodingOptions(rawValue: UInt(1 << 0))
+            public static let encoding76CharacterLineLength = Base64EncodingOptions(rawValue: UInt(1 << 1))
+            public static let encodingEndLineWithCarriageReturn = Base64EncodingOptions(rawValue: UInt(1 << 4))
+            public static let encodingEndLineWithLineFeed = Base64EncodingOptions(rawValue: UInt(1 << 5))
         }
         
-        if i+2 == count {
-            // (3) The final quantum of encoding input is exactly 16 bits; here, the
-            // final unit of encoded output will be three characters followed by
-            // one "=" padding character.
-            let one = bytes[i] >> 2
-            let two = ((bytes[i] & 0b11) << 4) | ((bytes[i+1] & 0b11110000) >> 4)
-            let three = ((bytes[i+1] & 0b00001111) << 2)
-            encoded.append(table[Int(one)])
-            encoded.append(table[Int(two)])
-            encoded.append(table[Int(three)])
-            encoded.append(padding)
-        } else if i+1 == count {
-            // (2) The final quantum of encoding input is exactly 8 bits; here, the
-            // final unit of encoded output will be two characters followed by
-            // two "=" padding characters.
-            let one = bytes[i] >> 2
-            let two = ((bytes[i] & 0b11) << 4)
-            encoded.append(table[Int(one)])
-            encoded.append(table[Int(two)])
-            encoded.append(padding)
-            encoded.append(padding)
-        } else {
-            // (1) The final quantum of encoding input is an integral multiple of 24
-            // bits; here, the final unit of encoded output will be an integral
-            // multiple of 4 characters with no "=" padding.
-            assert(i == count)
+        public struct Base64DecodingOptions : OptionSet {
+            public let rawValue : UInt
+            public init(rawValue: UInt) { self.rawValue = rawValue }
+            
+            public static let ignoreUnknownCharacters = Base64DecodingOptions(rawValue: UInt(1 << 0))
         }
         
-        return Data(byteValue: encoded)
-    }
-}
-
-// MARK: - Alphabet
-
-public extension Base64 {
-    
-    /**
-     Base64 Alphabet to use during encoding.
-     - Standard: The standard Base64 encoding, defined in RFC 4648 section 4.
-     - URLAndFilenameSafe: The base64url encoding, defined in RFC 4648 section 5.
-     */
-    public enum Alphabet {
-        /// The standard Base64 alphabet
-        case Standard
+        /* Create an NSData from a Base-64 encoded NSString using the given options. By default, returns nil when the input is not recognized as valid Base-64.
+         */
+        public init?(base64Encoded base64String: String, options: Base64DecodingOptions) {
+            let encodedBytes = Array(base64String.utf8)
+            guard let decodedBytes = Data.base64DecodeBytes(encodedBytes, options: options) else {
+                return nil
+            }
+            self.init(bytes: decodedBytes, count: decodedBytes.count)
+        }
         
-        /// The URL and Filename Safe Base64 alphabet
-        case URLAndFilenameSafe
-    }
-}
-
-private extension Base64 {
-    
-    /// Get the encoding table for the alphabet.
-    static func tableForAlphabet(alphabet : Alphabet) -> [UInt8] {
-        switch alphabet {
-        case .Standard:
-            return StandardAlphabet
-        case .URLAndFilenameSafe:
-            return URLAndFilenameSafeAlphabet
+        /* Create a Base-64 encoded NSString from the receiver's contents using the given options.
+         */
+        public func base64EncodedString(_ options: Base64EncodingOptions = []) -> String {
+            let encodedBytes = Data.base64EncodeBytes(bytes, options: options)
+            let characters = encodedBytes.map { Character(UnicodeScalar($0)) }
+            return String(characters)
+        }
+        
+        /* Create an NSData from a Base-64, UTF-8 encoded NSData. By default, returns nil when the input is not recognized as valid Base-64.
+         */
+        public init?(base64Encoded base64Data: Data, options: Base64DecodingOptions) {
+            guard let decodedBytes = Data.base64DecodeBytes(base64Data.bytes, options: options) else {
+                return nil
+            }
+            self.init(bytes: decodedBytes, count: decodedBytes.count)
+        }
+        
+        /* Create a Base-64, UTF-8 encoded NSData from the receiver's contents using the given options.
+         */
+        public func base64EncodedData(_ options: Base64EncodingOptions = []) -> Data {
+            let encodedBytes = Data.base64EncodeBytes(bytes, options: options)
+            return Data(bytes: encodedBytes, count: encodedBytes.count)
+        }
+        
+        /**
+         The ranges of ASCII characters that are used to encode data in Base64.
+         */
+        private static let base64ByteMappings: [Range<UInt8>] = [
+            65 ..< 91,      // A-Z
+            97 ..< 123,     // a-z
+            48 ..< 58,      // 0-9
+            43 ..< 44,      // +
+            47 ..< 48,      // /
+        ]
+        /**
+         Padding character used when the number of bytes to encode is not divisible by 3
+         */
+        private static let base64Padding : UInt8 = 61 // =
+        
+        /**
+         This method takes a byte with a character from Base64-encoded string
+         and gets the binary value that the character corresponds to.
+         
+         - parameter byte:       The byte with the Base64 character.
+         - returns:              Base64DecodedByte value containing the result (Valid , Invalid, Padding)
+         */
+        private enum Base64DecodedByte {
+            case valid(UInt8)
+            case invalid
+            case padding
+        }
+        private static func base64DecodeByte(_ byte: UInt8) -> Base64DecodedByte {
+            guard byte != base64Padding else {return .padding}
+            var decodedStart: UInt8 = 0
+            for range in base64ByteMappings {
+                if range.contains(byte) {
+                    let result = decodedStart + (byte - range.lowerBound)
+                    return .valid(result)
+                }
+                decodedStart += range.upperBound - range.lowerBound
+            }
+            return .invalid
+        }
+        
+        /**
+         This method takes six bits of binary data and encodes it as a character
+         in Base64.
+         
+         The value in the byte must be less than 64, because a Base64 character
+         can only represent 6 bits.
+         
+         - parameter byte:       The byte to encode
+         - returns:              The ASCII value for the encoded character.
+         */
+        private static func base64EncodeByte(_ byte: UInt8) -> UInt8 {
+            assert(byte < 64)
+            var decodedStart: UInt8 = 0
+            for range in base64ByteMappings {
+                let decodedRange = decodedStart ..< decodedStart + (range.upperBound - range.lowerBound)
+                if decodedRange.contains(byte) {
+                    return range.lowerBound + (byte - decodedStart)
+                }
+                decodedStart += range.upperBound - range.lowerBound
+            }
+            return 0
+        }
+        
+        
+        /**
+         This method decodes Base64-encoded data.
+         
+         If the input contains any bytes that are not valid Base64 characters,
+         this will return nil.
+         
+         - parameter bytes:      The Base64 bytes
+         - parameter options:    Options for handling invalid input
+         - returns:              The decoded bytes.
+         */
+        private static func base64DecodeBytes(_ bytes: [UInt8], options: Base64DecodingOptions = []) -> [UInt8]? {
+            var decodedBytes = [UInt8]()
+            decodedBytes.reserveCapacity((bytes.count/3)*2)
+            
+            var currentByte : UInt8 = 0
+            var validCharacterCount = 0
+            var paddingCount = 0
+            var index = 0
+            
+            
+            for base64Char in bytes {
+                
+                let value : UInt8
+                
+                switch base64DecodeByte(base64Char) {
+                case .valid(let v):
+                    value = v
+                    validCharacterCount += 1
+                case .invalid:
+                    if options.contains(.ignoreUnknownCharacters) {
+                        continue
+                    } else {
+                        return nil
+                    }
+                case .padding:
+                    paddingCount += 1
+                    continue
+                }
+                
+                //padding found in the middle of the sequence is invalid
+                if paddingCount > 0 {
+                    return nil
+                }
+                
+                switch index%4 {
+                case 0:
+                    currentByte = (value << 2)
+                case 1:
+                    currentByte |= (value >> 4)
+                    decodedBytes.append(currentByte)
+                    currentByte = (value << 4)
+                case 2:
+                    currentByte |= (value >> 2)
+                    decodedBytes.append(currentByte)
+                    currentByte = (value << 6)
+                case 3:
+                    currentByte |= value
+                    decodedBytes.append(currentByte)
+                default:
+                    fatalError()
+                }
+                
+                index += 1
+            }
+            
+            guard (validCharacterCount + paddingCount)%4 == 0 else {
+                //invalid character count
+                return nil
+            }
+            return decodedBytes
+        }
+        
+        
+        /**
+         This method encodes data in Base64.
+         
+         - parameter bytes:      The bytes you want to encode
+         - parameter options:    Options for formatting the result
+         - returns:              The Base64-encoding for those bytes.
+         */
+        private static func base64EncodeBytes(_ bytes: [UInt8], options: Base64EncodingOptions = []) -> [UInt8] {
+            var result = [UInt8]()
+            result.reserveCapacity((bytes.count/3)*4)
+            
+            let lineOptions : (lineLength : Int, separator : [UInt8])? = {
+                let lineLength: Int
+                
+                if options.contains(.encoding64CharacterLineLength) { lineLength = 64 }
+                else if options.contains(.encoding76CharacterLineLength) { lineLength = 76 }
+                else {
+                    return nil
+                }
+                
+                var separator = [UInt8]()
+                if options.contains(.encodingEndLineWithCarriageReturn) { separator.append(13) }
+                if options.contains(.encodingEndLineWithLineFeed) { separator.append(10) }
+                
+                //if the kind of line ending to insert is not specified, the default line ending is Carriage Return + Line Feed.
+                if separator.count == 0 {separator = [13,10]}
+                
+                return (lineLength,separator)
+            }()
+            
+            var currentLineCount = 0
+            let appendByteToResult : (UInt8) -> () = {
+                result.append($0)
+                currentLineCount += 1
+                if let options = lineOptions where currentLineCount == options.lineLength {
+                    result.append(contentsOf: options.separator)
+                    currentLineCount = 0
+                }
+            }
+            
+            var currentByte : UInt8 = 0
+            
+            for (index,value) in bytes.enumerated() {
+                switch index%3 {
+                case 0:
+                    currentByte = (value >> 2)
+                    appendByteToResult(Data.base64EncodeByte(currentByte))
+                    currentByte = ((value << 6) >> 2)
+                case 1:
+                    currentByte |= (value >> 4)
+                    appendByteToResult(Data.base64EncodeByte(currentByte))
+                    currentByte = ((value << 4) >> 2)
+                case 2:
+                    currentByte |= (value >> 6)
+                    appendByteToResult(Data.base64EncodeByte(currentByte))
+                    currentByte = ((value << 2) >> 2)
+                    appendByteToResult(Data.base64EncodeByte(currentByte))
+                default:
+                    fatalError()
+                }
+            }
+            //add padding
+            switch bytes.count%3 {
+            case 0: break //no padding needed
+            case 1:
+                appendByteToResult(Data.base64EncodeByte(currentByte))
+                appendByteToResult(self.base64Padding)
+                appendByteToResult(self.base64Padding)
+            case 2:
+                appendByteToResult(Data.base64EncodeByte(currentByte))
+                appendByteToResult(self.base64Padding)
+            default:
+                fatalError()
+            }
+            return result
         }
     }
-}
-
-// The tables in this file were generated using generate_alphabet_table in the tools directory.
-// Note the tables contain 65 characters: 64 to do the translation and 1 more for the padding
-// character used in each alphabet.
-
-/// Standard Base64 encoding table.
-private let StandardAlphabet : [UInt8] = [
-    65, // 0=A
-    66, // 1=B
-    67, // 2=C
-    68, // 3=D
-    69, // 4=E
-    70, // 5=F
-    71, // 6=G
-    72, // 7=H
-    73, // 8=I
-    74, // 9=J
-    75, // 10=K
-    76, // 11=L
-    77, // 12=M
-    78, // 13=N
-    79, // 14=O
-    80, // 15=P
-    81, // 16=Q
-    82, // 17=R
-    83, // 18=S
-    84, // 19=T
-    85, // 20=U
-    86, // 21=V
-    87, // 22=W
-    88, // 23=X
-    89, // 24=Y
-    90, // 25=Z
-    97, // 26=a
-    98, // 27=b
-    99, // 28=c
-    100, // 29=d
-    101, // 30=e
-    102, // 31=f
-    103, // 32=g
-    104, // 33=h
-    105, // 34=i
-    106, // 35=j
-    107, // 36=k
-    108, // 37=l
-    109, // 38=m
-    110, // 39=n
-    111, // 40=o
-    112, // 41=p
-    113, // 42=q
-    114, // 43=r
-    115, // 44=s
-    116, // 45=t
-    117, // 46=u
-    118, // 47=v
-    119, // 48=w
-    120, // 49=x
-    121, // 50=y
-    122, // 51=z
-    48, // 52=0
-    49, // 53=1
-    50, // 54=2
-    51, // 55=3
-    52, // 56=4
-    53, // 57=5
-    54, // 58=6
-    55, // 59=7
-    56, // 60=8
-    57, // 61=9
-    43, // 62=+
-    47, // 63=/
-    // PADDING FOLLOWS, not used during lookups
-    61, // 64==
-]
-
-/// URL and Filename Safe Base64 encoding table.
-private let URLAndFilenameSafeAlphabet : [UInt8] = [
-    65, // 0=A
-    66, // 1=B
-    67, // 2=C
-    68, // 3=D
-    69, // 4=E
-    70, // 5=F
-    71, // 6=G
-    72, // 7=H
-    73, // 8=I
-    74, // 9=J
-    75, // 10=K
-    76, // 11=L
-    77, // 12=M
-    78, // 13=N
-    79, // 14=O
-    80, // 15=P
-    81, // 16=Q
-    82, // 17=R
-    83, // 18=S
-    84, // 19=T
-    85, // 20=U
-    86, // 21=V
-    87, // 22=W
-    88, // 23=X
-    89, // 24=Y
-    90, // 25=Z
-    97, // 26=a
-    98, // 27=b
-    99, // 28=c
-    100, // 29=d
-    101, // 30=e
-    102, // 31=f
-    103, // 32=g
-    104, // 33=h
-    105, // 34=i
-    106, // 35=j
-    107, // 36=k
-    108, // 37=l
-    109, // 38=m
-    110, // 39=n
-    111, // 40=o
-    112, // 41=p
-    113, // 42=q
-    114, // 43=r
-    115, // 44=s
-    116, // 45=t
-    117, // 46=u
-    118, // 47=v
-    119, // 48=w
-    120, // 49=x
-    121, // 50=y
-    122, // 51=z
-    48, // 52=0
-    49, // 53=1
-    50, // 54=2
-    51, // 55=3
-    52, // 56=4
-    53, // 57=5
-    54, // 58=6
-    55, // 59=7
-    56, // 60=8
-    57, // 61=9
-    45, // 62=-
-    95, // 63=_
-    // PADDING FOLLOWS, not used during lookups
-    61, // 64==
-]
+    
+#endif

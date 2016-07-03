@@ -23,7 +23,7 @@ public extension JSON.Value {
         
         switch self {
             
-        case .Array(_), .Object(_): break
+        case .array(_), .object(_): break
             
         default: return nil
         }
@@ -34,9 +34,9 @@ public extension JSON.Value {
         
         let writingFlags = options.optionsBitmask()
         
-        let stringPointer = json_object_to_json_string_ext(jsonObject, writingFlags)
+        let stringPointer = json_object_to_json_string_ext(jsonObject, writingFlags)!
         
-        let string = Swift.String.fromCString(stringPointer)!
+        let string = Swift.String(validatingUTF8: stringPointer)!
         
         return string
     }
@@ -46,34 +46,29 @@ public extension JSON.Value {
 
 private extension JSON.Value {
     
-    func toJSONObject() -> COpaquePointer {
+    func toJSONObject() -> OpaquePointer? {
         
         switch self {
             
-        case .Null: return nil
+        case .null: return nil
             
-        case .String(let value): return json_object_new_string(value)
+        case .string(let value): return json_object_new_string(value)
             
-        case .Number(let number):
+        case .boolean(let value):
             
-            switch number {
-                
-            case .Boolean(let value):
-                
-                let jsonBool: Int32 = { if value { return Int32(1) } else { return Int32(0) } }()
-                
-                return json_object_new_boolean(jsonBool)
-                
-            case .Integer(let value): return json_object_new_int64(Int64(value))
-                
-            case .Double(let value): return json_object_new_double(value)
-            }
+            let jsonBool: Int32 = { if value { return Int32(1) } else { return Int32(0) } }()
             
-        case .Array(let arrayValue):
+            return json_object_new_boolean(jsonBool)
+            
+        case .integer(let value): return json_object_new_int64(Int64(value))
+            
+        case .double(let value): return json_object_new_double(value)
+            
+        case .array(let arrayValue):
             
             let jsonArray = json_object_new_array()
             
-            for (index, value) in arrayValue.enumerate() {
+            for (index, value) in arrayValue.enumerated() {
                 
                 let jsonValue = value.toJSONObject()
                 
@@ -82,7 +77,7 @@ private extension JSON.Value {
             
             return jsonArray
             
-        case .Object(let dictionaryValue):
+        case .object(let dictionaryValue):
             
             let jsonObject = json_object_new_object()
             
@@ -94,6 +89,49 @@ private extension JSON.Value {
             }
             
             return jsonObject
+        }
+    }
+}
+
+// MARK: - Supporting Types
+
+public extension JSON {
+    
+    /// Options for serializing JSON.
+    ///
+    /// - Note: Uses the [JSON-C](https://github.com/json-c/json-c) library.
+    public enum WritingOption: BitMaskOption {
+        
+        /// Causes the output to have minimal whitespace inserted to make things slightly more readable.
+        case Spaced
+        
+        /// Causes the output to be formatted. See the [Two Space Tab](http://jsonformatter.curiousconcept.com/) option
+        /// for an example of the format.
+        case Pretty
+        
+        /// Drop trailing zero for float values
+        case NoZero
+        
+        public init?(rawValue: Int32) {
+            
+            switch rawValue {
+                
+            case JSON_C_TO_STRING_SPACED:       self = .Spaced
+            case JSON_C_TO_STRING_PRETTY:       self = .Pretty
+            case JSON_C_TO_STRING_NOZERO:       self = .NoZero
+                
+            default: return nil
+            }
+        }
+        
+        public var rawValue: Int32 {
+            
+            switch self {
+                
+            case Spaced:        return JSON_C_TO_STRING_SPACED
+            case Pretty:        return JSON_C_TO_STRING_PRETTY
+            case NoZero:        return JSON_C_TO_STRING_NOZERO
+            }
         }
     }
 }

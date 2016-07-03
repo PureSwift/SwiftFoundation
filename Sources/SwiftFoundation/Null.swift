@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-/** An OOP placeholder for ```nil```. */
+/// An OOP placeholder for ```nil``` in collections. 
 public struct Null: CustomStringConvertible, Equatable {
     
     public var description: String { return "Null" }
@@ -16,7 +16,7 @@ public struct Null: CustomStringConvertible, Equatable {
 
 // MARK: - Operator Overloading
 
-public func ==(lhs: Null, rhs: Null) -> Bool {
+public func == (lhs: Null, rhs: Null) -> Bool {
     
     return true
 }

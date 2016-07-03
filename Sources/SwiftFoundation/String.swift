@@ -14,25 +14,25 @@ public extension String {
         
         var string = ""
         
-        var generator = data.byteValue.generate()
+        var generator = data.makeIterator()
         
         var encoding = UTF8()
-                
-        repeat {
         
+        repeat {
+            
             switch encoding.decode(&generator) {
                 
-            case .Result (let scalar):
+            case let .scalarValue(scalar):
                 
                 string.append(scalar)
                 
-            case .EmptyInput:
+            case .emptyInput:
                 
                 self = string
                 
                 return
                 
-            case .Error:
+            case .error:
                 
                 return nil
             }
@@ -44,6 +44,11 @@ public extension String {
     
     func toUTF8Data() -> Data {
         
-        return Data(byteValue: [] + utf8)
+        return Data(bytes: Array(utf8))
+    }
+    
+    func substring(range: Range<Int>) -> String? {
+        let indexRange = utf8.index(utf8.startIndex, offsetBy: range.lowerBound) ..< utf8.index(utf8.startIndex, offsetBy: range.upperBound)
+        return String(utf8[indexRange])
     }
 }

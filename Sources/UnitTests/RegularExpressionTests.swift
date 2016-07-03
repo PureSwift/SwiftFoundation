@@ -12,11 +12,11 @@ import Foundation
 
 final class RegularExpressionTests: XCTestCase {
     
-    lazy var allTests: [(String, () throws -> ())] =
-        [("testSimpleRegex", self.testSimpleRegex),
-        ("testExtendedRegex", self.testExtendedRegex),
-        ("testMultipleSubexpressions", self.testMultipleSubexpressions),
-        ("testEmoji", self.testEmoji)]
+    static let allTests: [(String, (RegularExpressionTests) -> () throws -> Void)] =
+        [("testSimpleRegex", testSimpleRegex),
+        ("testExtendedRegex", testExtendedRegex),
+        ("testMultipleSubexpressions", testMultipleSubexpressions),
+        ("testEmoji", testEmoji)]
 
     func testSimpleRegex() {
         
@@ -29,7 +29,7 @@ final class RegularExpressionTests: XCTestCase {
         
         let stringRange = NSRange(match.range)
         
-        let matchString = string.toFoundation().substringWithRange(stringRange)
+        let matchString = NSString(string: string).substring(with: stringRange)
         
         XCTAssert(matchString == "Welcome")
     }
@@ -47,7 +47,7 @@ final class RegularExpressionTests: XCTestCase {
             
             let stringRange = NSRange(match.range)
             
-            let matchString = string.toFoundation().substringWithRange(stringRange)
+            let matchString = NSString(string: string).substring(with: stringRange)
             
             XCTAssert(matchString == "aaa")
         }
@@ -64,7 +64,7 @@ final class RegularExpressionTests: XCTestCase {
             
             let stringRange = NSRange(match.range)
             
-            let matchString = string.toFoundation().substringWithRange(stringRange)
+            let matchString = NSString(string: string).substring(with: stringRange)
             
             XCTAssert(matchString == "Bird", matchString)
         }
@@ -81,7 +81,7 @@ final class RegularExpressionTests: XCTestCase {
         
         let stringRange = NSRange(match.range)
         
-        let matchString = string.toFoundation().substringWithRange(stringRange)
+        let matchString = NSString(string: string).substring(with: stringRange)
         
         // matched whole string
         XCTAssert(matchString == string)
@@ -112,7 +112,7 @@ final class RegularExpressionTests: XCTestCase {
                 return
             }
             
-            guard let capturedString = testString.substring(beerRange) else {
+            guard let capturedString = testString.substring(range: beerRange) else {
                 XCTFail("Failed to get a substring with range \(beerRange) in \(testString)")
                 return
             }
@@ -125,23 +125,13 @@ final class RegularExpressionTests: XCTestCase {
     }
 }
 
-// MARK: - Private
-
 #if os(Linux)
 
-extension String {
+extension NSRange {
     
-    public init(foundation: NSString) {
+    init(_ range: Range<Int>) {
         
-        self.init("\(foundation)")
-    }
-    
-    public func toFoundation() -> NSString {
-        
-        guard let foundationString = NSString(bytes: self, length: self.utf8.count, encoding: NSUTF8StringEncoding)
-            else { fatalError("Could not convert String to NSString") }
-        
-        return foundationString
+        self = NSRange(CountableRange(range))
     }
 }
 

@@ -15,17 +15,20 @@
 public extension POSIXError {
     
     /// Creates error from C ```errno```.
-    static var fromErrorNumber: POSIXError? { return self.init(rawValue: errno) }
+    static var fromErrno: POSIXError? { return self.init(rawValue: errno) }
 }
 
 #if os(Linux)
     
     /// Enumeration describing POSIX error codes.
-    public enum POSIXError: ErrorType, RawRepresentable {
+    public enum POSIXError: ErrorProtocol, RawRepresentable {
         
         case Value(CInt)
         
         public init?(rawValue: CInt) {
+            
+            guard rawValue != 0
+                else { return nil }
             
             self = .Value(rawValue)
         }

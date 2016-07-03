@@ -1,5 +1,5 @@
 language: generic
-osx_image: xcode7.3
+osx_image: xcode8
 os:
   - linux
   - osx
@@ -13,15 +13,15 @@ install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install clang uuid-dev libjson-c-dev ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then mkdir $SWIFT_DIR ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then curl https://swift.org/builds/development/ubuntu1404/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu14.04.tar.gz -s | tar xz -C $SWIFT_DIR &> /dev/null ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then curl https://swift.org/builds/swift-3.0-preview-1/ubuntu1404/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu14.04.tar.gz -s | tar xz -C $SWIFT_DIR &> /dev/null ; fi
 env:
-  - SWIFT_VERSION=swift-DEVELOPMENT-SNAPSHOT-2016-02-25-a
+  - SWIFT_VERSION=swift-3.0-PREVIEW-1
 script:
   - uname
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xctool test -workspace SwiftFoundation.xcworkspace -scheme "SwiftFoundation OS X" -sdk macosx ONLY_ACTIVE_ARCH=NO ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xctool build -workspace SwiftFoundation.xcworkspace -scheme "SwiftFoundation iOS" -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xctool test -project Xcode/SwiftFoundation.xcodeproj -scheme "SwiftFoundation OS X" -sdk macosx ONLY_ACTIVE_ARCH=NO ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then xctool build -project Xcode/SwiftFoundation.xcodeproj -scheme "SwiftFoundation iOS" -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO ; fi
   
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export PATH=$(pwd)/tests/$SWIFT_VERSION-ubuntu14.04/usr/bin:"${PATH}" ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift build -c release ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then .build/release/UnitTests ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift build ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then .build/debug/UnitTests ; fi
   

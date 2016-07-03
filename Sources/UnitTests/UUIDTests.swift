@@ -12,18 +12,18 @@ import SwiftFoundation
 
 final class UUIDTests: XCTestCase {
     
-    lazy var allTests: [(String, () throws -> ())] =
-        [("testCreateRandomUUID", self.testCreateRandomUUID),
-        ("testUUIDString", self.testUUIDString),
-        ("testCreateFromString", self.testCreateFromString),
-        ("testBytes", self.testBytes)]
+    static let allTests: [(String, (UUIDTests) -> () throws -> Void)] =
+        [("testCreateRandomUUID", testCreateRandomUUID),
+        ("testUUIDString", testUUIDString),
+        ("testCreateFromString", testCreateFromString),
+        ("testBytes", testBytes)]
     
     // MARK: - Functional Tests
 
     func testCreateRandomUUID() {
         
         // try to create without crashing
-        let uuid = UUID()
+        let uuid = SwiftFoundation.UUID()
         
         print(uuid)
     }
@@ -48,14 +48,14 @@ final class UUIDTests: XCTestCase {
     }
     
     func testBytes() {
-        
-        let expectedData = Data(byteValue: [91, 254, 177, 148, 104, 196, 72, 232, 143, 67, 60, 88, 99, 100, 203, 111])
+                
+        let expectedData = SwiftFoundation.Data(bytes: [91, 254, 177, 148, 104, 196, 72, 232, 143, 67, 60, 88, 99, 100, 203, 111] as [Byte])
         
         let stringValue = "5BFEB194-68C4-48E8-8F43-3C586364CB6F"
         
         guard let uuid = UUID(rawValue: stringValue)
             else { XCTFail("Could not create UUID from " + stringValue); return }
         
-        XCTAssert(uuid.toData() == expectedData, "Unexpected UUID data \(uuid.toData().byteValue)")
+        XCTAssert(uuid.toData() == expectedData, "Unexpected UUID data \(uuid.toData().bytes)")
     }
 }

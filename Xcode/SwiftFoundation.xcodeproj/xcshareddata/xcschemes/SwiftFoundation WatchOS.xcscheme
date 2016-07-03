@@ -14,40 +14,21 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1AE78F161B96774100CDEF17"
+               BlueprintIdentifier = "1AE78F6E1B96774300CDEF17"
                BuildableName = "SwiftFoundation.framework"
-               BlueprintName = "SwiftFoundation iOS"
+               BlueprintName = "SwiftFoundation WatchOS"
                ReferencedContainer = "container:SwiftFoundation.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6E08F83C1BBE7B8800548B1E"
-               BuildableName = "SwiftFoundationTests.xctest"
-               BlueprintName = "SwiftFoundationTests iOS"
-               ReferencedContainer = "container:SwiftFoundation.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1AE78F161B96774100CDEF17"
-            BuildableName = "SwiftFoundation.framework"
-            BlueprintName = "SwiftFoundation iOS"
-            ReferencedContainer = "container:SwiftFoundation.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -64,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1AE78F161B96774100CDEF17"
+            BlueprintIdentifier = "1AE78F6E1B96774300CDEF17"
             BuildableName = "SwiftFoundation.framework"
-            BlueprintName = "SwiftFoundation iOS"
+            BlueprintName = "SwiftFoundation WatchOS"
             ReferencedContainer = "container:SwiftFoundation.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1AE78F161B96774100CDEF17"
+            BlueprintIdentifier = "1AE78F6E1B96774300CDEF17"
             BuildableName = "SwiftFoundation.framework"
-            BlueprintName = "SwiftFoundation iOS"
+            BlueprintName = "SwiftFoundation WatchOS"
             ReferencedContainer = "container:SwiftFoundation.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

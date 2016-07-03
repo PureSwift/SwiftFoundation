@@ -10,7 +10,7 @@ import XCTest
 
 final class StringTests: XCTestCase {
     
-    lazy var allTests: [(String, () throws -> ())] = [("testUTF8Data", self.testUTF8Data)]
+    static let allTests: [(String, (StringTests) -> () throws -> Void)] = [("testUTF8Data", testUTF8Data)]
     
     // MARK: - Functional Tests
 
@@ -24,9 +24,4 @@ final class StringTests: XCTestCase {
         
         XCTAssert(string == decodedString, "\(string) == \(decodedString)")
     }
-    
-    // MARK: - Performance Tests
-    
-    
-
 }

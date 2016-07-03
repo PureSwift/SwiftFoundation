@@ -13,8 +13,6 @@
     import CStatfs
 #endif
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
-
 public extension statfs {
     
     // MARK: - Initialization
@@ -25,11 +23,9 @@ public extension statfs {
         
         guard statfs(path, &fileSystemStatus) == 0 else {
             
-            throw POSIXError.fromErrorNumber!
+            throw POSIXError.fromErrno!
         }
         
         self = fileSystemStatus
     }
 }
-
-#endif

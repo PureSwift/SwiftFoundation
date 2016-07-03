@@ -6,13 +6,29 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+// MARK: Protocol
+
+/// Type can be converted to JSON.
+public protocol JSONEncodable {
+    
+    /// Encodes the reciever into JSON.
+    func toJSON() -> JSON.Value
+}
+
+/// Type can be converted from JSON.
+public protocol JSONDecodable {
+    
+    /// Decodes the reciever from JSON.
+    init?(JSONValue: JSON.Value)
+}
+
 // MARK: - Primitive Types
 
 // MARK: Encodable
 
 extension String: JSONEncodable {
     
-    public func toJSON() -> JSON.Value { return .String(self) }
+    public func toJSON() -> JSON.Value { return .string(self) }
 }
 
 extension String: JSONDecodable {
@@ -27,7 +43,7 @@ extension String: JSONDecodable {
 
 extension Int: JSONEncodable {
     
-    public func toJSON() -> JSON.Value { return .Number(.Integer(self)) }
+    public func toJSON() -> JSON.Value { return .integer(self) }
 }
 
 extension Int: JSONDecodable {
@@ -42,7 +58,7 @@ extension Int: JSONDecodable {
 
 extension Double: JSONEncodable {
     
-    public func toJSON() -> JSON.Value { return .Number(.Double(self)) }
+    public func toJSON() -> JSON.Value { return .double(self) }
 }
 
 extension Double: JSONDecodable {
@@ -57,7 +73,7 @@ extension Double: JSONDecodable {
 
 extension Bool: JSONEncodable {
     
-    public func toJSON() -> JSON.Value { return .Number(.Boolean(self)) }
+    public func toJSON() -> JSON.Value { return .boolean(self) }
 }
 
 extension Bool: JSONDecodable {
@@ -74,20 +90,13 @@ extension Bool: JSONDecodable {
 
 // MARK: Encodable
 
-public extension CollectionType where Generator.Element: JSONEncodable {
+public extension Collection where Iterator.Element: JSONEncodable {
     
     func toJSON() -> JSON.Value {
         
-        var jsonArray = JSON.Array()
+        let jsonArray = self.map { $0.toJSON() }
         
-        for jsonEncodable in self {
-            
-            let jsonValue = jsonEncodable.toJSON()
-            
-            jsonArray.append(jsonValue)
-        }
-        
-        return .Array(jsonArray)
+        return .array(jsonArray)
     }
 }
 
@@ -96,7 +105,7 @@ public extension Dictionary where Value: JSONEncodable, Key: StringLiteralConver
     /// Encodes the reciever into JSON.
     func toJSON() -> JSON.Value {
         
-        var jsonObject = JSON.Object()
+        var jsonObject = JSON.Object(minimumCapacity: self.count)
         
         for (key, value) in self {
             
@@ -107,7 +116,7 @@ public extension Dictionary where Value: JSONEncodable, Key: StringLiteralConver
             jsonObject[keyString] = jsonValue
         }
         
-        return .Object(jsonObject)
+        return .object(jsonObject)
     }
 }
 
@@ -116,37 +125,20 @@ public extension Dictionary where Value: JSONEncodable, Key: StringLiteralConver
 public extension JSONDecodable {
     
     /// Decodes from an array of JSON values.
-    static func fromJSON(JSONArray: JSON.Array) -> [Self]? {
+    static func from(JSON array: SwiftFoundation.JSON.Array) -> [Self]? {
         
-        var jsonDecodables = [Self]()
+        var jsonDecodables: ContiguousArray<Self> = ContiguousArray()
         
-        for jsonValue in JSONArray {
+        jsonDecodables.reserveCapacity(array.count)
+        
+        for jsonValue in array {
             
             guard let jsonDecodable = self.init(JSONValue: jsonValue) else { return nil }
             
             jsonDecodables.append(jsonDecodable)
         }
         
-        return jsonDecodables
-    }
-}
-
-public extension JSONParametrizedDecodable {
-    
-    /// Decodes from an array of JSON values.
-    static func fromJSON(JSONArray: JSON.Array, parameters: JSONDecodingParameters) -> [Self]? {
-        
-        var jsonDecodables = [Self]()
-        
-        for jsonValue in JSONArray {
-            
-            guard let jsonDecodable = self.init(JSONValue: jsonValue, parameters: parameters)
-                else { return nil }
-            
-            jsonDecodables.append(jsonDecodable)
-        }
-        
-        return jsonDecodables
+        return Array(jsonDecodables)
     }
 }
 

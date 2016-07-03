@@ -10,8 +10,9 @@
 
 public extension RawRepresentable {
     
-    /// Creates a collection of ```RawRepresentable``` from a collection of raw values. Returns ```nil``` if an element in the array had an invalid raw value.
-    static func fromRawValues(rawValues: [RawValue]) -> [Self]? {
+    /// Creates a collection of ```RawRepresentable``` from a collection of raw values. 
+    /// åReturns ```nil``` if an element in the array had an invalid raw value.
+    static func from(rawValues: [RawValue]) -> [Self]? {
         
         var representables = [Self]()
         
@@ -26,10 +27,10 @@ public extension RawRepresentable {
     }
 }
 
-public extension SequenceType where Self.Generator.Element: RawRepresentable {
+public extension Sequence where Self.Iterator.Element: RawRepresentable {
 
     /// Convertes a sequence of `RawRepresentable` to its raw values.
-    var rawValues: [Self.Generator.Element.RawValue] {
+    var rawValues: [Self.Iterator.Element.RawValue] {
         return self.map { $0.rawValue }
     }
 
