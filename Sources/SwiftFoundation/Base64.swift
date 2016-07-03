@@ -29,7 +29,7 @@
         
         /* Create an NSData from a Base-64 encoded NSString using the given options. By default, returns nil when the input is not recognized as valid Base-64.
          */
-        public init?(base64Encoded base64String: String, options: Base64DecodingOptions) {
+        public init?(base64Encoded base64String: String, options: Base64DecodingOptions = []) {
             let encodedBytes = Array(base64String.utf8)
             guard let decodedBytes = Data.base64DecodeBytes(encodedBytes, options: options) else {
                 return nil
@@ -47,7 +47,7 @@
         
         /* Create an NSData from a Base-64, UTF-8 encoded NSData. By default, returns nil when the input is not recognized as valid Base-64.
          */
-        public init?(base64Encoded base64Data: Data, options: Base64DecodingOptions) {
+        public init?(base64Encoded base64Data: Data, options: Base64DecodingOptions = []) {
             guard let decodedBytes = Data.base64DecodeBytes(base64Data.bytes, options: options) else {
                 return nil
             }
