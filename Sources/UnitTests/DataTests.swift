@@ -16,7 +16,7 @@ import SwiftFoundation
 final class DataTests: XCTestCase {
     
     static let allTests: [(String, (DataTests) -> () throws -> Void)] = [("testFromBytePointer", testFromBytePointer)]
-
+    
     func testFromBytePointer() {
         
         let string = "TestData"
@@ -25,7 +25,13 @@ final class DataTests: XCTestCase {
         
         XCTAssert(testData.isEmpty == false, "Could not create test data")
         
-        let data = testData.bytes.withUnsafeBufferPointer{ Data(bytes: $0.baseAddress!, count: testData.count) }
+        let dataPointer = UnsafeMutablePointer<Byte>(allocatingCapacity: testData.count)
+        
+        defer { dataPointer.deallocateCapacity(testData.count) }
+        
+        memcpy(dataPointer, testData.bytes, testData.count)
+        
+        let data = Data(bytes: dataPointer, count: testData.count)
         
         XCTAssert(data == testData, "\(data) == \(testData)")
     }
