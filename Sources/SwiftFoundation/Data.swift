@@ -24,7 +24,16 @@
         
         // MARK: - Properties
         
-        public var bytes: [Byte]
+        private var _bytes: ContiguousArray<Byte>
+        
+        public var bytes: [Byte] {
+            
+            @inline(__always)
+            get { return Array(_bytes) }
+            
+            @inline(__always)
+            set { _bytes = ContiguousArray(newValue) }
+        }
         
         // MARK: - Initialization
         
@@ -34,7 +43,7 @@
         @inline(__always)
         public init(bytes: [Byte] = []) {
             
-            self.bytes = bytes
+            _bytes = ContiguousArray(bytes)
         }
         
         /// Initialize a `Data` with the contents of an Array.
@@ -43,7 +52,7 @@
         @inline(__always)
         public init(bytes: ArraySlice<UInt8>) {
             
-            self.bytes = Array(bytes)
+            _bytes = ContiguousArray(bytes)
         }
         
         /// Initialize a `Data` with the specified size.
@@ -53,7 +62,7 @@
         public init?(count: Int) {
             
             // Never fails on Linux
-            self.bytes = Array(repeating: 0, count: count)
+            _bytes = ContiguousArray.init(repeating: 0, count: count)
         }
         
         /// Initialize a `Data` with copied memory content.
@@ -63,7 +72,7 @@
         @inline(__always)
         public init(bytes pointer: UnsafePointer<Void>, count: Int) {
             
-            self.bytes = [UInt8](repeating: 0, count: count)
+            _bytes = ContiguousArray<UInt8>(repeating: 0, count: count)
             
             memcpy(&bytes, pointer, count)
         }
@@ -104,7 +113,7 @@
         @inline(__always)
         public mutating func append(_ other: Data) {
             
-            self.bytes += other.bytes
+            _bytes += other._bytes
         }
         
         /// Return a new copy of the data in a specified range.
@@ -113,7 +122,7 @@
         @inline(__always)
         public func subdata(in range: Range<Index>) -> Data {
             
-            return Data(bytes: bytes[range])
+            return Data(bytes: _bytes[range])
         }
         
         // MARK: - Index and Subscript
@@ -123,10 +132,10 @@
         public subscript(index: Index) -> Byte {
             
             @inline(__always)
-            get { return bytes[index] }
+            get { return _bytes[index] }
             
             @inline(__always)
-            set { bytes[index] = newValue }
+            set { _bytes[index] = newValue }
         }
         
         public subscript(bounds: Range<Int>) -> MutableRandomAccessSlice<Data> {
@@ -135,7 +144,7 @@
             get { return MutableRandomAccessSlice(base: self, bounds: bounds) }
             
             @inline(__always)
-            set { bytes.replaceSubrange(bounds, with: newValue) }
+            set { _bytes.replaceSubrange(bounds, with: newValue) }
         }
         
         /// The start `Index` in the data.
@@ -172,7 +181,7 @@
     
     public func == (lhs: Data, rhs: Data) -> Bool {
         
-        guard lhs.bytes.count == rhs.bytes.count else { return false }
+        guard lhs.count == rhs.count else { return false }
         
         var bytes1 = lhs.bytes
         
@@ -185,7 +194,11 @@
     
     public func + (lhs: Data, rhs: Data) -> Data {
                 
-        return Data(bytes: lhs.bytes + rhs.bytes)
+        var result = Data()
+        
+        result._bytes = lhs._bytes + rhs._bytes
+        
+        return result
     }
     
 #endif
