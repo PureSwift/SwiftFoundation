@@ -66,7 +66,7 @@ public final class Thread {
         let errorCode = pthread_join(internalThread, nil)
         
         guard errorCode == 0
-            else { throw POSIXError(rawValue: errorCode)! }
+            else { throw POSIXError(code: POSIXErrorCode(rawValue: errorCode)!) }
     }
     
     public func cancel() throws {
@@ -74,7 +74,7 @@ public final class Thread {
         let errorCode = pthread_cancel(internalThread)
         
         guard errorCode == 0
-            else { throw POSIXError(rawValue: errorCode)! }
+            else { throw POSIXError(code: POSIXErrorCode(rawValue: errorCode)!) }
     }
 }
 

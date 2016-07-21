@@ -103,22 +103,22 @@ public extension JSON {
     public enum WritingOption: BitMaskOption {
         
         /// Causes the output to have minimal whitespace inserted to make things slightly more readable.
-        case Spaced
+        case spaced
         
         /// Causes the output to be formatted. See the [Two Space Tab](http://jsonformatter.curiousconcept.com/) option
         /// for an example of the format.
-        case Pretty
+        case pretty
         
         /// Drop trailing zero for float values
-        case NoZero
+        case noZero
         
         public init?(rawValue: Int32) {
             
             switch rawValue {
                 
-            case JSON_C_TO_STRING_SPACED:       self = .Spaced
-            case JSON_C_TO_STRING_PRETTY:       self = .Pretty
-            case JSON_C_TO_STRING_NOZERO:       self = .NoZero
+            case JSON_C_TO_STRING_SPACED:       self = .spaced
+            case JSON_C_TO_STRING_PRETTY:       self = .pretty
+            case JSON_C_TO_STRING_NOZERO:       self = .noZero
                 
             default: return nil
             }
@@ -128,9 +128,9 @@ public extension JSON {
             
             switch self {
                 
-            case Spaced:        return JSON_C_TO_STRING_SPACED
-            case Pretty:        return JSON_C_TO_STRING_PRETTY
-            case NoZero:        return JSON_C_TO_STRING_NOZERO
+            case .spaced:        return JSON_C_TO_STRING_SPACED
+            case .pretty:        return JSON_C_TO_STRING_PRETTY
+            case .noZero:        return JSON_C_TO_STRING_NOZERO
             }
         }
     }

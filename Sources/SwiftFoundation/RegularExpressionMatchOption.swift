@@ -29,8 +29,8 @@ public extension RegularExpression {
             
             switch rawValue {
                 
-            case REG_NOTBOL:            self = NotBeginningOfLine
-            case REG_NOTEOL:            self = NotEndOfLine
+            case REG_NOTBOL:            self = .NotBeginningOfLine
+            case REG_NOTEOL:            self = .NotEndOfLine
                 
             default: return nil
             }

@@ -13,10 +13,6 @@
     import Glibc
 #endif
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
-    
-#endif
-
 public extension POSIXError {
     
     /// Creates error from C ```errno```.
@@ -28,14 +24,18 @@ public extension POSIXError {
         return self.init(code: code)
     }
     
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    
     /// Creates `POSIXError` from error code.
-    @inline(__always)
     init(code: POSIXErrorCode) {
         
         let nsError = NSError(domain: NSPOSIXErrorDomain, code: Int(code.rawValue), userInfo: nil)
         
         self.init(_nsError: nsError)
     }
+    
+#endif
+
 }
 
 #if os(Linux)

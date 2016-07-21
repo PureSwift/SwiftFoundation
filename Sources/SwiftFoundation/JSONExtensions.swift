@@ -100,7 +100,7 @@ public extension Collection where Iterator.Element: JSONEncodable {
     }
 }
 
-public extension Dictionary where Value: JSONEncodable, Key: StringLiteralConvertible {
+public extension Dictionary where Value: JSONEncodable, Key: ExpressibleByStringLiteral {
     
     /// Encodes the reciever into JSON.
     func toJSON() -> JSON.Value {
