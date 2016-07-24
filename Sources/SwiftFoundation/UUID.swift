@@ -59,9 +59,9 @@
         
         init?(rawValue: String) {
             
-            let uuidPointer = UnsafeMutablePointer<uuid_t>(allocatingCapacity: 1)
+            let uuidPointer = UnsafeMutablePointer<uuid_t>.allocate(capacity: 1)
             
-            defer { uuidPointer.deallocateCapacity(1) }
+            defer { uuidPointer.deallocate(capacity: 1) }
             
             guard uuid_parse(rawValue, unsafeBitCast(uuidPointer, to: UnsafeMutablePointer<UInt8>.self)) != -1
                 else { return nil }

@@ -22,7 +22,7 @@
     
     public final class Lock: Locking {
         
-        private var mutex = UnsafeMutablePointer<pthread_mutex_t>(allocatingCapacity: 1)
+        private var mutex = UnsafeMutablePointer<pthread_mutex_t>.allocate(capacity: 1)
         
         public init() {
             pthread_mutex_init(mutex, nil)
@@ -31,7 +31,7 @@
         deinit {
             pthread_mutex_destroy(mutex)
             mutex.deinitialize()
-            mutex.deallocateCapacity(1)
+            mutex.deallocate(capacity: 1)
         }
         
         public func lock() {
@@ -131,7 +131,7 @@
     }
     
     public final class RecursiveLock: Locking {
-        private var mutex = UnsafeMutablePointer<pthread_mutex_t>(allocatingCapacity: 1)
+        private var mutex = UnsafeMutablePointer<pthread_mutex_t>.allocate(capacity: 1)
         
         public init() {
             
@@ -145,7 +145,7 @@
         deinit {
             pthread_mutex_destroy(mutex)
             mutex.deinitialize()
-            mutex.deallocateCapacity(1)
+            mutex.deallocate(capacity: 1)
         }
         
         public func lock() {
@@ -164,8 +164,8 @@
     }
     
     public final class Condition: Locking {
-        private var mutex = UnsafeMutablePointer<pthread_mutex_t>(allocatingCapacity: 1)
-        private var cond = UnsafeMutablePointer<pthread_cond_t>(allocatingCapacity: 1)
+        private var mutex = UnsafeMutablePointer<pthread_mutex_t>.allocate(capacity: 1)
+        private var cond = UnsafeMutablePointer<pthread_cond_t>.allocate(capacity: 1)
         
         public init() {
             pthread_mutex_init(mutex, nil)
@@ -177,8 +177,8 @@
             pthread_cond_destroy(cond)
             mutex.deinitialize()
             cond.deinitialize()
-            mutex.deallocateCapacity(1)
-            cond.deallocateCapacity(1)
+            mutex.deallocate(capacity: 1)
+            cond.deallocate(capacity: 1)
         }
         
         public func lock() {

@@ -39,7 +39,7 @@ public extension POSIXRegularExpression {
         
         let numberOfMatches = re_nsub + 1 // first match is the expression itself, later matches are subexpressions
         
-        let matchesPointer = UnsafeMutablePointer<Match>.init(allocatingCapacity: numberOfMatches)
+        let matchesPointer = UnsafeMutablePointer<Match>.allocate(capacity: numberOfMatches)
         defer { matchesPointer.deinitialize(count: numberOfMatches) }
         
         let flags = options.optionsBitmask()

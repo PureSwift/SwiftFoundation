@@ -100,7 +100,7 @@
         
         public var description: String {
             
-            let hexString = bytes.map({ $0.toHexadecimal() }).reduce("", combine: { $0.0 + $0.1 })
+            let hexString = bytes.map({ $0.toHexadecimal() }).reduce("", { $0.0 + $0.1 })
             
             return "<" + hexString + ">"
         }
