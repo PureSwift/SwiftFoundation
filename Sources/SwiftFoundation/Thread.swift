@@ -25,7 +25,7 @@ public final class Thread {
         
         let holder = Unmanaged.passRetained(Closure(closure: closure))
         
-        let pointer = UnsafeMutablePointer<Void>(holder.toOpaque())
+        let pointer = holder.toOpaque()
         
         #if os(Linux)
             
@@ -82,7 +82,7 @@ public final class Thread {
 
 #if os(Linux)
     
-    private func ThreadPrivateMainLinux(arg: UnsafeMutablePointer<Void>?) -> UnsafeMutablePointer<Void>? {
+    private func ThreadPrivateMainLinux(arg: UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? {
         
         let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(arg!)
         
@@ -97,7 +97,7 @@ public final class Thread {
 
 #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
     
-    private func ThreadPrivateMainDarwin(arg: UnsafeMutablePointer<Void>) -> UnsafeMutablePointer<Void>? {
+    private func ThreadPrivateMainDarwin(arg: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer? {
         
         let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(arg)
         
@@ -110,9 +110,9 @@ public final class Thread {
     
 #endif
 
-private extension Thread {
+fileprivate extension Thread {
     
-    private final class Closure {
+    final class Closure {
         
         let closure: () -> ()
         

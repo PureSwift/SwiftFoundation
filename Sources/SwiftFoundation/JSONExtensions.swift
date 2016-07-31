@@ -100,18 +100,18 @@ public extension Collection where Iterator.Element: JSONEncodable {
     }
 }
 
-public extension Dictionary where Value: JSONEncodable, Key: ExpressibleByStringLiteral {
+public extension Collection where Index == DictionaryIndex<String, JSONEncodable>, Iterator.Element == (key: String, value: JSONEncodable) {
     
     /// Encodes the reciever into JSON.
     func toJSON() -> JSON.Value {
         
-        var jsonObject = JSON.Object(minimumCapacity: self.count)
+        var jsonObject = JSON.Object(minimumCapacity: numericCast(self.count))
         
         for (key, value) in self {
             
             let jsonValue = value.toJSON()
             
-            let keyString = String(key)
+            let keyString: String = key
             
             jsonObject[keyString] = jsonValue
         }

@@ -24,7 +24,7 @@
         
         // MARK: - Properties
         
-        private var _bytes: ContiguousArray<Byte>
+        fileprivate var _bytes: ContiguousArray<Byte>
         
         public var bytes: [Byte] {
             

@@ -38,7 +38,7 @@
             
             var uuid = uuid_t(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
             
-            withUnsafeMutablePointer(&uuid, { (valuePointer: UnsafeMutablePointer<uuid_t>) in
+            withUnsafeMutablePointer(to: &uuid, { (valuePointer: UnsafeMutablePointer<uuid_t>) in
                 
                 uuid_generate(unsafeBitCast(valuePointer, to: UnsafeMutablePointer<UInt8>.self))
             })
@@ -74,17 +74,22 @@
             var uuidCopy = bytes
             
             var uuidString = POSIXUUIDStringType(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+            // withUnsafeMutablePointer(&uuidCopy, &uuidString) { (uuidPointer: UnsafeMutablePointer<uuid_t>, uuidStringPointer: UnsafeMutablePointer<POSIXUUIDStringType>) -> Void in
             
-            withUnsafeMutablePointers(&uuidCopy, &uuidString) { (uuidPointer: UnsafeMutablePointer<uuid_t>, uuidStringPointer: UnsafeMutablePointer<POSIXUUIDStringType>) -> Void in
-                
-                let stringBuffer = unsafeBitCast(uuidStringPointer, to: UnsafeMutablePointer<Int8>.self)
-                
-                let uuidBuffer = unsafeBitCast(uuidPointer, to: UnsafeMutablePointer<UInt8>.self)
-                
-                uuid_unparse(unsafeBitCast(uuidBuffer, to: UnsafePointer<UInt8>.self), stringBuffer)
+            withUnsafeMutablePointer(to: &uuidCopy) { (uuidPointer: UnsafeMutablePointer<uuid_t>) in
+
+                withUnsafeMutablePointer(to: &uuidString) { (uuidStringPointer: UnsafeMutablePointer<POSIXUUIDStringType>) in
+                    
+                    let stringBuffer = unsafeBitCast(uuidStringPointer, to: UnsafeMutablePointer<Int8>.self)
+                    
+                    let uuidBuffer = unsafeBitCast(uuidPointer, to: UnsafeMutablePointer<UInt8>.self)
+                    
+                    uuid_unparse(unsafeBitCast(uuidBuffer, to: UnsafePointer<UInt8>.self), stringBuffer)
+                }
             }
             
-            return withUnsafeMutablePointer(&uuidString, { (valuePointer: UnsafeMutablePointer<POSIXUUIDStringType>) -> String in
+            return withUnsafeMutablePointer(to: &uuidString, { (valuePointer: UnsafeMutablePointer<POSIXUUIDStringType>) -> String in
                 
                 let buffer = unsafeBitCast(valuePointer, to: UnsafeMutablePointer<CChar>.self)
                 

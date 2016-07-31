@@ -136,7 +136,7 @@
         public init() {
             
             var attrib = pthread_mutexattr_t()
-            withUnsafeMutablePointer(&attrib) { attrs in
+            withUnsafeMutablePointer(to: &attrib) { attrs in
                 pthread_mutexattr_settype(attrs, Int32(PTHREAD_MUTEX_RECURSIVE))
                 pthread_mutex_init(mutex, attrs)
             }
@@ -203,12 +203,12 @@
             ts.tv_sec = Int(floor(ti))
             ts.tv_nsec = Int((ti - Double(ts.tv_sec)) * 1000000000.0)
             var tv = timeval()
-            withUnsafeMutablePointer(&tv) { t in
+            withUnsafeMutablePointer(to: &tv) { t in
                 gettimeofday(t, nil)
                 ts.tv_sec += t.pointee.tv_sec
                 ts.tv_nsec += Int((t.pointee.tv_usec * 1000000) / 1000000000)
             }
-            let retVal: Int32 = withUnsafePointer(&ts) { t in
+            let retVal: Int32 = withUnsafePointer(to: &ts) { t in
                 return pthread_cond_timedwait(cond, mutex, t)
             }
             

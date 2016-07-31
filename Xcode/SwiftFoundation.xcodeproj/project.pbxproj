@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		1AE78F671B96774100CDEF17 /* SwiftFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E30BA101B40F543009B1B49 /* SwiftFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1AE78FBF1B96774300CDEF17 /* SwiftFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E30BA101B40F543009B1B49 /* SwiftFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6E04074E1CB3E07500BE3A79 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E04074D1CB3E07500BE3A79 /* Thread.swift */; };
 		6E04074F1CB3E2E400BE3A79 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E04074D1CB3E07500BE3A79 /* Thread.swift */; };
 		6E0407501CB3E2E500BE3A79 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E04074D1CB3E07500BE3A79 /* Thread.swift */; };
 		6E041D3D1CB404CD004E080B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B461C20F6EB00B2C995 /* String.swift */; };
 		6E08F85D1BBE7DE900548B1E /* SwiftFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE78F6C1B96774100CDEF17 /* SwiftFoundation.framework */; };
+		6E102F3B1D4D504C0046128B /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E04074D1CB3E07500BE3A79 /* Thread.swift */; };
 		6E1ACD4B1C435822005775FD /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1ACD4A1C435822005775FD /* DataTests.swift */; };
 		6E1ACD4C1C435822005775FD /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1ACD4A1C435822005775FD /* DataTests.swift */; };
 		6E2C2B7B1C20F76600B2C995 /* Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B1C1C20F6EB00B2C995 /* Base64.swift */; };
@@ -793,7 +793,6 @@
 				6E8474CD1D24FCFE009CA7DB /* ComparisonResult.swift in Sources */,
 				6EFF9A1B1CAD0C6B00917CB3 /* Range.swift in Sources */,
 				6E2C2BFD1C20F76700B2C995 /* Null.swift in Sources */,
-				6E04074E1CB3E07500BE3A79 /* Thread.swift in Sources */,
 				6E2C2BE41C20F76700B2C995 /* BitMaskOption.swift in Sources */,
 				6E82FD721CBA06C10049CD1B /* Lock.swift in Sources */,
 				6E2C2C091C20F76700B2C995 /* RegularExpressionCompileOption.swift in Sources */,
@@ -807,6 +806,7 @@
 				6E2C2C0F1C20F76700B2C995 /* Transformer.swift in Sources */,
 				6E2C2C081C20F76700B2C995 /* RegularExpressionCompileError.swift in Sources */,
 				6E2C2C0B1C20F76700B2C995 /* SemanticVersion.swift in Sources */,
+				6E102F3B1D4D504C0046128B /* Thread.swift in Sources */,
 				6E2C2BF11C20F76700B2C995 /* FilePermission.swift in Sources */,
 				6E2C2C071C20F76700B2C995 /* RegularExpression.swift in Sources */,
 				6E957C2B1C43AA55003F3C51 /* JSONSerialization.swift in Sources */,

@@ -51,22 +51,22 @@ public extension RawRepresentable {
 
 // MARK: Comparable
 
-public func < <T where T: RawRepresentable, T.RawValue: Comparable>(lhs: T, rhs: T) -> Bool {
+public func < <T>(lhs: T, rhs: T) -> Bool where T: RawRepresentable, T.RawValue: Comparable {
     
     return lhs.rawValue < rhs.rawValue
 }
 
-public func <= <T where T: RawRepresentable, T.RawValue: Comparable>(lhs: T, rhs: T) -> Bool {
+public func <= <T>(lhs: T, rhs: T) -> Bool where T: RawRepresentable, T.RawValue: Comparable {
     
     return lhs.rawValue <= rhs.rawValue
 }
 
-public func >= <T where T: RawRepresentable, T.RawValue: Comparable>(lhs: T, rhs: T) -> Bool {
+public func >= <T>(lhs: T, rhs: T) -> Bool where T: RawRepresentable, T.RawValue: Comparable {
     
     return lhs.rawValue >= rhs.rawValue
 }
 
-public func > <T where T: RawRepresentable, T.RawValue: Comparable>(lhs: T, rhs: T) -> Bool {
+public func > <T>(lhs: T, rhs: T) -> Bool where T: RawRepresentable, T.RawValue: Comparable {
     
     return lhs.rawValue > rhs.rawValue
 }
