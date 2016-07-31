@@ -368,7 +368,8 @@
 				6E957C561C442E3E003F3C51 /* JSONTests.swift */,
 				6EFF9A1C1CAD108400917CB3 /* RangeTests.swift */,
 			);
-			path = UnitTests;
+			name = UnitTests;
+			path = ../Tests;
 			sourceTree = "<group>";
 		};
 		6E2C2C251C20FAED00B2C995 /* Standard Library Extensions */ = {
