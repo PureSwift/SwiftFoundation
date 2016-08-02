@@ -15,7 +15,7 @@
 public extension RegularExpression {
     
     // POSIX Regular Expression compilation error
-    public enum CompileError: RawRepresentable, ErrorProtocol {
+    public enum CompileError: Error, RawRepresentable {
         
         /// Invalid use  of repetition operators such as using '*' as the first character.
         ///
@@ -71,18 +71,18 @@ public extension RegularExpression {
             
             switch rawValue {
                 
-            case REG_BADRPT:                            self = InvalidRepetition
-            case REG_BADBR:                             self = InvalidBackReference
-            case REG_ESPACE:                            self = OutOfMemory
-            case REG_BADPAT:                            self = InvalidPatternOperator
-            case REG_EBRACE:                            self = UnMatchedBraceInterval
-            case REG_EBRACK:                            self = UnMatchedBracketList
-            case REG_ECOLLATE:                          self = InvalidCollating
-            case REG_ECTYPE:                            self = UnknownCharacterClassName
-            case REG_EESCAPE:                           self = TrailingBackslash
-            case REG_EPAREN:                            self = UnMatchedParenthesis
-            case REG_ERANGE:                            self = InvalidRange
-            case REG_ESUBREG:                           self = InvalidBackReferenceToSubExpression
+            case REG_BADRPT:                            self = .InvalidRepetition
+            case REG_BADBR:                             self = .InvalidBackReference
+            case REG_ESPACE:                            self = .OutOfMemory
+            case REG_BADPAT:                            self = .InvalidPatternOperator
+            case REG_EBRACE:                            self = .UnMatchedBraceInterval
+            case REG_EBRACK:                            self = .UnMatchedBracketList
+            case REG_ECOLLATE:                          self = .InvalidCollating
+            case REG_ECTYPE:                            self = .UnknownCharacterClassName
+            case REG_EESCAPE:                           self = .TrailingBackslash
+            case REG_EPAREN:                            self = .UnMatchedParenthesis
+            case REG_ERANGE:                            self = .InvalidRange
+            case REG_ESUBREG:                           self = .InvalidBackReferenceToSubExpression
                 
                 /*
                 #if os(linux)
@@ -101,18 +101,18 @@ public extension RegularExpression {
             
             switch self {
                 
-            case InvalidRepetition:                     return REG_BADRPT
-            case InvalidBackReference:                  return REG_BADBR
-            case OutOfMemory:                           return REG_ESPACE
-            case InvalidPatternOperator:                return REG_BADPAT
-            case UnMatchedBraceInterval:                return REG_EBRACE
-            case UnMatchedBracketList:                  return REG_EBRACK
-            case InvalidCollating:                      return REG_ECOLLATE
-            case UnknownCharacterClassName:             return REG_ECTYPE
-            case TrailingBackslash:                     return REG_EESCAPE
-            case UnMatchedParenthesis:                  return REG_EPAREN
-            case InvalidRange:                          return REG_ERANGE
-            case InvalidBackReferenceToSubExpression:   return REG_ESUBREG
+            case .InvalidRepetition:                     return REG_BADRPT
+            case .InvalidBackReference:                  return REG_BADBR
+            case .OutOfMemory:                           return REG_ESPACE
+            case .InvalidPatternOperator:                return REG_BADPAT
+            case .UnMatchedBraceInterval:                return REG_EBRACE
+            case .UnMatchedBracketList:                  return REG_EBRACK
+            case .InvalidCollating:                      return REG_ECOLLATE
+            case .UnknownCharacterClassName:             return REG_ECTYPE
+            case .TrailingBackslash:                     return REG_EESCAPE
+            case .UnMatchedParenthesis:                  return REG_EPAREN
+            case .InvalidRange:                          return REG_ERANGE
+            case .InvalidBackReferenceToSubExpression:   return REG_ESUBREG
             }
         }
     }

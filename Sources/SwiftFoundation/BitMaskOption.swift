@@ -14,7 +14,7 @@ public protocol BitMaskOption: RawRepresentable {
 
 public extension BitMaskOption where Self.RawValue: Integer {
     
-    static func bitmask<S: Sequence where S.Iterator.Element == Self>(options: S) -> Self.RawValue {
+    static func bitmask<S: Sequence>(options: S) -> Self.RawValue where S.Iterator.Element == Self {
         return options.reduce(0) { mask, option in
             mask | option.rawValue
         }

@@ -232,7 +232,7 @@
             let appendByteToResult : (UInt8) -> () = {
                 result.append($0)
                 currentLineCount += 1
-                if let options = lineOptions where currentLineCount == options.lineLength {
+                if let options = lineOptions, currentLineCount == options.lineLength {
                     result.append(contentsOf: options.separator)
                     currentLineCount = 0
                 }

@@ -24,7 +24,7 @@
         
         // MARK: - Properties
         
-        private var _bytes: ContiguousArray<Byte>
+        fileprivate var _bytes: ContiguousArray<Byte>
         
         public var bytes: [Byte] {
             
@@ -85,7 +85,7 @@
             guard let pointer = buffer.baseAddress
                 else { self.init(); return }
             
-            self.init(bytes: pointer, count: sizeof(SourceType) * buffer.count)
+            self.init(bytes: pointer, count: sizeof(SourceType.self) * buffer.count)
         }
         
         // MARK: - Accessors
@@ -100,7 +100,7 @@
         
         public var description: String {
             
-            let hexString = bytes.map({ $0.toHexadecimal() }).reduce("", combine: { $0.0 + $0.1 })
+            let hexString = bytes.map({ $0.toHexadecimal() }).reduce("", { $0.0 + $0.1 })
             
             return "<" + hexString + ">"
         }

@@ -10,5 +10,5 @@
 public func Hash(_ data: Data) -> Int {
     
     // more expensive than casting but that's not safe for large values.
-    return data.bytes.map({ Int($0) }).reduce(0, combine: { $0.0 ^ $0.1 })
+    return data.bytes.map({ Int($0) }).reduce(0, { $0.0 ^ $0.1 })
 }

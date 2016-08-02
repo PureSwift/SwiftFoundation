@@ -25,9 +25,9 @@ final class DataTests: XCTestCase {
         
         XCTAssert(testData.isEmpty == false, "Could not create test data")
         
-        let dataPointer = UnsafeMutablePointer<Byte>(allocatingCapacity: testData.count)
+        let dataPointer = UnsafeMutablePointer<Byte>.allocate(capacity: testData.count)
         
-        defer { dataPointer.deallocateCapacity(testData.count) }
+        defer { dataPointer.deallocate(capacity: testData.count) }
         
         memcpy(dataPointer, testData.bytes, testData.count)
         

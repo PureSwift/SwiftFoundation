@@ -22,7 +22,7 @@
     
     public final class Lock: Locking {
         
-        private var mutex = UnsafeMutablePointer<pthread_mutex_t>(allocatingCapacity: 1)
+        private var mutex = UnsafeMutablePointer<pthread_mutex_t>.allocate(capacity: 1)
         
         public init() {
             pthread_mutex_init(mutex, nil)
@@ -31,7 +31,7 @@
         deinit {
             pthread_mutex_destroy(mutex)
             mutex.deinitialize()
-            mutex.deallocateCapacity(1)
+            mutex.deallocate(capacity: 1)
         }
         
         public func lock() {
@@ -131,12 +131,12 @@
     }
     
     public final class RecursiveLock: Locking {
-        private var mutex = UnsafeMutablePointer<pthread_mutex_t>(allocatingCapacity: 1)
+        private var mutex = UnsafeMutablePointer<pthread_mutex_t>.allocate(capacity: 1)
         
         public init() {
             
             var attrib = pthread_mutexattr_t()
-            withUnsafeMutablePointer(&attrib) { attrs in
+            withUnsafeMutablePointer(to: &attrib) { attrs in
                 pthread_mutexattr_settype(attrs, Int32(PTHREAD_MUTEX_RECURSIVE))
                 pthread_mutex_init(mutex, attrs)
             }
@@ -145,7 +145,7 @@
         deinit {
             pthread_mutex_destroy(mutex)
             mutex.deinitialize()
-            mutex.deallocateCapacity(1)
+            mutex.deallocate(capacity: 1)
         }
         
         public func lock() {
@@ -164,8 +164,8 @@
     }
     
     public final class Condition: Locking {
-        private var mutex = UnsafeMutablePointer<pthread_mutex_t>(allocatingCapacity: 1)
-        private var cond = UnsafeMutablePointer<pthread_cond_t>(allocatingCapacity: 1)
+        private var mutex = UnsafeMutablePointer<pthread_mutex_t>.allocate(capacity: 1)
+        private var cond = UnsafeMutablePointer<pthread_cond_t>.allocate(capacity: 1)
         
         public init() {
             pthread_mutex_init(mutex, nil)
@@ -177,8 +177,8 @@
             pthread_cond_destroy(cond)
             mutex.deinitialize()
             cond.deinitialize()
-            mutex.deallocateCapacity(1)
-            cond.deallocateCapacity(1)
+            mutex.deallocate(capacity: 1)
+            cond.deallocate(capacity: 1)
         }
         
         public func lock() {
@@ -203,12 +203,12 @@
             ts.tv_sec = Int(floor(ti))
             ts.tv_nsec = Int((ti - Double(ts.tv_sec)) * 1000000000.0)
             var tv = timeval()
-            withUnsafeMutablePointer(&tv) { t in
+            withUnsafeMutablePointer(to: &tv) { t in
                 gettimeofday(t, nil)
                 ts.tv_sec += t.pointee.tv_sec
                 ts.tv_nsec += Int((t.pointee.tv_usec * 1000000) / 1000000000)
             }
-            let retVal: Int32 = withUnsafePointer(&ts) { t in
+            let retVal: Int32 = withUnsafePointer(to: &ts) { t in
                 return pthread_cond_timedwait(cond, mutex, t)
             }
             
