@@ -212,7 +212,7 @@ public struct FileManager {
     public static func set(contents data: Data, at path: String) throws {
         
         // get file descriptor for path (open file)
-        let file = open(path, O_WRONLY)
+        let file = open(path, O_TRUNC | O_WRONLY)
         
         guard file != -1 else { throw POSIXError.fromErrno! }
         
