@@ -21,7 +21,7 @@ public final class Thread {
     
     // MARK: - Intialization
     
-    public init(_ closure: () -> ()) throws {
+    public init(_ closure: @escaping () -> ()) throws {
         
         let holder = Unmanaged.passRetained(Closure(closure: closure))
         
@@ -116,7 +116,7 @@ fileprivate extension Thread {
         
         let closure: () -> ()
         
-        init(closure: () -> ()) {
+        init(closure: @escaping () -> ()) {
             
             self.closure = closure
         }

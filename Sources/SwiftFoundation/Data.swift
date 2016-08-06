@@ -85,7 +85,7 @@
             guard let pointer = buffer.baseAddress
                 else { self.init(); return }
             
-            self.init(bytes: pointer, count: sizeof(SourceType.self) * buffer.count)
+            self.init(bytes: pointer, count: MemoryLayout<SourceType>.size * buffer.count)
         }
         
         // MARK: - Accessors

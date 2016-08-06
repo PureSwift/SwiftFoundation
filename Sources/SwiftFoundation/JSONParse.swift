@@ -27,7 +27,7 @@ public extension JSON.Value {
         // could not parse
         guard tokenerError != nil else { return nil }
         
-        self = self.dynamicType.init(jsonObject: jsonObject)
+        self.init(jsonObject: jsonObject)
     }
 }
 
