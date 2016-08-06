@@ -43,7 +43,7 @@ public extension POSIXError {
     /// Enumeration describing POSIX error codes.
     public struct POSIXError: Error {
         
-        let code: POSIXErrorCode
+        public let code: POSIXErrorCode
         
         public init(code: POSIXErrorCode) {
             
