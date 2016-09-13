@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6EB496221D7AFF080023A57F"
-               BuildableName = "SwiftFoundation tvOS.framework"
+               BuildableName = "SwiftFoundation.framework"
                BlueprintName = "SwiftFoundation tvOS"
                ReferencedContainer = "container:SwiftFoundation.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6EB496711D7AFF790023A57F"
-               BuildableName = "SwiftFoundationTests tvOS.xctest"
+               BuildableName = "SwiftFoundationTests.xctest"
                BlueprintName = "SwiftFoundationTests tvOS"
                ReferencedContainer = "container:SwiftFoundation.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6EB496221D7AFF080023A57F"
-            BuildableName = "SwiftFoundation tvOS.framework"
+            BuildableName = "SwiftFoundation.framework"
             BlueprintName = "SwiftFoundation tvOS"
             ReferencedContainer = "container:SwiftFoundation.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6EB496221D7AFF080023A57F"
-            BuildableName = "SwiftFoundation tvOS.framework"
+            BuildableName = "SwiftFoundation.framework"
             BlueprintName = "SwiftFoundation tvOS"
             ReferencedContainer = "container:SwiftFoundation.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6EB496221D7AFF080023A57F"
-            BuildableName = "SwiftFoundation tvOS.framework"
+            BuildableName = "SwiftFoundation.framework"
             BlueprintName = "SwiftFoundation tvOS"
             ReferencedContainer = "container:SwiftFoundation.xcodeproj">
          </BuildableReference>
