@@ -50,7 +50,7 @@
     }
     
     extension Lock {
-        private func synchronized<T>(_ closure: @noescape () -> T) -> T {
+        private func synchronized<T>(_ closure: () -> T) -> T {
             self.lock()
             defer { self.unlock() }
             return closure()

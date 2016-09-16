@@ -70,7 +70,7 @@
         /// - parameter bytes: A pointer to the memory. It will be copied.
         /// - parameter count: The number of bytes to copy.
         @inline(__always)
-        public init(bytes pointer: UnsafePointer<Void>, count: Int) {
+        public init(bytes pointer: UnsafeRawPointer, count: Int) {
             
             _bytes = ContiguousArray<UInt8>(repeating: 0, count: count)
             
