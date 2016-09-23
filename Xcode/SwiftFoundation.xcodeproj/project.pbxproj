@@ -44,7 +44,6 @@
 		6E2C2BA21C20F76600B2C995 /* RegularExpressionMatchOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B431C20F6EB00B2C995 /* RegularExpressionMatchOption.swift */; };
 		6E2C2BA31C20F76600B2C995 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B441C20F6EB00B2C995 /* SemanticVersion.swift */; };
 		6E2C2BA51C20F76600B2C995 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B461C20F6EB00B2C995 /* String.swift */; };
-		6E2C2BA71C20F76600B2C995 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B481C20F6EB00B2C995 /* Transformer.swift */; };
 		6E2C2BAD1C20F76600B2C995 /* UUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B4E1C20F6EB00B2C995 /* UUID.swift */; };
 		6E2C2BAE1C20F76600B2C995 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B4F1C20F6EB00B2C995 /* Version.swift */; };
 		6E2C2BAF1C20F76600B2C995 /* Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B1C1C20F6EB00B2C995 /* Base64.swift */; };
@@ -75,7 +74,6 @@
 		6E2C2BD61C20F76600B2C995 /* RegularExpressionMatchOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B431C20F6EB00B2C995 /* RegularExpressionMatchOption.swift */; };
 		6E2C2BD71C20F76600B2C995 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B441C20F6EB00B2C995 /* SemanticVersion.swift */; };
 		6E2C2BD91C20F76600B2C995 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B461C20F6EB00B2C995 /* String.swift */; };
-		6E2C2BDB1C20F76600B2C995 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B481C20F6EB00B2C995 /* Transformer.swift */; };
 		6E2C2BE11C20F76600B2C995 /* UUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B4E1C20F6EB00B2C995 /* UUID.swift */; };
 		6E2C2BE21C20F76600B2C995 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B4F1C20F6EB00B2C995 /* Version.swift */; };
 		6E2C2BE31C20F76700B2C995 /* Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B1C1C20F6EB00B2C995 /* Base64.swift */; };
@@ -105,7 +103,6 @@
 		6E2C2C091C20F76700B2C995 /* RegularExpressionCompileOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B421C20F6EB00B2C995 /* RegularExpressionCompileOption.swift */; };
 		6E2C2C0A1C20F76700B2C995 /* RegularExpressionMatchOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B431C20F6EB00B2C995 /* RegularExpressionMatchOption.swift */; };
 		6E2C2C0B1C20F76700B2C995 /* SemanticVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B441C20F6EB00B2C995 /* SemanticVersion.swift */; };
-		6E2C2C0F1C20F76700B2C995 /* Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B481C20F6EB00B2C995 /* Transformer.swift */; };
 		6E2C2C161C20F76700B2C995 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B4F1C20F6EB00B2C995 /* Version.swift */; };
 		6E2C2C171C20F76B00B2C995 /* DateComponentsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B511C20F6EB00B2C995 /* DateComponentsTest.swift */; };
 		6E2C2C191C20F76B00B2C995 /* POSIXTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2C2B531C20F6EB00B2C995 /* POSIXTimeTests.swift */; };
@@ -227,7 +224,6 @@
 		6E2C2B431C20F6EB00B2C995 /* RegularExpressionMatchOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionMatchOption.swift; sourceTree = "<group>"; };
 		6E2C2B441C20F6EB00B2C995 /* SemanticVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticVersion.swift; sourceTree = "<group>"; };
 		6E2C2B461C20F6EB00B2C995 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		6E2C2B481C20F6EB00B2C995 /* Transformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		6E2C2B4E1C20F6EB00B2C995 /* UUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUID.swift; sourceTree = "<group>"; };
 		6E2C2B4F1C20F6EB00B2C995 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		6E2C2B511C20F6EB00B2C995 /* DateComponentsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateComponentsTest.swift; sourceTree = "<group>"; };
@@ -348,7 +344,6 @@
 				6E2C2B431C20F6EB00B2C995 /* RegularExpressionMatchOption.swift */,
 				6E2C2B441C20F6EB00B2C995 /* SemanticVersion.swift */,
 				6E04074D1CB3E07500BE3A79 /* Thread.swift */,
-				6E2C2B481C20F6EB00B2C995 /* Transformer.swift */,
 				6E2C2B4E1C20F6EB00B2C995 /* UUID.swift */,
 				6E2C2B4F1C20F6EB00B2C995 /* Version.swift */,
 			);
@@ -696,7 +691,6 @@
 				6E2C2BE11C20F76600B2C995 /* UUID.swift in Sources */,
 				6E2C2BBB1C20F76600B2C995 /* FileDescriptor.swift in Sources */,
 				6E8474CE1D24FCFE009CA7DB /* ComparisonResult.swift in Sources */,
-				6E2C2BDB1C20F76600B2C995 /* Transformer.swift in Sources */,
 				6E2C2BD41C20F76600B2C995 /* RegularExpressionCompileError.swift in Sources */,
 				6E2C2BD71C20F76600B2C995 /* SemanticVersion.swift in Sources */,
 				6E2C2BBD1C20F76600B2C995 /* FilePermission.swift in Sources */,
@@ -741,7 +735,6 @@
 				6E2C2BAD1C20F76600B2C995 /* UUID.swift in Sources */,
 				6E2C2B871C20F76600B2C995 /* FileDescriptor.swift in Sources */,
 				6E8474CF1D24FCFE009CA7DB /* ComparisonResult.swift in Sources */,
-				6E2C2BA71C20F76600B2C995 /* Transformer.swift in Sources */,
 				6E2C2BA01C20F76600B2C995 /* RegularExpressionCompileError.swift in Sources */,
 				6E2C2BA31C20F76600B2C995 /* SemanticVersion.swift in Sources */,
 				6E2C2B891C20F76600B2C995 /* FilePermission.swift in Sources */,
@@ -804,7 +797,6 @@
 				6E2C2BF31C20F76700B2C995 /* Formatter.swift in Sources */,
 				6E2C2BFC1C20F76700B2C995 /* JSONExtensions.swift in Sources */,
 				6E2C2BEF1C20F76700B2C995 /* FileDescriptor.swift in Sources */,
-				6E2C2C0F1C20F76700B2C995 /* Transformer.swift in Sources */,
 				6E2C2C081C20F76700B2C995 /* RegularExpressionCompileError.swift in Sources */,
 				6E2C2C0B1C20F76700B2C995 /* SemanticVersion.swift in Sources */,
 				6E102F3B1D4D504C0046128B /* Thread.swift in Sources */,
