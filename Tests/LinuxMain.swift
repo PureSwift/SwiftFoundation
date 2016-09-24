@@ -7,14 +7,16 @@
 //
 
 import XCTest
+@testable import UnitTests
 
-#if os(OSX) || os(iOS) || os(watchOS)
+#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
     func XCTMain(_ testCases: [XCTestCaseEntry]) { fatalError("Not Implemented. Linux only") }
     
     func testCase<T: XCTestCase>(_ allTests: [(String, (T) -> () throws -> Void)]) -> XCTestCaseEntry { fatalError("Not Implemented. Linux only") }
     
     struct XCTestCaseEntry { }
-#endif
+    
+#else
 
 XCTMain([testCase(DateComponentsTest.allTests),
          testCase(POSIXTimeTests.allTests),
@@ -25,3 +27,5 @@ XCTMain([testCase(DateComponentsTest.allTests),
          testCase(JSONTests.allTests),
          testCase(RangeTests.allTests)
     ])
+    
+#endif

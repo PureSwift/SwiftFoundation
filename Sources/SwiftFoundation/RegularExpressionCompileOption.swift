@@ -36,10 +36,10 @@ public extension RegularExpression {
             
             switch rawValue {
                 
-            case REG_ICASE:             self = CaseInsensitive
-            case REG_EXTENDED:          self = ExtendedSyntax
-            case REG_NOSUB:             self = NoSub
-            case REG_NEWLINE:           self = NewLine
+            case REG_ICASE:             self = .CaseInsensitive
+            case REG_EXTENDED:          self = .ExtendedSyntax
+            case REG_NOSUB:             self = .NoSub
+            case REG_NEWLINE:           self = .NewLine
                 
             default: return nil
             }

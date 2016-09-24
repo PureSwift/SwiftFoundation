@@ -13,7 +13,7 @@
 #endif
 
 import XCTest
-import SwiftFoundation
+@testable import SwiftFoundation
 
 final class POSIXTimeTests: XCTestCase {
     

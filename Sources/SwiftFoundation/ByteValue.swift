@@ -22,7 +22,7 @@ public protocol ByteValue: Equatable {
 
 // MARK: - Equatable
 
-public func == <T: ByteValue where T.ByteValue: Equatable> (lhs: T, rhs: T) -> Bool {
+public func == <T: ByteValue> (lhs: T, rhs: T) -> Bool where T.ByteValue: Equatable {
     
     return lhs.bytes == rhs.bytes
 }

@@ -75,9 +75,9 @@ public struct FileManager {
         
         let stringBufferSize = Int(PATH_MAX)
         
-        let path = UnsafeMutablePointer<CChar>(allocatingCapacity: stringBufferSize)
+        let path = UnsafeMutablePointer<CChar>.allocate(capacity: stringBufferSize)
         
-        defer { path.deallocateCapacity(stringBufferSize) }
+        defer { path.deallocate(capacity: stringBufferSize) }
         
         getcwd(path, stringBufferSize - 1)
         
@@ -193,9 +193,9 @@ public struct FileManager {
             
         #endif
         
-        let memoryPointer = UnsafeMutablePointer<Byte>(allocatingCapacity: fileSize)
+        let memoryPointer = UnsafeMutablePointer<Byte>.allocate(capacity: fileSize)
         
-        defer { memoryPointer.deallocateCapacity(fileSize) }
+        defer { memoryPointer.deallocate(capacity: fileSize) }
         
         let readBytes = read(file, memoryPointer, fileSize)
         
@@ -212,7 +212,7 @@ public struct FileManager {
     public static func set(contents data: Data, at path: String) throws {
         
         // get file descriptor for path (open file)
-        let file = open(path, O_WRONLY)
+        let file = open(path, O_TRUNC | O_WRONLY)
         
         guard file != -1 else { throw POSIXError.fromErrno! }
         

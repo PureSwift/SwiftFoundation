@@ -24,7 +24,7 @@
         
         // MARK: - Properties
         
-        private var _bytes: ContiguousArray<Byte>
+        fileprivate var _bytes: ContiguousArray<Byte>
         
         public var bytes: [Byte] {
             
@@ -70,7 +70,7 @@
         /// - parameter bytes: A pointer to the memory. It will be copied.
         /// - parameter count: The number of bytes to copy.
         @inline(__always)
-        public init(bytes pointer: UnsafePointer<Void>, count: Int) {
+        public init(bytes pointer: UnsafeRawPointer, count: Int) {
             
             _bytes = ContiguousArray<UInt8>(repeating: 0, count: count)
             
@@ -85,7 +85,7 @@
             guard let pointer = buffer.baseAddress
                 else { self.init(); return }
             
-            self.init(bytes: pointer, count: sizeof(SourceType) * buffer.count)
+            self.init(bytes: pointer, count: MemoryLayout<SourceType>.size * buffer.count)
         }
         
         // MARK: - Accessors
@@ -100,7 +100,7 @@
         
         public var description: String {
             
-            let hexString = bytes.map({ $0.toHexadecimal() }).reduce("", combine: { $0.0 + $0.1 })
+            let hexString = bytes.map({ $0.toHexadecimal() }).reduce("", { $0.0 + $0.1 })
             
             return "<" + hexString + ">"
         }

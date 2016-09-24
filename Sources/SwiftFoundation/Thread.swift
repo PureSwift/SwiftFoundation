@@ -21,13 +21,13 @@ public final class Thread {
     
     // MARK: - Intialization
     
-    public init(_ closure: () -> ()) throws {
+    public init(_ closure: @escaping () -> ()) throws {
         
         let holder = Unmanaged.passRetained(Closure(closure: closure))
         
+        let pointer = holder.toOpaque()
+        
         #if os(Linux)
-            
-            let pointer = UnsafeMutablePointer<Void>(holder.toOpaque())
             
             var internalThread: pthread_t = 0
             
@@ -39,8 +39,6 @@ public final class Thread {
             pthread_detach(internalThread)
             
         #elseif os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
-            
-            let pointer = UnsafeMutablePointer<Void>(OpaquePointer(bitPattern: holder))
             
             var internalThread: pthread_t? = nil
             
@@ -68,7 +66,7 @@ public final class Thread {
         let errorCode = pthread_join(internalThread, nil)
         
         guard errorCode == 0
-            else { throw POSIXError(rawValue: errorCode)! }
+            else { throw POSIXError(code: POSIXErrorCode(rawValue: errorCode)!) }
     }
     
     public func cancel() throws {
@@ -76,7 +74,7 @@ public final class Thread {
         let errorCode = pthread_cancel(internalThread)
         
         guard errorCode == 0
-            else { throw POSIXError(rawValue: errorCode)! }
+            else { throw POSIXError(code: POSIXErrorCode(rawValue: errorCode)!) }
     }
 }
 
@@ -84,7 +82,7 @@ public final class Thread {
 
 #if os(Linux)
     
-    private func ThreadPrivateMainLinux(arg: UnsafeMutablePointer<Void>?) -> UnsafeMutablePointer<Void>? {
+    private func ThreadPrivateMainLinux(arg: UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? {
         
         let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(arg!)
         
@@ -99,9 +97,9 @@ public final class Thread {
 
 #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
     
-    private func ThreadPrivateMainDarwin(arg: UnsafeMutablePointer<Void>) -> UnsafeMutablePointer<Void>? {
+    private func ThreadPrivateMainDarwin(arg: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer? {
         
-        let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(OpaquePointer(arg))
+        let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(arg)
         
         unmanaged.takeUnretainedValue().closure()
         
@@ -112,13 +110,13 @@ public final class Thread {
     
 #endif
 
-private extension Thread {
+fileprivate extension Thread {
     
-    private final class Closure {
+    final class Closure {
         
         let closure: () -> ()
         
-        init(closure: () -> ()) {
+        init(closure: @escaping () -> ()) {
             
             self.closure = closure
         }

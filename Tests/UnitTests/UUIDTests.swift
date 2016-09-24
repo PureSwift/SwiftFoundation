@@ -6,9 +6,12 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(Linux)
+    import Glibc
+#endif
+
 import XCTest
-import SwiftFoundation
-import SwiftFoundation
+@testable import SwiftFoundation
 
 final class UUIDTests: XCTestCase {
     

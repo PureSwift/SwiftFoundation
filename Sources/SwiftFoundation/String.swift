@@ -24,7 +24,9 @@ public extension String {
                 
             case let .scalarValue(scalar):
                 
-                string.append(scalar)
+                let scalarString = String(scalar)
+                
+                string.append(scalarString)
                 
             case .emptyInput:
                 
