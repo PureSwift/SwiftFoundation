@@ -6,9 +6,13 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(Linux)
+    import Glibc
+#endif
+
 import XCTest
-import SwiftFoundation
 import Foundation
+@testable import SwiftFoundation
 
 final class RegularExpressionTests: XCTestCase {
     
@@ -124,15 +128,3 @@ final class RegularExpressionTests: XCTestCase {
         }
     }
 }
-
-#if os(Linux)
-
-extension NSRange {
-    
-    init(_ range: Range<Int>) {
-        
-        self = NSRange(CountableRange(range))
-    }
-}
-
-#endif

@@ -11,7 +11,7 @@
 #endif
 
 import XCTest
-import SwiftFoundation
+@testable import SwiftFoundation
 
 final class DataTests: XCTestCase {
     

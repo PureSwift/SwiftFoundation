@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import UnitTests
 
 #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
     func XCTMain(_ testCases: [XCTestCaseEntry]) { fatalError("Not Implemented. Linux only") }
