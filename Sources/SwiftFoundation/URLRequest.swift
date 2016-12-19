@@ -8,7 +8,7 @@
 
 public protocol URLRequest {
     
-    var URL: String { get }
+    var url: URL { get }
     
     var timeoutInterval: TimeInterval { get }
 }

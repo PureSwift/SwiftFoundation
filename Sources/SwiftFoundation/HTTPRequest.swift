@@ -11,21 +11,31 @@ public extension HTTP {
     /// HTTP request. 
     public struct Request: URLRequest {
         
-        public var URL: String
+        public var url: URL
         
-        public var timeoutInterval: TimeInterval = 30
+        public var timeoutInterval: TimeInterval
         
-        public var body: Data?
+        public var body: Data
         
-        public var headers = [String: String]()
+        public var headers: [String: String]
         
-        public var method: HTTP.Method = .GET
+        public var method: HTTP.Method
         
-        public var version: HTTP.Version = HTTP.Version()
+        public var version: HTTP.Version
         
-        public init(URL: String) {
+        public init(url: URL,
+                    timeoutInterval: TimeInterval = 30,
+                    body: Data = Data(),
+                    headers: [String: String] = [:],
+                    method: HTTP.Method = .GET,
+                    version: HTTP.Version = HTTP.Version()) {
             
-            self.URL = URL
+            self.url = url
+            self.timeoutInterval = timeoutInterval
+            self.body = body
+            self.headers = headers
+            self.method = method
+            self.version = version
         }
     }
 }

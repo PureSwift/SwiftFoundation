@@ -78,6 +78,8 @@ public extension HTTP {
             
             response.headers = urlResponse!.allHeaderFields as! [String: String]
             
+            response.url = urlResponse!.url
+            
             return response
         }
     }
@@ -97,15 +99,13 @@ public extension Foundation.URLRequest {
     
     init?(request: HTTP.Request) {
         
-        guard let url = NSURL(string: request.URL) else { return nil }
-        
         guard request.version == HTTP.Version(1, 1) else { return nil }
         
-        self.init(url: url as Foundation.URL, timeoutInterval: request.timeoutInterval)
+        self.init(url: request.url, timeoutInterval: request.timeoutInterval)
         
-        if let data = request.body {
+        if request.body.isEmpty == false {
             
-            self.httpBody = data
+            self.httpBody = request.body
         }
         
         self.allHTTPHeaderFields = request.headers

@@ -6,6 +6,8 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
+#if os(Linux) || XcodeLinux
+
 /// Encapsulates the components of an URL.
 public struct URL: CustomStringConvertible {
     
@@ -172,3 +174,4 @@ public struct URL: CustomStringConvertible {
     }
 }
 
+#endif
