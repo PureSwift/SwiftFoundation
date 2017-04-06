@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     import Darwin.C
 #elseif os(Linux)
     import Glibc
@@ -51,7 +51,7 @@ final class POSIXTimeTests: XCTestCase {
         
         let time = timespec(timeInterval: date.timeIntervalSince1970)
         
-        #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
         
             XCTAssert(time.timeInterval == date.timeIntervalSince1970, "timespec: \(time.timeInterval) == Date: \(date)")
         

@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     import Darwin.C
 #elseif os(Linux)
     import Glibc
@@ -58,7 +58,7 @@ public extension RegularExpression {
     }
 }
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     
     
 #elseif os(Linux)

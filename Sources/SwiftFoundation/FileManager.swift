@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     import Darwin.C
 #elseif os(Linux)
     import Glibc
@@ -187,7 +187,7 @@ public struct FileManager {
         
         let fileSize = attributes.fileSize
         
-        #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
         
         assert(fileSize <= SSIZE_MAX, "File size (\(fileSize)) is larger than the max number of bytes allowed (\(SSIZE_MAX))")
             

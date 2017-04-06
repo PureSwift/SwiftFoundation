@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     import Darwin
 #elseif os(Linux)
     import Glibc
@@ -31,7 +31,7 @@ public extension stat {
     
     // MARK: - Properties
     
-    #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     
     /// Date of last access. Date of ```st_atimespec``` or ```st_atime```.
     ///

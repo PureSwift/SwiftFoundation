@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     import Darwin.C
 #elseif os(Linux)
     import Glibc
@@ -24,7 +24,7 @@
         
         // MARK: - Properties
         
-        fileprivate var _bytes: ContiguousArray<Byte>
+        internal var _bytes: ContiguousArray<Byte>
         
         public var bytes: [Byte] {
             
@@ -210,7 +210,7 @@
 
 // MARK: - Darwin
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     
     extension Foundation.Data: ByteValue {
         

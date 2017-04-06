@@ -6,12 +6,14 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
-    import Darwin.C
-    import Foundation
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+    import Darwin
 #elseif os(Linux)
     import Glibc
 #endif
+
+import struct Foundation.POSIXError
+import class Foundation.NSError
 
 public extension POSIXError {
     
@@ -24,7 +26,7 @@ public extension POSIXError {
         return self.init(code: code)
     }
     
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     
     /// Creates `POSIXError` from error code.
     init(code: POSIXErrorCode) {
@@ -34,8 +36,7 @@ public extension POSIXError {
         self.init(_nsError: nsError)
     }
     
-#endif
-
+    #endif
 }
 
 #if os(Linux)
@@ -263,5 +264,3 @@ public extension POSIXError {
     }
     
 #endif
-
-

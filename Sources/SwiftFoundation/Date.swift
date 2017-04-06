@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     import Darwin.C
     import struct Foundation.Date
 #elseif os(Linux)
@@ -194,7 +194,7 @@
 
 // MARK: - Darwin
 
-#if (os(OSX) || os(iOS) || os(watchOS) || os(tvOS)) && !XcodeLinux
+#if (os(macOS) || os(iOS) || os(watchOS) || os(tvOS)) && !XcodeLinux
     
     public typealias Date = Foundation.Date
     

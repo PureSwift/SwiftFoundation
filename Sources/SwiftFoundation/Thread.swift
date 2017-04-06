@@ -6,7 +6,7 @@
 //  Copyright © 2016 PureSwift. All rights reserved.
 //
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     import Darwin.C
 #elseif os(Linux)
     import Glibc
@@ -21,9 +21,9 @@ public final class Thread {
     
     // MARK: - Intialization
     
-    public init(_ closure: @escaping () -> ()) throws {
+    public init(block: @escaping () -> ()) throws {
         
-        let holder = Unmanaged.passRetained(Closure(closure: closure))
+        let holder = Unmanaged.passRetained(Closure(closure: block))
         
         let pointer = holder.toOpaque()
         
@@ -38,7 +38,7 @@ public final class Thread {
             
             pthread_detach(internalThread)
             
-        #elseif os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+        #elseif os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
             
             var internalThread: pthread_t? = nil
             
@@ -95,7 +95,7 @@ public final class Thread {
     
 #endif
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     
     private func ThreadPrivateMainDarwin(arg: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer? {
         

@@ -25,7 +25,7 @@ final class StringTests: XCTestCase {
         
         let data = string.toUTF8Data()
         
-        let decodedString = String(UTF8Data: data)
+        let decodedString = String(UTF8Data: data)!
         
         XCTAssert(string == decodedString, "\(string) == \(decodedString)")
     }

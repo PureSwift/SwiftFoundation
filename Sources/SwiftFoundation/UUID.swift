@@ -6,7 +6,7 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     import Darwin
     import Foundation
 #elseif os(Linux)
@@ -134,7 +134,7 @@
 
 // MARK: - Darwin
 
-#if (os(OSX) || os(iOS) || os(watchOS) || os(tvOS)) && !XcodeLinux
+#if (os(macOS) || os(iOS) || os(watchOS) || os(tvOS)) && !XcodeLinux
     
     public typealias UUID = Foundation.UUID
     
@@ -198,7 +198,7 @@ extension UUID: DataConvertible {
 
 // MARK: - Private
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     private typealias POSIXUUIDStringType = uuid_string_t
 #elseif os(Linux)
     private typealias POSIXUUIDStringType = (Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8)
