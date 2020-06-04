@@ -6,200 +6,157 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
-    import Darwin
-    import Foundation
-#elseif os(Linux)
-    import Glibc
-    import CUUID
-#endif
-
-// MARK: - Linux
-
-#if os(Linux) || XcodeLinux
+/// A representation of a universally unique identifier (```UUID```).
+public struct UUID {
     
-    /// A representation of a universally unique identifier (```UUID```).
-    public struct UUID: ByteValue, Equatable, Hashable, RawRepresentable, CustomStringConvertible {
+    // MARK: - Properties
+    
+    public let uuid: uuid_t
+    
+    // MARK: - Initialization
+    
+    /// Create a new UUID with RFC 4122 version 4 random bytes
+    public init() {
         
-        // MARK: - Static Properties
-        
-        public static let length = 16
-        public static let stringLength = 36
-        public static let unformattedStringLength = 32
-        
-        // MARK: - Properties
-        
-        public var bytes: uuid_t
-        
-        // MARK: - Initialization
-        
-        /// Create a new UUID with RFC 4122 version 4 random bytes
-        public init() {
-            
-            var uuid = uuid_t(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
-            
-            withUnsafeMutablePointer(to: &uuid, { (valuePointer: UnsafeMutablePointer<uuid_t>) in
-                
-                uuid_generate(unsafeBitCast(valuePointer, to: UnsafeMutablePointer<UInt8>.self))
-            })
-            
-            self.bytes = uuid
-        }
-        
-        /// Initializes a UUID with the specified bytes.
-        public init(bytes: uuid_t) {
-            
-            self.bytes = bytes
-        }
+        let uuid = uuid_t(.random,.random,.random,.random,.random,.random,.random,.random,.random,.random,.random,.random,.random,.random,.random,.random)
+        self.init(uuid: uuid)
     }
     
-    // MARK: - RawRepresentable
-    
-    public extension UUID {
-        
-        init?(rawValue: String) {
-            
-            let uuidPointer = UnsafeMutablePointer<uuid_t>.allocate(capacity: 1)
-            
-            defer { uuidPointer.deallocate(capacity: 1) }
-            
-            guard uuid_parse(rawValue, unsafeBitCast(uuidPointer, to: UnsafeMutablePointer<UInt8>.self)) != -1
-                else { return nil }
-            
-            self.bytes = uuidPointer.pointee
-        }
-        
-        var rawValue: String {
-            
-            var uuidCopy = bytes
-            
-            var uuidString = POSIXUUIDStringType(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-
-            // withUnsafeMutablePointer(&uuidCopy, &uuidString) { (uuidPointer: UnsafeMutablePointer<uuid_t>, uuidStringPointer: UnsafeMutablePointer<POSIXUUIDStringType>) -> Void in
-            
-            withUnsafeMutablePointer(to: &uuidCopy) { (uuidPointer: UnsafeMutablePointer<uuid_t>) in
-
-                withUnsafeMutablePointer(to: &uuidString) { (uuidStringPointer: UnsafeMutablePointer<POSIXUUIDStringType>) in
-                    
-                    let stringBuffer = unsafeBitCast(uuidStringPointer, to: UnsafeMutablePointer<Int8>.self)
-                    
-                    let uuidBuffer = unsafeBitCast(uuidPointer, to: UnsafeMutablePointer<UInt8>.self)
-                    
-                    uuid_unparse(unsafeBitCast(uuidBuffer, to: UnsafePointer<UInt8>.self), stringBuffer)
-                }
-            }
-            
-            return withUnsafeMutablePointer(to: &uuidString, { (valuePointer: UnsafeMutablePointer<POSIXUUIDStringType>) -> String in
-                
-                let buffer = unsafeBitCast(valuePointer, to: UnsafeMutablePointer<CChar>.self)
-                
-                return String(validatingUTF8: unsafeBitCast(buffer, to: UnsafePointer<CChar>.self))!
-            })
-        }
+    /// Create a UUID from a `uuid_t`.
+    public init(uuid: uuid_t) {
+        self.uuid = uuid
     }
     
-    // MARK: - Hashable
+    // MARK: - UUID String
     
-    public extension UUID {
-        
-        var hashValue: Int {
-            
-            return toData().hashValue
-        }
+    /// Create a UUID from a string such as "E621E1F8-C36C-495A-93FC-0C247A3E6E5F".
+    ///
+    /// Returns nil for invalid strings.
+    public init?(uuidString string: String) {
+        guard string.count == UUID.stringLength
+            else { return nil }
+        let components = string
+            .split(separator: "-")
+        guard components[0].count == 8,
+            components[1].count == 4,
+            components[2].count == 4,
+            components[3].count == 4,
+            components[4].count == 12
+            else { return nil }
+        let hexString = components
+            .reduce("") { $0 + $1 }
+        assert(hexString.count == UUID.length * 2)
+        guard let bytes = [UInt8](hexadecimal: hexString)
+            else { return nil }
+        assert(bytes.count == UUID.length)
+        self.init(uuid: uuid_t(bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], bytes[6], bytes[7], bytes[8], bytes[9], bytes[10], bytes[11], bytes[12], bytes[13], bytes[14], bytes[15]))
     }
     
-    // MARK: - Equatable
-    
-    public func == (lhs: UUID, rhs: UUID) -> Bool {
-        
-        return lhs.bytes.0 == rhs.bytes.0 &&
-            lhs.bytes.1 == rhs.bytes.1 &&
-            lhs.bytes.2 == rhs.bytes.2 &&
-            lhs.bytes.3 == rhs.bytes.3 &&
-            lhs.bytes.4 == rhs.bytes.4 &&
-            lhs.bytes.5 == rhs.bytes.5 &&
-            lhs.bytes.6 == rhs.bytes.6 &&
-            lhs.bytes.7 == rhs.bytes.7 &&
-            lhs.bytes.8 == rhs.bytes.8 &&
-            lhs.bytes.9 == rhs.bytes.9 &&
-            lhs.bytes.10 == rhs.bytes.10 &&
-            lhs.bytes.11 == rhs.bytes.11 &&
-            lhs.bytes.12 == rhs.bytes.12 &&
-            lhs.bytes.13 == rhs.bytes.13 &&
-            lhs.bytes.14 == rhs.bytes.14 &&
-            lhs.bytes.15 == rhs.bytes.15
-    }
-
-#endif
-
-// MARK: - Darwin
-
-#if (os(macOS) || os(iOS) || os(watchOS) || os(tvOS)) && !XcodeLinux
-    
-    public typealias UUID = Foundation.UUID
-    
-    extension Foundation.UUID {
-        
-        public static var length: Int { return 16 }
-        public static var stringLength: Int { return 36 }
-        public static var unformattedStringLength: Int { return 32 }
-    }
-    
-    extension Foundation.UUID: ByteValue {
-        
-        @inline(__always)
-        public init(bytes: uuid_t) {
-            
-            self.init(uuid: bytes)
-        }
-        
-        public var bytes: uuid_t {
-            
-            @inline(__always)
-            get { return uuid }
-            
-            @inline(__always)
-            set { self = Foundation.UUID(uuid: newValue) }
-        }
-    }
-    
-    extension Foundation.UUID: RawRepresentable {
-        
-        @inline(__always)
-        public init?(rawValue uuidString: String) {
-            
-            self.init(uuidString: uuidString)
-        }
-        
-        public var rawValue: String {
-            
-            return uuidString
-        }
-    }
-    
-#endif
-
-// MARK: - DataConvertible
-
-extension UUID: DataConvertible {
-    
-    public init?(data: Data) {
-        
-        guard data.count == UUID.length else { return nil }
-        
-        self.init(bytes: (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13], data[14], data[15]))
-    }
-    
-    public func toData() -> Data {
-        
-        return Data(bytes: [bytes.0, bytes.1, bytes.2, bytes.3, bytes.4, bytes.5, bytes.6, bytes.7, bytes.8, bytes.9, bytes.10, bytes.11, bytes.12, bytes.13, bytes.14, bytes.15])
+    /// Returns a string created from the UUID, such as "E621E1F8-C36C-495A-93FC-0C247A3E6E5F"
+    public var uuidString: String {
+        return uuid.0.toHexadecimal()
+            + uuid.1.toHexadecimal()
+            + uuid.2.toHexadecimal()
+            + uuid.3.toHexadecimal()
+            + "-"
+            + uuid.4.toHexadecimal()
+            + uuid.5.toHexadecimal()
+            + "-"
+            + uuid.6.toHexadecimal()
+            + uuid.7.toHexadecimal()
+            + "-"
+            + uuid.8.toHexadecimal()
+            + uuid.9.toHexadecimal()
+            + "-"
+            + uuid.10.toHexadecimal()
+            + uuid.11.toHexadecimal()
+            + uuid.12.toHexadecimal()
+            + uuid.13.toHexadecimal()
+            + uuid.14.toHexadecimal()
+            + uuid.15.toHexadecimal()
     }
 }
 
-// MARK: - Private
+internal extension SwiftFoundation.UUID {
+    
+    static var length: Int { return 16 }
+    static var stringLength: Int { return 36 }
+}
 
-#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
-    private typealias POSIXUUIDStringType = uuid_string_t
-#elseif os(Linux)
-    private typealias POSIXUUIDStringType = (Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8)
-#endif
+// MARK: - Equatable
+
+extension SwiftFoundation.UUID: Equatable {
+    
+    public static func == (lhs: SwiftFoundation.UUID, rhs: SwiftFoundation.UUID) -> Bool {
+        return lhs.uuid.0 == rhs.uuid.0 &&
+            lhs.uuid.1 == rhs.uuid.1 &&
+            lhs.uuid.2 == rhs.uuid.2 &&
+            lhs.uuid.3 == rhs.uuid.3 &&
+            lhs.uuid.4 == rhs.uuid.4 &&
+            lhs.uuid.5 == rhs.uuid.5 &&
+            lhs.uuid.6 == rhs.uuid.6 &&
+            lhs.uuid.7 == rhs.uuid.7 &&
+            lhs.uuid.8 == rhs.uuid.8 &&
+            lhs.uuid.9 == rhs.uuid.9 &&
+            lhs.uuid.10 == rhs.uuid.10 &&
+            lhs.uuid.11 == rhs.uuid.11 &&
+            lhs.uuid.12 == rhs.uuid.12 &&
+            lhs.uuid.13 == rhs.uuid.13 &&
+            lhs.uuid.14 == rhs.uuid.14 &&
+            lhs.uuid.15 == rhs.uuid.15
+    }
+}
+
+// MARK: - Hashable
+
+extension UUID: Hashable {
+    
+    public func hash(into hasher: inout Hasher) {
+        withUnsafeBytes(of: uuid) { hasher.combine(bytes: $0) }
+    }
+}
+
+// MARK: - CustomStringConvertible
+
+extension UUID: CustomStringConvertible {
+    
+    public var description: String {
+        return uuidString
+    }
+}
+
+// MARK: - CustomReflectable
+
+extension UUID: CustomReflectable {
+    public var customMirror: Mirror {
+        let c : [(label: String?, value: Any)] = []
+        let m = Mirror(self, children:c, displayStyle: .struct)
+        return m
+    }
+}
+
+// MARK: - Codable
+
+extension UUID: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let uuidString = try container.decode(String.self)
+        
+        guard let uuid = UUID(uuidString: uuidString) else {
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath,
+                                                                    debugDescription: "Attempted to decode UUID from invalid UUID string."))
+        }
+        
+        self = uuid
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(self.uuidString)
+    }
+}
+
+// MARK: - Supporting Types
+
+public typealias uuid_t = (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8)
+public typealias uuid_string_t = (Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8)
