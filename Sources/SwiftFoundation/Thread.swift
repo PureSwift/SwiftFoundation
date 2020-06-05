@@ -12,6 +12,8 @@ import Darwin
 import Glibc
 #endif
 
+#if !arch(wasm32)
+
 /// POSIX Thread
 public final class Thread {
     
@@ -120,3 +122,5 @@ fileprivate extension Thread {
         }
     }
 }
+
+#endif

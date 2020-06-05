@@ -75,7 +75,7 @@ internal extension timespec {
         
         let nanoseconds = decimalValue * billion
         
-        self.init(tv_sec: Int(integerValue), tv_nsec: Int(nanoseconds))
+        self.init(tv_sec: .init(integerValue), tv_nsec: .init(nanoseconds))
     }
     
     var timeInterval: SwiftFoundation.TimeInterval {
@@ -108,14 +108,16 @@ internal extension tm {
 // MARK: - Cross-Platform Support
 
 #if canImport(Darwin)
-    
 internal typealias POSIXMicroseconds = __darwin_suseconds_t
-    
 #else
+
+#if arch(wasm32)
+internal typealias POSIXMicroseconds = Int32
+#else
+internal typealias POSIXMicroseconds = __suseconds_t
+#endif
     
-public typealias POSIXMicroseconds = __suseconds_t
-    
-public func modf(value: Double) -> (Double, Double) {
+internal func modf(value: Double) -> (Double, Double) {
     
     var integerValue: Double = 0
     
