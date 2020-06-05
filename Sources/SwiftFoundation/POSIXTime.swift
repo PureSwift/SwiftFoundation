@@ -12,6 +12,8 @@ import Darwin.C
 import Glibc
 #endif
 
+#if !arch(wasm32)
+
 // MARK: - Date
 
 public extension Date {
@@ -26,6 +28,24 @@ public extension Date {
     init() {
         self.timeIntervalSinceReferenceDate = Date.timeIntervalSinceReferenceDate
     }
+    
+    /// Returns a `Date` initialized relative to the current date and time by a given number of seconds.
+    init(timeIntervalSinceNow: TimeInterval) {
+        self.timeIntervalSinceReferenceDate = timeIntervalSinceNow + Date.timeIntervalSinceReferenceDate
+    }
+    
+    /**
+     The time interval between the date and the current date and time.
+     
+     If the date is earlier than the current date and time, the this property’s value is negative.
+     
+     - SeeAlso: `timeIntervalSince(_:)`
+     - SeeAlso: `timeIntervalSince1970`
+     - SeeAlso: `timeIntervalSinceReferenceDate`
+     */
+    var timeIntervalSinceNow: TimeInterval {
+        return timeIntervalSinceReferenceDate - Date.timeIntervalSinceReferenceDate
+    }
 }
 
 // MARK: - POSIX Time
@@ -35,10 +55,8 @@ internal extension timeval {
     static func timeOfDay() throws -> timeval {
         
         var timeStamp = timeval()
-        
         guard gettimeofday(&timeStamp, nil) == 0
             else { throw POSIXError.fromErrno() }
-        
         return timeStamp
     }
     
@@ -105,6 +123,8 @@ internal extension tm {
     }
 }
 
+#endif
+
 // MARK: - Cross-Platform Support
 
 #if canImport(Darwin)
@@ -125,5 +145,5 @@ internal func modf(value: Double) -> (Double, Double) {
     
     return (decimalValue, integerValue)
 }
-    
+
 #endif
