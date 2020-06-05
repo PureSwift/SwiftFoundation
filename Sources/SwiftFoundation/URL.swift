@@ -1,4 +1,3 @@
-//
 //  URL.swift
 //  SwiftFoundation
 //
@@ -6,172 +5,85 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-#if os(Linux) || XcodeLinux
-
-/// Encapsulates the components of an URL.
-public struct URL: CustomStringConvertible {
+/**
+ A URL is a type that can potentially contain the location of a resource on a remote server, the path of a local file on disk, or even an arbitrary piece of encoded data.
+ 
+ You can construct URLs and access their parts. For URLs that represent local files, you can also manipulate properties of those files directly, such as changing the file's last modification date. Finally, you can pass URLs to other APIs to retrieve the contents of those URLs. For example, you can use the URLSession classes to access the contents of remote resources, as described in URL Session Programming Guide.
+ 
+ URLs are the preferred way to refer to local files. Most objects that read data from or write data to a file have methods that accept a URL instead of a pathname as the file reference. For example, you can get the contents of a local file URL as `String` by calling `func init(contentsOf:encoding) throws`, or as a `Data` by calling `func init(contentsOf:options) throws`.
+*/
+public struct URL {
     
-    // MARK: - Properties
+    internal let stringValue: String
     
-    public var scheme: String
-    
-    public var user: String?
-    
-    public var password: String?
-    
-    /// The host URL subcomponent (e.g. domain name, IP address)
-    public var host: String?
-    
-    public var port: UInt?
-    
-    public var path: String?
-    
-    public var query: [(String, String)]?
-    
-    /// The fragment URL component (the part after a # symbol)
-    public var fragment: String?
-    
-    // MARK: - Initialization
-    
-    public init(scheme: String) {
-        
-        self.scheme = scheme
+    /// Initialize with string.
+    ///
+    /// Returns `nil` if a `URL` cannot be formed with the string (for example, if the string contains characters that are illegal in a URL, or is an empty string).
+    public init?(string: String) {
+        // TODO: Validate URL string
+        guard string.isEmpty == false
+            else { return nil }
+        self.init(string: string)
     }
     
-    /// Creates an instance from the string. String must be a valid URL.
-    public init?(stringValue: String) {
-        
-        // parse string
-        
-        debugPrint("URL parsing from string is not implemented yet!")
-        
-        return nil
-    }
-    
-    // MARK: - Generated Properties
-    
-    /// Whether the URL components form a valid URL
-    public var valid: Bool {
-        
-        // validate scheme
-        
-        // host must exist for port to be specified
-        if port != nil { guard host != nil else { return false } }
-        
-        // user and password must both be nil or non-nil
-        guard !((user != nil || password != nil) && (user == nil || password == nil)) else { return false }
-        
-        // query must have at least one item
-        if query != nil { guard query!.count > 0 else { return false } }
-        
-        return true
-    }
-    
-    /// Returns a valid URL string or ```nil```
-    public var URLString: String? {
-        
-        guard self.valid else { return nil }
-        
-        var stringValue = scheme + "://"
-        
-        if let user = user { stringValue += user }
-        
-        if let password = password { stringValue += ":\(password)"}
-        
-        if user != nil { stringValue += "@" }
-        
-        if let host = host { stringValue += host }
-        
-        if let port = port { stringValue += ":\(port)" }
-        
-        if let path = path { stringValue += "/\(path)" }
-        
-        if let query = query {
-            
-            stringValue += "?"
-            
-            for (index, queryItem) in query.enumerated() {
-                
-                let (name, value) = queryItem
-                
-                stringValue += name + "=" + value
-                
-                if index != query.count - 1 {
-                    
-                    stringValue += "&"
-                }
-            }
-        }
-        
-        if let fragment = fragment { stringValue += "#\(fragment)" }
-        
+    /// Returns the absolute string for the URL.
+    public var absoluteString: String {
         return stringValue
     }
+}
+
+// MARK: - Equatable
+
+extension URL: Equatable {
+    
+    public static func == (lhs: URL, rhs: URL) -> Bool {
+        return lhs.stringValue == rhs.stringValue
+    }
+}
+
+// MARK: - Hashable
+
+extension URL: Hashable {
+    
+    public func hash(into hasher: inout Hasher) {
+        stringValue.hash(into: &hasher)
+    }
+}
+
+// MARK: - CustomStringConvertible
+
+extension URL: CustomStringConvertible {
     
     public var description: String {
-        
-        let separator = " "
-        
-        var description = ""
-        
-        if let URLString = URLString {
-            
-            description += "URL: " + URLString + separator
-        }
-            
-        description += "Scheme: " + scheme
-        
-        if let user = user {
-            
-            description += separator + "User: " + user
-        }
-        
-        if let password = password {
-            
-            description += separator + "Password: " + password
-        }
-        
-        if let host = host {
-            
-            description += separator + "Host: " + host
-        }
-        
-        if let port = port {
-            
-            description += separator + "Port: " + "\(port)"
-        }
-        
-        if let path = path {
-            
-            description += separator + "Path: " + path
-        }
-        
-        if let query = query {
-            
-            var stringValue = ""
-            
-            for (index, queryItem) in query.enumerated() {
-                
-                let (name, value) = queryItem
-                
-                stringValue += name + "=" + value
-                
-                if index != query.count - 1 {
-                    
-                    stringValue += "&"
-                }
-            }
-            
-            description += separator + "Query: " + stringValue
-        }
-        
-        if let fragment = fragment {
-            
-            description += separator + "Fragment: " + fragment
-        }
-        
+        return stringValue
+    }
+}
+
+// MARK: - CustomDebugStringConvertible
+
+extension URL: CustomDebugStringConvertible {
+    
+    public var debugDescription: String {
         return description
     }
 }
 
-#endif
+// MARK: - Codable
+
+extension URL: Codable {
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let string = try container.decode(String.self)
+        guard let url = URL(string: string) else {
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath,
+                                                                    debugDescription: "Invalid URL string."))
+        }
+        self = url
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(stringValue)
+    }
+}
