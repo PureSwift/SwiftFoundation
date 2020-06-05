@@ -6,77 +6,113 @@
 //  Copyright © 2015 PureSwift. All rights reserved.
 //
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
-    import Darwin.C
-#elseif os(Linux)
-    import Glibc
+#if canImport(Darwin)
+import Darwin.C
+#elseif canImport(Glibc)
+import Glibc
 #endif
 
-public extension timeval {
+#if !arch(wasm32)
+
+// MARK: - Date
+
+public extension Date {
+    
+    /// The interval between 00:00:00 UTC on 1 January 2001 and the current date and time.
+    static var timeIntervalSinceReferenceDate: TimeInterval {
+        do { return try timeval.timeOfDay().timeInterval - Date.timeIntervalBetween1970AndReferenceDate }
+        catch { fatalError("Unable to load current time") }
+    }
+    
+    /// Returns a `Date` initialized to the current date and time.
+    init() {
+        self.timeIntervalSinceReferenceDate = Date.timeIntervalSinceReferenceDate
+    }
+    
+    /// Returns a `Date` initialized relative to the current date and time by a given number of seconds.
+    init(timeIntervalSinceNow: TimeInterval) {
+        self.timeIntervalSinceReferenceDate = timeIntervalSinceNow + Date.timeIntervalSinceReferenceDate
+    }
+    
+    /**
+     The time interval between the date and the current date and time.
+     
+     If the date is earlier than the current date and time, the this property’s value is negative.
+     
+     - SeeAlso: `timeIntervalSince(_:)`
+     - SeeAlso: `timeIntervalSince1970`
+     - SeeAlso: `timeIntervalSinceReferenceDate`
+     */
+    var timeIntervalSinceNow: TimeInterval {
+        return timeIntervalSinceReferenceDate - Date.timeIntervalSinceReferenceDate
+    }
+}
+
+// MARK: - POSIX Time
+
+internal extension timeval {
     
     static func timeOfDay() throws -> timeval {
         
         var timeStamp = timeval()
-        
         guard gettimeofday(&timeStamp, nil) == 0
-            else { throw POSIXError.fromErrno! }
-        
+            else { throw POSIXError.fromErrno() }
         return timeStamp
     }
     
-    init(timeInterval: TimeInterval) {
+    init(timeInterval: SwiftFoundation.TimeInterval) {
         
         let (integerValue, decimalValue) = modf(timeInterval)
         
-        let million: TimeInterval = 1000000.0
+        let million: SwiftFoundation.TimeInterval = 1000000.0
         
         let microseconds = decimalValue * million
         
-        self.init(tv_sec: Int(integerValue), tv_usec: POSIXMicroseconds(microseconds))
+        self.init(tv_sec: .init(integerValue), tv_usec: .init(microseconds))
     }
     
-    var timeInterval: TimeInterval {
+    var timeInterval: SwiftFoundation.TimeInterval {
         
-        let secondsSince1970 = TimeInterval(self.tv_sec)
+        let secondsSince1970 = SwiftFoundation.TimeInterval(self.tv_sec)
         
-        let million: TimeInterval = 1000000.0
+        let million: SwiftFoundation.TimeInterval = 1000000.0
         
-        let microseconds = TimeInterval(self.tv_usec) / million
+        let microseconds = SwiftFoundation.TimeInterval(self.tv_usec) / million
         
         return secondsSince1970 + microseconds
     }
 }
 
-public extension timespec {
+internal extension timespec {
     
-    init(timeInterval: TimeInterval) {
+    init(timeInterval: SwiftFoundation.TimeInterval) {
         
         let (integerValue, decimalValue) = modf(timeInterval)
         
-        let billion: TimeInterval = 1000000000.0
+        let billion: SwiftFoundation.TimeInterval = 1000000000.0
         
         let nanoseconds = decimalValue * billion
         
-        self.init(tv_sec: Int(integerValue), tv_nsec: Int(nanoseconds))
+        self.init(tv_sec: .init(integerValue), tv_nsec: .init(nanoseconds))
     }
     
-    var timeInterval: TimeInterval {
+    var timeInterval: SwiftFoundation.TimeInterval {
         
-        let secondsSince1970 = TimeInterval(self.tv_sec)
+        let secondsSince1970 = SwiftFoundation.TimeInterval(self.tv_sec)
         
-        let billion: TimeInterval = 1000000000.0
+        let billion: SwiftFoundation.TimeInterval = 1000000000.0
         
-        let nanoseconds = TimeInterval(self.tv_nsec) / billion
+        let nanoseconds = SwiftFoundation.TimeInterval(self.tv_nsec) / billion
         
         return secondsSince1970 + nanoseconds
     }
 }
 
-public extension tm {
+internal extension tm {
     
-    init(UTCSecondsSince1970: time_t) {
+    init(utcSecondsSince1970 seconds: time_t) {
         
-        var seconds = UTCSecondsSince1970
+        var seconds = seconds
         
         // don't free!
         // The return value points to a statically allocated struct which might be overwritten by subsequent calls to any of the date and time functions.
@@ -87,23 +123,27 @@ public extension tm {
     }
 }
 
+#endif
+
 // MARK: - Cross-Platform Support
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+#if canImport(Darwin)
+internal typealias POSIXMicroseconds = __darwin_suseconds_t
+#else
+
+#if arch(wasm32)
+internal typealias POSIXMicroseconds = Int32
+#else
+internal typealias POSIXMicroseconds = __suseconds_t
+#endif
     
-    public typealias POSIXMicroseconds = __darwin_suseconds_t
+internal func modf(value: Double) -> (Double, Double) {
     
-#elseif os(Linux)
+    var integerValue: Double = 0
     
-    public typealias POSIXMicroseconds = __suseconds_t
+    let decimalValue = modf(value, &integerValue)
     
-    public func modf(value: Double) -> (Double, Double) {
-        
-        var integerValue: Double = 0
-        
-        let decimalValue = modf(value, &integerValue)
-        
-        return (decimalValue, integerValue)
-    }
-    
+    return (decimalValue, integerValue)
+}
+
 #endif

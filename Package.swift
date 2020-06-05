@@ -1,10 +1,24 @@
+// swift-tools-version:5.1
 import PackageDescription
+
+let libraryType: PackageDescription.Product.Library.LibraryType
+#if os(Linux)
+libraryType = .dynamic
+#else
+libraryType = .static
+#endif
 
 let package = Package(
     name: "SwiftFoundation",
-    dependencies: [
-        .Package(url: "https://github.com/PureSwift/CStatfs.git", majorVersion: 1),
-        .Package(url: "https://github.com/PureSwift/CJSONC.git", majorVersion: 1)
+    products: [
+        .library(
+            name: "SwiftFoundation",
+            type: libraryType,
+            targets: ["SwiftFoundation"]
+        )
     ],
-    exclude: ["Xcode", "Carthage"]
+    targets: [
+        .target(name: "SwiftFoundation"),
+        .testTarget(name: "SwiftFoundationTests", dependencies: ["SwiftFoundation"])
+    ]
 )

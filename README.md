@@ -1,13 +1,9 @@
 # SwiftFoundation #
-[![Swift](https://img.shields.io/badge/swift-3.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
-[![Platforms](https://img.shields.io/badge/platform-osx%20%7C%20ios%20%7C%20watchos%20%7C%20tvos%20%7C%20linux-lightgrey.svg)](https://developer.apple.com/swift/)
+[![Swift](https://img.shields.io/badge/swift-5.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Platforms](https://img.shields.io/badge/platform-osx%20%7C%20ios%20%7C%20watchos%20%7C%20tvos%20%7C%20linux%20%7C%20wasm-lightgrey.svg)](https://developer.apple.com/swift/)
 [![Release](https://img.shields.io/github/release/pureswift/swiftfoundation.svg)](https://github.com/PureSwift/SwiftFoundation/releases)
 [![License](https://img.shields.io/badge/license-MIT-71787A.svg)](https://tldrlegal.com/license/mit-license)
 [![Build Status](https://travis-ci.org/PureSwift/SwiftFoundation.svg?branch=develop)](https://travis-ci.org/PureSwift/SwiftFoundation)
-[![Join the chat at https://gitter.im/PureSwift/SwiftFoundation](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/PureSwift/SwiftFoundation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-[![SPM compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://github.com/apple/swift-package-manager)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Cross-Platform, Protocol-Oriented Programming base library to complement the Swift Standard Library.
 
@@ -27,17 +23,9 @@ Cross-Platform, Protocol-Oriented Programming base library to complement the Swi
 
 ## Targeted Platforms
 
-- LLVM Compiler
-   - Darwin (OS X, iOS, WatchOS)
-   - Linux
-
-## Compiling on Ubuntu
-
-```
-sudo apt-get install uuid-dev libjson-c-dev
-swift build
-.build/debug/UnitTests
-```
+- Darwin (macOS, iOS, watchOS, tvOS)
+- Linux (Ubuntu x86_64, [Debian Armv7](https://github.com/uraimo/buildSwiftOnARM))
+- [WebAssembly](https://swiftwasm.org) (wasm32)
 
 ## Implemented
 To see what parts of Foundation are implemented, just look at the unit tests. Completed functionality will be fully unit tested. Note that there is some functionality that is written as a protocol only, that will not be included on this list.
@@ -45,12 +33,9 @@ To see what parts of Foundation are implemented, just look at the unit tests. Co
 - [x] Base64
 - [x] Data
 - [x] Date
-- [x] FileManager
-- [x] JSON
-- [x] Null
-- [x] Order (equivalent to ```NSComparisonResult```)
-- [X] RegularExpression (POSIX, not ICU)
-- [x] SortDescriptor
+- [ ] FileManager
+- [ ] JSON
+- [ ] RegularExpression (POSIX, not ICU)
 - [x] Thread
 - [x] URL
 - [x] UUID

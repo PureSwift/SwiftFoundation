@@ -7,25 +7,10 @@
 //
 
 import XCTest
-@testable import UnitTests
+@testable import SwiftFoundationTests
 
-#if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
-    func XCTMain(_ testCases: [XCTestCaseEntry]) { fatalError("Not Implemented. Linux only") }
+XCTMain([
+    testCase(UUIDTests.allTests),
+    testCase(DataTests.allTests)
+])
     
-    func testCase<T: XCTestCase>(_ allTests: [(String, (T) -> () throws -> Void)]) -> XCTestCaseEntry { fatalError("Not Implemented. Linux only") }
-    
-    struct XCTestCaseEntry { }
-    
-#else
-
-XCTMain([testCase(DateComponentsTest.allTests),
-         testCase(POSIXTimeTests.allTests),
-         testCase(RegularExpressionTests.allTests),
-         testCase(StringTests.allTests),
-         testCase(UUIDTests.allTests),
-         testCase(DataTests.allTests),
-         testCase(JSONTests.allTests),
-         testCase(RangeTests.allTests)
-    ])
-    
-#endif

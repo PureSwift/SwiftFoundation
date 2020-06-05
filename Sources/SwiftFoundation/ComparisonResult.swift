@@ -19,17 +19,12 @@ public extension Comparable {
     
     /// Compares the reciever with another and returns their order.
     func compare(_ other: Self) -> ComparisonResult {
-        
         if self < other {
-            
             return .orderedAscending
         }
-        
         if self > other {
-            
             return .orderedDescending
         }
-        
         return .orderedSame
     }
 }
