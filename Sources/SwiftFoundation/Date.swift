@@ -69,19 +69,16 @@ public struct Date: Equatable, Hashable {
     
     /// Returns an `Date` initialized relative to 00:00:00 UTC on 1 January 2001 by a given number of seconds.
     public init(timeIntervalSinceReferenceDate timeInterval: TimeInterval) {
-        
         self.timeIntervalSinceReferenceDate = timeInterval
     }
     
     /// Returns a `Date` initialized relative to the current date and time by a given number of seconds.
     public init(timeIntervalSinceNow: TimeInterval) {
-        
         self.timeIntervalSinceReferenceDate = timeIntervalSinceNow + Date.timeIntervalSinceReferenceDate
     }
     
     /// Returns a `Date` initialized relative to 00:00:00 UTC on 1 January 1970 by a given number of seconds.
     public init(timeIntervalSince1970: TimeInterval) {
-        
         self.timeIntervalSinceReferenceDate = timeIntervalSince1970 - Date.timeIntervalBetween1970AndReferenceDate
     }
     
@@ -92,7 +89,6 @@ public struct Date: Equatable, Hashable {
      - Parameter date: The reference date.
      */
     public init(timeInterval: SwiftFoundation.TimeInterval, since date: SwiftFoundation.Date) {
-        
         self.timeIntervalSinceReferenceDate = date.timeIntervalSinceReferenceDate + timeInterval
     }
     
@@ -112,6 +108,22 @@ public struct Date: Equatable, Hashable {
     public func timeIntervalSince(_ date: SwiftFoundation.Date) -> SwiftFoundation.TimeInterval {
         return timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate
     }
+    
+    /// Return a new `Date` by adding a `TimeInterval` to this `Date`.
+    ///
+    /// - parameter timeInterval: The value to add, in seconds.
+    /// - warning: This only adjusts an absolute value. If you wish to add calendrical concepts like hours, days, months then you must use a `Calendar`. That will take into account complexities like daylight saving time, months with different numbers of days, and more.
+    public func addingTimeInterval(_ timeInterval: TimeInterval) -> Date {
+        return self + timeInterval
+    }
+    
+    /// Add a `TimeInterval` to this `Date`.
+    ///
+    /// - parameter timeInterval: The value to add, in seconds.
+    /// - warning: This only adjusts an absolute value. If you wish to add calendrical concepts like hours, days, months then you must use a `Calendar`. That will take into account complexities like daylight saving time, months with different numbers of days, and more.
+    public mutating func addTimeInterval(_ timeInterval: TimeInterval) {
+        self += timeInterval
+    }
 }
 
 // MARK: - CustomStringConvertible
@@ -121,6 +133,15 @@ extension SwiftFoundation.Date: CustomStringConvertible {
     public var description: String {
         // TODO: Custom date printing
         return timeIntervalSinceReferenceDate.description
+    }
+}
+
+// MARK: - CustomDebugStringConvertible
+
+extension SwiftFoundation.Date: CustomDebugStringConvertible {
+    
+    public var debugDescription: String {
+        return description
     }
 }
 
@@ -139,26 +160,62 @@ extension SwiftFoundation.Date: Comparable {
 
 // MARK: - Operators
 
-public func - (lhs: SwiftFoundation.Date, rhs: SwiftFoundation.Date) -> SwiftFoundation.TimeInterval {
-    return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
-}
-
-public func + (lhs: SwiftFoundation.Date, rhs: SwiftFoundation.TimeInterval) -> SwiftFoundation.Date {
+public extension SwiftFoundation.Date {
     
-    return SwiftFoundation.Date(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate + rhs)
-}
-
-public func - (lhs: SwiftFoundation.Date, rhs: SwiftFoundation.TimeInterval) -> SwiftFoundation.Date {
+    /// Returns a `Date` with a specified amount of time added to it.
+    static func +(lhs: Date, rhs: TimeInterval) -> Date {
+        return Date(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate + rhs)
+    }
     
-    return SwiftFoundation.Date(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate - rhs)
+    /// Returns a `Date` with a specified amount of time subtracted from it.
+    static func -(lhs: Date, rhs: TimeInterval) -> Date {
+        return Date(timeIntervalSinceReferenceDate: lhs.timeIntervalSinceReferenceDate - rhs)
+    }
+    
+    /// Add a `TimeInterval` to a `Date`.
+    ///
+    /// - warning: This only adjusts an absolute value. If you wish to add calendrical concepts like hours, days, months then you must use a `Calendar`. That will take into account complexities like daylight saving time, months with different numbers of days, and more.
+    static func +=(lhs: inout Date, rhs: TimeInterval) {
+        lhs = lhs + rhs
+    }
+    
+    /// Subtract a `TimeInterval` from a `Date`.
+    ///
+    /// - warning: This only adjusts an absolute value. If you wish to add calendrical concepts like hours, days, months then you must use a `Calendar`. That will take into account complexities like daylight saving time, months with different numbers of days, and more.
+    static func -=(lhs: inout Date, rhs: TimeInterval) {
+        lhs = lhs - rhs
+    }
+
+    typealias Stride = TimeInterval
+
+    /// Returns the `TimeInterval` between this `Date` and another given date.
+    ///
+    /// - returns: The interval between the receiver and the another parameter. If the receiver is earlier than `other`, the return value is negative.
+    func distance(to other: Date) -> TimeInterval {
+        return other.timeIntervalSince(self)
+    }
+
+    /// Creates a new date value by adding a `TimeInterval` to this `Date`.
+    ///
+    /// - warning: This only adjusts an absolute value. If you wish to add calendrical concepts like hours, days, months then you must use a `Calendar`. That will take into account complexities like daylight saving time, months with different numbers of days, and more.
+    func advanced(by n: TimeInterval) -> Date {
+        return self.addingTimeInterval(n)
+    }
 }
 
-public func += (lhs: inout SwiftFoundation.Date, rhs: SwiftFoundation.TimeInterval) {
-    lhs = lhs + rhs
-}
+// MARK: - Codable
 
-public func -= (lhs: inout SwiftFoundation.Date, rhs: SwiftFoundation.TimeInterval) {
-    lhs = lhs - rhs
+extension Date: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let timestamp = try container.decode(Double.self)
+        self.init(timeIntervalSinceReferenceDate: timestamp)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(self.timeIntervalSinceReferenceDate)
+    }
 }
 
 // MARK: - Supporting Types
