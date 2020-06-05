@@ -6,11 +6,13 @@
 //  Copyright © 2016 PureSwift. All rights reserved.
 //
 
-#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
-    import Darwin.C
-#elseif os(Linux)
-    import Glibc
+#if canImport(Darwin)
+import Darwin
+#elseif canImport(Glibc)
+import Glibc
 #endif
+
+#if !arch(wasm32)
 
 /// POSIX Thread
 public final class Thread {
@@ -27,23 +29,23 @@ public final class Thread {
         
         let pointer = holder.toOpaque()
         
-        #if os(Linux)
+        #if canImport(Glibc)
             
             var internalThread: pthread_t = 0
             
-            guard pthread_create(&internalThread, nil, ThreadPrivateMainLinux, pointer) == 0
-                else { throw POSIXError.fromErrno! }
+            guard pthread_create(&internalThread, nil, ThreadPrivateMain, pointer) == 0
+                else { throw POSIXError.fromErrno() }
             
             self.internalThread = internalThread
             
             pthread_detach(internalThread)
             
-        #elseif os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+        #elseif canImport(Darwin)
             
             var internalThread: pthread_t? = nil
             
-            guard pthread_create(&internalThread, nil, ThreadPrivateMainDarwin, pointer) == 0
-                else { throw POSIXError.fromErrno! }
+            guard pthread_create(&internalThread, nil, ThreadPrivateMain, pointer) == 0
+                else { throw POSIXError.fromErrno() }
             
             self.internalThread = internalThread!
             
@@ -80,9 +82,9 @@ public final class Thread {
 
 // MARK: - Private
 
-#if os(Linux)
+#if canImport(Glibc)
     
-    private func ThreadPrivateMainLinux(arg: UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? {
+    private func ThreadPrivateMain(arg: UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? {
         
         let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(arg!)
         
@@ -93,11 +95,9 @@ public final class Thread {
         return nil
     }
     
-#endif
-
-#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+#elseif canImport(Darwin)
     
-    private func ThreadPrivateMainDarwin(arg: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer? {
+    private func ThreadPrivateMain(arg: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer? {
         
         let unmanaged = Unmanaged<Thread.Closure>.fromOpaque(arg)
         
@@ -122,3 +122,5 @@ fileprivate extension Thread {
         }
     }
 }
+
+#endif
