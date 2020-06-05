@@ -50,7 +50,7 @@ internal extension timeval {
         
         let microseconds = decimalValue * million
         
-        self.init(tv_sec: Int(integerValue), tv_usec: POSIXMicroseconds(microseconds))
+        self.init(tv_sec: .init(integerValue), tv_usec: .init(microseconds))
     }
     
     var timeInterval: SwiftFoundation.TimeInterval {
