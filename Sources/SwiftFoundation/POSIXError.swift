@@ -32,7 +32,7 @@ internal extension POSIXError {
                           function: StaticString = #function) -> POSIXError {
         
         guard let code = POSIXErrorCode(rawValue: errno)
-            else { fatalError("Invalid POSIX Error \(errno)") }
+            else { fatalError("Invalid POSIX Error \(errno)", file: file, line: line) }
         
         return POSIXError(code: code)
     }

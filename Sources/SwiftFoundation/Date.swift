@@ -27,23 +27,58 @@ public struct Date: Equatable, Hashable {
      The distant past is in terms of centuries.
      */
     public static var distantPast: SwiftFoundation.Date { return Date(timeIntervalSinceReferenceDate: -63114076800.0) }
+    
+    /// The interval between 00:00:00 UTC on 1 January 2001 and the current date and time.
+    public static var timeIntervalSinceReferenceDate: TimeInterval {
+        return self.timeIntervalSince1970 - self.timeIntervalBetween1970AndReferenceDate
+    }
         
     // MARK: - Properties
     
     /// The time interval between the date and the reference date (1 January 2001, GMT).
     public var timeIntervalSinceReferenceDate: TimeInterval
     
-    /// The time interval between the current date and 1 January 1970, GMT.
+    /**
+     The time interval between the date and the current date and time.
+     
+     If the date is earlier than the current date and time, the this property’s value is negative.
+     
+     - SeeAlso: `timeIntervalSince(_:)`
+     - SeeAlso: `timeIntervalSince1970`
+     - SeeAlso: `timeIntervalSinceReferenceDate`
+     */
+    public var timeIntervalSinceNow: TimeInterval {
+        return timeIntervalSinceReferenceDate - Date.timeIntervalSinceReferenceDate
+    }
+    
+    /**
+     The interval between the date object and 00:00:00 UTC on 1 January 1970.
+     
+     This property’s value is negative if the date object is earlier than 00:00:00 UTC on 1 January 1970.
+     
+     - SeeAlso: `timeIntervalSince(_:)`
+     - SeeAlso: `timeIntervalSinceNow`
+     - SeeAlso: `timeIntervalSinceReferenceDate`
+     */
     public var timeIntervalSince1970: TimeInterval {
-        get { return timeIntervalSinceReferenceDate + Date.timeIntervalBetween1970AndReferenceDate }
-        set { timeIntervalSinceReferenceDate = newValue - Date.timeIntervalBetween1970AndReferenceDate }
+        return timeIntervalSinceReferenceDate + Date.timeIntervalBetween1970AndReferenceDate
     }
     
     // MARK: - Initialization
     
+    /// Returns a `Date` initialized to the current date and time.
+    public init() {
+        self.init(timeIntervalSinceReferenceDate: Date.timeIntervalSinceReferenceDate)
+    }
+    
     /// Returns an `Date` initialized relative to 00:00:00 UTC on 1 January 2001 by a given number of seconds.
     public init(timeIntervalSinceReferenceDate timeInterval: TimeInterval) {
         self.timeIntervalSinceReferenceDate = timeInterval
+    }
+    
+    /// Returns a `Date` initialized relative to the current date and time by a given number of seconds.
+    public init(timeIntervalSinceNow: TimeInterval) {
+        self.timeIntervalSinceReferenceDate = timeIntervalSinceNow + Date.timeIntervalSinceReferenceDate
     }
     
     /// Returns a `Date` initialized relative to 00:00:00 UTC on 1 January 1970 by a given number of seconds.
@@ -95,13 +130,12 @@ public struct Date: Equatable, Hashable {
     }
 }
 
-#if !arch(wasm32)
-
 // MARK: - CustomStringConvertible
 
 extension SwiftFoundation.Date: CustomStringConvertible {
     
     public var description: String {
+        // TODO: Custom date printing
         return timeIntervalSinceReferenceDate.description
     }
 }
@@ -114,8 +148,6 @@ extension SwiftFoundation.Date: CustomDebugStringConvertible {
         return description
     }
 }
-
-#endif
 
 // MARK: - Comparable
 
